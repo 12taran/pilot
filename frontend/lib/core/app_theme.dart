@@ -1,0 +1,63 @@
+// app_theme.dart
+
+import 'package:flutter/material.dart';
+import 'package:pilot_project/core/config.dart';
+
+class AppTheme {
+  static final ThemeData light = ThemeData(
+    brightness: Brightness.light,
+    fontFamily: Constants.fontFamily,
+    primaryColor: const Color(0xFF085DB6),
+    scaffoldBackgroundColor: Colors.white,
+    hintColor: const Color(0xFFBDBDBD),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Color(0xFF085DB6),
+      foregroundColor: Colors.white,
+    ),
+    textTheme: const TextTheme(
+        bodyLarge: TextStyle(color: Colors.black),
+        bodyMedium: TextStyle(color: Colors.black),
+        labelMedium: TextStyle(color: Colors.black54)),
+    colorScheme: const ColorScheme.light(
+      primary: Color(0xFF085DB6),
+      secondary: Color(0xFF1E4175),
+      error: Colors.red,
+      background: Colors.white,
+      surface: Color(0xFFC5E3FC),
+      onPrimary: Colors.white,
+      onSecondary: Colors.white,
+      onBackground: Colors.black,
+      onSurface: Colors.black,
+      onError: Colors.white,
+    ).copyWith(error: Colors.red),
+  );
+
+  static final ThemeData dark = ThemeData(
+    brightness: Brightness.dark,
+    fontFamily: Constants.fontFamily,
+    primaryColor: const Color(0xFF085DB6),
+    scaffoldBackgroundColor: Color(0xFF000000),
+    hintColor: const Color(0xFFBDBDBD),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Color(0xFF1E4175),
+      foregroundColor: Colors.white,
+    ),
+    textTheme: const TextTheme(
+      bodyLarge: TextStyle(color: Colors.white),
+      bodyMedium: TextStyle(color: Colors.white),
+      labelMedium: TextStyle(color: Colors.white54),
+    ),
+    colorScheme: const ColorScheme.dark(
+      primary: Color(0xFF085DB6),
+      secondary: Color(0xFFB5CEE9),
+      error: Colors.red,
+      background: Color(0xFF000000),
+      surface: Color(0xFF212529),
+      onPrimary: Colors.white,
+      onSecondary: Colors.white,
+      onBackground: Colors.white,
+      onSurface: Colors.white,
+      onError: Colors.white,
+    ).copyWith(error: Colors.red),
+  );
+}

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:pilot_project/presentation/screens/splash.dart';
+import 'package:pilot_project/core/app_theme.dart';
+import 'package:pilot_project/presentation/controllers/theme_controller.dart';
+import 'package:pilot_project/routes/page_route.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,16 +12,21 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+  
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        useMaterial3: true,
+    ThemeController themeController = Get.put(ThemeController());
+    return ScreenUtilInit(
+      child: GetMaterialApp(
+        theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
+        themeMode: themeController.theme,
+        getPages: PageRoutes.getPageRoutes(),
+        debugShowCheckedModeBanner: false,
+        initialRoute: PageRoutes.splashScreen,
       ),
-      home: SplashScreen(),
     );
   }
 }

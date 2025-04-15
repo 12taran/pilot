@@ -25,18 +25,7 @@ class Utils {
   // show Toast
   static void showGetXToast({required String title, required String message}) {
     Fluttertoast.showToast(msg: title);
-    // Get.snackbar(title, message,
-    //     snackPosition: SnackPosition.TOP,
-    //     backgroundGradient: const LinearGradient(
-    //       colors: [WebXConfig.primaryColor, WebXConfig.secondaryColor],
-    //     ),
-    //     colorText: Colors.white,
-    //     margin: const EdgeInsets.all(10),
-    //     borderRadius: 10,
-    //     snackStyle: SnackStyle.FLOATING,
-    //     animationDuration: const Duration(milliseconds: 500),
-    //     forwardAnimationCurve: Curves.easeIn,
-    //     reverseAnimationCurve: Curves.easeOut);
+   
   }
 
   //

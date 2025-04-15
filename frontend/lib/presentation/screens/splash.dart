@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/presentation/screens/email_password_sign_up.dart';
+import 'package:pilot_project/presentation/screens/onboarding/onboarding.dart';
+
+/// @author PRINCE DUBEY
+/// @email princedubey80066@gmail.com
+/// @DATE 11/04/2025);
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,7 +23,7 @@ class SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     // Trigger animation
-    Future.delayed(const Duration(milliseconds: 1000), () {
+    Future.delayed(const Duration(milliseconds: 100), () {
       setState(() {
         _opacity = 1.0;
       });
@@ -25,7 +32,7 @@ class SplashScreenState extends State<SplashScreen> {
     // Navigate after delay
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const EmailSignUpScreen()),
+        MaterialPageRoute(builder: (_) => const OnboardingScreen()),
       );
     });
   }
@@ -33,21 +40,35 @@ class SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[900],
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Center(
         child: AnimatedOpacity(
           duration: const Duration(seconds: 2),
           opacity: _opacity,
-          child: const Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(Icons.flutter_dash, color: Colors.white, size: 100),
-              SizedBox(height: 20),
-              Text(
-                "Welcome to Pilot",
-                style: TextStyle(color: Colors.white, fontSize: 24),
-              ),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.flutter_dash,
+                  color: Theme.of(context).colorScheme.primary,
+                  size: 100,
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                Text(
+                  "The Best Investment on Earth is Earth",
+                  style: GoogleFonts.acme(
+                    textStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          fontSize: Constants.fontSizeHeading,
+                        ),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
           ),
         ),
       ),
