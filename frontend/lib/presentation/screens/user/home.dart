@@ -17,8 +17,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List City = ['Mohali', 'Bangalore', 'Chennai', 'Hyderabad', 'Panji'];
+  List City = ['Mohali', '  Dhulera', 'Himachal'];
   List text1 = ['Why use Pilot for Your Investment', '123', '456'];
+  List location=['assets/images/kasol.jpg','assets/images/chandigarh.jpg','assets/images/kasol.jpg'];
   List<String> motivation = [
     "assets/images/motivation1.jpg",
     "assets/images/motivation2.jpg",
@@ -181,14 +182,22 @@ class _HomePageState extends State<HomePage> {
                                 ],
                               ),
                               const SizedBox(height: 4),
-                              Text(
-                                "₹ ${propertyController.properties[i]['price']!}",
-                                style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.green),
-                              ),
-                              const SizedBox(height: 10),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text('PRICE : ', style: GoogleFonts.lato(fontSize: 14,fontWeight: FontWeight.bold)),
+                                      Text(
+                                        "₹ ${propertyController.properties[i]['price']!}",
+                                        style: const TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.green),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
                               Align(
                                 alignment: Alignment.bottomRight,
                                 child: CustomButtons(
@@ -199,6 +208,9 @@ class _HomePageState extends State<HomePage> {
                                   },
                                 ),
                               )
+                                ],
+                              ),
+                              
                             ],
                           ),
                         ))
@@ -285,31 +297,31 @@ class _HomePageState extends State<HomePage> {
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 3),
-                      itemCount: 5,
+                      itemCount: 3,
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: Column(
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.3),
-                                      spreadRadius: 2,
-                                      blurRadius: 6,
-                                      offset: const Offset(0, 3),
-                                    ),
-                                  ],
-                                ),
-                                child: CircleAvatar(
-                                  radius: 40,
-                                  backgroundColor:
-                                      Colors.white, // optional for contrast
-                                  child: Center(child: Text('$index')),
-                                ),
-                              ),
+                             Container(
+  decoration: BoxDecoration(
+    shape: BoxShape.circle,
+    boxShadow: [
+      BoxShadow(
+        color: Colors.black.withOpacity(0.3),
+        spreadRadius: 2,
+        blurRadius: 6,
+        offset: const Offset(0, 3),
+      ),
+    ],
+  ),
+  child: CircleAvatar(
+    radius: 40,
+    backgroundColor: Colors.white,
+    backgroundImage: AssetImage(location[index]), // Yahi main kaam karta hai
+  ),
+),
+
                               Text(
                                 City[index],
                                 style: const TextStyle(fontSize: 12),
