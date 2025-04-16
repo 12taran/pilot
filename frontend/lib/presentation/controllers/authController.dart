@@ -11,6 +11,7 @@ class AuthController extends GetxController {
   RxBool isOtpSent = false.obs;
   RxBool verifyngOtp = false.obs;
   String verificationIds = "";
+  RxBool isGuest = true.obs;
 
   // 🔽 Google Sign-In instance
   final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -68,6 +69,9 @@ class AuthController extends GetxController {
         UserCredential userCredential =
             await FirebaseAuth.instance.signInWithCredential(credential);
         if (userCredential.user != null) {
+          isGuest.value = false;
+          phoneController.clear();
+          otpController.clear();
           Get.offAndToNamed(PageRoutes.bottomNav);
         }
       } on FirebaseAuthException catch (e) {
@@ -81,7 +85,6 @@ class AuthController extends GetxController {
     }
   }
 
- 
   Future<void> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();

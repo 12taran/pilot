@@ -36,7 +36,7 @@ class AppTheme {
     brightness: Brightness.dark,
     fontFamily: Constants.fontFamily,
     primaryColor: const Color(0xFF085DB6),
-    scaffoldBackgroundColor: Color(0xFF000000),
+    scaffoldBackgroundColor: const Color(0xFF000000),
     hintColor: const Color(0xFFBDBDBD),
     appBarTheme: const AppBarTheme(
       backgroundColor: Color(0xFF1E4175),
