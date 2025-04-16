@@ -12,16 +12,16 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(
-        title: const Text('Profile'),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
+            height: Get.height * 0.05,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          Container(
             width: Get.width,
-            height: Get.height * 0.1,
+            height: Get.height * 0.12,
             color: Theme.of(context).colorScheme.primary,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
