@@ -64,9 +64,7 @@ class _HomePageState extends State<HomePage> {
                       )
                     ],
                   )),
-              const Divider(
-                thickness: 3,
-              ),
+              
               Container(
                 margin: const EdgeInsets.all(10),
                 height: Get.height * 0.25,
@@ -105,15 +103,13 @@ class _HomePageState extends State<HomePage> {
                   }).toList(),
                 ),
               ),
-              const Divider(
-                thickness: 3,
-              ),
+             
               Container(
                 child: Column(
                   children: [
-                    const Text(
+                     Text(
                       "Make your future secure with Pilot 👇",
-                      style: TextStyle(fontSize: 20),
+                      style: GoogleFonts.lato(fontSize: 20),
                     ),
                     const SizedBox(
                       height: 20,
@@ -122,30 +118,33 @@ class _HomePageState extends State<HomePage> {
                       for (int i = 0; i < 6; i++)
                         Center(
                             child: Container(
-                          width: Get.width / 2,
-                          height: Get.height * 0.6,
+                          width: Get.width*0.7,
+                          height: Get.height * 0.5,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6),
+                              borderRadius: BorderRadius.circular(10),
                               color: Colors.amberAccent),
                           child: Text(
                             'Property $i',
                             style: const TextStyle(fontSize: 16),
                           ),
                         ))
-                    ], options: CarouselOptions()),
+                    ], options: CarouselOptions(
+                      enlargeCenterPage: true
+                    )),
                     const SizedBox(
                       height: 20,
                     ),
                     Center(
                         child: Text(
-                      " !! Returns are not guaranteed and are\n subjected to market risks !! ",
-                      style: GoogleFonts.aBeeZee(color: Colors.red),
+                      " !! Returns are not guaranteed and are subjected to market risks !! ",
+                      style: GoogleFonts.lato(color: Colors.red,fontSize: 12),
                     ))
                   ],
                 ),
               ),
               const Divider(
-                thickness: 3,
+                thickness: 2,
+                color: Colors.grey,
               ),
               Container(
                   child: Column(
@@ -153,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Row(
                             children: [
