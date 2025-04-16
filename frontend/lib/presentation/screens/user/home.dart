@@ -214,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 3),
-                        itemCount: 5,
+                        itemCount: 3,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding: const EdgeInsets.all(5.0),
@@ -239,9 +239,10 @@ class _HomePageState extends State<HomePage> {
                                     child: Center(child: Text('$index')),
                                   ),
                                 ),
+                                SizedBox(height: 10,),
                                 Text(
                                   City[index],
-                                  style: const TextStyle(fontSize: 12),
+                                  style: GoogleFonts.lato(fontSize: 16),
                                 ),
                               ],
                             ),

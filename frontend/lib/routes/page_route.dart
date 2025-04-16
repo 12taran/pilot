@@ -7,6 +7,7 @@ import 'package:pilot_project/presentation/screens/splash.dart';
 import 'package:pilot_project/presentation/screens/user/navigation.dart';
 import 'package:pilot_project/presentation/screens/user/profile.dart';
 import 'package:pilot_project/presentation/screens/user/setting.dart';
+import 'package:pilot_project/presentation/screens/user/userDetail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// @author PRINCE DUBEY
@@ -20,6 +21,7 @@ class PageRoutes {
   static const String setting = "/setting";
   static const String onboarding = "/onBoarding";
   static const String drawerProfile = "/drawerProfile";
+   static const String userDetail = "/userDetail";
 
   // get product category
   static List<GetPage> getPageRoutes() {
@@ -28,6 +30,14 @@ class PageRoutes {
       GetPage(
         name: splashScreen,
         page: () => const SplashScreen(),
+        binding: BindingsBuilder(() async {
+          final sharedPreferences = await SharedPreferences.getInstance();
+          Get.put(() => sharedPreferences, permanent: true);
+        }),
+      ),
+      GetPage(
+        name: userDetail,
+        page: () => const UserDetail(),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);
