@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 class PropertyController extends GetxController {
   RxList<Map<String, String>> properties = [
     {
-      "name": "Residential House",
+      "name": "V Mall",
       "desc": "Fully Furnished",
       "image": "assets/images/property1.jpg",
       "location": "Dhulera",

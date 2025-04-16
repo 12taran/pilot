@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pilot_project/core/components/CustomContainer.dart';
 import 'package:pilot_project/core/components/MyTextField.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
@@ -120,44 +121,50 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                       ),
                     ],
                     const SizedBox(height: 30),
-                    CustomButtons(
-                      fontSize: 14,
-                      height: Get.height*0.1,
-                        text: authController.isOtpSent.value
-                            ? "Verify OTP"
-                            : "Send OTP",
-                        onPressed: () async {
-                          authController.isOtpSent.value
-                              ? authController.verifyOtp()
-                              : await authController.sendOtp();
-                          print('Otp sends');
-                        }),
+                    Center(
+                      child: CustomButtons(
+                          width: Get.width * 0.8,
+                          fontSize: 14,
+                          height: Get.height * 0.09,
+                          text: authController.isOtpSent.value
+                              ? "Verify OTP"
+                              : "Send OTP",
+                          onPressed: () async {
+                            authController.isOtpSent.value
+                                ? authController.verifyOtp()
+                                : await authController.sendOtp();
+                            print('Otp sends');
+                          }),
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
-                    Container(
-                      width: Get.width,
-                        
-                      margin: EdgeInsets.all(8),
-                      padding: EdgeInsets.symmetric(vertical:5,horizontal: 2),
-                      decoration: BoxDecoration(
-                       color: Colors.white, // background color (optional)
-    border: Border.all(
-      color: Colors.blue, // border color
-      width: 2.0,         // border width
-    ),
-
-                        borderRadius: BorderRadius.circular(5)
-                      ),
-                        child: TextButton(
-                      child: Text(
-                        'Continue as Guest',
-                        style: GoogleFonts.acme(       fontSize: 14,),
-                      ),
-                      onPressed: () {
-                        Get.offAndToNamed(PageRoutes.bottomNav);
-                      },
-                    )),
+                    Center(
+                      child: CustomContainer(
+                          padding: 0,
+                          height: 50,
+                          width: Get.width * 0.5,
+                          borderRadius: 20,
+                          borderColor: Theme.of(context).colorScheme.primary,
+                          margin: const EdgeInsets.all(8),
+                          child: TextButton(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Icon(Icons.person, size: 20),
+                                Text(
+                                  'Continue as Guest',
+                                  style: GoogleFonts.acme(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            onPressed: () {
+                              Get.offAndToNamed(PageRoutes.bottomNav);
+                            },
+                          )),
+                    ),
                     /*Container(
                       margin: EdgeInsets.all(10),
                       padding: EdgeInsets.symmetric(vertical:5),
