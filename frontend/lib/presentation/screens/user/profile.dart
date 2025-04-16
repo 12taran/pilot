@@ -57,7 +57,7 @@ class ProfilePage extends StatelessWidget {
                   )
                         ],
                       ),
-                      IconButton(onPressed:(){}, icon:Icon(Icons.arrow_right))
+                      IconButton(onPressed:(){Get.toNamed(PageRoutes.userDetail);}, icon:Icon(Icons.arrow_right))
                      
                     ],
                   ),

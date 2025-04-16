@@ -6,6 +6,7 @@ import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/presentation/screens/user/home.dart';
 import 'package:pilot_project/presentation/screens/user/portfolio.dart';
 import 'package:pilot_project/presentation/screens/user/profile.dart';
+import 'package:pilot_project/presentation/screens/user/userDetail.dart';
 import 'package:pilot_project/presentation/screens/user/wishlistPage.dart';
 import 'package:pilot_project/routes/page_route.dart';
 
@@ -23,7 +24,7 @@ class BottomNavScreenState extends State<BottomNavScreen> {
      HomePage(),
     const WishlistPage(),
     const PortfolioPage(),
-    const ProfilePage(),
+    const UserDetail(),
   ];
 
   void _onTabTapped(int index) {
@@ -35,7 +36,7 @@ class BottomNavScreenState extends State<BottomNavScreen> {
   final List<BottomNavigationBarItem> _navItems = [
     const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
     const BottomNavigationBarItem(
-        icon: Icon(Icons.favorite_border), label: 'Wishlist'),
+        icon: Icon(Icons.favorite), label: 'Wishlist'),
     const BottomNavigationBarItem(
         icon: Icon(Icons.work_outline), label: 'Portfolio'),
     const BottomNavigationBarItem(
@@ -52,7 +53,7 @@ class BottomNavScreenState extends State<BottomNavScreen> {
         onTap: _onTabTapped,
         items: _navItems,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Theme.of(context).colorScheme.primary,
+        selectedItemColor:_currentIndex==1 ?Colors.red : Theme.of(context).colorScheme.primary,
         unselectedItemColor: Colors.grey,
       ),
     );

@@ -121,6 +121,8 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                     ],
                     const SizedBox(height: 30),
                     CustomButtons(
+                      fontSize: 14,
+                      height: Get.height*0.1,
                         text: authController.isOtpSent.value
                             ? "Verify OTP"
                             : "Send OTP",
@@ -133,11 +135,24 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Center(
+                    Container(
+                      width: Get.width,
+                        
+                      margin: EdgeInsets.all(8),
+                      padding: EdgeInsets.symmetric(vertical:5,horizontal: 2),
+                      decoration: BoxDecoration(
+                       color: Colors.white, // background color (optional)
+    border: Border.all(
+      color: Colors.blue, // border color
+      width: 2.0,         // border width
+    ),
+
+                        borderRadius: BorderRadius.circular(5)
+                      ),
                         child: TextButton(
                       child: Text(
                         'Continue as Guest',
-                        style: GoogleFonts.acme(),
+                        style: GoogleFonts.acme(       fontSize: 14,),
                       ),
                       onPressed: () {
                         Get.offAndToNamed(PageRoutes.bottomNav);
