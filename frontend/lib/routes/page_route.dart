@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pilot_project/presentation/controllers/authController.dart';
 import 'package:pilot_project/presentation/screens/email_password_sign_up.dart';
+import 'package:pilot_project/presentation/screens/onboarding/onboarding.dart';
 import 'package:pilot_project/presentation/screens/phone_sign_up.dart';
 import 'package:pilot_project/presentation/screens/splash.dart';
 import 'package:pilot_project/presentation/screens/user/navigation.dart';
@@ -16,6 +17,7 @@ class PageRoutes {
   static const String bottomNav = "/bottomNav";
   static const String emailPassword = "/emailPassword";
   static const String setting = "/setting";
+  static const String onboarding = "/onBoarding";
 
   // get product category
   static List<GetPage> getPageRoutes() {
@@ -57,6 +59,14 @@ class PageRoutes {
       GetPage(
         name: setting,
         page: () => const Setting(),
+        binding: BindingsBuilder(() async {
+          final sharedPreferences = await SharedPreferences.getInstance();
+          Get.put(() => sharedPreferences, permanent: true);
+        }),
+      ),
+      GetPage(
+        name: onboarding,
+        page: () => const OnboardingScreen(),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);

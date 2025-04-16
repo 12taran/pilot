@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -97,6 +98,15 @@ class BottomNavScreenState extends State<BottomNavScreen> {
               onTap: () {
                 Navigator.pop(context);
                 Get.toNamed(PageRoutes.setting);
+                // Navigate to a Settings page if available
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('LogOut'),
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                Get.offAndToNamed(PageRoutes.phonesignup);
                 // Navigate to a Settings page if available
               },
             ),

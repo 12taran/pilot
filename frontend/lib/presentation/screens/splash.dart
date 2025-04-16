@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/presentation/screens/email_password_sign_up.dart';
 import 'package:pilot_project/presentation/screens/onboarding/onboarding.dart';
+import 'package:pilot_project/routes/page_route.dart';
 
 /// @author PRINCE DUBEY
 /// @email princedubey80066@gmail.com
@@ -31,9 +34,9 @@ class SplashScreenState extends State<SplashScreen> {
 
     // Navigate after delay
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const OnboardingScreen()),
-      );
+      FirebaseAuth.instance.currentUser != null
+          ? Get.offAndToNamed(PageRoutes.bottomNav)
+          : Get.offAndToNamed(PageRoutes.onboarding);
     });
   }
 

@@ -5,14 +5,19 @@ import 'package:get/get.dart';
 import 'package:pilot_project/core/app_theme.dart';
 import 'package:pilot_project/presentation/controllers/theme_controller.dart';
 import 'package:pilot_project/routes/page_route.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  
 
   // This widget is the root of your application.
   @override
