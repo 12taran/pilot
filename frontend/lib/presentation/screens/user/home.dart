@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/components/CustomContainer.dart';
+import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/screens/user/profile.dart';
@@ -119,23 +120,91 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 15,
                 ),
-                CarouselSlider(items: [
-                  for (int i = 0; i < 6; i++)
-                    Center(
-                        child: CustomContainer(
-                            padding: 2,
-                            width: Get.width * 0.9,
-                            child: Column(
-                              children: [
-                                Image.asset(
+                CarouselSlider(
+                    items: [
+                      for (int i = 0; i < 6; i++)
+                        Center(
+                            child: CustomContainer(
+                          padding: 2,
+                          width: Get.width * 0.9,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ClipRRect(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(10)),
+                                child: Image.asset(
                                   propertyController.properties[i]['image']!,
-                                  fit: BoxFit.fill,
+                                  fit: BoxFit.cover,
                                   height: Get.height * 0.16,
-                                  width: double.infinity,
-                                )
-                              ],
-                            )))
-                ], options: CarouselOptions(enlargeCenterPage: true)),
+                                  width: Get.width * 0.9,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    propertyController.properties[i]['name']!,
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 4),
+                                    margin: const EdgeInsets.only(right: 5),
+                                    decoration: BoxDecoration(
+                                      color: Colors.blue.shade100,
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: Text(
+                                      propertyController.properties[i]['type']!,
+                                      style: const TextStyle(
+                                          fontSize: 12, color: Colors.black54),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 4),
+                              Row(
+                                children: [
+                                  const Icon(Icons.location_on,
+                                      size: 16, color: Colors.red),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    propertyController.properties[i]
+                                        ['location']!,
+                                    style: const TextStyle(color: Colors.grey),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                "₹ ${propertyController.properties[i]['price']!}",
+                                style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.green),
+                              ),
+                              const SizedBox(height: 10),
+                              Align(
+                                alignment: Alignment.bottomRight,
+                                child: CustomButtons(
+                                  width: Get.width * 0.3,
+                                  text: 'Invest',
+                                  onPressed: () {
+                                    // Do something here
+                                  },
+                                ),
+                              )
+                            ],
+                          ),
+                        ))
+                    ],
+                    options: CarouselOptions(
+                        enlargeCenterPage: true, height: Get.height * 0.36)),
                 const SizedBox(
                   height: 20,
                 ),
