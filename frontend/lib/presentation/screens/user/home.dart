@@ -16,8 +16,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List City = ['Mohali', 'Bangalore', 'Chennai', 'Hyderabad', 'Panji'];
+  List City = ['Mohali', '  Dhulera', 'Himachal'];
   List text1 = ['Why use Pilot for Your Investment', '123', '456'];
+  List location=['assets/images/kasol.jpg','assets/images/chandigarh.jpg','assets/images/kasol.jpg'];
   List<String> motivation = [
     "assets/images/motivation1.jpg",
     "assets/images/motivation2.jpg",
@@ -114,7 +115,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Text(
                   "   Make your future secure with Pilot 👇",
-                  style: GoogleFonts.lato(fontSize: 15),
+                  style: GoogleFonts.lato(fontSize: 19),
                 ),
                 const SizedBox(
                   height: 15,
@@ -127,11 +128,16 @@ class _HomePageState extends State<HomePage> {
                             width: Get.width * 0.9,
                             child: Column(
                               children: [
-                                Image.asset(
-                                  propertyController.properties[i]['image']!,
-                                  fit: BoxFit.fill,
-                                  height: Get.height * 0.16,
-                                  width: double.infinity,
+                                ClipRRect(
+                                  
+                                    borderRadius:BorderRadius.circular(10)
+                                  ,
+                                  child: Image.asset(
+                                    propertyController.properties[i]['image']!,
+                                    fit: BoxFit.fill,
+                                    height: Get.height * 0.16,
+                                    width: double.infinity,
+                                  ),
                                 )
                               ],
                             )))
@@ -216,34 +222,36 @@ class _HomePageState extends State<HomePage> {
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 3),
-                      itemCount: 5,
+                      itemCount: 3,
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: Column(
                             children: [
                               Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.3),
-                                      spreadRadius: 2,
-                                      blurRadius: 6,
-                                      offset: const Offset(0, 3),
-                                    ),
-                                  ],
-                                ),
-                                child: CircleAvatar(
-                                  radius: 40,
-                                  backgroundColor:
-                                      Colors.white, // optional for contrast
-                                  child: Center(child: Text('$index')),
-                                ),
-                              ),
+  decoration: BoxDecoration(
+    shape: BoxShape.circle,
+    boxShadow: [
+      BoxShadow(
+        color: Colors.black.withOpacity(0.3),
+        spreadRadius: 2,
+        blurRadius: 6,
+        offset: const Offset(0, 3),
+      ),
+    ],
+  ),
+  child: CircleAvatar(
+    radius: 45,
+    backgroundColor: Colors.white,
+    backgroundImage: AssetImage(location[index]), // Yahi main kaam karta hai
+  ),
+),
+
+                              
+                              
                               Text(
                                 City[index],
-                                style: const TextStyle(fontSize: 12),
+                                style:  GoogleFonts.lato(fontSize: 15),
                               ),
                             ],
                           ),

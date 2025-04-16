@@ -174,10 +174,10 @@ const SizedBox(height: 70), // prevent overlap with rest of the UI
                         ),
                 child: Column(children: [
                   _buildDetailTile(Icons.person, 'Name', 'abc@1234'),
-                  _buildDetailTile(Icons.phone, 'Phone No.', '234'),
-                  _buildDetailTile(Icons.cake, 'DOB', 'abc@1234'),
-                  _buildDetailTile(Icons.email, 'Email', 'abc@1234'),
-                  _buildDetailTile(Icons.location_city, 'Location', 'abc@1234')
+                  _buildDetailTile(Icons.phone, 'Phone No.', '2345678901'),
+                  _buildDetailTile(Icons.cake, 'DOB', '31/01/1995'),
+                  _buildDetailTile(Icons.email, 'Email', 'xyz@gmail.com'),
+                  _buildDetailTile(Icons.location_city, 'Location', 'Mohali ,Punjab')
                 ],),
               ),
             )
