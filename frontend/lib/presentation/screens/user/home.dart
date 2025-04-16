@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
                   child: Container(
                     color: Colors.black,
                     margin: const EdgeInsets.symmetric(horizontal: 5),
-                    height: Get.height*0.15,
+                    height: Get.height*0.1,
                   
                     child: Row(
                       children: [
@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                   ( options: CarouselOptions(
                     aspectRatio:16/9,
                     autoPlay: true,
-                   autoPlayInterval: Duration(seconds: 0), // Time before moving to next slide
+                   autoPlayInterval: Duration(seconds: 5), // Time before moving to next slide
             autoPlayAnimationDuration: Duration(seconds: 3), // Slide transition duration
             autoPlayCurve: Curves.linear,
                   ),

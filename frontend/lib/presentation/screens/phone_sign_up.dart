@@ -132,19 +132,43 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Center(
-                      child: Text('Continue with google'),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.symmetric(vertical:5),
+                      decoration: BoxDecoration(
+                       color: Colors.white, // background color (optional)
+    border: Border.all(
+      color: Colors.blue, // border color
+      width: 2.0,         // border width
+    ),
+
+                        borderRadius: BorderRadius.circular(5)
+                      ),
+                      width: Get.width,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          
+                          Center(
+                        child: InkWell(
+                            onTap: () {
+                              authController.signInWithGoogle();
+                            },
+                            child: Image.asset(
+                              'assets/images/google.png',
+                              height: 30,
+                            )),
+                      ),
+                      const SizedBox(width: 10),
+                       Center(
+                            child: Text('Continue with Google'),
+                          ),
+                          
+                        ],
+                      ),
                     ),
-                    Center(
-                      child: InkWell(
-                          onTap: () {
-                            authController.signInWithGoogle();
-                          },
-                          child: Image.asset(
-                            'assets/images/google.png',
-                            height: 30,
-                          )),
-                    )
+                    
                   ],
                 ),
               )
