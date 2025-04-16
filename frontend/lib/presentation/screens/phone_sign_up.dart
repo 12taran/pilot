@@ -6,6 +6,7 @@ import 'package:pilot_project/core/components/MyTextField.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/presentation/controllers/authController.dart';
+import 'package:pilot_project/routes/page_route.dart';
 
 class PhoneSignUpScreen extends StatefulWidget {
   const PhoneSignUpScreen({super.key});
@@ -64,7 +65,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                       textAlign: TextAlign.start,
                     ),
                     Text(
-                      'Sign Up to Continue!',
+                      'Verify to Continue!',
                       style: GoogleFonts.acme(
                         fontSize: Constants.fontSizeHeading,
                         fontWeight: FontWeight.w500,
@@ -132,19 +133,13 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Center(
-                      child: Text('Continue with google'),
-                    ),
                     Center(
-                      child: InkWell(
-                          onTap: () {
-                            authController.signInWithGoogle();
+                      child: TextButton(
+                          onPressed: () {
+                            Get.toNamed(PageRoutes.bottomNav);
                           },
-                          child: Image.asset(
-                            'assets/images/google.png',
-                            height: 30,
-                          )),
-                    )
+                          child: const Text('Continue as Guest')),
+                    ),
                   ],
                 ),
               )
