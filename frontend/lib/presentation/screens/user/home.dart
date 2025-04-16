@@ -116,33 +116,107 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Text(
                   "   Make your future secure with Pilot 👇",
-                  style: GoogleFonts.lato(fontSize: 19),
+                  style: GoogleFonts.lato(fontSize: 15),
                 ),
                 const SizedBox(
                   height: 15,
                 ),
-                CarouselSlider(items: [
-                  for (int i = 0; i < 6; i++)
-                    Center(
-                        child: CustomContainer(
-                            padding: 2,
-                            width: Get.width * 0.9,
-                            child: Column(
-                              children: [
-                                ClipRRect(
-                                  
-                                    borderRadius:BorderRadius.circular(10)
-                                  ,
-                                  child: Image.asset(
-                                    propertyController.properties[i]['image']!,
-                                    fit: BoxFit.fill,
-                                    height: Get.height * 0.16,
-                                    width: double.infinity,
+                CarouselSlider(
+                    items: [
+                      for (int i = 0; i < 6; i++)
+                        Center(
+                            child: CustomContainer(
+                          padding: 2,
+                          width: Get.width * 0.9,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ClipRRect(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(10)),
+                                child: Image.asset(
+                                  propertyController.properties[i]['image']!,
+                                  fit: BoxFit.cover,
+                                  height: Get.height * 0.16,
+                                  width: Get.width * 0.9,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    propertyController.properties[i]['name']!,
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
                                   ),
-                                )
-                              ],
-                            )))
-                ], options: CarouselOptions(enlargeCenterPage: true)),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 4),
+                                    margin: const EdgeInsets.only(right: 5),
+                                    decoration: BoxDecoration(
+                                      color: Colors.blue.shade100,
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: Text(
+                                      propertyController.properties[i]['type']!,
+                                      style: const TextStyle(
+                                          fontSize: 12, color: Colors.black54),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 4),
+                              Row(
+                                children: [
+                                  const Icon(Icons.location_on,
+                                      size: 16, color: Colors.red),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    propertyController.properties[i]
+                                        ['location']!,
+                                    style: const TextStyle(color: Colors.grey),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 4),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text('PRICE : ', style: GoogleFonts.lato(fontSize: 14,fontWeight: FontWeight.bold)),
+                                      Text(
+                                        "₹ ${propertyController.properties[i]['price']!}",
+                                        style: const TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.green),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                              Align(
+                                alignment: Alignment.bottomRight,
+                                child: CustomButtons(
+                                  width: Get.width * 0.3,
+                                  text: 'Invest',
+                                  onPressed: () {
+                                    // Do something here
+                                  },
+                                ),
+                              )
+                                ],
+                              ),
+                              
+                            ],
+                          ),
+                        ))
+                    ],
+                    options: CarouselOptions(
+                        enlargeCenterPage: true, height: Get.height * 0.36)),
                 const SizedBox(
                   height: 20,
                 ),
@@ -229,7 +303,7 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.all(5.0),
                           child: Column(
                             children: [
-                              Container(
+                             Container(
   decoration: BoxDecoration(
     shape: BoxShape.circle,
     boxShadow: [
@@ -242,17 +316,15 @@ class _HomePageState extends State<HomePage> {
     ],
   ),
   child: CircleAvatar(
-    radius: 45,
+    radius: 40,
     backgroundColor: Colors.white,
     backgroundImage: AssetImage(location[index]), // Yahi main kaam karta hai
   ),
 ),
 
-                              
-                              
                               Text(
                                 City[index],
-                                style:  GoogleFonts.lato(fontSize: 15),
+                                style: const TextStyle(fontSize: 12),
                               ),
                             ],
                           ),
