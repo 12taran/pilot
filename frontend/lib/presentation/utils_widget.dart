@@ -332,17 +332,17 @@ class UtilsWidget {
         builder: (BuildContext context) {
           return AlertDialog(
             backgroundColor: Theme.of(context).colorScheme.background,
-            title: Text("confirmation".tr),
+            title: Text("Confirmation".tr),
             content: Text(message ?? "del_conf".tr),
             actions: <Widget>[
               TextButton(
-                child: Text("no".tr),
+                child: const Text("No"),
                 onPressed: () {
                   onNoPressed();
                 },
               ),
               TextButton(
-                child: Text("yes".tr),
+                child: Text("YES"),
                 onPressed: () {
                   onYesPressed();
                 },

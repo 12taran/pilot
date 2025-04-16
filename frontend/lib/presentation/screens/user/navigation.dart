@@ -5,8 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/presentation/screens/user/home.dart';
 import 'package:pilot_project/presentation/screens/user/portfolio.dart';
+import 'package:pilot_project/presentation/screens/user/drawer.dart';
 import 'package:pilot_project/presentation/screens/user/profile.dart';
-import 'package:pilot_project/presentation/screens/user/userDetail.dart';
 import 'package:pilot_project/presentation/screens/user/wishlistPage.dart';
 import 'package:pilot_project/routes/page_route.dart';
 
@@ -21,10 +21,10 @@ class BottomNavScreenState extends State<BottomNavScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-     HomePage(),
+    HomePage(),
     const WishlistPage(),
     const PortfolioPage(),
-    const UserDetail(),
+    const ProfilePage(),
   ];
 
   void _onTabTapped(int index) {
@@ -46,14 +46,15 @@ class BottomNavScreenState extends State<BottomNavScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: _onTabTapped,
         items: _navItems,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor:_currentIndex==1 ?Colors.red : Theme.of(context).colorScheme.primary,
+        selectedItemColor: _currentIndex == 1
+            ? Colors.red
+            : Theme.of(context).colorScheme.primary,
         unselectedItemColor: Colors.grey,
       ),
     );

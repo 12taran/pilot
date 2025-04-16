@@ -8,7 +8,7 @@ import 'package:pilot_project/core/components/CustomContainer.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
-import 'package:pilot_project/presentation/screens/user/profile.dart';
+import 'package:pilot_project/presentation/screens/user/drawer.dart';
 import 'package:pilot_project/routes/page_route.dart';
 
 class HomePage extends StatefulWidget {
@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                         backgroundColor: Theme.of(context).primaryColorLight,
                         child: IconButton(
                             onPressed: () {
-                              Get.to(const ProfilePage());
+                              Get.toNamed(PageRoutes.drawer);
                             },
                             icon: const Icon(Icons.person)),
                       ),

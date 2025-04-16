@@ -5,9 +5,9 @@ import 'package:pilot_project/presentation/screens/onboarding/onboarding.dart';
 import 'package:pilot_project/presentation/screens/phone_sign_up.dart';
 import 'package:pilot_project/presentation/screens/splash.dart';
 import 'package:pilot_project/presentation/screens/user/navigation.dart';
-import 'package:pilot_project/presentation/screens/user/profile.dart';
+import 'package:pilot_project/presentation/screens/user/drawer.dart';
 import 'package:pilot_project/presentation/screens/user/setting.dart';
-import 'package:pilot_project/presentation/screens/user/userDetail.dart';
+import 'package:pilot_project/presentation/screens/user/profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// @author PRINCE DUBEY
@@ -20,8 +20,8 @@ class PageRoutes {
   static const String emailPassword = "/emailPassword";
   static const String setting = "/setting";
   static const String onboarding = "/onBoarding";
-  static const String drawerProfile = "/drawerProfile";
-   static const String userDetail = "/userDetail";
+  static const String drawer = "/drawerProfile";
+  static const String profile = "/userDetail";
 
   // get product category
   static List<GetPage> getPageRoutes() {
@@ -36,8 +36,8 @@ class PageRoutes {
         }),
       ),
       GetPage(
-        name: userDetail,
-        page: () => const UserDetail(),
+        name: profile,
+        page: () => const ProfilePage(),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);
@@ -77,8 +77,8 @@ class PageRoutes {
         }),
       ),
       GetPage(
-        name: drawerProfile,
-        page: () => const ProfilePage(),
+        name: drawer,
+        page: () => const Drawer(),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);
