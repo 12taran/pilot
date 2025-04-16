@@ -57,6 +57,7 @@ class ProfilePage extends StatelessWidget {
                   )
                         ],
                       ),
+                      IconButton(onPressed:(){}, icon:Icon(Icons.arrow_right))
                      
                     ],
                   ),
@@ -87,7 +88,7 @@ class ProfilePage extends StatelessWidget {
 
                trailing: Icon(Icons.arrow_right),
               leading: const Icon(Icons.food_bank_outlined),
-              title: const Text('Bank Deatils'),
+              title: const Text('Bank Details'),
               onTap: () {
                 Get.toNamed(PageRoutes.setting);
               },
@@ -104,7 +105,7 @@ class ProfilePage extends StatelessWidget {
             Divider(thickness: 1,),
             ListTile(
                trailing: Icon(Icons.arrow_right),
-              leading: const Icon(Icons.question_answer_outlined),
+              leading: const Icon(Icons.question_mark),
               title: const Text('FAQs'),
               onTap: () {
                 Get.toNamed(PageRoutes.setting);

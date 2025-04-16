@@ -5,6 +5,7 @@ import 'package:pilot_project/presentation/screens/onboarding/onboarding.dart';
 import 'package:pilot_project/presentation/screens/phone_sign_up.dart';
 import 'package:pilot_project/presentation/screens/splash.dart';
 import 'package:pilot_project/presentation/screens/user/navigation.dart';
+import 'package:pilot_project/presentation/screens/user/profile.dart';
 import 'package:pilot_project/presentation/screens/user/setting.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,6 +19,7 @@ class PageRoutes {
   static const String emailPassword = "/emailPassword";
   static const String setting = "/setting";
   static const String onboarding = "/onBoarding";
+  static const String drawerProfile = "/drawerProfile";
 
   // get product category
   static List<GetPage> getPageRoutes() {
@@ -59,6 +61,14 @@ class PageRoutes {
       GetPage(
         name: setting,
         page: () => const Setting(),
+        binding: BindingsBuilder(() async {
+          final sharedPreferences = await SharedPreferences.getInstance();
+          Get.put(() => sharedPreferences, permanent: true);
+        }),
+      ),
+      GetPage(
+        name: drawerProfile,
+        page: () => const ProfilePage(),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);

@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                                 padding: const EdgeInsets.all(5.0),
                                 child: CircleAvatar(radius: 25,
                                   child: IconButton(onPressed:(){
-                                        Get.to(ProfilePage());
+                                        Get.toNamed(PageRoutes.drawerProfile);
                                   }, icon:const Icon(Icons.person)),),
                                                     ),
                                                     
@@ -63,8 +63,8 @@ class _HomePageState extends State<HomePage> {
                       ],
                     )),
                 ),
-           
-              const Divider(thickness: 3,),
+           //const Divider(thickness: 2,color: Colors.grey,),
+              
                 Container(
                   margin: const EdgeInsets.all(10),
                   height: Get.height*0.25,
@@ -101,45 +101,56 @@ class _HomePageState extends State<HomePage> {
                 }).toList(),
                   ),
                 ),
-                const Divider(thickness: 3,),
+                const Divider(thickness: 2,color: Colors.grey,),
                 Container(
                   child: Column(
                     children: [
-                      const Text("Make your future secure with Pilot 👇", style: TextStyle(fontSize: 20),),
+                       Text("Make your future secure with Pilot 👇", style: GoogleFonts.lato(fontSize: 20),),
                       const SizedBox(height: 20,),
                       CarouselSlider(items: 
-                      [for(int i=0;i<6;i++)Center(child: Container(width: Get.width/2,
+                      [for(int i=0;i<6;i++)Center(child: Container(width: Get.width*0.7,
                       height: Get.height*0.6,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),color: Colors.amberAccent
+                        
+                         boxShadow: [
+      BoxShadow(
+        color: Colors.grey.withOpacity(0.5), // Shadow color
+        spreadRadius: 4, // Spread radius
+        blurRadius: 4, // Blur radius
+        offset: Offset(0,0), // Changes position of shadow
+      ),
+    ],
+                        borderRadius: BorderRadius.circular(30),color:Colors.white
                       ),
-                      child: Text('Property $i',style: TextStyle(fontSize: 16),),
+                      child: Text('Property $i',style: GoogleFonts.acme(fontSize: 16),),
                       ))]
                       , options:CarouselOptions(
                         
                       )),
                       const SizedBox(height: 20,),
-                      Center(child: Text(" !! Returns are not guaranteed and are\n subjected to market risks !! " ,style: GoogleFonts.aBeeZee(color: Colors.red),))
+                      Center(child: Text(" !! Returns are not guaranteed and are subjected to market risks !! " ,style: GoogleFonts.aBeeZee(color: Colors.red,fontSize: 12),))
                     ],
                   ),
                 ),
-                const Divider(thickness: 3,),
+                const Divider(thickness: 2,color: Colors.grey,),
+              
                 Container(
                   child: Column(children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Row(
                             children: [
-                              Container(width: 50,height: 50,
+                              Container(width: 40,height: 40,
                                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
                                color: Colors.grey,),
                               child: const Icon(Icons.person),),
                               
                               const Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text("10k+", style: TextStyle(fontSize: 18),),
                                   Text("Users", style: TextStyle(fontSize: 18),),
@@ -150,7 +161,7 @@ class _HomePageState extends State<HomePage> {
                                     
                         Row(
                             children: [
-                              Container(width: 50,height: 50,
+                              Container(width: 40,height: 40,
                              
                               decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
                                color: Colors.grey,),

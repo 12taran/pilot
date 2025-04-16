@@ -132,7 +132,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Container(
+                    /*Container(
                       margin: EdgeInsets.all(10),
                       padding: EdgeInsets.symmetric(vertical:5),
                       decoration: BoxDecoration(
@@ -167,7 +167,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                           
                         ],
                       ),
-                    ),
+                    ),*/
                     
                   ],
                 ),
