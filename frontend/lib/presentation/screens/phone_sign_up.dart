@@ -6,7 +6,6 @@ import 'package:pilot_project/core/components/MyTextField.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/presentation/controllers/authController.dart';
-import 'package:pilot_project/routes/page_route.dart';
 
 class PhoneSignUpScreen extends StatefulWidget {
   const PhoneSignUpScreen({super.key});
