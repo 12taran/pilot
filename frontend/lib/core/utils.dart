@@ -9,8 +9,8 @@ import 'package:get/get.dart';
 import 'package:image/image.dart' as Img;
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
-import 'package:scan/scan.dart';
-import 'package:share_plus/share_plus.dart';
+//import 'package:scan/scan.dart';
+//import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -30,10 +30,7 @@ class Utils {
 
   //
   // file to qr text
-  Future<String> fileToQrText(File file) async {
-    String? result = await Scan.parse(file.path);
-    return result ?? '';
-  }
+ 
 
   Future<Img.Image?> resizeImg(String path, {int selectedPageSize = 0}) async {
     try {
@@ -228,7 +225,7 @@ class Utils {
     return totalPrice.toStringAsFixed(2);
   }
 
-  static Future<XFile> createFile(String s, Uint8List uint8list) async {
+ /* static Future<XFile> createFile(String s, Uint8List uint8list) async {
     Uint8List imageInUnit8List = uint8list;
     final tempDir = await getTemporaryDirectory();
     File file = await File('${tempDir.path}/$s.png').create();
@@ -252,6 +249,6 @@ class Utils {
       );
     }
   }
-
+*/
   // share files on whatsapp
 }
