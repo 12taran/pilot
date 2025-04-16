@@ -133,6 +133,16 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                     const SizedBox(
                       height: 10,
                     ),
+                    Center(
+                        child: TextButton(
+                      child: Text(
+                        'Continue as Guest',
+                        style: GoogleFonts.acme(),
+                      ),
+                      onPressed: () {
+                        Get.offAndToNamed(PageRoutes.bottomNav);
+                      },
+                    )),
                     /*Container(
                       margin: EdgeInsets.all(10),
                       padding: EdgeInsets.symmetric(vertical:5),
@@ -169,7 +179,6 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                         ],
                       ),
                     ),*/
-                    
                   ],
                 ),
               )
