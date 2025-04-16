@@ -8,7 +8,7 @@ import 'package:dio/dio.dart' as dio;
 import 'package:dio/src/response.dart' as dio_response;
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+//import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/core/session_manager.dart';
 import 'package:pilot_project/routes/api_routes.dart';
