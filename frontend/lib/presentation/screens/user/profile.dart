@@ -86,22 +86,31 @@ class ProfilePage extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 30),
+             ListTile(
+               trailing: Icon(Icons.arrow_right),
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
+              onTap: () {
+                Get.toNamed(PageRoutes.setting);
+              },
+            ),
+               Divider(thickness: 1,),
             ListTile(
               trailing: Icon(Icons.arrow_right),
               leading: const Icon(Icons.document_scanner),
               title: const Text('Documents'),
               onTap: () {
-                Get.toNamed(PageRoutes.setting);
+            
               },
             ),
+
             Divider(thickness: 1,),
             ListTile(
                trailing: Icon(Icons.arrow_right),
               leading: const Icon(Icons.monetization_on),
               title: const Text('Virtual Wallet'),
               onTap: () {
-                Get.toNamed(PageRoutes.setting);
+              
               },
             ),
             Divider(thickness: 1,),
@@ -111,7 +120,7 @@ class ProfilePage extends StatelessWidget {
               leading: const Icon(Icons.food_bank_outlined),
               title: const Text('Bank Details'),
               onTap: () {
-                Get.toNamed(PageRoutes.setting);
+              
               },
             ),
             Divider(thickness: 1,),
@@ -120,7 +129,7 @@ class ProfilePage extends StatelessWidget {
               leading: const Icon(Icons.person),
               title: const Text(' About Us'),
               onTap: () {
-                Get.toNamed(PageRoutes.setting);
+              
               },
             ),
             Divider(thickness: 1,),
@@ -129,7 +138,7 @@ class ProfilePage extends StatelessWidget {
               leading: const Icon(Icons.question_mark),
               title: const Text('FAQs'),
               onTap: () {
-                Get.toNamed(PageRoutes.setting);
+                
               },
             ),
             Divider(thickness: 1,),

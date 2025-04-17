@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/components/CustomContainer.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
+import 'package:pilot_project/core/utils.dart';
 import 'package:pilot_project/presentation/controllers/pilotController.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/screens/user/profile.dart';
@@ -86,7 +87,7 @@ class _HomePageState extends State<HomePage> {
       child: Text(
         'Pilot',
         style: GoogleFonts.aBeeZee(
-          fontSize: 20,
+          fontSize: Constants.fontSizeBody,
           fontWeight: FontWeight.bold,
           color: Color.fromARGB(255, 246, 241, 241), // Make sure text is visible on gradient
         ),
@@ -181,7 +182,7 @@ class _HomePageState extends State<HomePage> {
                             left: 10,
                             child: CustomButtons(
                               color: Colors.orange,
-                              fontSize: 10,
+                              fontSize: Constants.fontSizeTinySmall,
                               width: Get.width * 0.4,
                               onPressed: () {},
                               text: 'Invest Now',
@@ -212,7 +213,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                        Text(
                         " Start Investing Securely 🔒",
-                        style: GoogleFonts.lato(fontSize: 25),
+                        style: GoogleFonts.lato(fontSize:Constants.fontSizeHeading),
                       ),
                     ],
                   ),
@@ -249,7 +250,7 @@ class _HomePageState extends State<HomePage> {
                                   Text(
                                     propertyController.properties[i]['name']!,
                                     style: GoogleFonts.actor(
-                                        fontSize: 20,
+                                        fontSize: Constants.fontSizeBody,
                                         fontWeight: FontWeight.w500),
                                   ),
                                   Container(
@@ -262,8 +263,8 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     child: Text(
                                       propertyController.properties[i]['type']!,
-                                      style: const TextStyle(
-                                          fontSize: 12, color: Colors.black54),
+                                      style:  TextStyle(
+                                          fontSize: Constants.fontSizeTiny, color: Colors.black54),
                                     ),
                                   ),
                                 ],
@@ -294,15 +295,21 @@ class _HomePageState extends State<HomePage> {
                                      
                                         Text(
                                           "Rs ${propertyController.properties[i]['price']!}/- ",
-                                          style: const TextStyle(
-                                              fontSize: 20,
+                                          style: TextStyle(
+                                              fontSize: Constants.fontSizeBody,
                                               fontWeight: FontWeight.w800,
                                               color: Color.fromARGB(255, 26, 27, 26)),
                                         ),
                                                 Column(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [Text('Per'),
-                                                  Text('ALT SQFT')],
+                                                  children: [Text('Per',
+                                                  style: const TextStyle(
+                                             
+                                              color: Color.fromARGB(255, 26, 27, 26)),),
+                                                  Text('ALT SQFT',style: const TextStyle(
+                                            
+                                              
+                                              color: Color.fromARGB(255, 26, 27, 26)),)],
                                                 )
                                       ],
                                     ),
@@ -312,7 +319,7 @@ class _HomePageState extends State<HomePage> {
                                         onTap: (){},
                                         child:Text('Invest Now',
                                         style: GoogleFonts.labrada(
-                                          fontSize: 18,
+                                           fontSize: Constants.fontSizeSubTitle,
                                           fontWeight: FontWeight.w600,
                                           color: Color.fromARGB(255, 230, 110, 19),
                                           letterSpacing: 1,
@@ -337,7 +344,7 @@ class _HomePageState extends State<HomePage> {
                 Center(
                     child: Text(
                   " !! Returns are not guaranteed and are subjected to market risks !! ",
-                  style: GoogleFonts.lato(color: Colors.red, fontSize: 12),
+                  style: GoogleFonts.lato(color: Colors.red, fontSize: Constants.fontSizeTiny),
                 ))
               ],
             ),
@@ -364,16 +371,16 @@ class _HomePageState extends State<HomePage> {
                               child: const Icon(Icons.person),
                             ),
                               SizedBox(width: 5,),
-                            const Column(
+                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   "10k+",
-                                  style: TextStyle(fontSize: 18,fontWeight: FontWeight.w800),
+                                  style: TextStyle(fontSize: Constants.fontSizeSubTitle,fontWeight: FontWeight.w800),
                                 ),
                                 Text(
                                   "Users",
-                                  style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500),
+                                  style: TextStyle( fontSize:Constants.fontSizeSmall,fontWeight: FontWeight.w500),
                                 ),
                               ],
                             ),
@@ -394,7 +401,7 @@ class _HomePageState extends State<HomePage> {
                               SizedBox(width: 5,),
                             Text(
                               "8 Cities",
-                              style: TextStyle(fontSize: 18,fontWeight: FontWeight.w800),
+                              style: TextStyle(fontSize: Constants.fontSizeSubTitle,fontWeight: FontWeight.w800),
                             ),
                             
                           ],
@@ -410,7 +417,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Padding(
                   padding: const EdgeInsets.only(left: 20.0,top: 20),
-                  child: Text('Explore by Regions',style: TextStyle(fontSize: 25,fontWeight: FontWeight.w800),),
+                  child: Text('Explore by Regions',style: TextStyle(fontSize:Constants.fontSizeHeading,fontWeight: FontWeight.w800),),
                 ),
                       Expanded(
                         child: GridView(
@@ -443,7 +450,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     Text(
                                       City[index],
-                                      style: const TextStyle(fontSize: 12),
+                                      style:  TextStyle(fontSize:Constants.fontSizeTiny),
                                     ),
                                   ],
                                 ),
@@ -457,7 +464,7 @@ class _HomePageState extends State<HomePage> {
                 Container(
                   height: Get.height*0.7,
                   child: Column(children: [
-                    Text('Our Board Of Members',style: TextStyle(fontSize: 25,fontWeight: FontWeight.w800),),
+                    Text('Our Board Of Members',style: TextStyle(fontSize:Constants.fontSizeHeading,fontWeight: FontWeight.w800),),
                     Expanded(
                       child: GridView(gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,
                        childAspectRatio:2/3, ),
@@ -485,13 +492,13 @@ class _HomePageState extends State<HomePage> {
                                                                      Text(
                                       pilotcontroller.boardMembers[index]['name']!,
                                       style: GoogleFonts.actor(
-                                          fontSize: 15,
+                                          fontSize: Constants.fontSizeSmall,
                                           fontWeight: FontWeight.w500),
                                                                         ),
                                                                          Text(
                                                                         pilotcontroller.boardMembers[index]['designation']!,
                                       style: GoogleFonts.actor(
-                                          fontSize: 20,
+                                          fontSize: Constants.fontSizeBody,
                                           fontWeight: FontWeight.w900),
                                                                         ),
                                          
@@ -512,7 +519,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Padding(
                   padding: const EdgeInsets.only(left: 20.0,top: 20),
-                  child: Text('Explore by Themes',style: TextStyle(fontSize: 25,fontWeight: FontWeight.w800),),
+                  child: Text('Explore by Themes',style: TextStyle(fontSize:Constants.fontSizeHeading,fontWeight: FontWeight.w800),),
                 ),
                       Expanded(
                         child: GridView(
@@ -545,7 +552,7 @@ class _HomePageState extends State<HomePage> {
                                     Text(
                                       propertyController.properties[
                                             index]['type']!,
-                                      style: const TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize:Constants.fontSizeSmall,fontWeight: FontWeight.bold),
                                     ),
                                   ],
                                 ),
