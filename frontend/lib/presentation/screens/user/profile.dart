@@ -25,20 +25,25 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+              
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        width: Get.width * 0.2,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.white),
-                        ),
-                        child: Image.asset(
-                          "assets/images/onboarding1.png",
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      const SizedBox(width: 20),
+                          IconButton(onPressed: (){Get.back();}, icon:Icon(Icons.arrow_back)),
+                      Row(
+                        children: [
+                          Container(
+                            width: Get.width * 0.2,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Colors.white),
+                            ),
+                            child: Image.asset(
+                              "assets/images/onboarding1.png",
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          const SizedBox(width: 20),
                       Column(
                         children: [
                           Text(
@@ -57,7 +62,13 @@ class ProfilePage extends StatelessWidget {
                   )
                         ],
                       ),
-                      IconButton(onPressed:(){Get.toNamed(PageRoutes.userDetail);}, icon:const Icon(Icons.arrow_right))
+                      SizedBox(width: 10,),
+                      CircleAvatar(
+                        backgroundColor: Colors.white,
+                        child: IconButton(onPressed:(){Get.toNamed(PageRoutes.userDetail);}, icon: Icon(Icons.edit,color:Theme.of(context).colorScheme.primary,)))
+                        ],
+                      ),
+                      
                      
                     ],
                   ),

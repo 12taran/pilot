@@ -8,7 +8,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:pilot_project/core/components/MyTextField.dart';
 
 import 'package:pilot_project/routes/page_route.dart';
-
 class UserDetail extends StatefulWidget {
   const UserDetail({super.key});
 
@@ -18,25 +17,20 @@ class UserDetail extends StatefulWidget {
 
 class _UserDetailState extends State<UserDetail> {
   File? _profileImage;
-  File? _backgroundImage;
-
   final picker = ImagePicker();
 
-  // Dummy user details (can fetch from Firebase or any backend)
-  String userName = "Prince Dubey";
-  String email = "prince@example.com";
-  String mobile = "123456XXXX";
-  String dob = "01-01-2000";
+  // Editable controllers
+  final nameController = TextEditingController(text: "Harry Wilson");
+  final emailController = TextEditingController(text: "prince@yahoo.com");
+  final mobileController = TextEditingController(text: "123456XXXX");
+  final dobController = TextEditingController(text: "01-01-2000");
+  final locationController = TextEditingController(text: "Mohali, Punjab");
 
-  Future<void> _pickImage(bool isProfile) async {
+  Future<void> _pickImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
-        if (isProfile) {
-          _profileImage = File(pickedFile.path);
-        } else {
-          _backgroundImage = File(pickedFile.path);
-        }
+        _profileImage = File(pickedFile.path);
       });
     }
   }
@@ -45,179 +39,108 @@ class _UserDetailState extends State<UserDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: AppBar(
+        title: const Text("User Profile"),
+        centerTitle: true,
+      ),
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-Stack(
-  clipBehavior: Clip.none,
-  children: [
-   Stack(
-  children: [
-    // Background image container (placed first, rendered at the bottom)
-    Container(
-      width: Get.width,
-      height: Get.height * 0.25,
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
-        image: _backgroundImage != null
-            ? DecorationImage(
-                image: FileImage(_backgroundImage!),
-                fit: BoxFit.cover,
-              )
-            : null,
-      ),
-    ),
-
-    // Edit icon (rendered on top)
-    Positioned(
-      top: 10,
-      right: 10,
-      child: GestureDetector(
-        onTap: () => _pickImage(false),
-        child: Container(
-          padding: const EdgeInsets.all(6),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 4,
-                offset: Offset(0, 2),
-              ),
-            ],
-          ),
-          child: const Icon(Icons.edit, size: 20),
-        ),
-      ),
-    ),
-  ],
-),
-
-   Positioned(
-  bottom: -50, // Overlapping the background
-  left: Get.width / 3, // You can tweak this for perfect centering
-  child: Stack(
-    alignment: Alignment.topRight,
-    children: [
-      GestureDetector(
-        onTap: () => _pickImage(true),
-        child: Container(
-          width: 150,
-          height: 150,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: Colors.white, width: 4),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 10,
-                offset: Offset(0, 5),
-              ),
-            ],
-            image: DecorationImage(
-              image: _profileImage != null
-                  ? FileImage(_profileImage!)
-                  : const AssetImage("assets/images/onboarding1.png")
-                      as ImageProvider,
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-      ),
-      Positioned(
-        top: 10,
-        right: 10,
-        child: GestureDetector(
-          onTap: () => _pickImage(true),
-          child: Container(
-            padding: const EdgeInsets.all(4),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black26,
-                  blurRadius: 4,
-                  offset: Offset(0, 2),
-                ),
-              ],
-            ),
-            child: const Icon(Icons.edit, size: 20),
-          ),
-        ),
-      ),
-    ],
-  ),
-),
-
-   
-  ],
-),
-const SizedBox(height: 70), // prevent overlap with rest of the UI
-            const SizedBox(height: 20),
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                width: Get.width*0.8,
-                 margin: EdgeInsets.all(10),
-                        padding: EdgeInsets.symmetric(vertical:5),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 20),
+              Center(
+                child: Stack(
+                  alignment: Alignment.topRight,
+                  children: [
+                    GestureDetector(
+                      onTap: _pickImage,
+                      child: Container(
+                        width: 130,
+                        height: 130,
                         decoration: BoxDecoration(
-                         color: Colors.white, // background color (optional)
-                  border: Border.all(
-                    color: Colors.black, // border color
-                    width: 2.0,         // border width
-                  ),
-              
-                          borderRadius: BorderRadius.circular(5)
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.white, width: 4),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              blurRadius: 10,
+                              offset: Offset(0, 5),
+                            ),
+                          ],
+                          image: DecorationImage(
+                            image: _profileImage != null
+                                ? FileImage(_profileImage!)
+                                : const AssetImage("assets/images/onboarding1.png")
+                                    as ImageProvider,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                child: Column(children: [
-                  _buildDetailTile(Icons.person, 'Name', 'abc@1234'),
-                  _buildDetailTile(Icons.phone, 'Phone No.', '2345678901'),
-                  _buildDetailTile(Icons.cake, 'DOB', '31/01/1995'),
-                  _buildDetailTile(Icons.email, 'Email', 'xyz@gmail.com'),
-                  _buildDetailTile(Icons.location_city, 'Location', 'Mohali ,Punjab')
-                ],),
+                      ),
+                    ),
+                    Positioned(
+                      top: 10,
+                      right: 10,
+                      child: GestureDetector(
+                        onTap: _pickImage,
+                        child: Container(
+                          padding: const EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 4,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: const Icon(Icons.edit, size: 20),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            )
-           
-           
-          ],
+              const SizedBox(height: 30),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  children: [
+                    _buildEditableField(Icons.person, "Name", nameController),
+                    _buildEditableField(Icons.phone, "Phone No.", mobileController),
+                    _buildEditableField(Icons.cake, "DOB", dobController),
+                    _buildEditableField(Icons.email, "Email", emailController),
+                    _buildEditableField(Icons.location_city, "Location", locationController),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
-Widget _buildDetailTile(IconData icon, String label, String value) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Icon(icon, size: 20),
-        const SizedBox(width: 10),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                label,
-                style: GoogleFonts.aBeeZee(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                value,
-                style: const TextStyle(fontSize: 14),
-              ),
-            ],
-          ),
-        ),
-      ],
-    ),
-  );
-}
 
+  Widget _buildEditableField(IconData icon, String label, TextEditingController controller) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Row(
+        children: [
+          Icon(icon, size: 20),
+          const SizedBox(width: 10),
+          Expanded(
+            child: TextFormField(
+              controller: controller,
+              decoration: InputDecoration(
+                labelText: label,
+                border: const OutlineInputBorder(),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

@@ -49,7 +49,12 @@ class _HomePageState extends State<HomePage> {
                         backgroundColor: Theme.of(context).primaryColorLight,
                         child: IconButton(
                             onPressed: () {
-                              Get.to(const ProfilePage());
+                             Get.to(
+  const ProfilePage(),
+  transition: Transition.leftToRight, // 👈 smooth left-to-right animation
+  duration: const Duration(milliseconds: 300), // optional
+);
+
                             },
                             icon: const Icon(Icons.person)),
                       ),
@@ -58,19 +63,38 @@ class _HomePageState extends State<HomePage> {
                       child: CarouselSlider(
                           items: [
                             for (int i = 0; i < 5; i++)
-                              CustomContainer(
-                                margin: const EdgeInsets.all(10),
-                                backgroundColor: Colors.black,
-                                width: Get.width * 0.28,
-                                child: Center(
-                                    child: Text(
-                                  'profile $i',
-                                  style: const TextStyle(color: Colors.white),
-                                )),
-                              )
+                             Expanded(
+  child: CustomContainer(
+    borderRadius: 0,
+    margin: const EdgeInsets.all(0),
+    backgroundColor: Colors.black,
+    width: Get.width * 0.7,
+    child:Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Icon(Icons.currency_rupee,color: Colors.orange,size: 30,),
+        Column(
+          children: [
+            Text(
+              'Stock $i',
+              style:  GoogleFonts.lateef(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),
+            ),
+            Text(
+          'Panther Investors',
+          style: GoogleFonts.aDLaMDisplay(color: Colors.green, fontSize: 12),
+        )
+          ],
+        ),
+        
+      ],
+    ),
+  ),
+),
+
                           ],
                           options: CarouselOptions(
-                            viewportFraction: 0.4,
+                            viewportFraction: 0.5,
                             height: Get.height * 0.08,
                             autoPlay: true,
                             autoPlayInterval: const Duration(
@@ -83,13 +107,15 @@ class _HomePageState extends State<HomePage> {
                   ],
                 )),
             Container(
-              margin: const EdgeInsets.all(10),
+              //margin: const EdgeInsets.all(10),
               width: Get.width,
               height: Get.height * 0.25,
               child: CarouselSlider(
                 options: CarouselOptions(
                   aspectRatio: 16 / 9,
+                  enlargeCenterPage: true,
                   autoPlay: true,
+                  viewportFraction: 0.9,
                   autoPlayInterval: const Duration(
                       seconds: 5), // Time before moving to next slide
                   autoPlayAnimationDuration:
@@ -114,6 +140,7 @@ class _HomePageState extends State<HomePage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(height: 10,),
                 Text(
                   "   Make your future secure with Pilot 👇",
                   style: GoogleFonts.lato(fontSize: 15),
@@ -198,16 +225,63 @@ class _HomePageState extends State<HomePage> {
                                     ],
                                   ),
                                   const SizedBox(height: 10),
-                              Align(
-                                alignment: Alignment.bottomRight,
-                                child: CustomButtons(
-                                  width: Get.width * 0.3,
-                                  text: 'Invest',
-                                  onPressed: () {
-                                    // Do something here
-                                  },
-                                ),
-                              )
+                             Align(
+  alignment: Alignment.bottomRight,
+  child: Padding(
+    padding: const EdgeInsets.all(20),
+    child: Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        gradient: const LinearGradient(
+          colors: [Color.fromARGB(255, 75, 92, 217),Color.fromARGB(255, 99, 195, 240), Color.fromARGB(255, 193, 185, 236)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.4),
+            blurRadius: 12,
+            offset: const Offset(4, 6),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(10),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(10),
+          onTap: () {
+            // Do something here
+          },
+          child: Container(
+            width: Get.width * 0.3,
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal:10),
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: Colors.white,
+                width: 1.5,
+              ),
+            ),
+            child: Center(
+              child: Text(
+                'Invest',
+                style: GoogleFonts.labrada(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                  letterSpacing: 1,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+
                                 ],
                               ),
                               
@@ -216,6 +290,7 @@ class _HomePageState extends State<HomePage> {
                         ))
                     ],
                     options: CarouselOptions(
+                      viewportFraction: 1,
                         enlargeCenterPage: true, height: Get.height * 0.36)),
                 const SizedBox(
                   height: 20,
