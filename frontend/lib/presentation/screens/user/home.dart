@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                             icon: const Icon(Icons.person)),
                       ),
                     ),
-                    Expanded(
+                   /* Expanded(
                       child: CarouselSlider(
                           items: [
                             for (int i = 0; i < 5; i++)
@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                                 seconds: 3), // Slide transition duration
                             autoPlayCurve: Curves.linear,
                           )),
-                    )
+                    )*/
                   ],
                 )),
             Container(
@@ -137,170 +137,177 @@ class _HomePageState extends State<HomePage> {
                 }).toList(),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 10,),
-                Text(
-                  "   Make your future secure with Pilot 👇",
-                  style: GoogleFonts.lato(fontSize: 15),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                CarouselSlider(
-                    items: [
-                      for (int i = 0; i < 6; i++)
-                        Center(
-                            child: CustomContainer(
-                          padding: 2,
-                          width: Get.width * 0.9,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ClipRRect(
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(10)),
-                                child: Image.asset(
-                                  propertyController.properties[i]['image']!,
-                                  fit: BoxFit.cover,
-                                  height: Get.height * 0.16,
-                                  width: Get.width * 0.9,
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 10,),
+                  Text(
+                    " Discover 👇",
+                    style: GoogleFonts.lato(fontSize: 35 ,fontWeight: FontWeight.w900),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                   Text(
+                    " Start Investing Securely ",
+                    style: GoogleFonts.lato(fontSize: 25),
+                  ),
+                  CarouselSlider(
+                      items: [
+                        for (int i = 0; i < 6; i++)
+                          Center(
+                              child: CustomContainer(
+                            padding: 2,
+                            width: Get.width * 0.9,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClipRRect(
+                                  borderRadius:
+                                      const BorderRadius.all(Radius.circular(10)),
+                                  child: Image.asset(
+                                    propertyController.properties[i]['image']!,
+                                    fit: BoxFit.cover,
+                                    height: Get.height * 0.16,
+                                    width: Get.width * 0.9,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 8),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    propertyController.properties[i]['name']!,
-                                    style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 4),
-                                    margin: const EdgeInsets.only(right: 5),
-                                    decoration: BoxDecoration(
-                                      color: Colors.blue.shade100,
-                                      borderRadius: BorderRadius.circular(6),
-                                    ),
-                                    child: Text(
-                                      propertyController.properties[i]['type']!,
+                                const SizedBox(height: 8),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      propertyController.properties[i]['name']!,
                                       style: const TextStyle(
-                                          fontSize: 12, color: Colors.black54),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 4),
-                              Row(
-                                children: [
-                                  const Icon(Icons.location_on,
-                                      size: 16, color: Colors.red),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                    propertyController.properties[i]
-                                        ['location']!,
-                                    style: const TextStyle(color: Colors.grey),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 4),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text('PRICE : ', style: GoogleFonts.lato(fontSize: 14,fontWeight: FontWeight.bold)),
-                                      Text(
-                                        "₹ ${propertyController.properties[i]['price']!}",
-                                        style: const TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.green),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8, vertical: 4),
+                                      margin: const EdgeInsets.only(right: 5),
+                                      decoration: BoxDecoration(
+                                        color: Colors.blue.shade100,
+                                        borderRadius: BorderRadius.circular(6),
                                       ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 10),
-                             Align(
-  alignment: Alignment.bottomRight,
-  child: Padding(
-    padding: const EdgeInsets.all(20),
-    child: Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        gradient: const LinearGradient(
-          colors: [Color.fromARGB(255, 75, 92, 217),Color.fromARGB(255, 99, 195, 240), Color.fromARGB(255, 193, 185, 236)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.4),
-            blurRadius: 12,
-            offset: const Offset(4, 6),
-          ),
-        ],
-      ),
-      child: Material(
-        color: Colors.transparent,
-        borderRadius: BorderRadius.circular(10),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(10),
-          onTap: () {
-            // Do something here
-          },
-          child: Container(
-            width: Get.width * 0.3,
-            padding: const EdgeInsets.symmetric(vertical: 5, horizontal:10),
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(
-                color: Colors.white,
-                width: 1.5,
-              ),
-            ),
-            child: Center(
-              child: Text(
-                'Invest',
-                style: GoogleFonts.labrada(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
+                                      child: Text(
+                                        propertyController.properties[i]['type']!,
+                                        style: const TextStyle(
+                                            fontSize: 12, color: Colors.black54),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 4),
+                                Row(
+                                  children: [
+                                    const Icon(Icons.location_on,
+                                        size: 16, color: Colors.red),
+                                    const SizedBox(width: 4),
+                                    Text(
+                                      propertyController.properties[i]
+                                          ['location']!,
+                                      style: const TextStyle(color: Colors.grey),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 4),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text('PRICE : ', style: GoogleFonts.lato(fontSize: 14,fontWeight: FontWeight.bold)),
+                                        Text(
+                                          "₹ ${propertyController.properties[i]['price']!}",
+                                          style: const TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.green),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 10),
+                               Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: const LinearGradient(
+                        colors: [Color.fromARGB(255, 75, 92, 217),Color.fromARGB(255, 99, 195, 240), Color.fromARGB(255, 193, 185, 236)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+              color: Colors.black.withOpacity(0.4),
+              blurRadius: 12,
+              offset: const Offset(4, 6),
+                        ),
+                      ],
+                    ),
+                    child: Material(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(10),
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(10),
+                        onTap: () {
+              // Do something here
+                        },
+                        child: Container(
+              width: Get.width * 0.3,
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal:10),
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
                   color: Colors.white,
-                  letterSpacing: 1,
+                  width: 1.5,
                 ),
               ),
-            ),
-          ),
-        ),
-      ),
-    ),
-  ),
-)
-
-                                ],
-                              ),
-                              
-                            ],
-                          ),
-                        ))
-                    ],
-                    options: CarouselOptions(
-                      viewportFraction: 1,
-                        enlargeCenterPage: true, height: Get.height * 0.36)),
-                const SizedBox(
-                  height: 20,
+              child: Center(
+                child: Text(
+                  'Invest',
+                  style: GoogleFonts.labrada(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                    letterSpacing: 1,
+                  ),
                 ),
-                Center(
-                    child: Text(
-                  " !! Returns are not guaranteed and are subjected to market risks !! ",
-                  style: GoogleFonts.lato(color: Colors.red, fontSize: 12),
-                ))
-              ],
+              ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              )
+              
+                                  ],
+                                ),
+                                
+                              ],
+                            ),
+                          ))
+                      ],
+                      options: CarouselOptions(
+                        viewportFraction: 1,
+                          enlargeCenterPage: true, height: Get.height * 0.36)),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Center(
+                      child: Text(
+                    " !! Returns are not guaranteed and are subjected to market risks !! ",
+                    style: GoogleFonts.lato(color: Colors.red, fontSize: 12),
+                  ))
+                ],
+              ),
             ),
             const Divider(
               thickness: 2,
