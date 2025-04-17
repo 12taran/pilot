@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pilot_project/core/utils.dart';
+import 'package:pilot_project/data/repos/auth_repo.dart';
 import 'package:pilot_project/routes/page_route.dart';
 
 class AuthController extends GetxController {
@@ -70,9 +71,12 @@ class AuthController extends GetxController {
             await FirebaseAuth.instance.signInWithCredential(credential);
         if (userCredential.user != null) {
           isGuest.value = false;
-          phoneController.clear();
+          //  phoneController.clear();
           otpController.clear();
-          Get.offAndToNamed(PageRoutes.bottomNav);
+          bool verified = await userRegisterVerify(phoneController.text.trim());
+          if (verified) {
+            Get.offAndToNamed(PageRoutes.bottomNav);
+          }
         }
       } on FirebaseAuthException catch (e) {
         print(e.code.toString());
@@ -112,5 +116,10 @@ class AuthController extends GetxController {
       print("Google Sign-In error: $e");
       Utils.showToast(message: 'Google Sign-In failed. Please try again.');
     }
+  }
+
+  Future<bool> userRegisterVerify(String phone) async {
+    bool isSuccess = await AuthRepo().userRegisterVerify(phone);
+    return isSuccess;
   }
 }
