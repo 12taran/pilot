@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/components/CustomContainer.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
+import 'package:pilot_project/presentation/controllers/pilotController.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/screens/user/profile.dart';
 import 'package:pilot_project/routes/page_route.dart';
@@ -19,7 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List City = ['Mohali', '  Dhulera', 'Himachal'];
-  List text1 = ['Why use Pilot for Your Investment', '123', '456'];
+
   List location = [
     'assets/images/kasol.jpg',
     'assets/images/chandigarh.jpg',
@@ -31,6 +32,7 @@ class _HomePageState extends State<HomePage> {
     "assets/images/motivation3.jpg",
   ];
   PropertyController propertyController = Get.put(PropertyController());
+  Pilotcontroller pilotcontroller=Get.put(Pilotcontroller());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -457,44 +459,103 @@ class _HomePageState extends State<HomePage> {
                   child: Column(children: [
                     Text('Our Board Of Members',style: TextStyle(fontSize: 25,fontWeight: FontWeight.w800),),
                     Expanded(
-                      child: GridView(gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), children:[for(int index=0;index<4;index++) Padding(
-                                  padding: const EdgeInsets.all(0.0),
+                      child: GridView(gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,
+                       childAspectRatio:2/3, ),
+                    
+                                           children:[for(int index=0;index<4;index++) Padding(
+                                  padding: const EdgeInsets.all(4.0),
                                   child: Card(
                                     color: Color.fromARGB(255, 213, 204, 190),
-                                    child: Column(
-                                      children: [
-                                         ClipRRect(
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(5)),
-                                child: Image.asset(
-                                  propertyController.properties[index]['image']!,
-                                  fit: BoxFit.cover,
-                                  height: Get.height * 0.1,
-                                  width: Get.width * 0.2,
-                                ),
-                              ),
-                              Divider(thickness: 1,color: Colors.teal[900],),
-
-                               Text(
-                                    propertyController.properties[index]['name']!,
-                                    style: GoogleFonts.actor(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                   Text(
-                                    propertyController.properties[index]['name']!,
-                                    style: GoogleFonts.actor(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                       
-                                      ],
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(3.0),
+                                      child: Column(
+                                        children: [
+                                           ClipRRect(
+                                                                      borderRadius:
+                                      const BorderRadius.all(Radius.circular(5)),
+                                                                      child: Image.asset(
+                                                                        propertyController.properties[index]['image']!,
+                                                                        fit: BoxFit.cover,
+                                                                        height: Get.height * 0.2,
+                                                                        width: Get.width * 0.25,
+                                                                      ),
+                                                                    ),
+                                                                    Divider(thickness: 1,color: Colors.teal[900],),
+                                      
+                                                                     Text(
+                                      pilotcontroller.boardMembers[index]['name']!,
+                                      style: GoogleFonts.actor(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w500),
+                                                                        ),
+                                                                         Text(
+                                                                        pilotcontroller.boardMembers[index]['designation']!,
+                                      style: GoogleFonts.actor(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w900),
+                                                                        ),
+                                         
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 )]),
                     )
                   ],),
+                ),
+                SizedBox(height: 10,),
+                  Container(
+                  decoration: BoxDecoration(gradient: LinearGradient(colors: [Color.fromARGB(255, 59, 127, 60),Color.fromARGB(255, 116, 185, 118),Color.fromARGB(255, 173, 194, 173)])),
+                  height: Get.height * 0.3,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                  padding: const EdgeInsets.only(left: 20.0,top: 20),
+                  child: Text('Explore by Themes',style: TextStyle(fontSize: 25,fontWeight: FontWeight.w800),),
+                ),
+                      Expanded(
+                        child: GridView(
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 3),
+                           
+                              children:[for(int index=0;index<3;index++) Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.3),
+                                            spreadRadius: 2,
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 3),
+                                          ),
+                                        ],
+                                      ),
+                                      child: CircleAvatar(
+                                        radius: 40,
+                                        backgroundColor: Colors.white,
+                                        backgroundImage: AssetImage(location[index]), // Yahi main kaam karta hai
+                                      ),
+                                    ),
+                                    Text(
+                                      propertyController.properties[
+                                            index]['type']!,
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                  ],
+                                ),
+                              )]
+                            
+                      ),
+                  )],
+                  ),
                 )
+,
               ],
             )
           ],
