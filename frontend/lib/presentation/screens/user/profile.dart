@@ -49,92 +49,38 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Stack(
-              clipBehavior: Clip.none,
-              children: [
-                Stack(
-                  children: [
-                    // Background image container (placed first, rendered at the bottom)
-                    Container(
-                      width: Get.width,
-                      height: Get.height * 0.25,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primary,
-                        image: _backgroundImage != null
-                            ? DecorationImage(
-                                image: FileImage(_backgroundImage!),
-                                fit: BoxFit.cover,
-                              )
-                            : null,
-                      ),
-                    ),
-
-                    // Edit icon (rendered on top)
-                    Positioned(
-                      top: 10,
-                      right: 10,
-                      child: GestureDetector(
-                        onTap: () => _pickImage(false),
-                        child: Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                blurRadius: 4,
-                                offset: Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: const Icon(Icons.edit, size: 20),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Positioned(
-                  bottom: -50, // Overlapping the background
-                  left:
-                      Get.width / 3, // You can tweak this for perfect centering
-                  child: Stack(
-                    alignment: Alignment.topRight,
+            Container(
+              width: Get.width,
+              height: Get.height * 0.2,
+              color: Theme.of(context).colorScheme.primary,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+              
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      GestureDetector(
-                        onTap: () => _pickImage(true),
-                        child: Container(
-                          width: 150,
-                          height: 150,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white, width: 4),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.black26,
-                                blurRadius: 10,
-                                offset: Offset(0, 5),
-                              ),
-                            ],
-                            image: DecorationImage(
-                              image: _profileImage != null
-                                  ? FileImage(_profileImage!)
-                                  : const AssetImage(
-                                          "assets/images/onboarding1.png")
-                                      as ImageProvider,
-                              fit: BoxFit.cover,
+                          IconButton(onPressed: (){Get.back();}, icon:Icon(Icons.arrow_back)),
+                      Row(
+                        children: [
+                          Container(
+                            width: Get.width * 0.2,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Colors.white),
+                            ),
+                            child: Image.asset(
+                              "assets/images/onboarding1.png",
+                              fit: BoxFit.fill,
                             ),
                           ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 10,
-                        right: 10,
-                        child: GestureDetector(
-                          onTap: () => _pickImage(true),
-                          child: Container(
-                            padding: const EdgeInsets.all(4),
-                            decoration: const BoxDecoration(
+                          const SizedBox(width: 20),
+                      Column(
+                        children: [
+                          Text(
+                            'Prince Dubey',
+                            style: GoogleFonts.acme(
                               color: Colors.white,
                               shape: BoxShape.circle,
                               boxShadow: [
@@ -149,6 +95,14 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                       ),
+                      SizedBox(width: 10,),
+                      CircleAvatar(
+                        backgroundColor: Colors.white,
+                        child: IconButton(onPressed:(){Get.toNamed(PageRoutes.userDetail);}, icon: Icon(Icons.edit,color:Theme.of(context).colorScheme.primary,)))
+                        ],
+                      ),
+                      
+                     
                     ],
                   ),
                 ),
