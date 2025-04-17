@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/core/utils.dart';
-import 'package:pilot_project/presentation/utils_widget.dart';
+import 'package:pilot_project/presentation/widgets/utils_widget.dart';
 import 'package:pilot_project/routes/page_route.dart';
 
 class Drawer extends StatelessWidget {
@@ -85,7 +85,7 @@ class Drawer extends StatelessWidget {
               leading: const Icon(Icons.monetization_on),
               title: const Text('Virtual Wallet'),
               onTap: () {
-                Get.toNamed(PageRoutes.setting);
+              //  Get.toNamed(PageRoutes.setting);
               },
             ),
             const Divider(
@@ -96,7 +96,7 @@ class Drawer extends StatelessWidget {
               leading: const Icon(Icons.food_bank_outlined),
               title: const Text('Bank Details'),
               onTap: () {
-                Get.toNamed(PageRoutes.setting);
+             //   Get.toNamed(PageRoutes.setting);
               },
             ),
             const Divider(
@@ -107,7 +107,7 @@ class Drawer extends StatelessWidget {
               leading: const Icon(Icons.person),
               title: const Text(' About Us'),
               onTap: () {
-                Get.toNamed(PageRoutes.setting);
+             //   Get.toNamed(PageRoutes.setting);
               },
             ),
             const Divider(
@@ -118,7 +118,7 @@ class Drawer extends StatelessWidget {
               leading: const Icon(Icons.question_mark),
               title: const Text('FAQs'),
               onTap: () {
-                Get.toNamed(PageRoutes.setting);
+              //  Get.toNamed(PageRoutes.setting);
               },
             ),
             const Divider(
