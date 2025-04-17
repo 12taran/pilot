@@ -8,43 +8,21 @@ import 'package:image_picker/image_picker.dart';
 import 'package:pilot_project/core/components/MyTextField.dart';
 
 import 'package:pilot_project/routes/page_route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:pilot_project/core/config.dart';
+import 'package:pilot_project/routes/page_route.dart';
 
-class ProfilePage extends StatefulWidget {
+class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
-
-  @override
-  State<ProfilePage> createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
-  File? _profileImage;
-  File? _backgroundImage;
-
-  final picker = ImagePicker();
-
-  // Dummy user details (can fetch from Firebase or any backend)
-  String userName = "Prince Dubey";
-  String email = "prince@example.com";
-  String mobile = "123456XXXX";
-  String dob = "01-01-2000";
-
-  Future<void> _pickImage(bool isProfile) async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      setState(() {
-        if (isProfile) {
-          _profileImage = File(pickedFile.path);
-        } else {
-          _backgroundImage = File(pickedFile.path);
-        }
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
+      
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,18 +60,17 @@ class _ProfilePageState extends State<ProfilePage> {
                             'Prince Dubey',
                             style: GoogleFonts.acme(
                               color: Colors.white,
-                              shape: BoxShape.circle,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black26,
-                                  blurRadius: 4,
-                                  offset: Offset(0, 2),
-                                ),
-                              ],
+                              fontSize: Constants.fontSizeHeading,
                             ),
-                            child: const Icon(Icons.edit, size: 20),
                           ),
-                        ),
+                          Text(
+                    '123456XXXX',
+                    style: GoogleFonts.acme(
+                      color: Colors.white,
+                      fontSize: Constants.fontSizeHeading,
+                    ),
+                  )
+                        ],
                       ),
                       SizedBox(width: 10,),
                       CircleAvatar(
@@ -105,70 +82,68 @@ class _ProfilePageState extends State<ProfilePage> {
                      
                     ],
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 70), // prevent overlap with rest of the UI
-            const SizedBox(height: 20),
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                width: Get.width * 0.8,
-                margin: const EdgeInsets.all(10),
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                decoration: BoxDecoration(
-                    color: Colors.white, // background color (optional)
-                    border: Border.all(
-                      color: Colors.black, // border color
-                      width: 2.0, // border width
-                    ),
-                    borderRadius: BorderRadius.circular(5)),
-                child: Column(
-                  children: [
-                    _buildDetailTile(Icons.person, 'Name', 'abc@1234'),
-                    _buildDetailTile(Icons.phone, 'Phone No.', '234'),
-                    _buildDetailTile(Icons.cake, 'DOB', 'abc@1234'),
-                    _buildDetailTile(Icons.email, 'Email', 'abc@1234'),
-                    _buildDetailTile(
-                        Icons.location_city, 'Location', 'abc@1234')
-                  ],
-                ),
+                 
+                ],
               ),
-            )
+            ),
+            const SizedBox(height: 30),
+            ListTile(
+              trailing: Icon(Icons.arrow_right),
+              leading: const Icon(Icons.document_scanner),
+              title: const Text('Documents'),
+              onTap: () {
+                Get.toNamed(PageRoutes.setting);
+              },
+            ),
+            Divider(thickness: 1,),
+            ListTile(
+               trailing: Icon(Icons.arrow_right),
+              leading: const Icon(Icons.monetization_on),
+              title: const Text('Virtual Wallet'),
+              onTap: () {
+                Get.toNamed(PageRoutes.setting);
+              },
+            ),
+            Divider(thickness: 1,),
+            ListTile(
+
+               trailing: Icon(Icons.arrow_right),
+              leading: const Icon(Icons.food_bank_outlined),
+              title: const Text('Bank Details'),
+              onTap: () {
+                Get.toNamed(PageRoutes.setting);
+              },
+            ),
+            Divider(thickness: 1,),
+            ListTile(
+               trailing: Icon(Icons.arrow_right),
+              leading: const Icon(Icons.person),
+              title: const Text(' About Us'),
+              onTap: () {
+                Get.toNamed(PageRoutes.setting);
+              },
+            ),
+            Divider(thickness: 1,),
+            ListTile(
+               trailing: Icon(Icons.arrow_right),
+              leading: const Icon(Icons.question_mark),
+              title: const Text('FAQs'),
+              onTap: () {
+                Get.toNamed(PageRoutes.setting);
+              },
+            ),
+            Divider(thickness: 1,),
+            ListTile(
+               trailing: Icon(Icons.arrow_right),
+              leading: const Icon(Icons.logout),
+              title: const Text('LogOut'),
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                Get.offAndToNamed(PageRoutes.phonesignup);
+              },
+            ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildDetailTile(IconData icon, String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(icon, size: 20),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  label,
-                  style: GoogleFonts.aBeeZee(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  value,
-                  style: const TextStyle(fontSize: 14),
-                ),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }

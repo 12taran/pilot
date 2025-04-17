@@ -60,7 +60,7 @@ class Drawer extends StatelessWidget {
                       ),
                       IconButton(
                           onPressed: () {
-                            Get.toNamed(PageRoutes.profile);
+                            Get.toNamed(PageRoutes.drawerProfile);
                           },
                           icon: const Icon(Icons.arrow_right))
                     ],
