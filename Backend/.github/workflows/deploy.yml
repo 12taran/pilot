@@ -1,0 +1,44 @@
+name: Deploy Backend App
+
+on:
+  push:
+    branches: [starter]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: Backend
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Build Docker Image
+      run: docker build -t backend-app .
+
+    - name: Save Docker Image to TAR
+      run: docker save backend-app > backend.tar
+
+    - name: Copy TAR to Server
+      uses: appleboy/scp-action@v0.1.3
+      with:
+        host: ${{ secrets.SERVER_IP }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        source: "Backend/backend.tar"
+        target: "~/backend.tar"
+
+    - name: SSH and Deploy Container
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_IP }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          docker load < backend.tar
+          docker stop backend-container || true
+          docker rm backend-container || true
+          docker run -d -p 4000:4000 --name backend-container backend-app
