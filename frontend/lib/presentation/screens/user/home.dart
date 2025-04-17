@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -48,21 +49,50 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 10.0, right: 10),
-                      child: CircleAvatar(
-                        radius: 25,
-                        backgroundColor: Theme.of(context).primaryColorLight,
-                        child: IconButton(
-                            onPressed: () {
-                              Get.to(
-                                const ProfilePage(),
-                                transition: Transition
-                                    .leftToRight, // 👈 smooth left-to-right animation
-                                duration: const Duration(
-                                    milliseconds: 300), // optional
-                              );
-                            },
-                            icon: const Icon(Icons.person)),
-                      ),
+                      child: Container(
+  width: 50,
+  height: 50,
+  decoration: BoxDecoration(
+    boxShadow: [
+      BoxShadow(
+        color: Colors.black.withOpacity(0.2), // shadow color
+        spreadRadius: 2, // how wide the shadow spreads
+        blurRadius: 6,   // softens the shadow
+        offset: Offset(0, 4), // shadow position: x (right), y (down)
+      ),
+    ],
+    shape: BoxShape.circle,
+    gradient: LinearGradient(
+      colors: [
+        Color(0xff4c4f5e),
+        Color.fromARGB(255, 200, 202, 213),
+        Color.fromARGB(255, 6, 6, 55),
+      ],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+  ),
+  child: Center(
+    child: GestureDetector(
+      onTap: () {
+        Get.to(
+          const ProfilePage(),
+          transition: Transition.leftToRight,
+          duration: const Duration(milliseconds: 300),
+        );
+      },
+      child: Text(
+        'Pilot',
+        style: GoogleFonts.aBeeZee(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: Color.fromARGB(255, 246, 241, 241), // Make sure text is visible on gradient
+        ),
+      ),
+    ),
+  ),
+)
+
                     ),
                     // Expanded(
                     //   child: CarouselSlider(
@@ -125,7 +155,7 @@ class _HomePageState extends State<HomePage> {
               height: Get.height * 0.25,
               child: CarouselSlider(
                 options: CarouselOptions(
-                  aspectRatio: 16 / 9,
+                  aspectRatio: 16/9,
                   enlargeCenterPage: true,
                   autoPlay: true,
                   viewportFraction: 1,
@@ -145,7 +175,10 @@ class _HomePageState extends State<HomePage> {
                             fit: BoxFit.fill,
                           ),
                           Positioned(
+                            bottom: 20,
+                            left: 10,
                             child: CustomButtons(
+                              color: Colors.orange,
                               fontSize: 10,
                               width: Get.width * 0.4,
                               onPressed: () {},
@@ -165,9 +198,22 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 10,
                 ),
-                Text(
-                  "   Make your future secure with Pilot 👇",
-                  style: GoogleFonts.lato(fontSize: 15),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal:10.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        " Discover ",
+                        style: GoogleFonts.lato(fontSize: 35,fontWeight: FontWeight.w900),
+                      ),
+                       Text(
+                        " Start Investing Securely 🔒",
+                        style: GoogleFonts.lato(fontSize: 25),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 15,
@@ -177,18 +223,19 @@ class _HomePageState extends State<HomePage> {
                       for (int i = 0; i < 6; i++)
                         Center(
                             child: CustomContainer(
-                          padding: 2,
+                              backgroundColor: Color.fromARGB(255, 203, 202, 200),
+                        padding: 2,
                           width: Get.width * 0.9,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               ClipRRect(
                                 borderRadius:
-                                    const BorderRadius.all(Radius.circular(10)),
+                                    const BorderRadius.all(Radius.circular(5)),
                                 child: Image.asset(
                                   propertyController.properties[i]['image']!,
                                   fit: BoxFit.cover,
-                                  height: Get.height * 0.16,
+                                  height: Get.height * 0.2,
                                   width: Get.width * 0.9,
                                 ),
                               ),
@@ -199,16 +246,16 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   Text(
                                     propertyController.properties[i]['name']!,
-                                    style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
+                                    style: GoogleFonts.actor(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500),
                                   ),
                                   Container(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 8, vertical: 4),
                                     margin: const EdgeInsets.only(right: 5),
                                     decoration: BoxDecoration(
-                                      color: Colors.blue.shade100,
+                                      color: Color.fromARGB(255, 164, 227, 127),
                                       borderRadius: BorderRadius.circular(6),
                                     ),
                                     child: Text(
@@ -228,100 +275,51 @@ class _HomePageState extends State<HomePage> {
                                   Text(
                                     propertyController.properties[i]
                                         ['location']!,
-                                    style: const TextStyle(color: Colors.grey),
+                                    style: const TextStyle(color: Color.fromARGB(255, 46, 47, 46)),
                                   ),
                                 ],
                               ),
                               const SizedBox(height: 4),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text('PRICE : ',
-                                          style: GoogleFonts.lato(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold)),
-                                      Text(
-                                        "₹ ${propertyController.properties[i]['price']!}",
-                                        style: const TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.green),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(20),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          gradient: const LinearGradient(
-                                            colors: [
-                                              Color.fromARGB(255, 75, 92, 217),
-                                              Color.fromARGB(255, 99, 195, 240),
-                                              Color.fromARGB(255, 193, 185, 236)
-                                            ],
-                                            begin: Alignment.topLeft,
-                                            end: Alignment.bottomRight,
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color:
-                                                  Colors.black.withOpacity(0.4),
-                                              blurRadius: 12,
-                                              offset: const Offset(4, 6),
-                                            ),
-                                          ],
+                              Divider(thickness: 1,color: Colors.grey,),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal:5.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                     
+                                        Text(
+                                          "Rs ${propertyController.properties[i]['price']!}/- ",
+                                          style: const TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w800,
+                                              color: Color.fromARGB(255, 26, 27, 26)),
                                         ),
-                                        child: Material(
-                                          color: Colors.transparent,
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          child: InkWell(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            onTap: () {
-                                              // Do something here
-                                            },
-                                            child: Container(
-                                              width: Get.width * 0.3,
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 5,
-                                                      horizontal: 10),
-                                              decoration: BoxDecoration(
-                                                color: Colors.transparent,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                border: Border.all(
-                                                  color: Colors.white,
-                                                  width: 1.5,
-                                                ),
-                                              ),
-                                              child: Center(
-                                                child: Text(
-                                                  'Invest',
-                                                  style: GoogleFonts.labrada(
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Colors.white,
-                                                    letterSpacing: 1,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [Text('Per'),
+                                                  Text('ALT SQFT')],
+                                                )
+                                      ],
                                     ),
-                                  )
-                                ],
+                                   // const SizedBox(height: 10),
+                                    Center(
+                                      child: GestureDetector(
+                                        onTap: (){},
+                                        child:Text('Invest Now',
+                                        style: GoogleFonts.labrada(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color.fromARGB(255, 230, 110, 19),
+                                          letterSpacing: 1,
+                                        ),
+                                      ),)
+                                    ),
+                                    
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -348,9 +346,9 @@ class _HomePageState extends State<HomePage> {
             Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Row(
                           children: [
@@ -359,25 +357,27 @@ class _HomePageState extends State<HomePage> {
                               height: 50,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
-                                color: Colors.grey,
+                                gradient: LinearGradient(colors:[Color.fromARGB(255, 38, 93, 40),Color.fromARGB(255, 83, 152, 85),Color.fromARGB(255, 173, 194, 173)])
                               ),
                               child: const Icon(Icons.person),
                             ),
+                              SizedBox(width: 5,),
                             const Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   "10k+",
-                                  style: TextStyle(fontSize: 18),
+                                  style: TextStyle(fontSize: 18,fontWeight: FontWeight.w800),
                                 ),
                                 Text(
                                   "Users",
-                                  style: TextStyle(fontSize: 18),
+                                  style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500),
                                 ),
                               ],
                             ),
                           ],
                         ),
+                      
                         Row(
                           children: [
                             Container(
@@ -385,65 +385,115 @@ class _HomePageState extends State<HomePage> {
                               height: 50,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
-                                color: Colors.grey,
+                               gradient: LinearGradient(colors:[Color.fromARGB(255, 38, 93, 40),Color.fromARGB(255, 83, 152, 85),Color.fromARGB(255, 173, 194, 173)])
                               ),
                               child: const Icon(Icons.location_city),
                             ),
-                            const Column(
-                              children: [
-                                Text(
-                                  "8",
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                                Text(
-                                  "Cities",
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                              ],
+                              SizedBox(width: 5,),
+                            Text(
+                              "8 Cities",
+                              style: TextStyle(fontSize: 18,fontWeight: FontWeight.w800),
                             ),
+                            
                           ],
                         ),
                       ]),
                 ),
-                SizedBox(
-                  height: Get.height * 0.5,
-                  child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3),
-                      itemCount: 3,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Column(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.3),
-                                      spreadRadius: 2,
-                                      blurRadius: 6,
-                                      offset: const Offset(0, 3),
+                SizedBox(height: 20,),
+                Container(
+                  decoration: BoxDecoration(gradient: LinearGradient(colors: [Color.fromARGB(255, 59, 127, 60),Color.fromARGB(255, 116, 185, 118),Color.fromARGB(255, 173, 194, 173)])),
+                  height: Get.height * 0.3,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                  padding: const EdgeInsets.only(left: 20.0,top: 20),
+                  child: Text('Explore by Regions',style: TextStyle(fontSize: 25,fontWeight: FontWeight.w800),),
+                ),
+                      Expanded(
+                        child: GridView(
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 3),
+                           
+                              children:[for(int index=0;index<3;index++) Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.3),
+                                            spreadRadius: 2,
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 3),
+                                          ),
+                                        ],
+                                      ),
+                                      child: CircleAvatar(
+                                        radius: 40,
+                                        backgroundColor: Colors.white,
+                                        backgroundImage: AssetImage(location[
+                                            index]), // Yahi main kaam karta hai
+                                      ),
+                                    ),
+                                    Text(
+                                      City[index],
+                                      style: const TextStyle(fontSize: 12),
                                     ),
                                   ],
                                 ),
-                                child: CircleAvatar(
-                                  radius: 40,
-                                  backgroundColor: Colors.white,
-                                  backgroundImage: AssetImage(location[
-                                      index]), // Yahi main kaam karta hai
+                              )]
+                            
+                      ),
+                  )],
+                  ),
+                )
+,
+                Container(
+                  height: Get.height*0.7,
+                  child: Column(children: [
+                    Text('Our Board Of Members',style: TextStyle(fontSize: 25,fontWeight: FontWeight.w800),),
+                    Expanded(
+                      child: GridView(gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), children:[for(int index=0;index<4;index++) Padding(
+                                  padding: const EdgeInsets.all(0.0),
+                                  child: Card(
+                                    color: Color.fromARGB(255, 213, 204, 190),
+                                    child: Column(
+                                      children: [
+                                         ClipRRect(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(5)),
+                                child: Image.asset(
+                                  propertyController.properties[index]['image']!,
+                                  fit: BoxFit.cover,
+                                  height: Get.height * 0.1,
+                                  width: Get.width * 0.2,
                                 ),
                               ),
-                              Text(
-                                City[index],
-                                style: const TextStyle(fontSize: 12),
-                              ),
-                            ],
-                          ),
-                        );
-                      }),
+                              Divider(thickness: 1,color: Colors.teal[900],),
+
+                               Text(
+                                    propertyController.properties[index]['name']!,
+                                    style: GoogleFonts.actor(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                   Text(
+                                    propertyController.properties[index]['name']!,
+                                    style: GoogleFonts.actor(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                       
+                                      ],
+                                    ),
+                                  ),
+                                )]),
+                    )
+                  ],),
                 )
               ],
             )
