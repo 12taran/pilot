@@ -181,6 +181,7 @@ class _HomePageState extends State<HomePage> {
                             bottom: 20,
                             left: 10,
                             child: CustomButtons(
+                              borderRadius: 20,
                               color: Colors.orange,
                               fontSize: Constants.fontSizeTinySmall,
                               width: Get.width * 0.4,
@@ -526,7 +527,8 @@ class _HomePageState extends State<HomePage> {
                     
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      gradient: LinearGradient(colors: [Color.fromARGB(255, 59, 127, 60),Color.fromARGB(255, 116, 185, 118),Color.fromARGB(255, 173, 194, 173)])),
+                      gradient:
+                       LinearGradient(colors: [Color.fromARGB(255, 59, 100, 127),Color.fromARGB(255, 166, 186, 107),Color.fromARGB(255, 173, 194, 173)])),
                     height: Get.height * 0.3,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -578,7 +580,7 @@ class _HomePageState extends State<HomePage> {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
-                      gradient: LinearGradient(colors: [Color.fromARGB(255, 173, 194, 173),Color.fromARGB(255, 116, 185, 118),Color.fromARGB(255, 59, 127, 60),])),
+                      gradient: LinearGradient(colors: [Color.fromARGB(255, 173, 194, 173),Color.fromARGB(255, 166, 185, 107),Color.fromARGB(255, 59, 100, 127),])),
                     height: Get.height * 0.2,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -592,7 +594,7 @@ class _HomePageState extends State<HomePage> {
                               child: Icon(Icons.call,size: 80,)),
                             Column(
                               children: [
-                                Text('Give us a Call to help you\n get started with your real \nestate investments',style: TextStyle(fontSize:Constants.fontSizeHeading,fontWeight: FontWeight.w600,color: Color.fromARGB(255, 28, 26, 35))),
+                                Text('Give us a Call to help you\n get started with your real \nestate investments',style: TextStyle(fontSize:Constants.fontSizeBody,fontWeight: FontWeight.w600,color: Color.fromARGB(255, 28, 26, 35))),
                                 CustomButtons(
                                   color: Colors.white,
                                   textColor: Colors.orange,

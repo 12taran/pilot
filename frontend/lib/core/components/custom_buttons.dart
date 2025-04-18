@@ -15,6 +15,7 @@ class CustomButtons extends StatelessWidget {
     this.fontSize = 12,
     this.height,
     this.width,
+    this.borderRadius
   }) : super(key: key);
 
   final String text;
@@ -26,6 +27,7 @@ class CustomButtons extends StatelessWidget {
   final double? fontSize;
   final double? height;
   final double? width;
+  final double? borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class CustomButtons extends StatelessWidget {
       backgroundColor: color ?? theme.colorScheme.primary,
       margin: margin,
       onTap: onPressed,
-      borderRadius: 10,
+      borderRadius: borderRadius??10,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
