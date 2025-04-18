@@ -21,4 +21,25 @@ class AuthRepo {
       return false;
     }
   }
+
+  Future<bool> registerUser(String phone, String name, {String? address}) async {
+  final response = await BaseService().postData(
+    endPoint: apiRoutes.userRegister,
+    body: {
+      "phoneNumber": phone,
+      "username": name,
+      if (address != null && address.isNotEmpty) "address": address,
+    },
+    isTokenRequired: false,
+  );
+
+  if (response.data['success'] == true) {
+    Utils.showToast(message: response.data['message']);
+    return true;
+  } else {
+    Utils.showToast(message: response.data['message']);
+    return false;
+  }
+}
+
 }

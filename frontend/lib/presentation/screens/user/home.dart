@@ -14,7 +14,6 @@ import 'package:pilot_project/presentation/controllers/pilotController.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/screens/user/profile.dart';
 import 'package:pilot_project/routes/page_route.dart';
-import 'package:pretty_animated_buttons/pretty_animated_buttons.dart';
 
 class HomePage extends StatefulWidget {
   @override

@@ -58,7 +58,7 @@ dependencies:
   google_sign_in: ^6.2.2
   carousel_slider: ^5.0.0
   image_picker: ^1.1.2
-  pretty_animated_buttons: ^0.0.2
+  
   glow_container: ^1.0.1
 
 dev_dependencies:

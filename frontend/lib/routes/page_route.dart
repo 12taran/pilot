@@ -87,7 +87,7 @@ class PageRoutes {
       GetPage(
         name: emailPassword,
         page: () => const EmailSignUpScreen(),
-        transition: Transition.zoom,
+        transition: Transition.upToDown,
         transitionDuration: const Duration(milliseconds: 300),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();

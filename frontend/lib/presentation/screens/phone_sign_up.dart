@@ -149,6 +149,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                                 ? authController.verifyOtp()
                                 : await authController.sendOtp();
                             print('Otp sends');
+                          
                           }),
                     ),
                     const SizedBox(

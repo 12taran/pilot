@@ -9,6 +9,7 @@ class Constants {
   static const String rupeeSymbol = '₹';
 
   // Font Sizes
+  static double get fontSizeExtraLarge => 26.sp;
   static double get appBarTextSize => 24.sp;
   static double get fontSizeHeading => 22.sp;
   static double get fontSizeBody => 20.sp;
