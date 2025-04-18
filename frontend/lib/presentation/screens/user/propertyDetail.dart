@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:pilot_project/core/config.dart';
 
 class Propertydetail extends StatefulWidget {
   const Propertydetail({super.key, required this.property});
@@ -22,9 +24,15 @@ class _PropertydetailState extends State<Propertydetail> {
                 fit: BoxFit.fill,
               )),
           const SizedBox(
-            height: 20,
+            height: 1,
           ),
-          Text(widget.property['name']!)
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              widget.property['name']!,
+              style: GoogleFonts.acme(fontSize: Constants.appBarTextSize),
+            ),
+          )
         ]));
   }
 }

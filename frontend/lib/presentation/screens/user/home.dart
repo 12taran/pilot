@@ -186,17 +186,22 @@ class _HomePageState extends State<HomePage> {
                           right: 10,
                           child: GlowContainer(
                             glowRadius: 10,
-                            gradientColors: [Colors.white,Color.fromARGB(255, 225, 209, 73)],
-                            containerOptions: ContainerOptions(borderRadius: 20,
-                            borderSide: BorderSide(width: 2)
-                            ),
+                            gradientColors: const [
+                              Colors.white,
+                              Color.fromARGB(255, 225, 209, 73)
+                            ],
+                            containerOptions: const ContainerOptions(
+                                borderRadius: 20,
+                                borderSide: BorderSide(width: 2)),
                             child: CustomButtons(
                               borderRadius: 20,
-                              color:Theme.of(context).colorScheme.primary,
-                              margin: EdgeInsets.all(0),
+                              color: Theme.of(context).colorScheme.primary,
+                              margin: const EdgeInsets.all(0),
                               fontSize: Constants.fontSizeTinySmall,
-                              width: Get.width * 0.2,
-                              onPressed: () {},
+                              width: Get.width * 0.22,
+                              onPressed: () {
+                                
+                              },
                               text: 'Invest Now',
                             ),
                           ),
@@ -270,14 +275,15 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 GlowContainer(
                                   glowRadius: 5,
-                                  containerOptions: ContainerOptions(borderRadius:6,
-                                  padding: EdgeInsets.all(0),
-                                  margin: EdgeInsets.only(right: 5)),
-                                  gradientColors: [Colors.green],
+                                  containerOptions: const ContainerOptions(
+                                      borderRadius: 6,
+                                      padding: EdgeInsets.all(0),
+                                      margin: EdgeInsets.only(right: 5)),
+                                  gradientColors: const [Colors.green],
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 5, vertical: 0),
-                                    margin: const EdgeInsets.only(right:0),
+                                    margin: const EdgeInsets.only(right: 0),
                                     decoration: BoxDecoration(
                                       color: const Color.fromARGB(
                                           255, 164, 227, 127),
@@ -287,7 +293,7 @@ class _HomePageState extends State<HomePage> {
                                       propertyController.properties[i]['type']!,
                                       style: TextStyle(
                                           fontSize: Constants.fontSizeTiny,
-                                          fontWeight:  FontWeight.w900,
+                                          fontWeight: FontWeight.w900,
                                           color: Colors.black54),
                                     ),
                                   ),
@@ -743,56 +749,60 @@ class _HomePageState extends State<HomePage> {
                   width: Get.width,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      gradient: LinearGradient(colors: [Color.fromARGB(255, 76, 79, 175),Color.fromARGB(255, 110, 145, 188),Color.fromARGB(255, 59, 100, 127),])),
-                    height: Get.height * 0.2,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Opacity(
-                          opacity: 0.5,
-                          child: const CircleAvatar(
-                              radius: 50,
-                              child: Icon(
-                                Icons.call,
-                                size: 80,
-                              )),
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                                ' Invest in Real estate easily with PILOT',
-                                style: TextStyle(
-                                    fontSize: Constants.fontSizeSubTitle,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color.fromARGB(255, 2, 2, 72))),
-                                    SizedBox(height: 20,),
-                                  
-                           GlowContainer(
-                            containerOptions: ContainerOptions(borderRadius: 10),
-   // optional, or customize
-  gradientColors: [Colors.orange, Color.fromARGB(255, 221, 96, 58), Colors.yellow],
-  glowRadius: 5,
- // match button's border
-  child: CustomButtons(
-  
-    width: Get.width*0.7,
-    borderRadius: 10,
-    margin: EdgeInsets.all(0),
-    color: Colors.white,
-    textColor: Colors.orange,
-    
-    text: 'Invest Now',
-    onPressed: () {
-      print('Hello');
-    },
-  ),
-)
-
-                          ],
-                        ),
-                        
-                        
+                      gradient: const LinearGradient(colors: [
+                        Color.fromARGB(255, 76, 79, 175),
+                        Color.fromARGB(255, 110, 145, 188),
+                        Color.fromARGB(255, 59, 100, 127),
+                      ])),
+                  height: Get.height * 0.2,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      const Opacity(
+                        opacity: 0.5,
+                        child: CircleAvatar(
+                            radius: 50,
+                            child: Icon(
+                              Icons.call,
+                              size: 80,
+                            )),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(' Invest in Real estate easily with PILOT',
+                              style: TextStyle(
+                                  fontSize: Constants.fontSizeSubTitle,
+                                  fontWeight: FontWeight.w600,
+                                  color: const Color.fromARGB(255, 2, 2, 72))),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          GlowContainer(
+                            containerOptions:
+                                const ContainerOptions(borderRadius: 10),
+                            // optional, or customize
+                            gradientColors: const [
+                              Colors.orange,
+                              Color.fromARGB(255, 221, 96, 58),
+                              Colors.yellow
+                            ],
+                            glowRadius: 5,
+                            // match button's border
+                            child: CustomButtons(
+                              width: Get.width * 0.7,
+                              borderRadius: 10,
+                              margin: const EdgeInsets.all(0),
+                              color: Colors.white,
+                              textColor: Colors.orange,
+                              text: 'Invest Now',
+                              onPressed: () {
+                                print('Hello');
+                              },
+                            ),
+                          )
+                        ],
+                      ),
                     ],
                   ),
                 ),
