@@ -460,114 +460,161 @@ class _HomePageState extends State<HomePage> {
                   )],
                   ),
                 )
-,
+,SizedBox(height: Get.height*0.02,),
                 Container(
-                  height: Get.height*0.7,
+                  height: Get.height*0.5,
                   child: Column(children: [
-                    Text('Our Board Of Members',style: TextStyle(fontSize:Constants.fontSizeHeading,fontWeight: FontWeight.w800),),
-                    Expanded(
-                      child: GridView(gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,
-                       childAspectRatio:2/3, ),
-                    
-                                           children:[for(int index=0;index<4;index++) Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Card(
-                                    color: Color.fromARGB(255, 213, 204, 190),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(3.0),
-                                      child: Column(
-                                        children: [
-                                           ClipRRect(
-                                                                      borderRadius:
-                                      const BorderRadius.all(Radius.circular(5)),
-                                                                      child: Image.asset(
-                                                                        propertyController.properties[index]['image']!,
-                                                                        fit: BoxFit.cover,
-                                                                        height: Get.height * 0.2,
-                                                                        width: Get.width * 0.25,
-                                                                      ),
-                                                                    ),
-                                                                    Divider(thickness: 1,color: Colors.teal[900],),
-                                      
-                                                                     Text(
-                                      pilotcontroller.boardMembers[index]['name']!,
-                                      style: GoogleFonts.actor(
-                                          fontSize: Constants.fontSizeSmall,
-                                          fontWeight: FontWeight.w500),
-                                                                        ),
-                                                                         Text(
-                                                                        pilotcontroller.boardMembers[index]['designation']!,
-                                      style: GoogleFonts.actor(
-                                          fontSize: Constants.fontSizeBody,
-                                          fontWeight: FontWeight.w900),
-                                                                        ),
-                                         
-                                        ],
-                                      ),
-                                    ),
+                    Text('Our Board Of Members',style: TextStyle(fontSize:Constants.appBarTextSize,fontWeight: FontWeight.w900),),
+                    SizedBox(height: Get.height*0.02,),
+                    CarouselSlider(
+                      options: CarouselOptions(
+                        height: Get.height * 0.35,
+                        enlargeCenterPage: true,
+                        enableInfiniteScroll: true,
+                        autoPlay: true,
+                        aspectRatio: 2 / 3,
+                      ),
+                      items: List.generate(4, (index) {
+                        return Container(
+                        height: Get.height*0.4,
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)
+                          ,  color:Theme.of(context).colorScheme.primary,),
+                          //height: Get.height*0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(5),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.all(Radius.circular(5)),
+                                  child: Image.asset(
+                                    propertyController.properties[index]['image']!,
+                                    fit: BoxFit.cover,
+                                    height: Get.height * 0.2,
+                                    width: Get.width * 0.7,
                                   ),
-                                )]),
+                                ),
+                                Divider(thickness: 1, color: Color.fromARGB(255, 185, 206, 202)),
+                                Text(
+                                  pilotcontroller.boardMembers[index]['name']!,
+                                  style: GoogleFonts.actor(
+                                    fontSize: Constants.fontSizeSmall,
+                                    fontWeight: FontWeight.w500,
+                                      color: Colors.white
+                                  ),
+                                ),
+                                Text(
+                                  pilotcontroller.boardMembers[index]['designation']!,
+                                  style: GoogleFonts.actor(
+                                    fontSize: Constants.fontSizeBody,
+                                    fontWeight: FontWeight.w900,
+                                    color: Colors.white
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }),
                     )
                   ],),
                 ),
-                SizedBox(height: 10,),
-                  Container(
-                  decoration: BoxDecoration(gradient: LinearGradient(colors: [Color.fromARGB(255, 59, 127, 60),Color.fromARGB(255, 116, 185, 118),Color.fromARGB(255, 173, 194, 173)])),
-                  height: Get.height * 0.3,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                  padding: const EdgeInsets.only(left: 20.0,top: 20),
-                  child: Text('Explore by Themes',style: TextStyle(fontSize:Constants.fontSizeHeading,fontWeight: FontWeight.w800),),
-                ),
-                      Expanded(
-                        child: GridView(
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3),
-                           
-                              children:[for(int index=0;index<3;index++) Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black.withOpacity(0.3),
-                                            spreadRadius: 2,
-                                            blurRadius: 6,
-                                            offset: const Offset(0, 3),
-                                          ),
-                                        ],
-                                      ),
-                                      child: CircleAvatar(
-                                        radius: 40,
-                                        backgroundColor: Colors.white,
-                                        backgroundImage: AssetImage(location[index]), // Yahi main kaam karta hai
-                                      ),
+                SizedBox(height: Get.height*0.01,),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                    child: Container(
+                    
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: LinearGradient(colors: [Color.fromARGB(255, 59, 127, 60),Color.fromARGB(255, 116, 185, 118),Color.fromARGB(255, 173, 194, 173)])),
+                    height: Get.height * 0.3,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                    padding: const EdgeInsets.only(left: 20.0,top: 20),
+                    child: Text('Explore by Themes',style: TextStyle(fontSize:Constants.fontSizeHeading,fontWeight: FontWeight.w800),),
                                     ),
-                                    Text(
-                                      propertyController.properties[
-                                            index]['type']!,
-                                      style: TextStyle(fontSize:Constants.fontSizeSmall,fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
+                                    SizedBox(height: Get.height*0.02,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [for(int index=0;index<3;index++) Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Column(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.3),
+                                        spreadRadius: 2,
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 3),
+                                      ),
+                                    ],
+                                  ),
+                                  child: CircleAvatar(
+                                    radius: 40,
+                                    backgroundColor: Colors.white,
+                                    backgroundImage: AssetImage(location[index]), // Yahi main kaam karta hai
+                                  ),
                                 ),
-                              )]
-                            
-                      ),
-                  )],
+                                Text(
+                                  propertyController.properties[
+                                        index]['type']!,
+                                  style: TextStyle(fontSize:Constants.fontSizeSmall,fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),]
+                    )],
+                    ),
+                                    ),
                   ),
+                SizedBox(height: Get.height*0.05,),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      gradient: LinearGradient(colors: [Color.fromARGB(255, 173, 194, 173),Color.fromARGB(255, 116, 185, 118),Color.fromARGB(255, 59, 127, 60),])),
+                    height: Get.height * 0.2,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        
+                          children: [
+                            //SizedBox(width: Get.width*0.1,),
+                            CircleAvatar(radius: 50,
+                              child: Icon(Icons.call,size: 80,)),
+                            Column(
+                              children: [
+                                Text('Give us a Call to help you\n get started with your real \nestate investments',style: TextStyle(fontSize:Constants.fontSizeHeading,fontWeight: FontWeight.w600,color: Color.fromARGB(255, 28, 26, 35))),
+                                CustomButtons(
+                                  color: Colors.white,
+                                  textColor: Colors.orange,
+                                  width: Get.width*0.4,
+                                  text:'Call Us', onPressed:(){})
+                              ],
+                            )
+                          ]
+                        ),
+                      ],
+                    ),
+                    ),
                 )
-,
+                  ],
+                  ),
+                
+
               ],
             )
-          ],
+          
         ),
-      ),
-    );
+      );
+    
   }
 }
