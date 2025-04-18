@@ -186,16 +186,16 @@ class _HomePageState extends State<HomePage> {
                           right: 10,
                           child: GlowContainer(
                             glowRadius: 10,
-                            gradientColors: [Colors.white,Color.fromARGB(255, 224, 216, 139)],
+                            gradientColors: [Colors.white,Color.fromARGB(255, 225, 209, 73)],
                             containerOptions: ContainerOptions(borderRadius: 20,
                             borderSide: BorderSide(width: 2)
                             ),
                             child: CustomButtons(
                               borderRadius: 20,
-                              color: Colors.orange,
+                              color:Theme.of(context).colorScheme.primary,
                               margin: EdgeInsets.all(0),
                               fontSize: Constants.fontSizeTinySmall,
-                              width: Get.width * 0.3,
+                              width: Get.width * 0.2,
                               onPressed: () {},
                               text: 'Invest Now',
                             ),
@@ -268,20 +268,28 @@ class _HomePageState extends State<HomePage> {
                                       fontSize: Constants.fontSizeBody,
                                       fontWeight: FontWeight.w500),
                                 ),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 4),
-                                  margin: const EdgeInsets.only(right: 5),
-                                  decoration: BoxDecoration(
-                                    color: const Color.fromARGB(
-                                        255, 164, 227, 127),
-                                    borderRadius: BorderRadius.circular(6),
-                                  ),
-                                  child: Text(
-                                    propertyController.properties[i]['type']!,
-                                    style: TextStyle(
-                                        fontSize: Constants.fontSizeTiny,
-                                        color: Colors.black54),
+                                GlowContainer(
+                                  glowRadius: 5,
+                                  containerOptions: ContainerOptions(borderRadius:6,
+                                  padding: EdgeInsets.all(0),
+                                  margin: EdgeInsets.only(right: 5)),
+                                  gradientColors: [Colors.green],
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 5, vertical: 0),
+                                    margin: const EdgeInsets.only(right:0),
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromARGB(
+                                          255, 164, 227, 127),
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: Text(
+                                      propertyController.properties[i]['type']!,
+                                      style: TextStyle(
+                                          fontSize: Constants.fontSizeTiny,
+                                          fontWeight:  FontWeight.w900,
+                                          color: Colors.black54),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -730,7 +738,7 @@ class _HomePageState extends State<HomePage> {
                            GlowContainer(
                             containerOptions: ContainerOptions(borderRadius: 10),
    // optional, or customize
-  gradientColors: [Colors.orange, Colors.red, Colors.yellow],
+  gradientColors: [Colors.orange, Color.fromARGB(255, 221, 96, 58), Colors.yellow],
   glowRadius: 5,
  // match button's border
   child: CustomButtons(
