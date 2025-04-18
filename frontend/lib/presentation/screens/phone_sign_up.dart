@@ -22,6 +22,9 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
   @override
   void dispose() {
     _timer?.cancel();
+    authController.phoneController.clear();
+    authController.nameController.clear();
+    authController.otpController.clear();
 
     super.dispose();
   }
@@ -76,15 +79,14 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                     SizedBox(height: Get.height * 0.1),
                     MyTextField(
                       labelText: "Name",
-                      controller: authController.phoneController,
+                      controller: authController.nameController,
                       textStyle:
                           GoogleFonts.acme(fontSize: Constants.fontSizeBody),
                       onChanged: (v) {},
                       focusedBorderColor: Colors.green.withBlue(200),
                       isLabelEnabled: false,
-                      validator: (v) =>
-                          v!.isEmpty ? 'Mobile Number is required' : null,
-                      keyboardType: TextInputType.phone,
+                      validator: (v) => v!.isEmpty ? ' Name is required' : null,
+                      keyboardType: TextInputType.name,
                     ),
                     SizedBox(height: Get.height * 0.02),
                     MyTextField(

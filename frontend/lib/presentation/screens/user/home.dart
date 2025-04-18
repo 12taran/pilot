@@ -231,8 +231,8 @@ class _HomePageState extends State<HomePage> {
                       Center(
                           child: CustomContainer(
                         backgroundColor:
-                            const Color.fromARGB(255, 203, 202, 200),
-                        padding: 2,
+                            const Color.fromARGB(255, 238, 221, 198),
+                        padding: 0,
                         width: Get.width * 0.9,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -248,54 +248,63 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             const SizedBox(height: 8),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  propertyController.properties[i]['name']!,
-                                  style: GoogleFonts.actor(
-                                      fontSize: Constants.fontSizeBody,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 4),
-                                  margin: const EdgeInsets.only(right: 5),
-                                  decoration: BoxDecoration(
-                                    color: const Color.fromARGB(
-                                        255, 164, 227, 127),
-                                    borderRadius: BorderRadius.circular(6),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    propertyController.properties[i]['name']!,
+                                    style: GoogleFonts.actor(
+                                        fontSize: Constants.fontSizeBody,
+                                        fontWeight: FontWeight.w500),
                                   ),
-                                  child: Text(
-                                    propertyController.properties[i]['type']!,
-                                    style: TextStyle(
-                                        fontSize: Constants.fontSizeTiny,
-                                        color: Colors.black54),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 4),
+                                    margin: const EdgeInsets.only(right: 5),
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromARGB(
+                                          255, 164, 227, 127),
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: Text(
+                                      propertyController.properties[i]['type']!,
+                                      style: TextStyle(
+                                          fontSize: Constants.fontSizeTiny,
+                                          color: Colors.black54),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                             const SizedBox(height: 4),
-                            Row(
-                              children: [
-                                const Icon(Icons.location_on,
-                                    size: 16, color: Colors.red),
-                                const SizedBox(width: 4),
-                                Text(
-                                  propertyController.properties[i]['location']!,
-                                  style: const TextStyle(
-                                      color: Color.fromARGB(255, 46, 47, 46)),
-                                ),
-                              ],
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4.0),
+                              child: Row(
+                                children: [
+                                  const Icon(Icons.location_on,
+                                      size: 16, color: Colors.red),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    propertyController.properties[i]
+                                        ['location']!,
+                                    style: const TextStyle(
+                                        color: Color.fromARGB(255, 46, 47, 46)),
+                                  ),
+                                ],
+                              ),
                             ),
-                            const SizedBox(height: 4),
                             const Divider(
                               thickness: 1,
                               color: Colors.grey,
                             ),
                             Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 5.0),
+                                  const EdgeInsets.symmetric(horizontal: 4.0),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -355,7 +364,7 @@ class _HomePageState extends State<HomePage> {
                   options: CarouselOptions(
                       viewportFraction: 1,
                       enlargeCenterPage: true,
-                      height: Get.height * 0.36)),
+                      height: Get.height * 0.38)),
               const SizedBox(
                 height: 20,
               ),
@@ -591,18 +600,28 @@ class _HomePageState extends State<HomePage> {
                 child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      gradient:
-                       LinearGradient(colors: [Color.fromARGB(255, 59, 100, 127),Color.fromARGB(255, 166, 186, 107),Color.fromARGB(255, 173, 194, 173)])),
-                    height: Get.height * 0.3,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                    padding: const EdgeInsets.only(left: 20.0,top: 20),
-                    child: Text('Explore by Themes',style: TextStyle(fontSize:Constants.fontSizeHeading,fontWeight: FontWeight.w800),),
-                                    ),
-                                    SizedBox(height: Get.height*0.02,),
-                        Row(
+                      gradient: LinearGradient(colors: [
+                        Color.fromARGB(255, 59, 100, 127),
+                        Color.fromARGB(255, 166, 186, 107),
+                        Color.fromARGB(255, 173, 194, 173)
+                      ])),
+                  height: Get.height * 0.3,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20.0, top: 20),
+                        child: Text(
+                          'Explore by Themes',
+                          style: TextStyle(
+                              fontSize: Constants.fontSizeHeading,
+                              fontWeight: FontWeight.w800),
+                        ),
+                      ),
+                      SizedBox(
+                        height: Get.height * 0.02,
+                      ),
+                      Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             for (int index = 0; index < 3; index++)
@@ -653,12 +672,16 @@ class _HomePageState extends State<HomePage> {
                 child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
-                      gradient: LinearGradient(colors: [Color.fromARGB(255, 173, 194, 173),Color.fromARGB(255, 166, 185, 107),Color.fromARGB(255, 59, 100, 127),])),
-                    height: Get.height * 0.2,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
+                      gradient: LinearGradient(colors: [
+                        Color.fromARGB(255, 173, 194, 173),
+                        Color.fromARGB(255, 166, 185, 107),
+                        Color.fromARGB(255, 59, 100, 127),
+                      ])),
+                  height: Get.height * 0.2,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             //SizedBox(width: Get.width*0.1,),

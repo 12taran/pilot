@@ -24,6 +24,9 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
     _timer?.cancel();
 
     super.dispose();
+    authController.phoneController.clear();
+    authController.nameController.clear();
+    authController.otpController.clear();
   }
 
   int start = 30;
