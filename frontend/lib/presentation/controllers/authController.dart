@@ -9,6 +9,7 @@ import 'package:pilot_project/routes/page_route.dart';
 class AuthController extends GetxController {
   TextEditingController otpController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
   RxBool isOtpSent = false.obs;
   RxBool verifyngOtp = false.obs;
   String verificationIds = "";
@@ -73,7 +74,8 @@ class AuthController extends GetxController {
           isGuest.value = false;
           //  phoneController.clear();
           otpController.clear();
-          bool verified = await userRegisterVerify(phoneController.text.trim());
+          bool verified = await userRegisterVerify(
+              phoneController.text.trim(), nameController.text.trim());
           if (verified) {
             Get.offAndToNamed(PageRoutes.bottomNav);
           }
@@ -118,8 +120,8 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<bool> userRegisterVerify(String phone) async {
-    bool isSuccess = await AuthRepo().userRegisterVerify(phone);
+  Future<bool> userRegisterVerify(String phone, String? name) async {
+    bool isSuccess = await AuthRepo().userRegisterVerify(phone, name);
     return isSuccess;
   }
 }

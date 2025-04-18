@@ -9,14 +9,14 @@ import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/presentation/controllers/authController.dart';
 import 'package:pilot_project/routes/page_route.dart';
 
-class PhoneSignUpScreen extends StatefulWidget {
-  const PhoneSignUpScreen({super.key});
+class PhoneSignInScreen extends StatefulWidget {
+  const PhoneSignInScreen({super.key});
 
   @override
-  PhoneSignUpScreenState createState() => PhoneSignUpScreenState();
+  PhoneSignInScreenState createState() => PhoneSignInScreenState();
 }
 
-class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
+class PhoneSignInScreenState extends State<PhoneSignInScreen> {
   final AuthController authController = Get.put(AuthController());
 
   @override
@@ -66,7 +66,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                       textAlign: TextAlign.start,
                     ),
                     Text(
-                      'Sign Up to Continue!',
+                      'Sign In to Continue!',
                       style: GoogleFonts.acme(
                         fontSize: Constants.fontSizeHeading,
                         fontWeight: FontWeight.w500,
@@ -74,19 +74,6 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                       ),
                     ),
                     SizedBox(height: Get.height * 0.1),
-                    MyTextField(
-                      labelText: "Name",
-                      controller: authController.phoneController,
-                      textStyle:
-                          GoogleFonts.acme(fontSize: Constants.fontSizeBody),
-                      onChanged: (v) {},
-                      focusedBorderColor: Colors.green.withBlue(200),
-                      isLabelEnabled: false,
-                      validator: (v) =>
-                          v!.isEmpty ? 'Mobile Number is required' : null,
-                      keyboardType: TextInputType.phone,
-                    ),
-                    SizedBox(height: Get.height * 0.02),
                     MyTextField(
                       labelText: "Mobile Number",
                       maxLength: 10,
@@ -164,7 +151,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Icon(Icons.person, size: 20),
+                                const Icon(Icons.person, size: 20),
                                 Text(
                                   'Continue as Guest',
                                   style: GoogleFonts.acme(
@@ -181,17 +168,18 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                     Center(
                       child: TextButton(
                         child: Text(
-                          'Already a User? Sign In',
+                          'New User? Sign Up',
                           style: GoogleFonts.acme(
                               color: Theme.of(context).primaryColor,
                               decoration: TextDecoration.underline,
                               decorationColor: Theme.of(context).primaryColor),
                         ),
                         onPressed: () {
-                          Get.toNamed(PageRoutes.phonesignin);
+                          Get.toNamed(PageRoutes.phonesignup);
                         },
                       ),
                     ),
+
                     /*Container(
                       margin: EdgeInsets.all(10),
                       padding: EdgeInsets.symmetric(vertical:5),
