@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:pilot_project/presentation/controllers/authController.dart';
+import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/screens/email_password_sign_up.dart';
 import 'package:pilot_project/presentation/screens/onboarding/onboarding.dart';
 import 'package:pilot_project/presentation/screens/phone_signIn.dart';
@@ -7,6 +8,7 @@ import 'package:pilot_project/presentation/screens/phone_sign_up.dart';
 import 'package:pilot_project/presentation/screens/splash.dart';
 import 'package:pilot_project/presentation/screens/user/navigation.dart';
 import 'package:pilot_project/presentation/screens/user/profile.dart';
+import 'package:pilot_project/presentation/screens/user/propertyDetail.dart';
 import 'package:pilot_project/presentation/screens/user/setting.dart';
 import 'package:pilot_project/presentation/screens/user/userDetail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,6 +26,7 @@ class PageRoutes {
   static const String onboarding = "/onBoarding";
   static const String drawerProfile = "/drawerProfile";
   static const String userDetail = "/userDetail";
+  static const String propertydetail = "/propertyDetails";
 
   // get product category
   static List<GetPage> getPageRoutes() {
@@ -121,6 +124,21 @@ class PageRoutes {
           Get.put(() => sharedPreferences, permanent: true);
         }),
       ),
+      GetPage(
+        name: propertydetail,
+        page: () => Propertydetail(
+          property: Get.arguments as Map<String, String>,
+        ),
+        transition: Transition.zoom,
+        transitionDuration: const Duration(milliseconds: 300),
+        binding: BindingsBuilder(() async {
+          final sharedPreferences = await SharedPreferences.getInstance();
+          Get.put(() => sharedPreferences, permanent: true);
+          Get.lazyPut(
+            () => PropertyController(),
+          );
+        }),
+      )
     ];
   }
 }
