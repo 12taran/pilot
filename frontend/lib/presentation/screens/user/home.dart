@@ -591,28 +591,18 @@ class _HomePageState extends State<HomePage> {
                 child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      gradient: const LinearGradient(colors: [
-                        Color.fromARGB(255, 59, 127, 60),
-                        Color.fromARGB(255, 116, 185, 118),
-                        Color.fromARGB(255, 173, 194, 173)
-                      ])),
-                  height: Get.height * 0.3,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20.0, top: 20),
-                        child: Text(
-                          'Explore by Themes',
-                          style: TextStyle(
-                              fontSize: Constants.fontSizeHeading,
-                              fontWeight: FontWeight.w800),
-                        ),
-                      ),
-                      SizedBox(
-                        height: Get.height * 0.02,
-                      ),
-                      Row(
+                      gradient:
+                       LinearGradient(colors: [Color.fromARGB(255, 59, 100, 127),Color.fromARGB(255, 166, 186, 107),Color.fromARGB(255, 173, 194, 173)])),
+                    height: Get.height * 0.3,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                    padding: const EdgeInsets.only(left: 20.0,top: 20),
+                    child: Text('Explore by Themes',style: TextStyle(fontSize:Constants.fontSizeHeading,fontWeight: FontWeight.w800),),
+                                    ),
+                                    SizedBox(height: Get.height*0.02,),
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             for (int index = 0; index < 3; index++)
@@ -663,16 +653,12 @@ class _HomePageState extends State<HomePage> {
                 child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
-                      gradient: const LinearGradient(colors: [
-                        Color.fromARGB(255, 173, 194, 173),
-                        Color.fromARGB(255, 116, 185, 118),
-                        Color.fromARGB(255, 59, 127, 60),
-                      ])),
-                  height: Get.height * 0.2,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
+                      gradient: LinearGradient(colors: [Color.fromARGB(255, 173, 194, 173),Color.fromARGB(255, 166, 185, 107),Color.fromARGB(255, 59, 100, 127),])),
+                    height: Get.height * 0.2,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             //SizedBox(width: Get.width*0.1,),
