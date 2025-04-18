@@ -190,13 +190,7 @@ class _HomePageState extends State<HomePage> {
                             containerOptions: const ContainerOptions(borderRadius: 20,
                             borderSide: BorderSide(width: 2)
                             ),
-                            gradientColors: const [
-                              Colors.white,
-                              Color.fromARGB(255, 225, 209, 73)
-                            ],
-                            containerOptions: const ContainerOptions(
-                                borderRadius: 20,
-                                borderSide: BorderSide(width: 2)),
+                            
                             child: CustomButtons(
                               borderRadius: 20,
                               color: Theme.of(context).colorScheme.primary,
