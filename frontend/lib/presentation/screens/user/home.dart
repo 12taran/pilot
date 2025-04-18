@@ -186,14 +186,14 @@ class _HomePageState extends State<HomePage> {
                           right: 10,
                           child: GlowContainer(
                             glowRadius: 10,
-                            gradientColors: [Colors.white,Color.fromARGB(255, 225, 209, 73)],
-                            containerOptions: ContainerOptions(borderRadius: 20,
+                            gradientColors: const [Colors.white,Color.fromARGB(255, 225, 209, 73)],
+                            containerOptions: const ContainerOptions(borderRadius: 20,
                             borderSide: BorderSide(width: 2)
                             ),
                             child: CustomButtons(
                               borderRadius: 20,
                               color:Theme.of(context).colorScheme.primary,
-                              margin: EdgeInsets.all(0),
+                              margin: const EdgeInsets.all(0),
                               fontSize: Constants.fontSizeTinySmall,
                               width: Get.width * 0.2,
                               onPressed: () {},
@@ -270,10 +270,10 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 GlowContainer(
                                   glowRadius: 5,
-                                  containerOptions: ContainerOptions(borderRadius:6,
+                                  containerOptions: const ContainerOptions(borderRadius:6,
                                   padding: EdgeInsets.all(0),
                                   margin: EdgeInsets.only(right: 5)),
-                                  gradientColors: [Colors.green],
+                                  gradientColors: [Color.fromARGB(255, 36, 109, 38),Colors.white],
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 5, vertical: 0),
