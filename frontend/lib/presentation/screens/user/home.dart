@@ -183,6 +183,7 @@ class _HomePageState extends State<HomePage> {
                           bottom: 25,
                           right: 10,
                           child: CustomButtons(
+                            borderRadius: 20,
                             color: Colors.orange,
                             fontSize: Constants.fontSizeTinySmall,
                             width: Get.width * 0.3,
