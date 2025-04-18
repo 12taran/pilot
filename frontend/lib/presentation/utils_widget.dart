@@ -336,13 +336,13 @@ class UtilsWidget {
             content: Text(message ?? "del_conf".tr),
             actions: <Widget>[
               TextButton(
-                child: const Text("No"),
+                child: const Text("No",style: TextStyle(color: Colors.red),),
                 onPressed: () {
                   onNoPressed();
                 },
               ),
               TextButton(
-                child: Text("YES"),
+                child: Text("YES",style: TextStyle(color: Colors.green),),
                 onPressed: () {
                   onYesPressed();
                 },

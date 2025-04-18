@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pilot_project/core/components/MyTextField.dart';
+import 'package:pilot_project/presentation/utils_widget.dart';
 
 import 'package:pilot_project/routes/page_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -147,8 +148,10 @@ class ProfilePage extends StatelessWidget {
               leading: const Icon(Icons.logout),
               title: const Text('LogOut'),
               onTap: () async {
-                await FirebaseAuth.instance.signOut();
-                Get.offAndToNamed(PageRoutes.phonesignup);
+                UtilsWidget.showConfirmationDialog(message: 'Are you sure you want to logout?',
+                  onYesPressed:()async{  await FirebaseAuth.instance.signOut();
+                Get.offAndToNamed(PageRoutes.phonesignup);}, onNoPressed:(){Get.back();}, context: context);
+              
               },
             ),
           ],
