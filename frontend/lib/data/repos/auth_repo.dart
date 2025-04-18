@@ -5,10 +5,13 @@ import 'package:pilot_project/routes/api_routes.dart';
 
 class AuthRepo {
   ApiRoutes apiRoutes = ApiRoutes();
-  Future<bool> userRegisterVerify(String phone) async {
+  Future<bool> userRegisterVerify(String phone, String? name) async {
     final response = await BaseService().postData(
         endPoint: apiRoutes.userRegisterVerify,
-        body: {"phoneNumber": phone},
+        body: {
+          "phoneNumber": phone,
+          if (name != null && name.isNotEmpty) "Username": name,
+        },
         isTokenRequired: false);
     if (response.data['success'] == true) {
       Utils.showToast(message: response.data['message']);

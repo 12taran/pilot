@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:pilot_project/presentation/controllers/authController.dart';
 import 'package:pilot_project/presentation/screens/email_password_sign_up.dart';
 import 'package:pilot_project/presentation/screens/onboarding/onboarding.dart';
+import 'package:pilot_project/presentation/screens/phone_signIn.dart';
 import 'package:pilot_project/presentation/screens/phone_sign_up.dart';
 import 'package:pilot_project/presentation/screens/splash.dart';
 import 'package:pilot_project/presentation/screens/user/navigation.dart';
@@ -16,12 +17,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 class PageRoutes {
   static const String splashScreen = "/splashScreen";
   static const String phonesignup = "/phoneSignup";
+  static const String phonesignin = "/phoneSignin";
   static const String bottomNav = "/bottomNav";
   static const String emailPassword = "/emailPassword";
   static const String setting = "/setting";
   static const String onboarding = "/onBoarding";
   static const String drawerProfile = "/drawerProfile";
-   static const String userDetail = "/userDetail";
+  static const String userDetail = "/userDetail";
 
   // get product category
   static List<GetPage> getPageRoutes() {
@@ -30,6 +32,8 @@ class PageRoutes {
       GetPage(
         name: splashScreen,
         page: () => const SplashScreen(),
+        transition: Transition.zoom,
+        transitionDuration: const Duration(milliseconds: 300),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);
@@ -38,6 +42,8 @@ class PageRoutes {
       GetPage(
         name: userDetail,
         page: () => const UserDetail(),
+        transition: Transition.zoom,
+        transitionDuration: const Duration(milliseconds: 300),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);
@@ -46,6 +52,19 @@ class PageRoutes {
       GetPage(
         name: phonesignup,
         page: () => const PhoneSignUpScreen(),
+        transition: Transition.zoom,
+        transitionDuration: const Duration(milliseconds: 300),
+        binding: BindingsBuilder(() async {
+          final sharedPreferences = await SharedPreferences.getInstance();
+          Get.put(() => sharedPreferences, permanent: true);
+          Get.lazyPut(() => AuthController());
+        }),
+      ),
+      GetPage(
+        name: phonesignin,
+        page: () => const PhoneSignInScreen(),
+        transition: Transition.zoom,
+        transitionDuration: const Duration(milliseconds: 300),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);
@@ -55,6 +74,8 @@ class PageRoutes {
       GetPage(
         name: bottomNav,
         page: () => const BottomNavScreen(),
+        transition: Transition.zoom,
+        transitionDuration: const Duration(milliseconds: 300),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);
@@ -63,6 +84,8 @@ class PageRoutes {
       GetPage(
         name: emailPassword,
         page: () => const EmailSignUpScreen(),
+        transition: Transition.zoom,
+        transitionDuration: const Duration(milliseconds: 300),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);
@@ -71,6 +94,8 @@ class PageRoutes {
       GetPage(
         name: setting,
         page: () => const Setting(),
+        transition: Transition.zoom,
+        transitionDuration: const Duration(milliseconds: 300),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);
@@ -79,6 +104,8 @@ class PageRoutes {
       GetPage(
         name: drawerProfile,
         page: () => const ProfilePage(),
+        transition: Transition.zoom,
+        transitionDuration: const Duration(milliseconds: 300),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);
@@ -87,6 +114,8 @@ class PageRoutes {
       GetPage(
         name: onboarding,
         page: () => const OnboardingScreen(),
+        transition: Transition.zoom,
+        transitionDuration: const Duration(milliseconds: 300),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);

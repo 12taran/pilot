@@ -61,11 +61,11 @@ class _HomePageState extends State<HomePage> {
         color: Colors.black.withOpacity(0.2), // shadow color
         spreadRadius: 2, // how wide the shadow spreads
         blurRadius: 6,   // softens the shadow
-        offset: Offset(0, 4), // shadow position: x (right), y (down)
+        offset: const Offset(0, 4), // shadow position: x (right), y (down)
       ),
     ],
     shape: BoxShape.circle,
-    gradient: LinearGradient(
+    gradient: const LinearGradient(
       colors: [
         Color(0xff4c4f5e),
         Color.fromARGB(255, 200, 202, 213),
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
         style: GoogleFonts.aBeeZee(
           fontSize: Constants.fontSizeBody,
           fontWeight: FontWeight.bold,
-          color: Color.fromARGB(255, 246, 241, 241), // Make sure text is visible on gradient
+          color: const Color.fromARGB(255, 246, 241, 241), // Make sure text is visible on gradient
         ),
       ),
     ),
@@ -202,7 +202,7 @@ class _HomePageState extends State<HomePage> {
                   height: 10,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal:10.0),
+                  padding: const EdgeInsets.symmetric(horizontal:10.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -226,7 +226,7 @@ class _HomePageState extends State<HomePage> {
                       for (int i = 0; i < 6; i++)
                         Center(
                             child: CustomContainer(
-                              backgroundColor: Color.fromARGB(255, 203, 202, 200),
+                              backgroundColor: const Color.fromARGB(255, 203, 202, 200),
                         padding: 2,
                           width: Get.width * 0.9,
                           child: Column(
@@ -258,7 +258,7 @@ class _HomePageState extends State<HomePage> {
                                         horizontal: 8, vertical: 4),
                                     margin: const EdgeInsets.only(right: 5),
                                     decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 164, 227, 127),
+                                      color: const Color.fromARGB(255, 164, 227, 127),
                                       borderRadius: BorderRadius.circular(6),
                                     ),
                                     child: Text(
@@ -283,7 +283,7 @@ class _HomePageState extends State<HomePage> {
                                 ],
                               ),
                               const SizedBox(height: 4),
-                              Divider(thickness: 1,color: Colors.grey,),
+                              const Divider(thickness: 1,color: Colors.grey,),
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal:5.0),
                                 child: Row(
@@ -294,19 +294,19 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                      
                                         Text(
-                                          "Rs ${propertyController.properties[i]['price']!}/- ",
+                                          "${propertyController.properties[i]['price']!}/- ",
                                           style: TextStyle(
                                               fontSize: Constants.fontSizeBody,
                                               fontWeight: FontWeight.w800,
-                                              color: Color.fromARGB(255, 26, 27, 26)),
+                                              color: const Color.fromARGB(255, 26, 27, 26)),
                                         ),
-                                                Column(
+                                                const Column(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [Text('Per',
-                                                  style: const TextStyle(
+                                                  style: TextStyle(
                                              
                                               color: Color.fromARGB(255, 26, 27, 26)),),
-                                                  Text('ALT SQFT',style: const TextStyle(
+                                                  Text('ALT SQFT',style: TextStyle(
                                             
                                               
                                               color: Color.fromARGB(255, 26, 27, 26)),)],
@@ -321,7 +321,7 @@ class _HomePageState extends State<HomePage> {
                                         style: GoogleFonts.labrada(
                                            fontSize: Constants.fontSizeSubTitle,
                                           fontWeight: FontWeight.w600,
-                                          color: Color.fromARGB(255, 230, 110, 19),
+                                          color: const Color.fromARGB(255, 230, 110, 19),
                                           letterSpacing: 1,
                                         ),
                                       ),)
@@ -366,11 +366,11 @@ class _HomePageState extends State<HomePage> {
                               height: 50,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
-                                gradient: LinearGradient(colors:[Color.fromARGB(255, 38, 93, 40),Color.fromARGB(255, 83, 152, 85),Color.fromARGB(255, 173, 194, 173)])
+                                gradient: const LinearGradient(colors:[Color.fromARGB(255, 38, 93, 40),Color.fromARGB(255, 83, 152, 85),Color.fromARGB(255, 173, 194, 173)])
                               ),
                               child: const Icon(Icons.person),
                             ),
-                              SizedBox(width: 5,),
+                              const SizedBox(width: 5,),
                              Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -394,11 +394,11 @@ class _HomePageState extends State<HomePage> {
                               height: 50,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
-                               gradient: LinearGradient(colors:[Color.fromARGB(255, 38, 93, 40),Color.fromARGB(255, 83, 152, 85),Color.fromARGB(255, 173, 194, 173)])
+                               gradient: const LinearGradient(colors:[Color.fromARGB(255, 38, 93, 40),Color.fromARGB(255, 83, 152, 85),Color.fromARGB(255, 173, 194, 173)])
                               ),
                               child: const Icon(Icons.location_city),
                             ),
-                              SizedBox(width: 5,),
+                              const SizedBox(width: 5,),
                             Text(
                               "8 Cities",
                               style: TextStyle(fontSize: Constants.fontSizeSubTitle,fontWeight: FontWeight.w800),
@@ -408,9 +408,9 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ]),
                 ),
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
                 Container(
-                  decoration: BoxDecoration(gradient: LinearGradient(colors: [Color.fromARGB(255, 59, 127, 60),Color.fromARGB(255, 116, 185, 118),Color.fromARGB(255, 173, 194, 173)])),
+                  decoration: const BoxDecoration(gradient: LinearGradient(colors: [Color.fromARGB(255, 59, 127, 60),Color.fromARGB(255, 116, 185, 118),Color.fromARGB(255, 173, 194, 173)])),
                   height: Get.height * 0.3,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -466,13 +466,13 @@ class _HomePageState extends State<HomePage> {
                   child: Column(children: [
                     Text('Our Board Of Members',style: TextStyle(fontSize:Constants.fontSizeHeading,fontWeight: FontWeight.w800),),
                     Expanded(
-                      child: GridView(gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,
+                      child: GridView(gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,
                        childAspectRatio:2/3, ),
                     
                                            children:[for(int index=0;index<4;index++) Padding(
                                   padding: const EdgeInsets.all(4.0),
                                   child: Card(
-                                    color: Color.fromARGB(255, 213, 204, 190),
+                                    color: const Color.fromARGB(255, 213, 204, 190),
                                     child: Padding(
                                       padding: const EdgeInsets.all(3.0),
                                       child: Column(
@@ -510,9 +510,9 @@ class _HomePageState extends State<HomePage> {
                     )
                   ],),
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                   Container(
-                  decoration: BoxDecoration(gradient: LinearGradient(colors: [Color.fromARGB(255, 59, 127, 60),Color.fromARGB(255, 116, 185, 118),Color.fromARGB(255, 173, 194, 173)])),
+                  decoration: const BoxDecoration(gradient: LinearGradient(colors: [Color.fromARGB(255, 59, 127, 60),Color.fromARGB(255, 116, 185, 118),Color.fromARGB(255, 173, 194, 173)])),
                   height: Get.height * 0.3,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
