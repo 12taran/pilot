@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:glow_container/glow_container.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/components/CustomContainer.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
@@ -13,6 +14,7 @@ import 'package:pilot_project/presentation/controllers/pilotController.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/screens/user/profile.dart';
 import 'package:pilot_project/routes/page_route.dart';
+import 'package:pretty_animated_buttons/pretty_animated_buttons.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -182,13 +184,21 @@ class _HomePageState extends State<HomePage> {
                         Positioned(
                           bottom: 25,
                           right: 10,
-                          child: CustomButtons(
-                            borderRadius: 20,
-                            color: Colors.orange,
-                            fontSize: Constants.fontSizeTinySmall,
-                            width: Get.width * 0.3,
-                            onPressed: () {},
-                            text: 'Invest Now',
+                          child: GlowContainer(
+                            glowRadius: 10,
+                            gradientColors: [Colors.white,Color.fromARGB(255, 224, 216, 139)],
+                            containerOptions: ContainerOptions(borderRadius: 20,
+                            borderSide: BorderSide(width: 2)
+                            ),
+                            child: CustomButtons(
+                              borderRadius: 20,
+                              color: Colors.orange,
+                              margin: EdgeInsets.all(0),
+                              fontSize: Constants.fontSizeTinySmall,
+                              width: Get.width * 0.3,
+                              onPressed: () {},
+                              text: 'Invest Now',
+                            ),
                           ),
                         )
                       ],
@@ -334,7 +344,7 @@ class _HomePageState extends State<HomePage> {
                                   // const SizedBox(height: 10),
                                   Center(
                                       child: GestureDetector(
-                                    onTap: () {},
+                                    onTap: () {print('Invest now1');},
                                     child: Text(
                                       'Invest Now',
                                       style: GoogleFonts.labrada(
@@ -386,11 +396,8 @@ class _HomePageState extends State<HomePage> {
                             height: 50,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
-                                gradient: const LinearGradient(colors: [
-                                  Color.fromARGB(255, 38, 93, 40),
-                                  Color.fromARGB(255, 83, 152, 85),
-                                  Color.fromARGB(255, 173, 194, 173)
-                                ])),
+                                gradient: LinearGradient(colors: [Color.fromARGB(255, 173, 194, 173),Color.fromARGB(255, 166, 185, 107),Color.fromARGB(255, 59, 100, 127),]
+                                )),
                             child: const Icon(Icons.person),
                           ),
                           const SizedBox(
@@ -422,11 +429,8 @@ class _HomePageState extends State<HomePage> {
                             height: 50,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
-                                gradient: const LinearGradient(colors: [
-                                  Color.fromARGB(255, 38, 93, 40),
-                                  Color.fromARGB(255, 83, 152, 85),
-                                  Color.fromARGB(255, 173, 194, 173)
-                                ])),
+                                gradient: LinearGradient(colors: [Color.fromARGB(255, 173, 194, 173),Color.fromARGB(255, 166, 185, 107),Color.fromARGB(255, 59, 100, 127),]
+                                )),
                             child: const Icon(Icons.location_city),
                           ),
                           const SizedBox(
@@ -448,8 +452,8 @@ class _HomePageState extends State<HomePage> {
               Container(
                 decoration: const BoxDecoration(
                     gradient: LinearGradient(colors: [
-                  Color.fromARGB(255, 59, 127, 60),
-                  Color.fromARGB(255, 116, 185, 118),
+                  Color.fromARGB(255, 53, 99, 136),
+                  Color.fromARGB(255, 146, 182, 118),
                   Color.fromARGB(255, 173, 194, 173)
                 ])),
                 height: Get.height * 0.3,
@@ -499,7 +503,7 @@ class _HomePageState extends State<HomePage> {
                                     Text(
                                       City[index],
                                       style: TextStyle(
-                                          fontSize: Constants.fontSizeTiny),
+                                          fontSize: Constants.fontSizeSubTitle,fontWeight: FontWeight.w700),
                                     ),
                                   ],
                                 ),
@@ -530,7 +534,7 @@ class _HomePageState extends State<HomePage> {
                         height: Get.height * 0.35,
                         enlargeCenterPage: true,
                         enableInfiniteScroll: true,
-                        autoPlay: true,
+                        autoPlay: false,
                         aspectRatio: 2 / 3,
                       ),
                       items: List.generate(4, (index) {
@@ -591,7 +595,7 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.symmetric(horizontal: 5.0),
                 child: Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
+                      //borderRadius: BorderRadius.circular(20),
                       gradient:
                        LinearGradient(colors: [Color.fromARGB(255, 59, 100, 127),Color.fromARGB(255, 166, 186, 107),Color.fromARGB(255, 173, 194, 173)])),
                     height: Get.height * 0.3,
@@ -687,6 +691,67 @@ class _HomePageState extends State<HomePage> {
                               ],
                             )
                           ]),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height:Get.height*0.04,),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Container(
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: LinearGradient(colors: [Color.fromARGB(255, 76, 79, 175),Color.fromARGB(255, 110, 145, 188),Color.fromARGB(255, 59, 100, 127),])),
+                    height: Get.height * 0.2,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Opacity(
+                          opacity: 0.5,
+                          child: const CircleAvatar(
+                              radius: 50,
+                              child: Icon(
+                                Icons.call,
+                                size: 80,
+                              )),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                                ' Invest in Real estate easily with PILOT',
+                                style: TextStyle(
+                                    fontSize: Constants.fontSizeSubTitle,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color.fromARGB(255, 2, 2, 72))),
+                                    SizedBox(height: 20,),
+                                  
+                           GlowContainer(
+                            containerOptions: ContainerOptions(borderRadius: 10),
+   // optional, or customize
+  gradientColors: [Colors.orange, Colors.red, Colors.yellow],
+  glowRadius: 5,
+ // match button's border
+  child: CustomButtons(
+  
+    width: Get.width*0.7,
+    borderRadius: 10,
+    margin: EdgeInsets.all(0),
+    color: Colors.white,
+    textColor: Colors.orange,
+    
+    text: 'Invest Now',
+    onPressed: () {
+      print('Hello');
+    },
+  ),
+)
+
+                          ],
+                        ),
+                        
+                        
                     ],
                   ),
                 ),

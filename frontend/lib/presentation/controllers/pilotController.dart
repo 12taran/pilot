@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 class Pilotcontroller extends GetxController{
  List<Map<String, String>> boardMembers = [
   {
-    "name": "Alice Johnson",
+    "name": "Mr Anjuman",
     "designation": "Chairperson",
      "image": "assets/images/property1.jpg",
   },
