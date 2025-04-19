@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pilot_project/core/utils.dart';
 
 import 'package:pilot_project/data/repos/auth_repo.dart';
+import 'package:pilot_project/presentation/utils_widget.dart';
+import 'package:pilot_project/routes/page_route.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -35,9 +39,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
       if (success) {
         // You can navigate to home or login screen
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Registration successful')),
-        );
+        Utils.showToast(message: 'Registration successful');
+        Get.toNamed(PageRoutes.bottomNav);
+      
       } else {
         // Error toast is already shown by Utils.showToast
       }

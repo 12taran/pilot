@@ -20,6 +20,7 @@ class _InvestpageState extends State<Investpage> {
             itemCount: propertyController.properties.length,
             itemBuilder: (context, index) {
               return CustomWidgets.propertyCard(
+                propertyController,
                   propertyController.properties[index],context);
             },
           )

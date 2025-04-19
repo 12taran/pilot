@@ -77,7 +77,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                       ),
                     ),
                     SizedBox(height: Get.height * 0.1),
-                    MyTextField(
+                   /* MyTextField(
                       labelText: "Name",
                       controller: authController.nameController,
                       textStyle:
@@ -87,7 +87,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                       isLabelEnabled: false,
                       validator: (v) => v!.isEmpty ? ' Name is required' : null,
                       keyboardType: TextInputType.name,
-                    ),
+                    ),*/
                     SizedBox(height: Get.height * 0.02),
                     MyTextField(
                       labelText: "Mobile Number",
@@ -102,6 +102,18 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                           v!.isEmpty ? 'Mobile Number is required' : null,
                       keyboardType: TextInputType.phone,
                     ),
+                    /* MyTextField(
+                      maxLength: 50,
+                      labelText: "Address",
+                      controller: authController.addressController,
+                      textStyle:
+                          GoogleFonts.acme(fontSize: Constants.fontSizeBody),
+                      onChanged: (v) {},
+                      focusedBorderColor: Colors.green.withBlue(200),
+                      isLabelEnabled: false,
+                      validator: (v) => v!.isEmpty ? ' Address is required' : null,
+                      keyboardType: TextInputType.name,
+                    ),*/
                     if (authController.isOtpSent.value) ...[
                       const SizedBox(height: 16),
                       MyTextField(

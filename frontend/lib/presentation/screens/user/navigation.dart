@@ -16,7 +16,7 @@ class BottomNavScreenState extends State<BottomNavScreen> {
 
   final List<Widget> _pages = [
     HomePage(),
-    const WishlistPage(),
+     WishlistPage(),
     const Investpage(),
     const PortfolioPage(),
   ];

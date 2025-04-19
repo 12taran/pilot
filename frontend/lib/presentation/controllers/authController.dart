@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pilot_project/core/utils.dart';
@@ -10,6 +11,7 @@ class AuthController extends GetxController {
   TextEditingController otpController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController nameController = TextEditingController();
+  TextEditingController addressController=TextEditingController();
   RxBool isOtpSent = false.obs;
   RxBool verifyngOtp = false.obs;
   String verificationIds = "";
@@ -75,9 +77,10 @@ class AuthController extends GetxController {
           //  phoneController.clear();
           otpController.clear();
           bool verified = await userRegisterVerify(
-              phoneController.text.trim(), nameController.text.trim());
+              phoneController.text.trim());
+              print(nameController.text);
           if (verified) {
-            Get.offAndToNamed(PageRoutes.bottomNav);
+            Get.offAndToNamed(PageRoutes.register);
           }
         }
       } on FirebaseAuthException catch (e) {
@@ -120,8 +123,8 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<bool> userRegisterVerify(String phone, String? name) async {
-    bool isSuccess = await AuthRepo().userRegisterVerify(phone, name);
+  Future<bool> userRegisterVerify(String phone) async {
+    bool isSuccess = await AuthRepo().userRegisterVerify(phone);
     return isSuccess;
   }
 }

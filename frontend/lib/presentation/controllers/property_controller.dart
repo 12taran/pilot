@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 class PropertyController extends GetxController {
+ RxList<Map<String, String>> isFav = <Map<String, String>>[].obs;
   RxList<Map<String, String>> properties =[
   {
     "name": "Sunset Heights",

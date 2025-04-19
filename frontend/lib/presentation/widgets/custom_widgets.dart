@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:pilot_project/core/config.dart';
+import 'package:pilot_project/presentation/controllers/property_controller.dart';
 
 class CustomWidgets {
+   PropertyController propertyController = Get.find();
   static Widget propertyCard(
+     PropertyController controller,
       Map<String, String> property, BuildContext context) {
     return Card(
       elevation: 4,
@@ -11,7 +16,9 @@ class CustomWidgets {
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+           
             // Property Image
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
@@ -63,6 +70,31 @@ class CustomWidgets {
                 ],
               ),
             ),
+             Obx(
+               (){return Center(
+                 child: CircleAvatar(
+                   radius: 18,
+                   backgroundColor: Colors.white,
+                   child: IconButton(
+                     onPressed: () {
+                       if (controller.isFav.contains(property)) {
+                         controller.isFav.remove(property);
+                       } else {
+                         controller.isFav.add(property);
+                       }
+                     },
+                     icon: Icon(
+                       Icons.favorite,
+                       color: controller.isFav.contains(property) ? Colors.red : Colors.grey,
+                       size: 18,
+                     ),
+                     padding: EdgeInsets.zero, // So the icon centers nicely
+                     constraints: BoxConstraints(), // Removes default button size
+                   ),
+                 ),
+               );}
+             )
+
           ],
         ),
       ),
