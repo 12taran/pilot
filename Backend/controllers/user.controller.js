@@ -2,11 +2,18 @@ import { User } from "../Models/user.model.js";
 
 export const userVerify = async (req, res) => {
   try {
-    const { phoneNumber } = req.body;
+    const { phoneNumber,fullname,address } = req.body;
 
-    if (!phoneNumber) {
+    if(phoneNumber.length != 10){
       return res.status(400).json({
-        message: "phoneNumber is missing",
+        message : "Enter valid number",
+        success : false,
+      })
+    }
+
+    if (!phoneNumber || !fullname || !address) {
+      return res.status(400).json({
+        message: "All fields are required",
         success: false,
       });
     }
@@ -22,6 +29,8 @@ export const userVerify = async (req, res) => {
 
     const newUser = await User.create({
       phoneNumber,
+      fullname,
+      address,
     });
     return res.status(201).json({
       message: "Account created successfully",
@@ -57,6 +66,30 @@ export const userGet = async (req, res) => {
   }
 };
 
+export const userById = async (req, res) => {
+  try {
+    const {userId} = req.params;
+    const user = await User.findById(userId );// findById() expects the ID directly, not an object
+
+    if (!user) {
+      return res.status(404).json({
+        message: "Profile not found",
+        success: false,
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Failed to load",
+      success: false,
+    });
+  }
+};
+
 export const userProfile = async (req, res) => {
   try {
     const { fullname, address, phoneNumber } = req.body;
@@ -68,12 +101,12 @@ export const userProfile = async (req, res) => {
 
 export const userEdit = async (req, res) => {
   try {
-    const userId = req.id;
+    const {id : userId} = req.params;// grabs id from URL and assigns it to userId
     const { fullname, address } = req.body;
 
     // const user = await User.findById(userId);
 
-    if (!user) {
+    if (!userId) {
       return res.status(404).json({
         message: "User not found",
         success: false,
