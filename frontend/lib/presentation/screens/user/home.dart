@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
           Container(
               color: Theme.of(context).colorScheme.primary,
               // margin: const EdgeInsets.symmetric(horizontal: 5),
-              height: Get.height * 0.1,
+              height: Get.height * 0.09,
               child: Row(
                 children: [
                   Padding(
