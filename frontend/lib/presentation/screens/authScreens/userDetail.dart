@@ -6,9 +6,11 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pilot_project/core/components/MyTextField.dart';
+import 'package:pilot_project/core/components/custom_buttons.dart';
+import 'package:pilot_project/core/utils.dart';
+import 'package:pilot_project/presentation/widgets/utils_widget.dart';
 
 import 'package:pilot_project/routes/page_route.dart';
-
 class UserDetail extends StatefulWidget {
   const UserDetail({super.key});
 
@@ -44,6 +46,9 @@ class _UserDetailState extends State<UserDetail> {
         title: const Text("User Profile"),
         centerTitle: true,
       ),
+      bottomNavigationBar: CustomButtons(text:'Save', onPressed:(){
+                  Utils.showToast(message: 'User Details saved Successfully');
+                 Future.delayed(Duration(seconds: 1),() {Get.back();});}),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -61,7 +66,7 @@ class _UserDetailState extends State<UserDetail> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(color: Colors.white, width: 4),
-                          boxShadow: const [
+                          boxShadow: [
                             BoxShadow(
                               color: Colors.black26,
                               blurRadius: 10,
@@ -71,8 +76,7 @@ class _UserDetailState extends State<UserDetail> {
                           image: DecorationImage(
                             image: _profileImage != null
                                 ? FileImage(_profileImage!)
-                                : const AssetImage(
-                                        "assets/images/onboarding1.png")
+                                : const AssetImage("assets/images/onboarding1.png")
                                     as ImageProvider,
                             fit: BoxFit.cover,
                           ),
@@ -109,16 +113,17 @@ class _UserDetailState extends State<UserDetail> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
-                    _buildEditableField(Icons.person, "Name", nameController),
-                    _buildEditableField(
-                        Icons.phone, "Phone No.", mobileController),
-                    _buildEditableField(Icons.cake, "DOB", dobController),
-                    _buildEditableField(Icons.email, "Email", emailController),
-                    _buildEditableField(
-                        Icons.location_city, "Location", locationController),
+                  
+                    _buildEditableField(Icons.person, "Name", nameController,false),
+                    _buildEditableField(Icons.phone, "Phone No.", mobileController,true),
+                    _buildEditableField(Icons.cake, "DOB", dobController,false),
+                    _buildEditableField(Icons.email, "Email", emailController,true),
+                    _buildEditableField(Icons.location_city, "Location", locationController,false),
                   ],
                 ),
-              ),
+              )
+              
+             
             ],
           ),
         ),
@@ -126,25 +131,22 @@ class _UserDetailState extends State<UserDetail> {
     );
   }
 
-  Widget _buildEditableField(
-      IconData icon, String label, TextEditingController controller) {
+  Widget _buildEditableField(IconData icon, String label, TextEditingController controller,bool readOnly) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: [
-          Icon(icon, size: 20),
-          const SizedBox(width: 10),
+       
           Expanded(
-            child: TextFormField(
+            child: MyTextField(
+              prefixIcon: Icon(icon),
+              readOnly: readOnly,
               controller: controller,
-              decoration: InputDecoration(
-                labelText: label,
-                border: const OutlineInputBorder(),
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+              labelText: label,
+              onChanged: (value){},
               ),
             ),
-          ),
+          
         ],
       ),
     );

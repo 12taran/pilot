@@ -1,17 +1,21 @@
 import 'package:get/get.dart';
 import 'package:pilot_project/presentation/controllers/authController.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
-import 'package:pilot_project/presentation/screens/email_password_sign_up.dart';
+import 'package:pilot_project/presentation/screens/authScreens/email_password_sign_up.dart';
+import 'package:pilot_project/presentation/screens/authScreens/phone_signIn.dart';
+import 'package:pilot_project/presentation/screens/authScreens/phone_sign_up.dart';
+import 'package:pilot_project/presentation/screens/authScreens/register.dart';
+import 'package:pilot_project/presentation/screens/authScreens/userDetail.dart';
+
 import 'package:pilot_project/presentation/screens/onboarding/onboarding.dart';
-import 'package:pilot_project/presentation/screens/phone_signIn.dart';
-import 'package:pilot_project/presentation/screens/phone_sign_up.dart';
+
 import 'package:pilot_project/presentation/screens/splash.dart';
 import 'package:pilot_project/presentation/screens/user/navigation.dart';
 import 'package:pilot_project/presentation/screens/user/profile.dart';
 import 'package:pilot_project/presentation/screens/user/propertyDetail.dart';
-import 'package:pilot_project/presentation/screens/user/register.dart';
+
 import 'package:pilot_project/presentation/screens/user/setting.dart';
-import 'package:pilot_project/presentation/screens/user/userDetail.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// @author PRINCE DUBEY
@@ -47,7 +51,7 @@ class PageRoutes {
       GetPage(
         name: userDetail,
         page: () => const UserDetail(),
-        transition: Transition.zoom,
+        transition: Transition.native,
         transitionDuration: const Duration(milliseconds: 300),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();

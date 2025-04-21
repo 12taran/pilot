@@ -38,49 +38,41 @@ class ProfilePage extends StatelessWidget {
                 children: [
               
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                          IconButton(onPressed: (){Get.back();}, icon:Icon(Icons.arrow_back)),
-                      Row(
-                        children: [
-                          Container(
-                            width: Get.width * 0.2,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(color: Colors.white),
-                            ),
-                            child: Image.asset(
-                              "assets/images/onboarding1.png",
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                          const SizedBox(width: 20),
-                      Column(
-                        children: [
-                          Text(
-                            'Prince Dubey',
-                            style: GoogleFonts.acme(
-                              color: Colors.white,
-                              fontSize: Constants.fontSizeHeading,
-                            ),
-                          ),
-                          Text(
-                    '123456XXXX',
-                    style: GoogleFonts.acme(
-                      color: Colors.white,
-                      fontSize: Constants.fontSizeHeading,
-                    ),
-                  )
-                        ],
+                      Container(
+                        width: Get.width * 0.2,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.white),
+                        ),
+                        child: Image.asset(
+                          "assets/images/onboarding1.png",
+                          fit: BoxFit.fill,
+                        ),
                       ),
-                      SizedBox(width: 10,),
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        child: IconButton(onPressed:(){Get.toNamed(PageRoutes.userDetail);}, icon: Icon(Icons.edit,color:Theme.of(context).colorScheme.primary,)))
-                        ],
+                      const SizedBox(width: 20),
+                  Column(
+                    children: [
+                      Text(
+                        'Prince Dubey',
+                        style: GoogleFonts.acme(
+                          color: Colors.white,
+                          fontSize: Constants.fontSizeHeading,
+                        ),
                       ),
-                      
-                     
+                      Text(
+                                      '123456XXXX',
+                                      style: GoogleFonts.acme(
+                  color: Colors.white,
+                  fontSize: Constants.fontSizeHeading,
+                                      ),
+                                    )
+                    ],
+                  ),
+                  SizedBox(width: 10,),
+                  CircleAvatar(
+                    backgroundColor: Colors.white,
+                    child: IconButton(onPressed:(){Get.toNamed(PageRoutes.userDetail);}, icon: Icon(Icons.edit,color:Theme.of(context).colorScheme.primary,)))
                     ],
                   ),
                  

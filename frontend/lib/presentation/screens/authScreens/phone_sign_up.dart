@@ -194,6 +194,32 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                           )),
                     ),
                     Center(
+                      child: CustomContainer(
+                          padding: 0,
+                          height: 50,
+                          width: Get.width * 0.7,
+                          borderRadius: 15,
+                          borderColor: Theme.of(context).colorScheme.primary,
+                          margin: const EdgeInsets.all(8),
+                          child: TextButton(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Icon(Icons.facebook, size: 20),
+                                Text(
+                                  'Continue With Facebook',
+                                  style: GoogleFonts.acme(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            onPressed: () {
+                            
+                            },
+                          )),
+                    ),
+                    Center(
                       child: TextButton(
                         child: Text(
                           'Already a User? Sign In',

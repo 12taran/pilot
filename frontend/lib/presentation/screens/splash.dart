@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/config.dart';
-import 'package:pilot_project/presentation/screens/email_password_sign_up.dart';
-import 'package:pilot_project/presentation/screens/onboarding/onboarding.dart';
+//import 'package:pilot_project/presentation/screens/onboarding/onboarding.dart';
 import 'package:pilot_project/routes/page_route.dart';
 
 /// @author PRINCE DUBEY

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/components/CustomContainer.dart';
@@ -146,7 +147,7 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                       child: CustomContainer(
                           padding: 0,
                           height: 50,
-                          width: Get.width * 0.5,
+                          width: Get.width * 0.7,
                           borderRadius: 20,
                           borderColor: Theme.of(context).colorScheme.primary,
                           margin: const EdgeInsets.all(8),
@@ -165,6 +166,32 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                             ),
                             onPressed: () {
                               Get.offAndToNamed(PageRoutes.bottomNav);
+                            },
+                          )),
+                    ),
+                    Center(
+                      child: CustomContainer(
+                          padding: 0,
+                          height: 50,
+                          width: Get.width * 0.7,
+                          borderRadius: 15,
+                          borderColor: Theme.of(context).colorScheme.primary,
+                          margin: const EdgeInsets.all(8),
+                          child: TextButton(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Icon(Icons.facebook, size: 20),
+                                Text(
+                                  'Continue With Facebook',
+                                  style: GoogleFonts.acme(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            onPressed: () {
+                           // FacebookAuth.getInstance();
                             },
                           )),
                     ),
