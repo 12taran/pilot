@@ -237,7 +237,7 @@ class _HomePageState extends State<HomePage> {
                       Center(
                           child: CustomContainer(
                         backgroundColor:
-                            const Color.fromARGB(255, 238, 221, 198),
+                            Color.fromARGB(255, 211, 209, 207),
                         padding: 0,
                         width: Get.width * 0.9,
                         child: Column(
