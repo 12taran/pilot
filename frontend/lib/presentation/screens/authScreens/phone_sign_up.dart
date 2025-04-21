@@ -202,7 +202,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                           height: 50,
                           width: Get.width * 0.4,
                           borderRadius: 5,
-                          borderColor: Theme.of(context).colorScheme.primary,
+                          borderColor: Colors.grey,
                           margin: const EdgeInsets.all(8),
                           child: TextButton(
                             child: Row(
@@ -212,6 +212,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                                 Text(
                                   'Google',
                                   style: GoogleFonts.acme(
+                                   color: Colors.grey,
                                     fontSize: 14,
                                   ),
                                 ),
@@ -228,17 +229,19 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                               height: 50,
                               width: Get.width * 0.4,
                               borderRadius: 5,
-                              borderColor: Theme.of(context).colorScheme.primary,
+                              borderColor:  Colors.grey,
                               margin: const EdgeInsets.all(8),
                               child: TextButton(
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Icon(Icons.facebook, size: 20),
+                                    SizedBox(width: 5,),
                                     Text(
                                       'Facebook',
                                       style: GoogleFonts.acme(
                                         fontSize: 14,
+                                        color: Colors.grey
                                       ),
                                     ),
                                   ],

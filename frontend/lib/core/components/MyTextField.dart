@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/config.dart';
 
 class MyTextField extends StatefulWidget {
@@ -104,12 +105,15 @@ class _MyTextFieldState extends State<MyTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      cursorWidth: 2,
+      showCursor: true,
       controller: widget.controller,
       onChanged: widget.onChanged,
       onSaved: widget.onSaved,
       onTap: widget.onTap,
       enabled: widget.enable,
       readOnly: widget.readOnly,
+      cursorColor:Colors.black,
       autofocus: widget.autofocus,
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
@@ -123,17 +127,18 @@ class _MyTextFieldState extends State<MyTextField> {
       style: widget.textStyle ??
           TextStyle(
             color: Theme.of(context).textTheme.bodySmall?.color,
-            fontSize: Constants.fontSizeTinySmallMini,
+            fontSize: Constants.fontSizeTinySmall,
           ),
-      cursorColor: Theme.of(context).colorScheme.onSecondary,
+      
       decoration: InputDecoration(
+        labelStyle: GoogleFonts.aBeeZee(),
         filled: true,
         fillColor: Colors.white,
         hintText: widget.overrideHintText
             ? widget.hintText
             : "Enter ${widget.labelText}",
         hintStyle: widget.hintTextStyle ??
-            TextStyle(fontSize: 12.sp, color: Theme.of(context).hintColor),
+            TextStyle(fontSize: 15.sp, color: Theme.of(context).hintColor),
         contentPadding: widget.contentPadding,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(widget.borderRadius),

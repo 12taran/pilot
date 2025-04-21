@@ -557,7 +557,7 @@ class _HomePageState extends State<HomePage> {
                         autoPlay: false,
                         aspectRatio: 2 / 3,
                       ),
-                      items: List.generate(4, (index) {
+                      items: List.generate(3, (index) {
                         return Container(
                           height: Get.height * 0.4,
                           decoration: BoxDecoration(
@@ -689,9 +689,11 @@ class _HomePageState extends State<HomePage> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
                       gradient: const LinearGradient(colors: [
-                        Color.fromARGB(255, 173, 194, 173),
+                    Color.fromARGB(255, 173, 194, 173),
                         Color.fromARGB(255, 166, 185, 107),
                         Color.fromARGB(255, 59, 100, 127),
+                
+                        
                       ])),
                   height: Get.height * 0.2,
                   child: Column(
@@ -739,23 +741,16 @@ class _HomePageState extends State<HomePage> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       gradient: const LinearGradient(colors: [
-                        Color.fromARGB(255, 76, 79, 175),
-                        Color.fromARGB(255, 110, 145, 188),
                         Color.fromARGB(255, 59, 100, 127),
+                                Color.fromARGB(255, 166, 185, 107),
+                                      Color.fromARGB(255, 173, 194, 173),
+                        
                       ])),
                   height: Get.height * 0.2,
                   child: Stack(
-                    alignment: Alignment.center,
+                    alignment:Alignment.topCenter,
                     children: [
-                      const Opacity(
-                        opacity: 0.5,
-                        child: CircleAvatar(
-                            radius: 50,
-                            child: Icon(
-                              Icons.call,
-                              size: 80,
-                            )),
-                      ),
+                      
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

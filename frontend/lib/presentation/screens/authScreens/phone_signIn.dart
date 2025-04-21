@@ -178,7 +178,7 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                           height: 50,
                           width: Get.width * 0.4,
                           borderRadius: 5,
-                          borderColor: Theme.of(context).colorScheme.primary,
+                          borderColor: Colors.grey,
                           margin: const EdgeInsets.all(8),
                           child: TextButton(
                             child: Row(
@@ -189,6 +189,7 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                                   'Google',
                                   style: GoogleFonts.acme(
                                     fontSize: 14,
+                                    color: Colors.grey
                                   ),
                                 ),
                               ],
@@ -204,7 +205,7 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                               height: 50,
                               width: Get.width * 0.4,
                               borderRadius: 5,
-                              borderColor: Theme.of(context).colorScheme.primary,
+                              borderColor: Colors.grey,
                               margin: const EdgeInsets.all(8),
                               child: TextButton(
                                 child: Row(
@@ -215,6 +216,7 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                                       'Facebook',
                                       style: GoogleFonts.acme(
                                         fontSize: 14,
+                                         color: Colors.grey
                                       ),
                                     ),
                                   ],

@@ -2,11 +2,13 @@
 
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pilot_project/core/components/MyTextField.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
+import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/core/utils.dart';
 import 'package:pilot_project/presentation/widgets/utils_widget.dart';
 
@@ -25,7 +27,7 @@ class _UserDetailState extends State<UserDetail> {
   // Editable controllers
   final nameController = TextEditingController(text: "Harry Wilson");
   final emailController = TextEditingController(text: "prince@yahoo.com");
-  final mobileController = TextEditingController(text: "123456XXXX");
+  final mobileController = TextEditingController(text: "1234569087",);
   final dobController = TextEditingController(text: "01-01-2000");
   final locationController = TextEditingController(text: "Mohali, Punjab");
 
@@ -41,12 +43,17 @@ class _UserDetailState extends State<UserDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+    
       appBar: AppBar(
+          backgroundColor:const Color.fromARGB(255, 56, 98, 57),
         title: const Text("User Profile"),
         centerTitle: true,
       ),
-      bottomNavigationBar: CustomButtons(text:'Save', onPressed:(){
+      bottomNavigationBar: CustomButtons(color:const Color.fromARGB(255, 56, 98, 57) ,
+      fontSize: 20,
+        text:'Save'
+        ,
+       onPressed:(){
                   Utils.showToast(message: 'User Details saved Successfully');
                  Future.delayed(Duration(seconds: 1),() {Get.back();});}),
       body: SafeArea(
@@ -101,7 +108,7 @@ class _UserDetailState extends State<UserDetail> {
                               ),
                             ],
                           ),
-                          child: const Icon(Icons.edit, size: 20),
+                          child: const Icon(Icons.edit, size: 20,color: Colors.grey,),
                         ),
                       ),
                     ),
@@ -113,12 +120,30 @@ class _UserDetailState extends State<UserDetail> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
+                   Padding(
+                     padding: const EdgeInsets.all(10.0),
+                     child: MyTextField(labelText:'Name', onChanged:(value){},
+                                  textStyle: TextStyle(color: Colors.black),  
+                     prefixIcon: Icon(Icons.person,color: Colors.black,),
+                     controller: nameController,),
+                   ),
+                   Padding(
+                     padding: const EdgeInsets.all(10.0),
+                     child: MyTextField(labelText:'Phone No.', onChanged:(value){},
+                    textStyle: TextStyle(color: Colors.black),
+                     enable: false,
+                     prefixIcon: Icon(Icons.phone,color: Colors.black,),
+                     controller:mobileController,),
+                   ),
+                   Padding(
+                     padding: const EdgeInsets.all(10.0),
+                     child: MyTextField(labelText:'Email', onChanged:(value){},
+                     textStyle: TextStyle(color: Colors.black),
+                     prefixIcon: Icon(Icons.email,color: Colors.black,),
+                     controller: emailController,),
+                   )
+                    
                   
-                    _buildEditableField(Icons.person, "Name", nameController,false),
-                    _buildEditableField(Icons.phone, "Phone No.", mobileController,true),
-                    _buildEditableField(Icons.cake, "DOB", dobController,false),
-                    _buildEditableField(Icons.email, "Email", emailController,true),
-                    _buildEditableField(Icons.location_city, "Location", locationController,false),
                   ],
                 ),
               )
@@ -131,24 +156,5 @@ class _UserDetailState extends State<UserDetail> {
     );
   }
 
-  Widget _buildEditableField(IconData icon, String label, TextEditingController controller,bool readOnly) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Row(
-        children: [
-       
-          Expanded(
-            child: MyTextField(
-              prefixIcon: Icon(icon),
-              readOnly: readOnly,
-              controller: controller,
-              labelText: label,
-              onChanged: (value){},
-              ),
-            ),
-          
-        ],
-      ),
-    );
-  }
+ 
 }
