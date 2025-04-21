@@ -2,6 +2,8 @@ import { User } from "../Models/user.model.js";
 
 export const userVerify = async (req, res) => {
   try {
+    req.body.phoneNumber = req.body.phoneNumber.replace(/\s+/g, '');
+
     const { phoneNumber,fullname,address } = req.body;
 
     if(phoneNumber.length != 10){
@@ -128,6 +130,43 @@ export const userEdit = async (req, res) => {
     console.log(error);
     return res.status(500).json({
       message: "Failed to update",
+      success: false,
+    });
+  }
+};
+
+export const userLogin = async (req, res) => {
+  try {
+    req.body.phoneNumber = req.body.phoneNumber.replace(/\s+/g, '');// remove spaces in middle if any
+
+    const { phoneNumber } = req.body;
+
+    if(!phoneNumber || phoneNumber.length !== 10){
+      return res.status(400).json({
+        message : "Enter valid number",
+        success : false,
+      })
+    } 
+
+    const user = await User.findOne({phoneNumber});
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+        success: false,
+      });
+    }
+
+    return res.status(200).json({
+      message: `Welcome back ${user.fullname}`,
+      success: true,
+      userId: user._id,
+    });
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Server problem",
       success: false,
     });
   }
