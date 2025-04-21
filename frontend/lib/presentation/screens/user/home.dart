@@ -54,8 +54,8 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                       padding: const EdgeInsets.only(left: 10.0, right: 10),
                       child: Container(
-                        width: 50,
-                        height: 50,
+                        width: 40,
+                        height: 40,
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
@@ -87,15 +87,8 @@ class _HomePageState extends State<HomePage> {
                                 duration: const Duration(milliseconds: 300),
                               );
                             },
-                            child: Text(
-                              'Pilot',
-                              style: GoogleFonts.aBeeZee(
-                                fontSize: Constants.fontSizeBody,
-                                fontWeight: FontWeight.bold,
-                                color: const Color.fromARGB(255, 246, 241,
-                                    241), // Make sure text is visible on gradient
-                              ),
-                            ),
+                            child: Icon(Icons.person)
+                            
                           ),
                         ),
                       )),
