@@ -169,21 +169,24 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                             },
                           )),
                     ),
-                    Center(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                          Center(
                       child: CustomContainer(
                           padding: 0,
                           height: 50,
-                          width: Get.width * 0.7,
-                          borderRadius: 15,
+                          width: Get.width * 0.4,
+                          borderRadius: 5,
                           borderColor: Theme.of(context).colorScheme.primary,
                           margin: const EdgeInsets.all(8),
                           child: TextButton(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Icon(Icons.facebook, size: 20),
+                                Image.asset('assets/images/google.jpeg'),
                                 Text(
-                                  'Continue With Facebook',
+                                  'Google',
                                   style: GoogleFonts.acme(
                                     fontSize: 14,
                                   ),
@@ -191,9 +194,37 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                               ],
                             ),
                             onPressed: () {
-                           // FacebookAuth.getInstance();
+                          
                             },
                           )),
+                    ),
+                        Center(
+                          child: CustomContainer(
+                              padding: 0,
+                              height: 50,
+                              width: Get.width * 0.4,
+                              borderRadius: 5,
+                              borderColor: Theme.of(context).colorScheme.primary,
+                              margin: const EdgeInsets.all(8),
+                              child: TextButton(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Icon(Icons.facebook, size: 20),
+                                    Text(
+                                      'Facebook',
+                                      style: GoogleFonts.acme(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                onPressed: () {
+                              
+                                },
+                              )),
+                        ),
+                      ],
                     ),
                     Center(
                       child: TextButton(
