@@ -8,9 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:pilot_project/core/components/MyTextField.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/utils.dart';
-import 'package:pilot_project/presentation/widgets/utils_widget.dart';
 
-import 'package:pilot_project/routes/page_route.dart';
 class UserDetail extends StatefulWidget {
   const UserDetail({super.key});
 
@@ -46,9 +44,14 @@ class _UserDetailState extends State<UserDetail> {
         title: const Text("User Profile"),
         centerTitle: true,
       ),
-      bottomNavigationBar: CustomButtons(text:'Save', onPressed:(){
-                  Utils.showToast(message: 'User Details saved Successfully');
-                 Future.delayed(Duration(seconds: 1),() {Get.back();});}),
+      bottomNavigationBar: CustomButtons(
+          text: 'Save',
+          onPressed: () {
+            Utils.showToast(message: 'User Details saved Successfully');
+            Future.delayed(Duration(seconds: 1), () {
+              Get.back();
+            });
+          }),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -76,7 +79,8 @@ class _UserDetailState extends State<UserDetail> {
                           image: DecorationImage(
                             image: _profileImage != null
                                 ? FileImage(_profileImage!)
-                                : const AssetImage("assets/images/onboarding1.png")
+                                : const AssetImage(
+                                        "assets/images/onboarding1.png")
                                     as ImageProvider,
                             fit: BoxFit.cover,
                           ),
@@ -113,17 +117,19 @@ class _UserDetailState extends State<UserDetail> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
-                  
-                    _buildEditableField(Icons.person, "Name", nameController,false),
-                    _buildEditableField(Icons.phone, "Phone No.", mobileController,true),
-                    _buildEditableField(Icons.cake, "DOB", dobController,false),
-                    _buildEditableField(Icons.email, "Email", emailController,true),
-                    _buildEditableField(Icons.location_city, "Location", locationController,false),
+                    _buildEditableField(
+                        Icons.person, "Name", nameController, false),
+                    _buildEditableField(
+                        Icons.phone, "Phone No.", mobileController, true),
+                    _buildEditableField(
+                        Icons.cake, "DOB", dobController, false),
+                    _buildEditableField(
+                        Icons.email, "Email", emailController, true),
+                    _buildEditableField(Icons.location_city, "Location",
+                        locationController, false),
                   ],
                 ),
               )
-              
-             
             ],
           ),
         ),
@@ -131,22 +137,21 @@ class _UserDetailState extends State<UserDetail> {
     );
   }
 
-  Widget _buildEditableField(IconData icon, String label, TextEditingController controller,bool readOnly) {
+  Widget _buildEditableField(IconData icon, String label,
+      TextEditingController controller, bool readOnly) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: [
-       
           Expanded(
             child: MyTextField(
               prefixIcon: Icon(icon),
               readOnly: readOnly,
               controller: controller,
               labelText: label,
-              onChanged: (value){},
-              ),
+              onChanged: (value) {},
             ),
-          
+          ),
         ],
       ),
     );
