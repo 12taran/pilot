@@ -49,13 +49,7 @@ class _UserDetailState extends State<UserDetail> {
         title: const Text("User Profile"),
         centerTitle: true,
       ),
-      bottomNavigationBar: CustomButtons(color:const Color.fromARGB(255, 56, 98, 57) ,
-      fontSize: 20,
-        text:'Save'
-        ,
-       onPressed:(){
-                  Utils.showToast(message: 'User Details saved Successfully');
-                 Future.delayed(Duration(seconds: 1),() {Get.back();});}),
+    
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -146,8 +140,16 @@ class _UserDetailState extends State<UserDetail> {
                   
                   ],
                 ),
-              )
-              
+              ),
+              SizedBox(height: Get.height*0.2,),
+              CustomButtons(color:const Color.fromARGB(255, 56, 98, 57) ,
+      fontSize: 20,
+      width:Get.width*0.5,
+        text:'Save'
+        ,
+       onPressed:(){
+                  Utils.showToast(message: 'User Details saved Successfully');
+                 Future.delayed(Duration(seconds: 1),() {Get.back();});}),
              
             ],
           ),

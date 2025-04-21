@@ -176,7 +176,7 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                       child: CustomContainer(
                           padding: 0,
                           height: 50,
-                          width: Get.width * 0.4,
+                          width: Get.width * 0.2,
                           borderRadius: 5,
                           borderColor: Colors.grey,
                           margin: const EdgeInsets.all(8),
@@ -185,13 +185,7 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Image.asset('assets/images/google.jpeg'),
-                                Text(
-                                  'Google',
-                                  style: GoogleFonts.acme(
-                                    fontSize: 14,
-                                    color: Colors.grey
-                                  ),
-                                ),
+                               
                               ],
                             ),
                             onPressed: () {
@@ -203,7 +197,7 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                           child: CustomContainer(
                               padding: 0,
                               height: 50,
-                              width: Get.width * 0.4,
+                              width: Get.width * 0.2,
                               borderRadius: 5,
                               borderColor: Colors.grey,
                               margin: const EdgeInsets.all(8),
@@ -212,13 +206,8 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Icon(Icons.facebook, size: 20),
-                                    Text(
-                                      'Facebook',
-                                      style: GoogleFonts.acme(
-                                        fontSize: 14,
-                                         color: Colors.grey
-                                      ),
-                                    ),
+                                    
+                                    
                                   ],
                                 ),
                                 onPressed: () {

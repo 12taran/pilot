@@ -239,29 +239,36 @@ class _HomePageState extends State<HomePage> {
                         backgroundColor:
                             Color.fromARGB(255, 211, 209, 207),
                         padding: 0,
-                        width: Get.width * 0.9,
+                        width: Get.width * 0.8,
+                        height: Get.height*0.37,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ClipRRect(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(5)),
-                              child: Image.asset(
-                                propertyController.properties[i]['image']!,
-                                fit: BoxFit.cover,
-                                height: Get.height * 0.2,
-                                width: Get.width * 0.9,
+                            Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: ClipRRect(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(5)),
+                                child: Image.asset(
+                                  propertyController.properties[i]['image']!,
+                                  fit: BoxFit.cover,
+                                  height: Get.height * 0.2,
+                                  width: Get.width * 0.9,
+                                ),
                               ),
                             ),
                             const SizedBox(height: 8),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  propertyController.properties[i]['name']!,
-                                  style: GoogleFonts.actor(
-                                      fontSize: Constants.fontSizeBody,
-                                      fontWeight: FontWeight.w500),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                  child: Text(
+                                    propertyController.properties[i]['name']!,
+                                    style: GoogleFonts.actor(
+                                        fontSize: Constants.fontSizeBody,
+                                        fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                                 GlowContainer(
                                   glowRadius: 5,
@@ -377,9 +384,9 @@ class _HomePageState extends State<HomePage> {
                       ))
                   ],
                   options: CarouselOptions(
-                      viewportFraction: 1,
+                      viewportFraction: 0.8,
                       enlargeCenterPage: true,
-                      height: Get.height * 0.38)),
+                      height: Get.height * 0.42)),
               const SizedBox(
                 height: 20,
               ),
@@ -475,9 +482,10 @@ class _HomePageState extends State<HomePage> {
                   Color.fromARGB(255, 146, 182, 118),
                   Color.fromARGB(255, 173, 194, 173)
                 ])),
-                height: Get.height * 0.3,
+                height: Get.height * 0.25,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 20.0, top: 20),
@@ -495,38 +503,35 @@ class _HomePageState extends State<HomePage> {
                                   crossAxisCount: 3),
                           children: [
                             for (int index = 0; index < 3; index++)
-                              Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color:
-                                                Colors.black.withOpacity(0.3),
-                                            spreadRadius: 2,
-                                            blurRadius: 6,
-                                            offset: const Offset(0, 3),
-                                          ),
-                                        ],
-                                      ),
-                                      child: CircleAvatar(
-                                        radius: 40,
-                                        backgroundColor: Colors.white,
-                                        backgroundImage: AssetImage(location[
-                                            index]), // Yahi main kaam karta hai
-                                      ),
+                              Column(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color:
+                                              Colors.black.withOpacity(0.3),
+                                          spreadRadius: 2,
+                                          blurRadius: 6,
+                                          offset: const Offset(0, 3),
+                                        ),
+                                      ],
                                     ),
-                                    Text(
-                                      City[index],
-                                      style: TextStyle(
-                                          fontSize: Constants.fontSizeSubTitle,
-                                          fontWeight: FontWeight.w700),
+                                    child: CircleAvatar(
+                                      radius: 40,
+                                      backgroundColor: Colors.white,
+                                      backgroundImage: AssetImage(location[
+                                          index]), // Yahi main kaam karta hai
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  Text(
+                                    City[index],
+                                    style: TextStyle(
+                                        fontSize: Constants.fontSizeSubTitle,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ],
                               )
                           ]),
                     )
@@ -608,9 +613,9 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              SizedBox(
+              /*SizedBox(
                 height: Get.height * 0.01,
-              ),
+              ),*/
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5.0),
                 child: Container(
@@ -621,7 +626,7 @@ class _HomePageState extends State<HomePage> {
                     Color.fromARGB(255, 166, 186, 107),
                     Color.fromARGB(255, 173, 194, 173)
                   ])),
-                  height: Get.height * 0.3,
+                  height: Get.height * 0.25,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -641,39 +646,36 @@ class _HomePageState extends State<HomePage> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             for (int index = 0; index < 3; index++)
-                              Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color:
-                                                Colors.black.withOpacity(0.3),
-                                            spreadRadius: 2,
-                                            blurRadius: 6,
-                                            offset: const Offset(0, 3),
-                                          ),
-                                        ],
-                                      ),
-                                      child: CircleAvatar(
-                                        radius: 40,
-                                        backgroundColor: Colors.white,
-                                        backgroundImage: AssetImage(location[
-                                            index]), // Yahi main kaam karta hai
-                                      ),
+                              Column(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color:
+                                              Colors.black.withOpacity(0.3),
+                                          spreadRadius: 2,
+                                          blurRadius: 6,
+                                          offset: const Offset(0, 3),
+                                        ),
+                                      ],
                                     ),
-                                    Text(
-                                      propertyController.properties[index]
-                                          ['type']!,
-                                      style: TextStyle(
-                                          fontSize: Constants.fontSizeSmall,
-                                          fontWeight: FontWeight.bold),
+                                    child: CircleAvatar(
+                                      radius: 40,
+                                      backgroundColor: Colors.white,
+                                      backgroundImage: AssetImage(location[
+                                          index]), // Yahi main kaam karta hai
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  Text(
+                                    propertyController.properties[index]
+                                        ['type']!,
+                                    style: TextStyle(
+                                        fontSize: Constants.fontSizeSmall,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
                               ),
                           ])
                     ],
@@ -681,13 +683,13 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(
-                height: Get.height * 0.05,
+                height: Get.height * 0.01,
               ),
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
+                      borderRadius: BorderRadius.circular(10),
                       gradient: const LinearGradient(colors: [
                     Color.fromARGB(255, 173, 194, 173),
                         Color.fromARGB(255, 166, 185, 107),
@@ -732,14 +734,14 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(
-                height: Get.height * 0.04,
+                height: Get.height * 0.01,
               ),
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Container(
                   width: Get.width,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(10),
                       gradient: const LinearGradient(colors: [
                         Color.fromARGB(255, 59, 100, 127),
                                 Color.fromARGB(255, 166, 185, 107),
