@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pilot_project/core/components/MyTextField.dart';
+import 'package:pilot_project/presentation/controllers/theme_controller.dart';
 import 'package:pilot_project/presentation/utils_widget.dart';
 
 import 'package:pilot_project/routes/page_route.dart';
@@ -80,13 +81,15 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
              ListTile(
-               trailing: Icon(Icons.arrow_right),
-              leading: const Icon(Icons.settings),
-              title: const Text('Settings'),
-              onTap: () {
-                Get.toNamed(PageRoutes.setting);
+        leading: const Icon(Icons.brightness_6),
+        title: const Text("Dark Mode"),
+        trailing: Obx(() => Switch(
+              value: Get.find<ThemeController>().isDarkMode.value,
+              onChanged: (val) {
+                Get.find<ThemeController>().toggleTheme();
               },
-            ),
+            ))),
+             
                Divider(thickness: 1,),
             ListTile(
               trailing: Icon(Icons.arrow_right),

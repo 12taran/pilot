@@ -146,7 +146,7 @@ class PageRoutes {
           property: Get.arguments as Map<String, String>,
         ),
         transition: Transition.zoom,
-        transitionDuration: const Duration(milliseconds: 300),
+        transitionDuration: const Duration(milliseconds: 200),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);

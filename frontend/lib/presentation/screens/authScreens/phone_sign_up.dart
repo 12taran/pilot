@@ -77,7 +77,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                       ),
                     ),
                     SizedBox(height: Get.height * 0.1),
-                    /* MyTextField(
+                    MyTextField(
                       labelText: "Name",
                       controller: authController.nameController,
                       textStyle:
@@ -87,7 +87,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                       isLabelEnabled: false,
                       validator: (v) => v!.isEmpty ? ' Name is required' : null,
                       keyboardType: TextInputType.name,
-                    ),*/
+                    ),
                     SizedBox(height: Get.height * 0.02),
                     MyTextField(
                       labelText: "Mobile Number",
@@ -102,7 +102,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                           v!.isEmpty ? 'Mobile Number is required' : null,
                       keyboardType: TextInputType.phone,
                     ),
-                    /* MyTextField(
+                     MyTextField(
                       maxLength: 50,
                       labelText: "Address",
                       controller: authController.addressController,
@@ -113,7 +113,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                       isLabelEnabled: false,
                       validator: (v) => v!.isEmpty ? ' Address is required' : null,
                       keyboardType: TextInputType.name,
-                    ),*/
+                    ),
                     if (authController.isOtpSent.value) ...[
                       const SizedBox(height: 16),
                       MyTextField(
@@ -192,31 +192,53 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                             },
                           )),
                     ),
-                    Center(
+                   Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                          Center(
                       child: CustomContainer(
                           padding: 0,
                           height: 50,
-                          width: Get.width * 0.7,
-                          borderRadius: 15,
-                          borderColor: Theme.of(context).colorScheme.primary,
+                          width: Get.width * 0.2,
+                          borderRadius: 5,
+                          borderColor: Colors.grey,
                           margin: const EdgeInsets.all(8),
                           child: TextButton(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Icon(Icons.facebook, size: 20),
-                                Text(
-                                  'Continue With Facebook',
-                                  style: GoogleFonts.acme(
-                                    fontSize: 14,
-                                  ),
-                                ),
+                                Image.asset('assets/images/google.jpeg'),
+                               
                               ],
                             ),
                             onPressed: () {
-                              authController.loginWithFacebook();
+                              
                             },
                           )),
+                    ),
+                        Center(
+                          child: CustomContainer(
+                              padding: 0,
+                              height: 50,
+                              width: Get.width * 0.2,
+                              borderRadius: 5,
+                              borderColor:  Colors.grey,
+                              margin: const EdgeInsets.all(8),
+                              child: TextButton(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.facebook, size: 20),
+                                    
+                                   
+                                  ],
+                                ),
+                                onPressed: () {
+                               // FacebookAuth.getInstance();
+                                },
+                              )),
+                        ),
+                      ],
                     ),
                     Center(
                       child: TextButton(
