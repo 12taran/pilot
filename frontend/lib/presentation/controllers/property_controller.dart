@@ -51,7 +51,7 @@ class PropertyController extends GetxController {
   {
     "name": "The Urban Nest",
     "desc": "Semi Furnished",
-    "image": "assets/images/property7.jpg",
+    "image": "assets/images/property6.jpg",
     "location": "Gandhinagar",
     "price": "16,20,000",
     "type": "Residential",
