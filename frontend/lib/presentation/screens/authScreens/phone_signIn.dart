@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/components/CustomContainer.dart';
@@ -172,27 +172,6 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                          Center(
-                      child: CustomContainer(
-                          padding: 0,
-                          height: 50,
-                          width: Get.width * 0.2,
-                          borderRadius: 5,
-                          borderColor: Colors.grey,
-                          margin: const EdgeInsets.all(8),
-                          child: TextButton(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Image.asset('assets/images/google.jpeg'),
-                               
-                              ],
-                            ),
-                            onPressed: () {
-                          
-                            },
-                          )),
-                    ),
                         Center(
                           child: CustomContainer(
                               padding: 0,
@@ -203,15 +182,35 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                               margin: const EdgeInsets.all(8),
                               child: TextButton(
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Icon(Icons.facebook, size: 20),
-                                    
-                                    
+                                    Image.asset('assets/images/google.png'),
                                   ],
                                 ),
                                 onPressed: () {
-                              
+                                  authController.signInWithGoogle();
+                                },
+                              )),
+                        ),
+                        Center(
+                          child: CustomContainer(
+                              padding: 0,
+                              height: 50,
+                              width: Get.width * 0.2,
+                              borderRadius: 5,
+                              borderColor: Colors.grey,
+                              margin: const EdgeInsets.all(8),
+                              child: TextButton(
+                                child: const Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Icon(Icons.facebook, size: 20),
+                                  ],
+                                ),
+                                onPressed: () async {
+                                  
                                 },
                               )),
                         ),

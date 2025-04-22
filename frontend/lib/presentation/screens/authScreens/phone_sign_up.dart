@@ -102,7 +102,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                           v!.isEmpty ? 'Mobile Number is required' : null,
                       keyboardType: TextInputType.phone,
                     ),
-                     MyTextField(
+                    MyTextField(
                       maxLength: 50,
                       labelText: "Address",
                       controller: authController.addressController,
@@ -111,7 +111,8 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                       onChanged: (v) {},
                       focusedBorderColor: Colors.green.withBlue(200),
                       isLabelEnabled: false,
-                      validator: (v) => v!.isEmpty ? ' Address is required' : null,
+                      validator: (v) =>
+                          v!.isEmpty ? ' Address is required' : null,
                       keyboardType: TextInputType.name,
                     ),
                     if (authController.isOtpSent.value) ...[
@@ -178,7 +179,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Icon(Icons.person, size: 20),
+                                const Icon(Icons.person, size: 20),
                                 Text(
                                   'Continue as Guest',
                                   style: GoogleFonts.acme(
@@ -192,49 +193,47 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                             },
                           )),
                     ),
-                   Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                          Center(
-                      child: CustomContainer(
-                          padding: 0,
-                          height: 50,
-                          width: Get.width * 0.2,
-                          borderRadius: 5,
-                          borderColor: Colors.grey,
-                          margin: const EdgeInsets.all(8),
-                          child: TextButton(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Image.asset('assets/images/google.jpeg'),
-                               
-                              ],
-                            ),
-                            onPressed: () {
-                              
-                            },
-                          )),
-                    ),
                         Center(
                           child: CustomContainer(
                               padding: 0,
                               height: 50,
                               width: Get.width * 0.2,
                               borderRadius: 5,
-                              borderColor:  Colors.grey,
+                              borderColor: Colors.grey,
                               margin: const EdgeInsets.all(8),
                               child: TextButton(
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Icon(Icons.facebook, size: 20),
-                                    
-                                   
+                                    Image.asset('assets/images/google.png'),
                                   ],
                                 ),
                                 onPressed: () {
-                               // FacebookAuth.getInstance();
+                                  authController.signInWithGoogle();
+                                },
+                              )),
+                        ),
+                        Center(
+                          child: CustomContainer(
+                              padding: 0,
+                              height: 50,
+                              width: Get.width * 0.2,
+                              borderRadius: 5,
+                              borderColor: Colors.grey,
+                              margin: const EdgeInsets.all(8),
+                              child: TextButton(
+                                child: const Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.facebook, size: 20),
+                                  ],
+                                ),
+                                onPressed: () async {
+                                  await authController.signInWithFacebook();
                                 },
                               )),
                         ),

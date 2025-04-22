@@ -47,6 +47,9 @@ android {
         versionName = flutterVersionName
     
     }
+    dependencies {
+        implementation 'com.facebook.android:facebook-android-sdk:latest.release'
+    }
 
     buildTypes {
         release {
@@ -56,9 +59,7 @@ android {
         }
     }
 }
-    dependencies {
-        implementation 'com.facebook.android:facebook-android-sdk:latest.release'
-}
+   
 
     repositories {
     google()
