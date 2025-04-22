@@ -1,0 +1,49 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches:
+      - starter # ✅ This should match your branch name
+    paths:
+      - 'Backend/**' # ✅ This triggers only if files in backend folder change
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📦 Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: 🐳 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: 🛠️ Build Docker Image
+        run: |
+          cd backend
+          docker build -t backend-app .
+
+      - name: 💾 Save Docker Image to tar file
+        run: |
+          docker save backend-app -o backend.tar
+
+      - name: 🚀 Copy Docker image to server via SCP
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.SERVER_IP }} # ✅ Add this in GitHub Secrets
+          username: ${{ secrets.SERVER_USER }} # ✅ Add this in GitHub Secrets (like 'ubuntu' or 'root')
+          key: ${{ secrets.SSH_PRIVATE_KEY }} # ✅ Paste your private key in GitHub Secrets
+          source: backend.tar
+          target: ~/backend.tar
+
+      - name: 🔐 SSH into server and run Docker container
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            docker stop backend-app || true
+            docker rm backend-app || true
+            docker load -i backend.tar
+            docker run -d -p 4000:4000 --name backend-app backend-app
