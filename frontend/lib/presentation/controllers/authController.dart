@@ -133,4 +133,10 @@ class AuthController extends GetxController {
     bool isSuccess = await AuthRepo().userRegisterVerify(phone);
     return isSuccess;
   }
+
+  Future<bool> editUser(String fullname,String address ) async
+  {bool isSuccess=await AuthRepo().userEdit("6805e94a873ed5bd0c51f356",
+    fullname, address);
+  return isSuccess;
+  }
 }

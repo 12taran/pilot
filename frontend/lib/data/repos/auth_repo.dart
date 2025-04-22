@@ -57,4 +57,21 @@ Future<bool> userLogin(String phone) async {
     Utils.showToast(message: response.data['message']);
     return false;
   }}
+
+  Future<bool> userEdit(String userId,
+    String fullname,String address) async {
+      final endpoint = apiRoutes.userEdit.replaceFirst(':id', userId);
+
+  final response = await BaseService().patchData(endPoint: endpoint, body:{
+    "fullname":fullname,
+    "address":address
+
+  }, isTokenRequired:false);
+   if (response.data['success'] == true) {
+    Utils.showToast(message: response.data['message']);
+    return true;
+  } else {
+    Utils.showToast(message: response.data['message']);
+    return false;
+  }}
 }
