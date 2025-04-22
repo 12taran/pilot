@@ -7,7 +7,7 @@ class AppTheme {
   static final ThemeData light = ThemeData(
     brightness: Brightness.light,
     fontFamily: Constants.fontFamily,
-    primaryColor:const Color.fromARGB(255, 56, 98, 57),
+    primaryColor:Color(0x57BB5B),
     scaffoldBackgroundColor: Colors.white,
     hintColor: const Color(0xFFBDBDBD),
     appBarTheme: const AppBarTheme(
@@ -35,7 +35,7 @@ class AppTheme {
   static final ThemeData dark = ThemeData(
     brightness: Brightness.dark,
     fontFamily: Constants.fontFamily,
-    primaryColor:const Color.fromARGB(255, 56, 98, 57),
+    primaryColor:Color(0x57BB5B),
     scaffoldBackgroundColor: const Color(0xFF000000),
     hintColor: const Color(0xFFBDBDBD),
     appBarTheme: const AppBarTheme(
