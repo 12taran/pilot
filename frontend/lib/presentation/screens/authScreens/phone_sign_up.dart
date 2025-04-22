@@ -244,9 +244,9 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                         child: Text(
                           'Already a User? Sign In',
                           style: GoogleFonts.acme(
-                              color: Theme.of(context).primaryColor,
+                              color: Theme.of(context).colorScheme.primary,
                               decoration: TextDecoration.underline,
-                              decorationColor: Theme.of(context).primaryColor),
+                    decorationColor: Theme.of(context).colorScheme.primary),
                         ),
                         onPressed: () {
                           Get.toNamed(PageRoutes.phonesignin);
