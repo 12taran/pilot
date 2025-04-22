@@ -60,7 +60,7 @@ class PageRoutes {
       ),
       GetPage(
         name: phonesignup,
-        page: () => const PhoneSignUpScreen(),
+        page: () => const PhoneSignInScreen(),
         transition: Transition.zoom,
         transitionDuration: const Duration(milliseconds: 300),
         binding: BindingsBuilder(() async {

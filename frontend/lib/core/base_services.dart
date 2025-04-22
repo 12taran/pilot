@@ -460,6 +460,29 @@ class BaseService extends GetxService {
     }
   }
 
+
+  patchData({
+  required String endPoint,
+  required Map<String, dynamic> body,
+  required bool isTokenRequired,
+}) async {
+  try {
+    sharedPreferences ??= await SharedPreferences.getInstance();
+    String token = sharedPreferences!.getString(Constants.TOKEN) ?? '';
+    Dio dio = _dio();
+    if (isTokenRequired) {
+      dio.options.headers['Authorization'] = 'Bearer $token';
+    }
+    return await dio.patch(
+      ApiRoutes().baseUrl + endPoint,
+      data: body,
+    );
+  } on DioError catch (e) {
+    return Future.error(e);
+  }
+}
+
+
   // file downloader
   Future<dynamic> downloadFile(
       {required String endPoint, required bool isTokenRequired}) async {

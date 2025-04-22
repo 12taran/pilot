@@ -9,5 +9,7 @@ class ApiRoutes {
   String baseUrl = "$serverUrl$apiEndpoint";
 
   String userRegisterVerify = "register/phone";
-  String userRegister = "";
+  String userRegister="";
+  String userLogin="login";
+  String userEdit="edit/:id";
 }

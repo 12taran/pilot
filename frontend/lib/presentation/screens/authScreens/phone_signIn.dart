@@ -172,27 +172,27 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Center(
-                          child: CustomContainer(
-                              padding: 0,
-                              height: 50,
-                              width: Get.width * 0.2,
-                              borderRadius: 5,
-                              borderColor: Colors.grey,
-                              margin: const EdgeInsets.all(8),
-                              child: TextButton(
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Image.asset('assets/images/google.png'),
-                                  ],
-                                ),
-                                onPressed: () {
-                                  authController.signInWithGoogle();
-                                },
-                              )),
-                        ),
+                          Center(
+                      child: CustomContainer(
+                          padding: 0,
+                          height: 50,
+                          width: Get.width * 0.2,
+                          borderRadius: 5,
+                          borderColor: Colors.grey,
+                          margin: const EdgeInsets.all(8),
+                          child: TextButton(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Image.asset('assets/images/google.png'),
+                               
+                              ],
+                            ),
+                            onPressed: () {
+                          
+                            },
+                          )),
+                    ),
                         Center(
                           child: CustomContainer(
                               padding: 0,

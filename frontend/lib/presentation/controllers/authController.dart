@@ -25,6 +25,7 @@ class AuthController extends GetxController {
   Future<void> sendOtp() async {
     String phoneRaw = phoneController.text.trim();
 
+
     if (phoneRaw == "") {
       Utils.showGetXToast(
           title: "Mobile Number Required",
@@ -42,7 +43,12 @@ class AuthController extends GetxController {
     }
 
     String phone = "+91$phoneRaw";
+    bool doesExist=await AuthRepo().userLogin(phoneRaw);
+     if (doesExist) {
+            Get.offAndToNamed(PageRoutes.bottomNav);
+          }
 
+   else{
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: phone,
       verificationCompleted: (credential) {},
@@ -58,7 +64,7 @@ class AuthController extends GetxController {
       codeAutoRetrievalTimeout: (verificationId) {},
       timeout: const Duration(seconds: 30),
     );
-  }
+  }}
 
   void verifyOtp() async {
     String otp = otpController.text.trim();
@@ -141,5 +147,11 @@ class AuthController extends GetxController {
 
     // Once signed in, return the UserCredential
     return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+  }
+
+  Future<bool> editUser(String fullname,String address ) async
+  {bool isSuccess=await AuthRepo().userEdit("6805e94a873ed5bd0c51f356",
+    fullname, address);
+  return isSuccess;
   }
 }

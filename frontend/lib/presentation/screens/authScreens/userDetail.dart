@@ -10,6 +10,8 @@ import 'package:pilot_project/core/components/MyTextField.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/core/utils.dart';
+import 'package:pilot_project/presentation/controllers/authController.dart';
+import 'package:pilot_project/presentation/widgets/utils_widget.dart';
 
 class UserDetail extends StatefulWidget {
   const UserDetail({super.key});
@@ -21,13 +23,12 @@ class UserDetail extends StatefulWidget {
 class _UserDetailState extends State<UserDetail> {
   File? _profileImage;
   final picker = ImagePicker();
-
+  AuthController controller=AuthController();
   // Editable controllers
   final nameController = TextEditingController(text: "Harry Wilson");
-  final emailController = TextEditingController(text: "prince@yahoo.com");
+  final addressController = TextEditingController(text: "Mohali");
   final mobileController = TextEditingController(text: "1234569087",);
-  final dobController = TextEditingController(text: "01-01-2000");
-  final locationController = TextEditingController(text: "Mohali, Punjab");
+
 
   Future<void> _pickImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -130,10 +131,10 @@ class _UserDetailState extends State<UserDetail> {
                    ),
                    Padding(
                      padding: const EdgeInsets.all(10.0),
-                     child: MyTextField(labelText:'Email', onChanged:(value){},
+                     child: MyTextField(labelText:'Address', onChanged:(value){},
                      textStyle: TextStyle(color: Colors.black),
                      prefixIcon: Icon(Icons.email,color: Colors.black,),
-                     controller: emailController,),
+                     controller: addressController,),
                    )
                     
                   
@@ -147,7 +148,8 @@ class _UserDetailState extends State<UserDetail> {
         text:'Save'
         ,
        onPressed:(){
-                  Utils.showToast(message: 'User Details saved Successfully');
+                   controller.editUser(nameController.text,addressController.text);
+                 // Utils.showToast(message: 'User Details saved Successfully');
                  Future.delayed(Duration(seconds: 1),() {Get.back();});}),
              
             ],
