@@ -77,7 +77,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                       ),
                     ),
                     SizedBox(height: Get.height * 0.1),
-                   /* MyTextField(
+                    /* MyTextField(
                       labelText: "Name",
                       controller: authController.nameController,
                       textStyle:
@@ -161,7 +161,6 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                                 ? authController.verifyOtp()
                                 : await authController.sendOtp();
                             print('Otp sends');
-                          
                           }),
                     ),
                     const SizedBox(
@@ -215,7 +214,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                               ],
                             ),
                             onPressed: () {
-                            
+                              authController.loginWithFacebook();
                             },
                           )),
                     ),

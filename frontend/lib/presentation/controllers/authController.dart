@@ -6,12 +6,13 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pilot_project/core/utils.dart';
 import 'package:pilot_project/data/repos/auth_repo.dart';
 import 'package:pilot_project/routes/page_route.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class AuthController extends GetxController {
   TextEditingController otpController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController nameController = TextEditingController();
-  TextEditingController addressController=TextEditingController();
+  TextEditingController addressController = TextEditingController();
   RxBool isOtpSent = false.obs;
   RxBool verifyngOtp = false.obs;
   String verificationIds = "";
@@ -76,9 +77,8 @@ class AuthController extends GetxController {
           isGuest.value = false;
           //  phoneController.clear();
           otpController.clear();
-          bool verified = await userRegisterVerify(
-              phoneController.text.trim());
-              print(nameController.text);
+          bool verified = await userRegisterVerify(phoneController.text.trim());
+          print(nameController.text);
           if (verified) {
             Get.offAndToNamed(PageRoutes.register);
           }
@@ -126,5 +126,19 @@ class AuthController extends GetxController {
   Future<bool> userRegisterVerify(String phone) async {
     bool isSuccess = await AuthRepo().userRegisterVerify(phone);
     return isSuccess;
+  }
+
+  Future<void> loginWithFacebook() async {
+    final LoginResult result = await FacebookAuth.instance.login();
+
+    if (result.status == LoginStatus.success) {
+      final AccessToken accessToken = result.accessToken!;
+      final userData = await FacebookAuth.instance.getUserData();
+      print("AccessToken: ${accessToken.tokenString}");
+      print("User Data: $userData");
+      Get.offAndToNamed(PageRoutes.bottomNav);
+    } else {
+      print("Facebook login failed: ${result.status}");
+    }
   }
 }
