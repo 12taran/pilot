@@ -184,7 +184,7 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Image.asset('assets/images/google.jpeg'),
+                                Image.asset('assets/images/google.png'),
                                
                               ],
                             ),

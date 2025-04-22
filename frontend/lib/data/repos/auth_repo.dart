@@ -45,4 +45,16 @@ class AuthRepo {
   }
 }
 
+Future<bool> userLogin(String phone) async {
+  final response = await BaseService().postData(endPoint: apiRoutes.userLogin, body:{
+    "phoneNumber":phone
+
+  }, isTokenRequired:false);
+   if (response.data['success'] == true) {
+    Utils.showToast(message: response.data['message']);
+    return true;
+  } else {
+    Utils.showToast(message: response.data['message']);
+    return false;
+  }}
 }
