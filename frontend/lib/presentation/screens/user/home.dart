@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
           Container(
               color:Colors.black,
               // margin: const EdgeInsets.symmetric(horizontal: 5),
-              height: Get.height * 0.09,
+              height: Get.height * 0.08,
               child: Row(
                 children: [
                   Padding(
@@ -96,41 +96,40 @@ class _HomePageState extends State<HomePage> {
                     child: CarouselSlider(
                         items: [
                           for (int i = 0; i < 5; i++)
-                            Expanded(
-                              child: CustomContainer(
-                                borderRadius: 0,
-                                margin: const EdgeInsets.all(0),
-                                backgroundColor: Colors.black,
-                                width: Get.width * 0.7,
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    const Icon(
-                                      Icons.currency_rupee,
-                                      color: Colors.orange,
-                                      size: 30,
-                                    ),
-                                    Column(
-                                      children: [
-                                        Text(
-                                          'Stock $i',
-                                          style: GoogleFonts.lateef(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15),
-                                        ),
-                                        Text(
-                                          'Panther Investors',
-                                          style: GoogleFonts.aDLaMDisplay(
-                                              color: Colors.green,
-                                              fontSize: 5),
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                            CustomContainer(
+                              borderRadius: 0,
+                              margin: const EdgeInsets.all(0),
+                              backgroundColor: Colors.black,
+                              width: Get.width * 0.5,
+                              height: 0.05,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  const Icon(
+                                    Icons.currency_rupee,
+                                    color: Colors.orange,
+                                    size: 30,
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        'KHHIO',
+                                        style: GoogleFonts.lateef(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15),
+                                      ),
+                                      Text(
+                                        'Panther Investors',
+                                        style: GoogleFonts.aDLaMDisplay(
+                                            color: Color.fromARGB(255, 140, 227, 99),
+                                            fontSize:10),
+                                      )
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
                         ],
@@ -147,6 +146,7 @@ class _HomePageState extends State<HomePage> {
                   )
                 ],
               )),
+              SizedBox(height: 10,),
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Container(
@@ -158,35 +158,51 @@ class _HomePageState extends State<HomePage> {
                         Color.fromARGB(255, 37, 72, 33),
                 
                         
-                      ])),
+                      ]),
+                      boxShadow: [BoxShadow(spreadRadius: 1,blurRadius: 5)],
+                      border: Border.all(
+                        color: const Color.fromARGB(255, 107, 106, 106),
+                        width:0.5,
+                      )),
                   height: Get.height * 0.2,
-                  width: Get.width*0.9,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  width: Get.width*0.95,
+                  child: Stack(
                     children: [
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      Positioned(left: 0,bottom:0,
+                        child:Image.asset('assets/images/women.png',
+                        fit: BoxFit.fill,
+                        height: Get.height * 0.2,
+                        width: Get.width*0.3,)),
+                      /*Positioned(
+                        right: 20,bottom:40,
+                        child: Text('Share Sampatti',
+                            style: GoogleFonts.acme(
+                                fontSize: 40,
+                                fontWeight: FontWeight.w700,
+
+                                color:Color.fromARGB(255, 236, 236, 224)// const Color.fromARGB(255, 129, 125, 125)
+                                )),
+                      ),*/
+                      Positioned(
+                        top: 30,right:10,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                           
-                            Column(
-                              children: [
-                                Text(
-                                    "Let's Connect to get you\n Started with PILOT",
-                                    style: TextStyle(
-                                        fontSize: Constants.fontSizeSmall,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white)),
-                                CustomButtons(
-                                  borderRadius: 20,
-                                    color: Colors.white,
-                                    textColor: Colors.orange,
-                                    width: Get.width * 0.4,
-                                    text: 'Call Us',
-                                    onPressed: () {})
-                              ],
-                            )
-                          ]),
-                    ],
+                            /*Text('Invest in Real estate Easily',
+                              style: GoogleFonts.aleo(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w900,
+                                  color: Colors.white)
+                                  ),*/
+                                  Text(   style: GoogleFonts.aleo(
+                                  fontSize: 23,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color.fromARGB(255, 251, 245, 245)),  "Real Estate for Everyone.",),
+                            
+                          ],
+                        ),
+                      ),]
                   ),
                 ),
               ),
@@ -227,7 +243,7 @@ class _HomePageState extends State<HomePage> {
                         padding: 0,
                         borderWidth: 3,
                         borderRadius: 10,
-                        width: Get.width * 0.8,
+                        width: Get.width * 0.9,
                         height: Get.height*0.34,
                         borderColor: Colors.white,
                         child: Column(
@@ -335,9 +351,10 @@ class _HomePageState extends State<HomePage> {
                         
                   
                   options: CarouselOptions(
-                      viewportFraction: 0.8,
-                      enlargeCenterPage: true,
-                      height: Get.height * 0.42)),
+                      viewportFraction: 0.9,
+                      enlargeCenterPage: false,
+                      aspectRatio: 16 / 9,
+                      height: Get.height * 0.4)),
               const SizedBox(
                 height: 10,
               ),
@@ -439,7 +456,7 @@ class _HomePageState extends State<HomePage> {
                         enlargeCenterPage: true,
                         enableInfiniteScroll: true,
                         autoPlay: false,
-                        aspectRatio: 2 / 3,
+                        aspectRatio: 16/11,
                       ),
                       items: List.generate(3, (index) {
                         return Container(
@@ -450,7 +467,7 @@ class _HomePageState extends State<HomePage> {
   child: Padding(
     padding: const EdgeInsets.only(top: 10, left: 10, bottom: 10),
     child: Column(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: MainAxisSize.max,
       children: [
         SizedBox(height: Get.height * 0.015), // 1.5% of screen height
         Row(
@@ -505,6 +522,54 @@ class _HomePageState extends State<HomePage> {
                     )
                   ],
                 ),
+              ),
+
+               Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [BoxShadow(spreadRadius: 1,blurRadius: 5)],
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: const LinearGradient(colors: [
+                    Color.fromARGB(255, 75, 138, 75),
+                        Color.fromARGB(255, 44, 121, 39),
+                        Color.fromARGB(255, 37, 72, 33),
+                
+                        
+                      ])),
+                  height: Get.height * 0.2,
+                  width: Get.width*0.9,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                           
+                            Column(
+                              children: [
+                                Text(
+                                    "Let's Connect to get you\n Started with PILOT",
+                                    style: TextStyle(
+                                        fontSize: Constants.fontSizeSmall,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white)),
+                                CustomButtons(
+                                  borderRadius: 20,
+                                    color: Colors.white,
+                                    textColor: Colors.orange,
+                                    width: Get.width * 0.4,
+                                    text: 'Call Us',
+                                    onPressed: () {})
+                              ],
+                            )
+                          ]),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20
               ),
               /*SizedBox(
                 height: Get.height * 0.01,
@@ -570,12 +635,10 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: Get.height * 0.001,
-              ),
+             
               
               SizedBox(
-                height: Get.height * 0.01,
+                height: 20
               ),
               Padding(
                 padding: const EdgeInsets.all(1.0),
@@ -584,10 +647,11 @@ class _HomePageState extends State<HomePage> {
                   decoration: BoxDecoration(
                      border: Border.all(
     color: const Color.fromARGB(255, 107, 106, 106),
-    width: 1,
+    width:0.5,
   ),
                       borderRadius: BorderRadius.circular(10),
                       shape: BoxShape.rectangle,
+                      boxShadow: [BoxShadow(spreadRadius: 1,blurRadius:2)],
                      color: Color.fromARGB(255, 236, 233, 233)
                       ),
                   height: Get.height * 0.2,
@@ -627,6 +691,8 @@ class _HomePageState extends State<HomePage> {
                               text: 'Invest Now',
                               onPressed: () {
                                 print('Hello');
+                                Get.toNamed(PageRoutes.invest,
+                                    );
                               },
                             ),
                           )
