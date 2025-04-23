@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -43,9 +45,10 @@ class AuthController extends GetxController {
 
     String phone = "+91$phoneRaw";
     bool doesExist = await AuthRepo().userLogin(phoneRaw);
-    if (!doesExist) {
+    if (doesExist) {
       return;
     } else {
+      print('I am here');
       await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: phone,
         verificationCompleted: (credential) {},
@@ -83,12 +86,14 @@ class AuthController extends GetxController {
           //  phoneController.clear();
           otpController.clear();
           if (!isLogin) {
-            bool verified =
-                await userRegisterVerify(phoneController.text.trim());
+            bool verified = await userRegisterVerify(
+                phoneController.text.trim(),
+                nameController.text,
+                addressController.text);
             if (verified) {
               Get.offAndToNamed(PageRoutes.bottomNav);
             }
-          }else{
+          } else {
             Get.offAndToNamed(PageRoutes.bottomNav);
           }
 
@@ -134,23 +139,58 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<bool> userRegisterVerify(String phone) async {
-    bool isSuccess = await AuthRepo().userRegisterVerify(phone);
+  Future<bool> userRegisterVerify(
+      String phone, String name, String address) async {
+    bool isSuccess = await AuthRepo().userRegisterVerify(phone,name,address);
     return isSuccess;
   }
 
-  Future<UserCredential> signInWithFacebook() async {
-    print('object');
-    // Trigger the sign-in flow
-    final LoginResult loginResult = await FacebookAuth.instance.login();
-    Get.offAndToNamed(PageRoutes.bottomNav);
+  Future<UserCredential?> signInWithFacebook() async {
+    try {
+      final LoginResult loginResult = await FacebookAuth.instance.login();
 
-    // Create a credential from the access token
-    final OAuthCredential facebookAuthCredential =
-        FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
+      log('Facebook Login Status: ${loginResult.status}');
+      if (loginResult.status == LoginStatus.failed) {
+        log('Facebook Login Error: ${loginResult.message}');
+      }
+      if (loginResult.accessToken != null) {
+        log('Facebook Access Token: ${loginResult.accessToken!.tokenString}');
+      }
 
-    // Once signed in, return the UserCredential
-    return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+      final OAuthCredential facebookAuthCredential =
+          FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
+
+      final userCredential = await FirebaseAuth.instance
+          .signInWithCredential(facebookAuthCredential);
+
+      Get.offAndToNamed(PageRoutes.bottomNav);
+      return userCredential;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'account-exists-with-different-credential') {
+        final email = e.email;
+        final pendingCred = e.credential;
+
+        // Fetch the list of providers linked to this email
+        final signInMethods =
+            await FirebaseAuth.instance.fetchSignInMethodsForEmail(email!);
+
+        if (signInMethods.contains('google.com')) {
+          // You can prompt the user to sign in with Google
+          // Then link the Facebook credential
+          // Example (after successful Google login):
+          // await user.linkWithCredential(pendingCred);
+          print('Please sign in using Google and link Facebook later.');
+        } else {
+          print('Linked with another provider: $signInMethods');
+        }
+      } else {
+        print('Firebase Auth Error: ${e.message}');
+      }
+    } catch (e) {
+      print('Error during Facebook sign-in: $e');
+    }
+
+    return null;
   }
 
   Future<bool> editUser(String fullname, String address) async {

@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
             color: Theme.of(context).colorScheme.primary,
           ),
           Container(
-              color:Colors.black,
+              color: Colors.black,
               // margin: const EdgeInsets.symmetric(horizontal: 5),
               height: Get.height * 0.09,
               child: Row(
@@ -80,57 +80,52 @@ class _HomePageState extends State<HomePage> {
                         ),
                         child: Center(
                           child: GestureDetector(
-                            onTap: () {
-                              Get.to(
-                                const ProfilePage(),
-                                transition: Transition.leftToRight,
-                                duration: const Duration(milliseconds: 300),
-                              );
-                            },
-                            child: Icon(Icons.person)
-                            
-                          ),
+                              onTap: () {
+                                Get.to(
+                                  const ProfilePage(),
+                                  transition: Transition.leftToRight,
+                                  duration: const Duration(milliseconds: 300),
+                                );
+                              },
+                              child: Icon(Icons.person)),
                         ),
                       )),
                   Expanded(
                     child: CarouselSlider(
                         items: [
                           for (int i = 0; i < 5; i++)
-                            Expanded(
-                              child: CustomContainer(
-                                borderRadius: 0,
-                                margin: const EdgeInsets.all(0),
-                                backgroundColor: Colors.black,
-                                width: Get.width * 0.7,
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    const Icon(
-                                      Icons.currency_rupee,
-                                      color: Colors.orange,
-                                      size: 30,
-                                    ),
-                                    Column(
-                                      children: [
-                                        Text(
-                                          'Stock $i',
-                                          style: GoogleFonts.lateef(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15),
-                                        ),
-                                        Text(
-                                          'Panther Investors',
-                                          style: GoogleFonts.aDLaMDisplay(
-                                              color: Colors.green,
-                                              fontSize: 5),
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                            CustomContainer(
+                              borderRadius: 0,
+                              margin: const EdgeInsets.all(0),
+                              backgroundColor: Colors.black,
+                              width: Get.width * 0.7,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  const Icon(
+                                    Icons.currency_rupee,
+                                    color: Colors.orange,
+                                    size: 30,
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        'Stock $i',
+                                        style: GoogleFonts.lateef(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15),
+                                      ),
+                                      Text(
+                                        'Panther Investors',
+                                        style: GoogleFonts.aDLaMDisplay(
+                                            color: Colors.green, fontSize: 5),
+                                      )
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
                         ],
@@ -147,50 +142,46 @@ class _HomePageState extends State<HomePage> {
                   )
                 ],
               )),
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      gradient: const LinearGradient(colors: [
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  gradient: const LinearGradient(colors: [
                     Color.fromARGB(255, 75, 138, 75),
-                        Color.fromARGB(255, 44, 121, 39),
-                        Color.fromARGB(255, 37, 72, 33),
-                
-                        
-                      ])),
-                  height: Get.height * 0.2,
-                  width: Get.width*0.9,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    Color.fromARGB(255, 44, 121, 39),
+                    Color.fromARGB(255, 37, 72, 33),
+                  ])),
+              height: Get.height * 0.2,
+              width: Get.width * 0.9,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
                           children: [
-                           
-                            Column(
-                              children: [
-                                Text(
-                                    "Let's Connect to get you\n Started with PILOT",
-                                    style: TextStyle(
-                                        fontSize: Constants.fontSizeSmall,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white)),
-                                CustomButtons(
-                                  borderRadius: 20,
-                                    color: Colors.white,
-                                    textColor: Colors.orange,
-                                    width: Get.width * 0.4,
-                                    text: 'Call Us',
-                                    onPressed: () {})
-                              ],
-                            )
-                          ]),
-                    ],
-                  ),
-                ),
+                            Text(
+                                "Let's Connect to get you\n Started with PILOT",
+                                style: TextStyle(
+                                    fontSize: Constants.fontSizeSmall,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white)),
+                            CustomButtons(
+                                borderRadius: 20,
+                                color: Colors.white,
+                                textColor: Colors.orange,
+                                width: Get.width * 0.4,
+                                text: 'Call Us',
+                                onPressed: () {})
+                          ],
+                        )
+                      ]),
+                ],
               ),
-            
+            ),
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -206,134 +197,139 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       " Discover ",
                       style: GoogleFonts.lato(
-                          fontSize: 35, fontWeight: FontWeight.w700,color:Color.fromARGB(255, 12, 3, 113)),
+                          fontSize: 35,
+                          fontWeight: FontWeight.w700,
+                          color: Color.fromARGB(255, 12, 3, 113)),
                     ),
                     Text(
                       " Start Investing Securely 🔒",
-                      style:
-                          GoogleFonts.lato(fontSize: Constants.fontSizeHeading,color: Color.fromARGB(255, 49, 18, 171)),
+                      style: GoogleFonts.lato(
+                          fontSize: Constants.fontSizeHeading,
+                          color: Color.fromARGB(255, 49, 18, 171)),
                     ),
                   ],
                 ),
               ),
-              
               CarouselSlider(
                   items: [
                     for (int i = 0; i < 6; i++)
                       Center(
                           child: CustomContainer(
-                        backgroundColor:
-                            Color.fromARGB(255, 239, 238, 237),
-                        padding: 0,
-                        borderWidth: 3,
-                        borderRadius: 10,
-                        width: Get.width * 0.8,
-                        height: Get.height*0.34,
-                        borderColor: Colors.white,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 15.0,top:4),
-                                  child: Text(
-                                    propertyController.properties[i]['name']!,
-                                    style: GoogleFonts.almarai(
-                                      color: Color.fromARGB(255, 49, 18, 171),
-                                        fontSize: Constants.fontSizeBody,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ),]),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 4.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "Rs ${propertyController.properties[i]['price']!}/- ",
-                                        style: GoogleFonts.andika(
-                                            fontSize: Constants.fontSizeSubTitle,
-                                            fontWeight: FontWeight.w900,
-                                            color: Color.fromARGB(255, 49, 18, 171)
-                                                ),
-                                      ),
-                                      const Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                              backgroundColor:
+                                  Color.fromARGB(255, 239, 238, 237),
+                              padding: 0,
+                              borderWidth: 3,
+                              borderRadius: 10,
+                              width: Get.width * 0.8,
+                              height: Get.height * 0.34,
+                              borderColor: Colors.white,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
-                                            'Per',
-                                            style: TextStyle(
-                                              fontSize:12 ,
-                                                color:  Color.fromARGB(255, 49, 18, 171)
-                                                    ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15.0, top: 4),
+                                            child: Text(
+                                              propertyController.properties[i]
+                                                  ['name']!,
+                                              style: GoogleFonts.almarai(
+                                                  color: Color.fromARGB(
+                                                      255, 49, 18, 171),
+                                                  fontSize:
+                                                      Constants.fontSizeBody,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
                                           ),
-                                          Text(
-                                            'SQFT',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                                color: Color.fromARGB(255, 49, 18, 171)
-                                                    ),
-                                          )
+                                        ]),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 4.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "Rs ${propertyController.properties[i]['price']!}/- ",
+                                                style: GoogleFonts.andika(
+                                                    fontSize: Constants
+                                                        .fontSizeSubTitle,
+                                                    fontWeight: FontWeight.w900,
+                                                    color: Color.fromARGB(
+                                                        255, 49, 18, 171)),
+                                              ),
+                                              const Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'Per',
+                                                    style: TextStyle(
+                                                        fontSize: 12,
+                                                        color: Color.fromARGB(
+                                                            255, 49, 18, 171)),
+                                                  ),
+                                                  Text(
+                                                    'SQFT',
+                                                    style: TextStyle(
+                                                        fontSize: 12,
+                                                        color: Color.fromARGB(
+                                                            255, 49, 18, 171)),
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                          // const SizedBox(height: 10),
+                                          Center(
+                                              child: GestureDetector(
+                                            onTap: () {
+                                              print('Invest now1');
+                                              Map<String, String> detail =
+                                                  propertyController
+                                                      .properties[i];
+                                              Get.toNamed(
+                                                  PageRoutes.propertydetail,
+                                                  arguments: detail);
+                                            },
+                                            child: Text(
+                                              'Invest Now',
+                                              style: GoogleFonts.aBeeZee(
+                                                fontSize:
+                                                    Constants.fontSizeSmall,
+                                                fontWeight: FontWeight.w400,
+                                                color: Color.fromARGB(
+                                                    255, 232, 125, 43),
+                                                letterSpacing: 1,
+                                              ),
+                                            ),
+                                          )),
                                         ],
-                                      )
-                                    ],
-                                  ),
-                                  // const SizedBox(height: 10),
-                                  Center(
-                                      child: GestureDetector(
-                                    onTap: () {
-                                      print('Invest now1');
-                                      Map<String, String> detail =
-                                          propertyController.properties[i];
-                                      Get.toNamed(PageRoutes.propertydetail,
-                                          arguments: detail);
-                                    },
-                                    child: Text(
-                                      'Invest Now',
-                                      style: GoogleFonts.aBeeZee(
-                                        fontSize: Constants.fontSizeSmall,
-                                        fontWeight: FontWeight.w400,
-                                        color: Color.fromARGB(255, 232, 125, 43),
-                                        letterSpacing: 1,
                                       ),
                                     ),
-                                  )),
-                                ],
-                              ),
-                            ),
-                            
-                            Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: ClipRRect(
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(5)),
-                                child: Image.asset(
-                                  propertyController.properties[i]['image']!,
-                                  fit: BoxFit.cover,
-                                  height: Get.height * 0.22,
-                                  width: Get.width * 0.9,
-                                ),
-                              ),
-                            ),
-                          
-                           
-                            
-                            
-                          
-                            
-                            ]
-                        )))
+                                    Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: ClipRRect(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(5)),
+                                        child: Image.asset(
+                                          propertyController.properties[i]
+                                              ['image']!,
+                                          fit: BoxFit.cover,
+                                          height: Get.height * 0.22,
+                                          width: Get.width * 0.9,
+                                        ),
+                                      ),
+                                    ),
+                                  ])))
                   ],
-                        
-                  
                   options: CarouselOptions(
                       viewportFraction: 0.8,
                       enlargeCenterPage: true,
@@ -345,15 +341,16 @@ class _HomePageState extends State<HomePage> {
                   child: Text(
                 " !! Returns are not guaranteed and are subjected to market risks !! ",
                 style: GoogleFonts.lato(
-                    color: Color.fromARGB(255, 105, 104, 104), fontSize: Constants.fontSizeTiny),
+                    color: Color.fromARGB(255, 105, 104, 104),
+                    fontSize: Constants.fontSizeTiny),
               ))
             ],
           ),
-         SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
           Column(
             children: [
-             
-              
               Container(
                 decoration: const BoxDecoration(
                     gradient: LinearGradient(colors: [
@@ -367,7 +364,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 20.0,top: 20),
+                      padding: const EdgeInsets.only(left: 20.0, top: 20),
                       child: Text(
                         'Explore by Regions',
                         style: TextStyle(
@@ -389,8 +386,7 @@ class _HomePageState extends State<HomePage> {
                                       shape: BoxShape.circle,
                                       boxShadow: [
                                         BoxShadow(
-                                          color:
-                                              Colors.black.withOpacity(0.3),
+                                          color: Colors.black.withOpacity(0.3),
                                           spreadRadius: 2,
                                           blurRadius: 6,
                                           offset: const Offset(0, 3),
@@ -443,64 +439,77 @@ class _HomePageState extends State<HomePage> {
                       ),
                       items: List.generate(3, (index) {
                         return Container(
-  decoration: BoxDecoration(
-    borderRadius: BorderRadius.circular(5),
-    color: const Color.fromARGB(255, 211, 223, 212),
-  ),
-  child: Padding(
-    padding: const EdgeInsets.only(top: 10, left: 10, bottom: 10),
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        SizedBox(height: Get.height * 0.015), // 1.5% of screen height
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(5),
-              child: Image.asset(
-                propertyController.properties[index]['image']!,
-                fit: BoxFit.cover,
-                height: Get.height * 0.23,
-                width: Get.width * 0.4,
-              ),
-            ),
-          SizedBox(width: Get.width * 0.02), // Space between image and text
-            Expanded( // To avoid text overflow
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center, // Left align
-                children: [
-                  Text(
-                    pilotcontroller.boardMembers[index]['name']!,
-                    style: GoogleFonts.actor(
-                      fontSize: Constants.fontSizeSmall,
-                      fontWeight: FontWeight.w500,
-                      color: const Color.fromARGB(255, 26, 24, 24),
-                    ),
-                    overflow: TextOverflow.ellipsis, // To prevent overflow
-                  ),
-                  Text(
-                    pilotcontroller.boardMembers[index]['designation']!,
-                    style: GoogleFonts.actor(
-                      fontSize: Constants.fontSizeBody,
-                      fontWeight: FontWeight.w900,
-                      color: const Color.fromARGB(255, 31, 31, 31),
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ],
-    ),
-  ),
-);
-
-
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: const Color.fromARGB(255, 211, 223, 212),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                top: 10, left: 10, bottom: 10),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SizedBox(
+                                    height: Get.height *
+                                        0.015), // 1.5% of screen height
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(5),
+                                      child: Image.asset(
+                                        propertyController.properties[index]
+                                            ['image']!,
+                                        fit: BoxFit.cover,
+                                        height: Get.height * 0.23,
+                                        width: Get.width * 0.4,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                        width: Get.width *
+                                            0.02), // Space between image and text
+                                    Expanded(
+                                      // To avoid text overflow
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment
+                                            .center, // Left align
+                                        children: [
+                                          Text(
+                                            pilotcontroller.boardMembers[index]
+                                                ['name']!,
+                                            style: GoogleFonts.actor(
+                                              fontSize: Constants.fontSizeSmall,
+                                              fontWeight: FontWeight.w500,
+                                              color: const Color.fromARGB(
+                                                  255, 26, 24, 24),
+                                            ),
+                                            overflow: TextOverflow
+                                                .ellipsis, // To prevent overflow
+                                          ),
+                                          Text(
+                                            pilotcontroller.boardMembers[index]
+                                                ['designation']!,
+                                            style: GoogleFonts.actor(
+                                              fontSize: Constants.fontSizeBody,
+                                              fontWeight: FontWeight.w900,
+                                              color: const Color.fromARGB(
+                                                  255, 31, 31, 31),
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
                       }),
                     )
                   ],
@@ -512,10 +521,8 @@ class _HomePageState extends State<HomePage> {
               Container(
                 decoration: const BoxDecoration(
                     //borderRadius: BorderRadius.circular(20),
-                    color: Color.fromARGB(255, 197, 239, 220)
-                ),
+                    color: Color.fromARGB(255, 197, 239, 220)),
                 height: Get.height * 0.23,
-              
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -542,8 +549,7 @@ class _HomePageState extends State<HomePage> {
                                     shape: BoxShape.circle,
                                     boxShadow: [
                                       BoxShadow(
-                                        color:
-                                            Colors.black.withOpacity(0.3),
+                                        color: Colors.black.withOpacity(0.3),
                                         spreadRadius: 2,
                                         blurRadius: 6,
                                         offset: const Offset(0, 3),
@@ -558,8 +564,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                                 Text(
-                                  propertyController.properties[index]
-                                      ['type']!,
+                                  propertyController.properties[index]['type']!,
                                   style: TextStyle(
                                       fontSize: Constants.fontSizeSmall,
                                       fontWeight: FontWeight.bold),
@@ -573,28 +578,25 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: Get.height * 0.001,
               ),
-              
               SizedBox(
                 height: Get.height * 0.01,
               ),
               Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Container(
-                  width: Get.width*0.95,
+                  width: Get.width * 0.95,
                   decoration: BoxDecoration(
-                     border: Border.all(
-    color: const Color.fromARGB(255, 107, 106, 106),
-    width: 1,
-  ),
+                      border: Border.all(
+                        color: const Color.fromARGB(255, 107, 106, 106),
+                        width: 1,
+                      ),
                       borderRadius: BorderRadius.circular(10),
                       shape: BoxShape.rectangle,
-                     color: Color.fromARGB(255, 236, 233, 233)
-                      ),
+                      color: Color.fromARGB(255, 236, 233, 233)),
                   height: Get.height * 0.2,
                   child: Stack(
-                    alignment:Alignment.topCenter,
+                    alignment: Alignment.topCenter,
                     children: [
-                      
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -607,14 +609,13 @@ class _HomePageState extends State<HomePage> {
                             height: 20,
                           ),
                           GlowContainer(
-                            containerOptions:
-                                const ContainerOptions(borderRadius: 10,borderSide: BorderSide(width: 2)
-                                ),
+                            containerOptions: const ContainerOptions(
+                                borderRadius: 10,
+                                borderSide: BorderSide(width: 2)),
                             // optional, or customize
                             gradientColors: const [
                               Colors.orange,
                               Color.fromARGB(255, 221, 96, 58),
-                              
                             ],
                             glowRadius: 5,
                             // match button's border

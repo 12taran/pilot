@@ -9,7 +9,9 @@
     </queries>
     <application
         android:label="pilot_project"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:hardwareAccelerated="true"
+        android:supportsRtl="true">
 
         <!-- Main Activity -->
         <activity
