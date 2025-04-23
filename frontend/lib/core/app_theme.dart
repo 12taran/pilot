@@ -7,7 +7,7 @@ class AppTheme {
   static final ThemeData light = ThemeData(
     brightness: Brightness.light,
     fontFamily: Constants.fontFamily,
-    primaryColor:Color.fromARGB(0, 88, 125, 90),
+    primaryColor: Color.fromARGB(0, 88, 125, 90),
     scaffoldBackgroundColor: Colors.white,
     hintColor: const Color(0xFFBDBDBD),
     appBarTheme: const AppBarTheme(
@@ -19,7 +19,7 @@ class AppTheme {
         bodyMedium: TextStyle(color: Colors.black),
         labelMedium: TextStyle(color: Colors.black54)),
     colorScheme: const ColorScheme.light(
-      primary:Color(0x57BB5B),
+      primary: const Color.fromARGB(255, 87, 187, 91),
       secondary: const Color.fromARGB(255, 56, 98, 57),
       error: Colors.red,
       background: Colors.white,
@@ -35,7 +35,7 @@ class AppTheme {
   static final ThemeData dark = ThemeData(
     brightness: Brightness.dark,
     fontFamily: Constants.fontFamily,
-    primaryColor:Color.fromARGB(0, 88, 125, 90),
+    primaryColor: Color.fromARGB(0, 88, 125, 90),
     scaffoldBackgroundColor: const Color(0xFF000000),
     hintColor: const Color(0xFFBDBDBD),
     appBarTheme: const AppBarTheme(
@@ -48,7 +48,7 @@ class AppTheme {
       labelMedium: TextStyle(color: Colors.white54),
     ),
     colorScheme: const ColorScheme.dark(
-      primary: const Color.fromARGB(255, 56, 98, 57),
+      primary: Color.fromARGB(255, 87, 187, 91),
       secondary: const Color.fromARGB(255, 56, 98, 57),
       error: Colors.red,
       background: Color(0xFF000000),
