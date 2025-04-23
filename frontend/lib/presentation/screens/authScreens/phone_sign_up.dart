@@ -229,7 +229,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                                 child: const Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(Icons.facebook, size: 20),
+                                    Icon(Icons.facebook, size: 20,color: Colors.indigo,),
                                   ],
                                 ),
                                 onPressed: () async {

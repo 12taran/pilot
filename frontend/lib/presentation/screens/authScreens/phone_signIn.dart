@@ -206,7 +206,7 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Icon(Icons.facebook, size: 20),
+                                    Icon(Icons.facebook, size: 20,color: Colors.indigo,),
                                   ],
                                 ),
                                 onPressed: () async {
