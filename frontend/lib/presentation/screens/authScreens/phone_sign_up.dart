@@ -159,7 +159,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                               : "Send OTP",
                           onPressed: () async {
                             authController.isOtpSent.value
-                                ? authController.verifyOtp()
+                                ? authController.verifyOtp(false)
                                 : await authController.sendOtp();
                             print('Otp sends');
                           }),
@@ -212,8 +212,8 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                                     Image.asset('assets/images/google.png'),
                                   ],
                                 ),
-                                onPressed: () {
-                                  authController.signInWithGoogle();
+                                onPressed: () async {
+                                  await authController.signInWithGoogle();
                                 },
                               )),
                         ),
@@ -244,9 +244,8 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                         child: Text(
                           'Already a User? Sign In',
                           style: GoogleFonts.acme(
-                              color: Theme.of(context).primaryColor,
-                              decoration: TextDecoration.underline,
-                              decorationColor: Theme.of(context).primaryColor),
+                            decoration: TextDecoration.underline,
+                          ),
                         ),
                         onPressed: () {
                           Get.toNamed(PageRoutes.phonesignin);

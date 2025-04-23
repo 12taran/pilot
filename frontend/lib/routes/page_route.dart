@@ -60,7 +60,7 @@ class PageRoutes {
       ),
       GetPage(
         name: phonesignup,
-        page: () => const PhoneSignInScreen(),
+        page: () => const PhoneSignUpScreen(),
         transition: Transition.zoom,
         transitionDuration: const Duration(milliseconds: 300),
         binding: BindingsBuilder(() async {
@@ -130,7 +130,7 @@ class PageRoutes {
           Get.put(() => sharedPreferences, permanent: true);
         }),
       ),
-       GetPage(
+      GetPage(
         name: register,
         page: () => const RegisterScreen(),
         transition: Transition.zoom,

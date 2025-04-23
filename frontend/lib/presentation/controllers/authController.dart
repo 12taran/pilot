@@ -25,7 +25,6 @@ class AuthController extends GetxController {
   Future<void> sendOtp() async {
     String phoneRaw = phoneController.text.trim();
 
-
     if (phoneRaw == "") {
       Utils.showGetXToast(
           title: "Mobile Number Required",
@@ -43,30 +42,29 @@ class AuthController extends GetxController {
     }
 
     String phone = "+91$phoneRaw";
-    bool doesExist=await AuthRepo().userLogin(phoneRaw);
-     if (doesExist) {
-            Get.offAndToNamed(PageRoutes.bottomNav);
-          }
+    bool doesExist = await AuthRepo().userLogin(phoneRaw);
+    if (!doesExist) {
+      return;
+    } else {
+      await FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: phone,
+        verificationCompleted: (credential) {},
+        verificationFailed: (FirebaseAuthException ex) {
+          print("OTP verification failed: ${ex.code} - ${ex.message}");
+          Utils.showToast(message: ex.code.toString());
+          isOtpSent.value = false;
+        },
+        codeSent: (verificationId, resendToken) {
+          verificationIds = verificationId;
+          isOtpSent.value = true;
+        },
+        codeAutoRetrievalTimeout: (verificationId) {},
+        timeout: const Duration(seconds: 30),
+      );
+    }
+  }
 
-   else{
-    await FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: phone,
-      verificationCompleted: (credential) {},
-      verificationFailed: (FirebaseAuthException ex) {
-        print("OTP verification failed: ${ex.code} - ${ex.message}");
-        Utils.showToast(message: ex.code.toString());
-        isOtpSent.value = false;
-      },
-      codeSent: (verificationId, resendToken) {
-        verificationIds = verificationId;
-        isOtpSent.value = true;
-      },
-      codeAutoRetrievalTimeout: (verificationId) {},
-      timeout: const Duration(seconds: 30),
-    );
-  }}
-
-  void verifyOtp() async {
+  void verifyOtp(bool isLogin) async {
     String otp = otpController.text.trim();
     if (otp.length < 6) {
       Utils.showToast(message: 'Enter 6 Digit OTP');
@@ -84,11 +82,17 @@ class AuthController extends GetxController {
           isGuest.value = false;
           //  phoneController.clear();
           otpController.clear();
-          bool verified = await userRegisterVerify(phoneController.text.trim());
-          print(nameController.text);
-          if (verified) {
-            Get.offAndToNamed(PageRoutes.register);
+          if (!isLogin) {
+            bool verified =
+                await userRegisterVerify(phoneController.text.trim());
+            if (verified) {
+              Get.offAndToNamed(PageRoutes.bottomNav);
+            }
+          }else{
+            Get.offAndToNamed(PageRoutes.bottomNav);
           }
+
+          print(nameController.text);
         }
       } on FirebaseAuthException catch (e) {
         print(e.code.toString());
@@ -149,9 +153,9 @@ class AuthController extends GetxController {
     return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
   }
 
-  Future<bool> editUser(String fullname,String address ) async
-  {bool isSuccess=await AuthRepo().userEdit("6805e94a873ed5bd0c51f356",
-    fullname, address);
-  return isSuccess;
+  Future<bool> editUser(String fullname, String address) async {
+    bool isSuccess = await AuthRepo()
+        .userEdit("6805e94a873ed5bd0c51f356", fullname, address);
+    return isSuccess;
   }
 }
