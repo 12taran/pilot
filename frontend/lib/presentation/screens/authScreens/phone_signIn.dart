@@ -153,7 +153,7 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                           margin: const EdgeInsets.all(8),
                           child: TextButton(
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 const Icon(Icons.person, size: 20),
                                 Text(
