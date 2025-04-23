@@ -92,117 +92,62 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       )),
-                  // Expanded(
-                  //   child: CarouselSlider(
-                  //       items: [
-                  //         for (int i = 0; i < 5; i++)
-                  //           Expanded(
-                  //             child: CustomContainer(
-                  //               borderRadius: 0,
-                  //               margin: const EdgeInsets.all(0),
-                  //               backgroundColor: Colors.black,
-                  //               width: Get.width * 0.7,
-                  //               child: Row(
-                  //                 mainAxisSize: MainAxisSize.max,
-                  //                 mainAxisAlignment:
-                  //                     MainAxisAlignment.spaceEvenly,
-                  //                 children: [
-                  //                   const Icon(
-                  //                     Icons.currency_rupee,
-                  //                     color: Colors.orange,
-                  //                     size: 30,
-                  //                   ),
-                  //                   Column(
-                  //                     children: [
-                  //                       Text(
-                  //                         'Stock $i',
-                  //                         style: GoogleFonts.lateef(
-                  //                             color: Colors.white,
-                  //                             fontWeight: FontWeight.bold,
-                  //                             fontSize: 15),
-                  //                       ),
-                  //                       Text(
-                  //                         'Panther Investors',
-                  //                         style: GoogleFonts.aDLaMDisplay(
-                  //                             color: Colors.green,
-                  //                             fontSize: 5),
-                  //                       )
-                  //                     ],
-                  //                   ),
-                  //                 ],
-                  //               ),
-                  //             ),
-                  //           ),
-                  //       ],
-                  //       options: CarouselOptions(
-                  //         viewportFraction: 0.5,
-                  //         height: Get.height * 0.08,
-                  //         autoPlay: true,
-                  //         autoPlayInterval: const Duration(
-                  //             seconds: 1), // Time before moving to next slide
-                  //         autoPlayAnimationDuration: const Duration(
-                  //             seconds: 3), // Slide transition duration
-                  //         autoPlayCurve: Curves.linear,
-                  //       )),
-                  // )
+                  Expanded(
+                    child: CarouselSlider(
+                        items: [
+                          for (int i = 0; i < 5; i++)
+                            Expanded(
+                              child: CustomContainer(
+                                borderRadius: 0,
+                                margin: const EdgeInsets.all(0),
+                                backgroundColor: Colors.black,
+                                width: Get.width * 0.7,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    const Icon(
+                                      Icons.currency_rupee,
+                                      color: Colors.orange,
+                                      size: 30,
+                                    ),
+                                    Column(
+                                      children: [
+                                        Text(
+                                          'Stock $i',
+                                          style: GoogleFonts.lateef(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15),
+                                        ),
+                                        Text(
+                                          'Panther Investors',
+                                          style: GoogleFonts.aDLaMDisplay(
+                                              color: Colors.green,
+                                              fontSize: 5),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                        ],
+                        options: CarouselOptions(
+                          viewportFraction: 0.5,
+                          height: Get.height * 0.08,
+                          autoPlay: true,
+                          autoPlayInterval: const Duration(
+                              seconds: 1), // Time before moving to next slide
+                          autoPlayAnimationDuration: const Duration(
+                              seconds: 3), // Slide transition duration
+                          autoPlayCurve: Curves.linear,
+                        )),
+                  )
                 ],
               )),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            width: Get.width,
-            height: Get.height * 0.25,
-            child: CarouselSlider(
-              options: CarouselOptions(
-                aspectRatio: 16 / 9,
-                enlargeCenterPage: true,
-                autoPlay: true,
-                viewportFraction: 1,
-                autoPlayInterval: const Duration(
-                    seconds: 5), // Time before moving to next slide
-                autoPlayAnimationDuration:
-                    const Duration(seconds: 3), // Slide transition duration
-                //autoPlayCurve: Curves.linear,
-              ),
-              items: [0, 1, 2].map((i) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return Stack(
-                      children: [
-                        Image.asset(
-                          motivation[i],
-                          fit: BoxFit.fill,
-                          width: double.infinity,
-                        ),
-                        Positioned(
-                          bottom: 25,
-                          right: 10,
-                          child: GlowContainer(
-                            glowRadius: 10,
-                            gradientColors: const [Colors.white,Color.fromARGB(255, 225, 209, 73)],
-                            containerOptions: const ContainerOptions(borderRadius: 20,
-                            borderSide: BorderSide(width: 2)
-                            ),
-                            
-                            child: CustomButtons(
-                              borderRadius: 20,
-                              color: Theme.of(context).colorScheme.primary,
-                              margin: const EdgeInsets.all(0),
-                              fontSize: Constants.fontSizeTinySmall,
-                              width: Get.width * 0.22,
-                              onPressed: () {
-                                
-                              },
-                              text: 'Invest Now',
-                            ),
-                          ),
-                        )
-                      ],
-                    );
-                  },
-                );
-              }).toList(),
-            ),
-          ),
+            
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -218,19 +163,17 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       " Discover ",
                       style: GoogleFonts.lato(
-                          fontSize: 35, fontWeight: FontWeight.w900),
+                          fontSize: 35, fontWeight: FontWeight.w700,color:Color.fromARGB(255, 12, 3, 113)),
                     ),
                     Text(
                       " Start Investing Securely 🔒",
                       style:
-                          GoogleFonts.lato(fontSize: Constants.fontSizeHeading),
+                          GoogleFonts.lato(fontSize: Constants.fontSizeHeading,color: Color.fromARGB(255, 49, 18, 171)),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              
               CarouselSlider(
                   items: [
                     for (int i = 0; i < 6; i++)
@@ -256,8 +199,9 @@ class _HomePageState extends State<HomePage> {
                                   child: Text(
                                     propertyController.properties[i]['name']!,
                                     style: GoogleFonts.almarai(
+                                      color: Color.fromARGB(255, 49, 18, 171),
                                         fontSize: Constants.fontSizeBody,
-                                        fontWeight: FontWeight.w600),
+                                        fontWeight: FontWeight.w500),
                                   ),
                                 ),]),
                             Padding(
@@ -271,11 +215,11 @@ class _HomePageState extends State<HomePage> {
                                     children: [
                                       Text(
                                         "Rs ${propertyController.properties[i]['price']!}/- ",
-                                        style: TextStyle(
-                                            fontSize: Constants.fontSizeSmall,
-                                            fontWeight: FontWeight.w500,
-                                            color: const Color.fromARGB(
-                                                255, 26, 27, 26)),
+                                        style: GoogleFonts.andika(
+                                            fontSize: Constants.fontSizeSubTitle,
+                                            fontWeight: FontWeight.w900,
+                                            color: Color.fromARGB(255, 49, 18, 171)
+                                                ),
                                       ),
                                       const Column(
                                         crossAxisAlignment:
@@ -285,15 +229,15 @@ class _HomePageState extends State<HomePage> {
                                             'Per',
                                             style: TextStyle(
                                               fontSize:12 ,
-                                                color: Color.fromARGB(
-                                                    255, 26, 27, 26)),
+                                                color:  Color.fromARGB(255, 49, 18, 171)
+                                                    ),
                                           ),
                                           Text(
                                             'SQFT',
                                             style: TextStyle(
                                               fontSize: 12,
-                                                color: Color.fromARGB(
-                                                    255, 26, 27, 26)),
+                                                color: Color.fromARGB(255, 49, 18, 171)
+                                                    ),
                                           )
                                         ],
                                       )
@@ -311,11 +255,10 @@ class _HomePageState extends State<HomePage> {
                                     },
                                     child: Text(
                                       'Invest Now',
-                                      style: GoogleFonts.labrada(
+                                      style: GoogleFonts.aBeeZee(
                                         fontSize: Constants.fontSizeSubTitle,
-                                        fontWeight: FontWeight.w600,
-                                        color: const Color.fromARGB(
-                                            255, 230, 110, 19),
+                                        fontWeight: FontWeight.w400,
+                                        color: Color.fromARGB(255, 232, 125, 43),
                                         letterSpacing: 1,
                                       ),
                                     ),
@@ -363,10 +306,7 @@ class _HomePageState extends State<HomePage> {
               ))
             ],
           ),
-          const Divider(
-            thickness: 2,
-            color: Colors.grey,
-          ),
+         
           Column(
             children: [
              
@@ -374,7 +314,7 @@ class _HomePageState extends State<HomePage> {
               Container(
                 decoration: const BoxDecoration(
                     gradient: LinearGradient(colors: [
-                  Color.fromARGB(255, 53, 99, 136),
+                  Color.fromARGB(255, 190, 204, 215),
                   Color.fromARGB(255, 146, 182, 118),
                   Color.fromARGB(255, 173, 194, 173)
                 ])),
@@ -463,7 +403,7 @@ class _HomePageState extends State<HomePage> {
                           height: Get.height * 0.4,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
-                            color: Theme.of(context).colorScheme.primary,
+                            color: Color.fromARGB(255, 211, 223, 212)
                           ),
                           //height: Get.height*0,
                           child: Padding(
@@ -490,7 +430,7 @@ class _HomePageState extends State<HomePage> {
                                   style: GoogleFonts.actor(
                                       fontSize: Constants.fontSizeSmall,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.white),
+                                      color: const Color.fromARGB(255, 26, 24, 24)),
                                 ),
                                 Text(
                                   pilotcontroller.boardMembers[index]
@@ -498,7 +438,7 @@ class _HomePageState extends State<HomePage> {
                                   style: GoogleFonts.actor(
                                       fontSize: Constants.fontSizeBody,
                                       fontWeight: FontWeight.w900,
-                                      color: Colors.white),
+                                      color: const Color.fromARGB(255, 31, 31, 31)),
                                 ),
                               ],
                             ),
@@ -512,88 +452,84 @@ class _HomePageState extends State<HomePage> {
               /*SizedBox(
                 height: Get.height * 0.01,
               ),*/
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                child: Container(
-                  decoration: const BoxDecoration(
-                      //borderRadius: BorderRadius.circular(20),
-                      gradient: LinearGradient(colors: [
-                    Color.fromARGB(255, 59, 100, 127),
-                    Color.fromARGB(255, 166, 186, 107),
-                    Color.fromARGB(255, 173, 194, 173)
-                  ])),
-                  height: Get.height * 0.25,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20.0, top: 20),
-                        child: Text(
-                          'Explore by Themes',
-                          style: TextStyle(
-                              fontSize: Constants.fontSizeHeading,
-                              fontWeight: FontWeight.w800),
-                        ),
+              Container(
+                decoration: const BoxDecoration(
+                    //borderRadius: BorderRadius.circular(20),
+                    color: Color.fromARGB(255, 197, 239, 220)
+                ),
+                height: Get.height * 0.23,
+              
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0, top: 20),
+                      child: Text(
+                        'Explore by Themes',
+                        style: TextStyle(
+                            fontSize: Constants.fontSizeHeading,
+                            fontWeight: FontWeight.w800),
                       ),
-                      SizedBox(
-                        height: Get.height * 0.02,
-                      ),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            for (int index = 0; index < 3; index++)
-                              Column(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color:
-                                              Colors.black.withOpacity(0.3),
-                                          spreadRadius: 2,
-                                          blurRadius: 6,
-                                          offset: const Offset(0, 3),
-                                        ),
-                                      ],
-                                    ),
-                                    child: CircleAvatar(
-                                      radius: 40,
-                                      backgroundColor: Colors.white,
-                                      backgroundImage: AssetImage(location[
-                                          index]), // Yahi main kaam karta hai
-                                    ),
+                    ),
+                    SizedBox(
+                      height: Get.height * 0.02,
+                    ),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          for (int index = 0; index < 3; index++)
+                            Column(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color:
+                                            Colors.black.withOpacity(0.3),
+                                        spreadRadius: 2,
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 3),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    propertyController.properties[index]
-                                        ['type']!,
-                                    style: TextStyle(
-                                        fontSize: Constants.fontSizeSmall,
-                                        fontWeight: FontWeight.bold),
+                                  child: CircleAvatar(
+                                    radius: 40,
+                                    backgroundColor: Colors.white,
+                                    backgroundImage: AssetImage(location[
+                                        index]), // Yahi main kaam karta hai
                                   ),
-                                ],
-                              ),
-                          ])
-                    ],
-                  ),
+                                ),
+                                Text(
+                                  propertyController.properties[index]
+                                      ['type']!,
+                                  style: TextStyle(
+                                      fontSize: Constants.fontSizeSmall,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                        ])
+                  ],
                 ),
               ),
               SizedBox(
-                height: Get.height * 0.01,
+                height: Get.height * 0.001,
               ),
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(20),
                       gradient: const LinearGradient(colors: [
-                    Color.fromARGB(255, 173, 194, 173),
-                        Color.fromARGB(255, 166, 185, 107),
-                        Color.fromARGB(255, 59, 100, 127),
+                    Color.fromARGB(255, 18, 117, 18),
+                        Color.fromARGB(255, 44, 121, 39),
+                        Color.fromARGB(255, 37, 72, 33),
                 
                         
                       ])),
                   height: Get.height * 0.2,
+                  width: Get.width*0.9,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -604,7 +540,7 @@ class _HomePageState extends State<HomePage> {
                             const CircleAvatar(
                                 radius: 50,
                                 child: Icon(
-                                  Icons.call,
+                                  Icons.call_rounded,
                                   size: 80,
                                 )),
                             Column(
@@ -612,10 +548,9 @@ class _HomePageState extends State<HomePage> {
                                 Text(
                                     'Give us a Call to help you\n get started with your real \nestate investments',
                                     style: TextStyle(
-                                        fontSize: Constants.fontSizeBody,
+                                        fontSize: Constants.fontSizeSmall,
                                         fontWeight: FontWeight.w600,
-                                        color: const Color.fromARGB(
-                                            255, 28, 26, 35))),
+                                        color: Colors.white)),
                                 CustomButtons(
                                     color: Colors.white,
                                     textColor: Colors.orange,
@@ -633,17 +568,18 @@ class _HomePageState extends State<HomePage> {
                 height: Get.height * 0.01,
               ),
               Padding(
-                padding: const EdgeInsets.all(5.0),
+                padding: const EdgeInsets.all(1.0),
                 child: Container(
-                  width: Get.width,
+                  width: Get.width*0.95,
                   decoration: BoxDecoration(
+                     border: Border.all(
+    color: const Color.fromARGB(255, 107, 106, 106),
+    width: 1,
+  ),
                       borderRadius: BorderRadius.circular(10),
-                      gradient: const LinearGradient(colors: [
-                        Color.fromARGB(255, 59, 100, 127),
-                                Color.fromARGB(255, 166, 185, 107),
-                                      Color.fromARGB(255, 173, 194, 173),
-                        
-                      ])),
+                      shape: BoxShape.rectangle,
+                     color: Color.fromARGB(255, 236, 233, 233)
+                      ),
                   height: Get.height * 0.2,
                   child: Stack(
                     alignment:Alignment.topCenter,

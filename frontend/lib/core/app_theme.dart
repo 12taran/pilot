@@ -19,7 +19,7 @@ class AppTheme {
         bodyMedium: TextStyle(color: Colors.black),
         labelMedium: TextStyle(color: Colors.black54)),
     colorScheme: const ColorScheme.light(
-      primary:const Color.fromARGB(255, 56, 98, 57),
+      primary:Color(0x57BB5B),
       secondary: const Color.fromARGB(255, 56, 98, 57),
       error: Colors.red,
       background: Colors.white,

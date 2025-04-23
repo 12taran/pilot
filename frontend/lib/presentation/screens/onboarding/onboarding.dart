@@ -21,7 +21,7 @@ class OnboardingScreenState extends State<OnboardingScreen> {
 
   List<Map<String, String>> onboardingData = [
     {
-      "title": "Welcome to Pilot",
+      "title": "Welcome to Share Sampatti",
       "desc": " Real estate fractional ownership made easy."
     },
     {

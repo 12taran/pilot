@@ -70,8 +70,8 @@ class _PropertydetailState extends State<Propertydetail> {
                                       child: Text(
                                         widget.property['type']!,
                                         style: TextStyle(
-                                            fontSize: Constants.fontSizeTiny,
-                                            fontWeight: FontWeight.w900,
+                                            fontSize: Constants.fontSizeSubTitle,
+                                            fontWeight: FontWeight.w800,
                                             color: Colors.black54),
                                       ),
                                     ),
