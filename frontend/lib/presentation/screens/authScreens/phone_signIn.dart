@@ -135,7 +135,7 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                               : "Send OTP",
                           onPressed: () async {
                             authController.isOtpSent.value
-                                ? authController.verifyOtp()
+                                ? authController.verifyOtp(true)
                                 : await authController.sendOtp();
                             print('Otp sends');
                           }),
@@ -172,27 +172,27 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                          Center(
-                      child: CustomContainer(
-                          padding: 0,
-                          height: 50,
-                          width: Get.width * 0.2,
-                          borderRadius: 5,
-                          borderColor: Colors.grey,
-                          margin: const EdgeInsets.all(8),
-                          child: TextButton(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Image.asset('assets/images/google.png'),
-                               
-                              ],
-                            ),
-                            onPressed: () {
-                          
-                            },
-                          )),
-                    ),
+                        Center(
+                          child: CustomContainer(
+                              padding: 0,
+                              height: 50,
+                              width: Get.width * 0.2,
+                              borderRadius: 5,
+                              borderColor: Colors.grey,
+                              margin: const EdgeInsets.all(8),
+                              child: TextButton(
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Image.asset('assets/images/google.png'),
+                                  ],
+                                ),
+                                onPressed: () async {
+                                  await authController.signInWithGoogle();
+                                },
+                              )),
+                        ),
                         Center(
                           child: CustomContainer(
                               padding: 0,
@@ -210,7 +210,7 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                                   ],
                                 ),
                                 onPressed: () async {
-                                  
+                                  await authController.signInWithFacebook();
                                 },
                               )),
                         ),

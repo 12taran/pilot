@@ -130,7 +130,7 @@ class PageRoutes {
           Get.put(() => sharedPreferences, permanent: true);
         }),
       ),
-       GetPage(
+      GetPage(
         name: register,
         page: () => const RegisterScreen(),
         transition: Transition.zoom,

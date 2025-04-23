@@ -159,7 +159,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                               : "Send OTP",
                           onPressed: () async {
                             authController.isOtpSent.value
-                                ? authController.verifyOtp()
+                                ? authController.verifyOtp(false)
                                 : await authController.sendOtp();
                             print('Otp sends');
                           }),
@@ -212,8 +212,8 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                                     Image.asset('assets/images/google.png'),
                                   ],
                                 ),
-                                onPressed: () {
-                                  authController.signInWithGoogle();
+                                onPressed: () async {
+                                  await authController.signInWithGoogle();
                                 },
                               )),
                         ),
