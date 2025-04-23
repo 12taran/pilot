@@ -194,7 +194,7 @@ class _HomePageState extends State<HomePage> {
                                   color: Colors.white)
                                   ),*/
                                   Text(   style: GoogleFonts.aleo(
-                                  fontSize: 23,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.w500,
                                   color: Color.fromARGB(255, 251, 245, 245)),  "Real Estate for Everyone.",),
                             
