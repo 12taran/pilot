@@ -533,49 +533,74 @@ class _HomePageState extends State<HomePage> {
                     alignment:Alignment.topCenter,
                     children: [
                       
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(' The smart way to invest in assets',
-                              style: TextStyle(
-                                  fontSize: Constants.fontSizeSubTitle,
-                                  fontWeight: FontWeight.w600,
-                                  color: const Color.fromARGB(255, 2, 2, 72))),
-                                   Text('fractionally, securely, profitably',
-                              style: TextStyle(
-                                  fontSize: Constants.fontSizeSubTitle,
-                                  fontWeight: FontWeight.w600,
-                                  color: const Color.fromARGB(255, 2, 2, 72))),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          GlowContainer(
-                            containerOptions:
-                                const ContainerOptions(borderRadius: 10,borderSide: BorderSide(width: 2)
-                                ),
-                            // optional, or customize
-                            gradientColors: const [
-                              Colors.orange,
-                              Color.fromARGB(255, 221, 96, 58),
-                              
-                            ],
-                            glowRadius: 5,
-                            // match button's border
-                            child: CustomButtons(
-                              width: Get.width * 0.7,
-                              borderRadius: 10,
-                              margin: const EdgeInsets.all(0),
-                              color: Colors.white,
-                              textColor: Colors.orange,
-                              text: 'Invest Now',
-                              onPressed: () {
-                                print('Hello');
-                                  
-                              },
-                            ),
-                          )
-                        ],
-                      ),
+                      Stack(
+  children: [
+    // Background image (lowest in stack)
+    Opacity(
+      opacity: 0.5,
+      child: Image.asset(
+        'assets/images/invest.png',
+        width: Get.width * 0.9,
+        fit: BoxFit.cover,
+      ),
+    ),
+
+    // Foreground content (text + button) wrapped in a semi-transparent container
+    Positioned(
+      left: Get.width * 0.05,
+      top: Get.height * 0.05,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            'The smart way to invest in assets',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: Constants.fontSizeSubTitle,
+              fontWeight: FontWeight.w600,
+              color: const Color.fromARGB(255, 2, 2, 72),
+            ),
+          ),
+          SizedBox(height: 8),
+          Text(
+            'fractionally, securely, profitably',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: Constants.fontSizeSubTitle,
+              fontWeight: FontWeight.w600,
+              color: const Color.fromARGB(255, 2, 2, 72),
+            ),
+          ),
+          SizedBox(height: 16),
+          GlowContainer(
+            containerOptions: const ContainerOptions(
+              borderRadius: 10,
+              borderSide: BorderSide(width: 2),
+            ),
+            gradientColors: const [
+              Colors.orange,
+              Color.fromARGB(255, 221, 96, 58),
+            ],
+            glowRadius: 5,
+            child: CustomButtons(
+              width: Get.width * 0.6,
+              borderRadius: 10,
+              margin: const EdgeInsets.all(0),
+              color: Colors.white,
+              textColor: Colors.orange,
+              text: 'Invest Now',
+              onPressed: () {
+                print('Hello');
+              },
+            ),
+          ),
+        ],
+      ),
+    ),
+  ],
+)
+
                     ],
                   ),
                 ),
