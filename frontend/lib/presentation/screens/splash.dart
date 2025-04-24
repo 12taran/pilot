@@ -40,7 +40,7 @@ class SplashScreenState extends State<SplashScreen> {
       if (FirebaseAuth.instance.currentUser != null) {
         final sharedPreferences = await SharedPreferences.getInstance();
         log('User id h ${sharedPreferences.getString(Constants.USER_ID)}');
-        await usercontroller.getUserDetails(
+        usercontroller.getUserDetails(
             sharedPreferences.getString(Constants.USER_ID) ?? "");
         usercontroller.setuserDetail(usercontroller.userDetail.value);
         await Get.offAndToNamed(PageRoutes.bottomNav);
@@ -63,13 +63,13 @@ class SplashScreenState extends State<SplashScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(
-                  Icons.flutter_dash,
-                  color: Theme.of(context).colorScheme.primary,
-                  size: 100,
+                Image.asset(
+                  "assets/icon/logo.png",
+                  height: 200,
+                  width: 200,
                 ),
                 const SizedBox(
-                  height: 50,
+                  height: 15,
                 ),
                 Text(
                   "The Best Investment on Earth is Earth",

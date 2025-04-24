@@ -1,26 +1,19 @@
 // ignore_for_file: use_key_in_widget_constructors
 
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:pilot_project/core/components/MyTextField.dart';
-import 'package:pilot_project/presentation/controllers/authController.dart';
 import 'package:pilot_project/presentation/controllers/theme_controller.dart';
+import 'package:pilot_project/presentation/controllers/userController.dart';
 import 'package:pilot_project/presentation/utils_widget.dart';
 
 import 'package:pilot_project/routes/page_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/config.dart';
-import 'package:pilot_project/routes/page_route.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
-
+  ProfilePage({super.key});
+  Usercontroller usercontroller = Get.find<Usercontroller>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +25,7 @@ class ProfilePage extends StatelessWidget {
             Container(
               width: Get.width,
               height: Get.height * 0.2,
-              color: Theme.of(context).colorScheme.primary,
+              color: Theme.of(context).colorScheme.secondary,
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -54,14 +47,14 @@ class ProfilePage extends StatelessWidget {
                       Column(
                         children: [
                           Text(
-                            'Prince Dubey',
+                            usercontroller.nameController.text,
                             style: GoogleFonts.acme(
                               color: Colors.white,
                               fontSize: Constants.fontSizeHeading,
                             ),
                           ),
                           Text(
-                            '123456XXXX',
+                            usercontroller.mobileController.text,
                             style: GoogleFonts.acme(
                               color: Colors.white,
                               fontSize: Constants.fontSizeHeading,

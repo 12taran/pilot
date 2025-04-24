@@ -80,9 +80,13 @@ class _PortfolioPageState extends State<PortfolioPage> {
                   ),
                   Row(
                     children: [
-                      const Icon(
-                        Icons.arrow_upward,
+                      Image.asset(
+                        'assets/images/increase.png',
+                        height: 25,
                         color: Colors.green,
+                      ),
+                      SizedBox(
+                        width: 5,
                       ),
                       Text(
                         '49.9%',

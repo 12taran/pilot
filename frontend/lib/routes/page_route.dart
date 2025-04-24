@@ -10,7 +10,7 @@ import 'package:pilot_project/presentation/screens/user/userDetail.dart';
 import 'package:pilot_project/presentation/screens/onboarding/onboarding.dart';
 
 import 'package:pilot_project/presentation/screens/splash.dart';
-import 'package:pilot_project/presentation/screens/user/investpage.dart'; 
+import 'package:pilot_project/presentation/screens/user/investpage.dart';
 import 'package:pilot_project/presentation/screens/user/navigation.dart';
 import 'package:pilot_project/presentation/screens/user/profile.dart';
 import 'package:pilot_project/presentation/screens/user/propertyDetail.dart';
@@ -40,16 +40,16 @@ class PageRoutes {
   static List<GetPage> getPageRoutes() {
     // final globleMiddleware = [GlobalMiddleware()];
     return [
-      GetPage(name: invest, page:() => const Investpage(),
-    
+      GetPage(
+        name: invest,
+        page: () => const Investpage(),
         transitionDuration: const Duration(milliseconds: 300),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);
           Get.lazyPut(() => PropertyController());
         }),
-       
-        ),
+      ),
       GetPage(
         name: splashScreen,
         page: () => const SplashScreen(),
@@ -124,7 +124,7 @@ class PageRoutes {
       ),
       GetPage(
         name: drawerProfile,
-        page: () => const ProfilePage(),
+        page: () => ProfilePage(),
         transition: Transition.zoom,
         transitionDuration: const Duration(milliseconds: 300),
         binding: BindingsBuilder(() async {

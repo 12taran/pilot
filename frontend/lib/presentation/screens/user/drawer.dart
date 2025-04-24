@@ -4,11 +4,13 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/core/utils.dart';
+import 'package:pilot_project/presentation/controllers/userController.dart';
 import 'package:pilot_project/presentation/widgets/utils_widget.dart';
 import 'package:pilot_project/routes/page_route.dart';
 
 class Drawer extends StatelessWidget {
-  const Drawer({super.key});
+  Drawer({super.key});
+  Usercontroller usercontroller = Get.find<Usercontroller>();
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +45,14 @@ class Drawer extends StatelessWidget {
                       Column(
                         children: [
                           Text(
-                            'Prince Dubey',
+                            usercontroller.nameController.text,
                             style: GoogleFonts.acme(
                               color: Colors.white,
                               fontSize: Constants.fontSizeHeading,
                             ),
                           ),
                           Text(
-                            '123456XXXX',
+                            usercontroller.mobileController.text,
                             style: GoogleFonts.acme(
                               color: Colors.white,
                               fontSize: Constants.fontSizeHeading,

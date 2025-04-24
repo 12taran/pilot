@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                           child: GestureDetector(
                               onTap: () {
                                 Get.to(
-                                  const ProfilePage(),
+                                  ProfilePage(),
                                   transition: Transition.leftToRight,
                                   duration: const Duration(milliseconds: 300),
                                 );
