@@ -500,6 +500,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Text(
                     pilotcontroller.boardMembers[index]['designation']!,
+                    maxLines: 2,
                     style: GoogleFonts.actor(
                       fontSize: Constants.fontSizeBody,
                       fontWeight: FontWeight.w900,
@@ -691,8 +692,7 @@ class _HomePageState extends State<HomePage> {
                               text: 'Invest Now',
                               onPressed: () {
                                 print('Hello');
-                                Get.toNamed(PageRoutes.invest,
-                                    );
+                                  
                               },
                             ),
                           )
