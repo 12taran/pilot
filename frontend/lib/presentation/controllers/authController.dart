@@ -24,7 +24,7 @@ class AuthController extends GetxController {
   // 🔽 Google Sign-In instance
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  Future<void> sendOtp() async {
+  Future<void> sendOtp(bool isLogin) async {
     String phoneRaw = phoneController.text.trim();
 
     if (phoneRaw == "") {
@@ -44,8 +44,9 @@ class AuthController extends GetxController {
     }
 
     String phone = "+91$phoneRaw";
+
     bool doesExist = await AuthRepo().userLogin(phoneRaw);
-    if (doesExist) {
+    if (!doesExist && isLogin) {
       return;
     } else {
       print('I am here');
@@ -141,7 +142,7 @@ class AuthController extends GetxController {
 
   Future<bool> userRegisterVerify(
       String phone, String name, String address) async {
-    bool isSuccess = await AuthRepo().userRegisterVerify(phone,name,address);
+    bool isSuccess = await AuthRepo().userRegisterVerify(phone, name, address);
     return isSuccess;
   }
 
@@ -152,7 +153,9 @@ class AuthController extends GetxController {
       log('Facebook Login Status: ${loginResult.status}');
       if (loginResult.status == LoginStatus.failed) {
         log('Facebook Login Error: ${loginResult.message}');
+        return null;
       }
+
       if (loginResult.accessToken != null) {
         log('Facebook Access Token: ${loginResult.accessToken!.tokenString}');
       }
@@ -175,12 +178,24 @@ class AuthController extends GetxController {
             await FirebaseAuth.instance.fetchSignInMethodsForEmail(email!);
 
         if (signInMethods.contains('google.com')) {
-          // You can prompt the user to sign in with Google
-          // Then link the Facebook credential
-          // Example (after successful Google login):
-          // await user.linkWithCredential(pendingCred);
-          print('Please sign in using Google and link Facebook later.');
+          // Ask user to sign in with Google and link Facebook
+          Get.defaultDialog(
+            title: 'Account Conflict',
+            middleText:
+                'This account already exists with Google. Do you want to sign in with Google and link Facebook?',
+            textConfirm: 'Continue',
+            textCancel: 'Cancel',
+            onConfirm: () {
+              Get.back(); // close dialog
+              signInWithGoogleAndLinkFacebook(pendingCred!);
+            },
+            onCancel: () {
+              Get.back();
+            },
+          );
         } else {
+          log('Conflicting email: $email');
+
           print('Linked with another provider: $signInMethods');
         }
       } else {
@@ -191,6 +206,39 @@ class AuthController extends GetxController {
     }
 
     return null;
+  }
+
+  Future<void> signInWithGoogleAndLinkFacebook(
+      AuthCredential pendingCredential) async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+
+      if (googleUser == null) {
+        Utils.showToast(message: 'Google Sign-In canceled');
+        return;
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      final googleCredential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      // Sign in with Google
+      UserCredential googleUserCredential =
+          await FirebaseAuth.instance.signInWithCredential(googleCredential);
+
+      // Now link Facebook credential to this user
+      await googleUserCredential.user?.linkWithCredential(pendingCredential);
+
+      Utils.showToast(message: 'Facebook account linked successfully!');
+      Get.offAllNamed(PageRoutes.bottomNav);
+    } catch (e) {
+      print("Error linking Facebook with Google account: $e");
+      Utils.showToast(message: 'Failed to link accounts.');
+    }
   }
 
   Future<bool> editUser(String fullname, String address) async {

@@ -85,7 +85,7 @@ class Drawer extends StatelessWidget {
               leading: const Icon(Icons.monetization_on),
               title: const Text('Virtual Wallet'),
               onTap: () {
-              //  Get.toNamed(PageRoutes.setting);
+                //  Get.toNamed(PageRoutes.setting);
               },
             ),
             const Divider(
@@ -96,7 +96,7 @@ class Drawer extends StatelessWidget {
               leading: const Icon(Icons.food_bank_outlined),
               title: const Text('Bank Details'),
               onTap: () {
-             //   Get.toNamed(PageRoutes.setting);
+                //   Get.toNamed(PageRoutes.setting);
               },
             ),
             const Divider(
@@ -107,7 +107,7 @@ class Drawer extends StatelessWidget {
               leading: const Icon(Icons.person),
               title: const Text(' About Us'),
               onTap: () {
-             //   Get.toNamed(PageRoutes.setting);
+                //   Get.toNamed(PageRoutes.setting);
               },
             ),
             const Divider(
@@ -118,7 +118,7 @@ class Drawer extends StatelessWidget {
               leading: const Icon(Icons.question_mark),
               title: const Text('FAQs'),
               onTap: () {
-              //  Get.toNamed(PageRoutes.setting);
+                //  Get.toNamed(PageRoutes.setting);
               },
             ),
             const Divider(
@@ -144,7 +144,7 @@ class Drawer extends StatelessWidget {
                     message: "Sure want to Logout?",
                     onYesPressed: () async {
                       await FirebaseAuth.instance.signOut();
-                      Get.offAndToNamed(PageRoutes.phonesignup);
+                      Get.offAndToNamed(PageRoutes.phonesignin);
                     },
                     onNoPressed: () {
                       Get.back();

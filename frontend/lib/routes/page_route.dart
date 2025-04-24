@@ -10,7 +10,7 @@ import 'package:pilot_project/presentation/screens/authScreens/userDetail.dart';
 import 'package:pilot_project/presentation/screens/onboarding/onboarding.dart';
 
 import 'package:pilot_project/presentation/screens/splash.dart';
-import 'package:pilot_project/presentation/screens/user/investpage.dart';
+import 'package:pilot_project/presentation/screens/user/investpage.dart'; 
 import 'package:pilot_project/presentation/screens/user/navigation.dart';
 import 'package:pilot_project/presentation/screens/user/profile.dart';
 import 'package:pilot_project/presentation/screens/user/propertyDetail.dart';
