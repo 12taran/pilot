@@ -165,15 +165,15 @@ class _HomePageState extends State<HomePage> {
                         width:0.5,
                       )),
                   height: Get.height * 0.2,
-                  width: Get.width*0.95,
+                  width: Get.width*0.9,
                   child: Stack(
                     children: [
-                     /* Positioned(left: 0,bottom:0,
+                      Positioned(left: 0,bottom:0,
                         child:Image.asset('assets/images/women.png',
                         fit: BoxFit.fill,
                         height: Get.height * 0.2,
-                        width: Get.width*0.3,)),*/
-                      Positioned(
+                        width: Get.width*0.3,)),
+                      /*Positioned(
                         right: 20,bottom:40,
                         child: Text('Share Sampatti',
                             style: GoogleFonts.acme(
@@ -182,7 +182,7 @@ class _HomePageState extends State<HomePage> {
 
                                 color:Color.fromARGB(255, 236, 236, 224)// const Color.fromARGB(255, 129, 125, 125)
                                 )),
-                      ),
+                      ),*/
                       Positioned(
                         top: 30,right:10,
                         child: Column(
@@ -243,48 +243,41 @@ class _HomePageState extends State<HomePage> {
                         padding: 0,
                         borderWidth: 3,
                         borderRadius: 10,
-                        width: Get.width * 0.9,
+                        width: Get.width * 0.8,
                         height: Get.height*0.34,
                         borderColor: Colors.white,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 15.0,top:4),
-                                  child: Text(
-                                    propertyController.properties[i]['name']!,
-                                    style: GoogleFonts.almarai(
-                                      color: Color.fromARGB(255, 49, 18, 171),
-                                        fontSize: Constants.fontSizeBody,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ),]),
+                             Padding(
+                               padding: const EdgeInsets.only(left: 15.0,top:4),
+                               child: Text(
+                                 propertyController.properties[i]['name']!,
+                                 style: GoogleFonts.almarai(
+                                   color: Color.fromARGB(255, 49, 18, 171),
+                                     fontSize: Constants.fontSizeBody,
+                                     fontWeight: FontWeight.w500),
+                               ),
+                             ),
                                  Padding(
                               padding: const EdgeInsets.all(5.0),
-                              child: Center(
-                                child: ClipRRect(
-                                  borderRadius:
-                                      const BorderRadius.all(Radius.circular(5)),
-                                  child: Image.asset(
-                                    propertyController.properties[i]['image']!,
-                                    fit: BoxFit.cover,
-                                    height: Get.height * 0.22,
-                                    width: Get.width * 0.8,
-                                  ),
+                              child: ClipRRect(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(5)),
+                                child: Image.asset(
+                                  propertyController.properties[i]['image']!,
+                                  fit: BoxFit.cover,
+                                  height: Get.height * 0.22,
+                                  width: Get.width * 0.9,
                                 ),
                               ),
                             ),
-                            Divider(
-                              color: Colors.grey,
-                              thickness: 1,
-                            ),
+                          
+                           
                             Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 4.0),
+                                  const EdgeInsets.symmetric(horizontal: 2.0),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
@@ -346,8 +339,6 @@ class _HomePageState extends State<HomePage> {
                             ),
                             
                            
-                          
-                           
                             
                             
                           
@@ -358,7 +349,7 @@ class _HomePageState extends State<HomePage> {
                         
                   
                   options: CarouselOptions(
-                      viewportFraction: 0.9,
+                      viewportFraction: 0.8,
                       enlargeCenterPage: false,
                       aspectRatio: 16 / 9,
                       height: Get.height * 0.4)),
@@ -472,11 +463,11 @@ class _HomePageState extends State<HomePage> {
     color: const Color.fromARGB(255, 211, 223, 212),
   ),
   child: Padding(
-    padding: const EdgeInsets.only(top: 10, left: 10, bottom: 10),
+    padding: const EdgeInsets.only(top: 10, left: 5, bottom: 10),
     child: Column(
       mainAxisSize: MainAxisSize.max,
       children: [
-        SizedBox(height: Get.height * 0.015), // 1.5% of screen height
+        //SizedBox(height: Get.height * 0.015), // 1.5% of screen height
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -486,7 +477,7 @@ class _HomePageState extends State<HomePage> {
               child: Image.asset(
                 propertyController.properties[index]['image']!,
                 fit: BoxFit.cover,
-                height: Get.height * 0.23,
+                height: Get.height * 0.25,
                 width: Get.width * 0.4,
               ),
             ),
