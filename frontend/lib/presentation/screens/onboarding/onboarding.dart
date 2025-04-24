@@ -40,7 +40,6 @@ class OnboardingScreenState extends State<OnboardingScreen> {
       "desc": "Track your investments and see them grow.",
       "image": "assets/images/motivation1.jpg"
     },*/
-
   ];
 
   @override
@@ -170,15 +169,16 @@ class OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.asset(
               data["image"]!,
-              height: Get.height * 0.5,
+              height: Get.height * 0.45,
               width: Get.width * 0.8,
               fit: BoxFit.fill,
-            
             ),
           ),
           SizedBox(

@@ -1,10 +1,14 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/config.dart';
+import 'package:pilot_project/presentation/controllers/userController.dart';
 //import 'package:pilot_project/presentation/screens/onboarding/onboarding.dart';
 import 'package:pilot_project/routes/page_route.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// @author PRINCE DUBEY
 /// @email princedubey80066@gmail.com
@@ -19,7 +23,7 @@ class SplashScreen extends StatefulWidget {
 
 class SplashScreenState extends State<SplashScreen> {
   double _opacity = 0.0;
-
+  Usercontroller usercontroller = Get.put(Usercontroller());
   @override
   void initState() {
     super.initState();
@@ -32,10 +36,17 @@ class SplashScreenState extends State<SplashScreen> {
     });
 
     // Navigate after delay
-    Future.delayed(const Duration(seconds: 3), () {
-      FirebaseAuth.instance.currentUser != null
-          ? Get.offAndToNamed(PageRoutes.bottomNav)
-          : Get.offAndToNamed(PageRoutes.onboarding);
+    Future.delayed(const Duration(seconds: 3), () async {
+      if (FirebaseAuth.instance.currentUser != null) {
+        final sharedPreferences = await SharedPreferences.getInstance();
+        log('User id h ${sharedPreferences.getString(Constants.USER_ID)}');
+        await usercontroller.getUserDetails(
+            sharedPreferences.getString(Constants.USER_ID) ?? "");
+        usercontroller.setuserDetail(usercontroller.userDetail.value);
+        await Get.offAndToNamed(PageRoutes.bottomNav);
+      } else {
+        Get.offAndToNamed(PageRoutes.onboarding);
+      }
     });
   }
 

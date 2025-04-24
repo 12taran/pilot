@@ -5,7 +5,7 @@ import 'package:pilot_project/presentation/screens/authScreens/email_password_si
 import 'package:pilot_project/presentation/screens/authScreens/phone_signIn.dart';
 import 'package:pilot_project/presentation/screens/authScreens/phone_sign_up.dart';
 import 'package:pilot_project/presentation/screens/authScreens/register.dart';
-import 'package:pilot_project/presentation/screens/authScreens/userDetail.dart';
+import 'package:pilot_project/presentation/screens/user/userDetail.dart';
 
 import 'package:pilot_project/presentation/screens/onboarding/onboarding.dart';
 

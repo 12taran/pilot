@@ -1,5 +1,6 @@
 //import 'package:http/http.dart';
 import 'package:pilot_project/core/base_services.dart';
+import 'package:pilot_project/core/session_manager.dart';
 import 'package:pilot_project/core/utils.dart';
 import 'package:pilot_project/routes/api_routes.dart';
 
@@ -15,6 +16,7 @@ class AuthRepo {
     print("Helllooo");
     if (response.data['success'] == true) {
       Utils.showToast(message: response.data['message']);
+      await SessionManager().setUserId(response.data['userId']);
       return true;
     } else {
       Utils.showToast(message: response.data['message']);
@@ -36,6 +38,7 @@ class AuthRepo {
 
     if (response.data['success'] == true) {
       Utils.showToast(message: response.data['message']);
+      await SessionManager().setUserId(response.data['userId']);
       return true;
     } else {
       Utils.showToast(message: response.data['message']);
@@ -56,32 +59,18 @@ class AuthRepo {
       if (response.data['success'] == true) {
         // Success case
         // Utils.showToast(message: response.data['message']);
+        await SessionManager().setUserId(response.data['userId']);
         return true;
       } else {
         // Failure case
         Utils.showToast(message: response.data['message']);
+
         return false;
       }
     } catch (e) {
       // Handle any exceptions during the network call
       Utils.showToast(message: "An error occurred: ${e.toString()}");
       return false; // Indicate failure
-    }
-  }
-
-  Future<bool> userEdit(String userId, String fullname, String address) async {
-    final endpoint = apiRoutes.userEdit.replaceFirst(':id', userId);
-
-    final response = await BaseService().patchData(
-        endPoint: endpoint,
-        body: {"fullname": fullname, "address": address},
-        isTokenRequired: false);
-    if (response.data['success'] == true) {
-      Utils.showToast(message: response.data['message']);
-      return true;
-    } else {
-      Utils.showToast(message: response.data['message']);
-      return false;
     }
   }
 }

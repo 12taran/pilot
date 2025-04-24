@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:pilot_project/core/session_manager.dart';
 import 'package:pilot_project/core/utils.dart';
 import 'package:pilot_project/data/repos/auth_repo.dart';
 import 'package:pilot_project/routes/page_route.dart';
@@ -143,6 +144,7 @@ class AuthController extends GetxController {
   Future<bool> userRegisterVerify(
       String phone, String name, String address) async {
     bool isSuccess = await AuthRepo().userRegisterVerify(phone, name, address);
+   
     return isSuccess;
   }
 
@@ -239,11 +241,5 @@ class AuthController extends GetxController {
       print("Error linking Facebook with Google account: $e");
       Utils.showToast(message: 'Failed to link accounts.');
     }
-  }
-
-  Future<bool> editUser(String fullname, String address) async {
-    bool isSuccess = await AuthRepo()
-        .userEdit("6805e94a873ed5bd0c51f356", fullname, address);
-    return isSuccess;
   }
 }

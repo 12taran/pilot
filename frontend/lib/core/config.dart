@@ -27,6 +27,7 @@ class Constants {
   // Shared Preferences Keys
   static const String TOKEN = 'TOKEN';
   static String FIREBASE_TOKEN = "FIREBASE_TOKEN";
+  static String USER_ID = "USER_ID";
   static bool isLockEnabled = false;
   static String userType = "STAFF";
 }

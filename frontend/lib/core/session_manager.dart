@@ -22,4 +22,8 @@ class SessionManager {
     sharedPreferences ??= await SharedPreferences.getInstance();
     return sharedPreferences?.getString(Constants.FIREBASE_TOKEN);
   }
+  Future<void >setUserId(String userId) async{
+    sharedPreferences ??= await SharedPreferences.getInstance();
+    sharedPreferences?.setString(Constants.USER_ID, userId);
+  }
 }
