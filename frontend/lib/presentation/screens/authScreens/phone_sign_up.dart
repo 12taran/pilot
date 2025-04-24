@@ -83,7 +83,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                       textStyle:
                           GoogleFonts.acme(fontSize: Constants.fontSizeBody),
                       onChanged: (v) {},
-                      focusedBorderColor: Colors.green.withBlue(200),
+                        focusedBorderColor: Theme.of(context).colorScheme.primary,
                       isLabelEnabled: false,
                       validator: (v) => v!.isEmpty ? ' Name is required' : null,
                       keyboardType: TextInputType.name,
@@ -96,7 +96,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                       textStyle:
                           GoogleFonts.acme(fontSize: Constants.fontSizeBody),
                       onChanged: (v) {},
-                      focusedBorderColor: Colors.green.withBlue(200),
+                      focusedBorderColor: Theme.of(context).colorScheme.primary,
                       isLabelEnabled: false,
                       validator: (v) =>
                           v!.isEmpty ? 'Mobile Number is required' : null,
@@ -109,7 +109,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                       textStyle:
                           GoogleFonts.acme(fontSize: Constants.fontSizeBody),
                       onChanged: (v) {},
-                      focusedBorderColor: Colors.green.withBlue(200),
+                        focusedBorderColor: Theme.of(context).colorScheme.primary,
                       isLabelEnabled: false,
                       validator: (v) =>
                           v!.isEmpty ? ' Address is required' : null,
