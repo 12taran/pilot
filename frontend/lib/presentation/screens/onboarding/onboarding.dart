@@ -22,20 +22,25 @@ class OnboardingScreenState extends State<OnboardingScreen> {
   List<Map<String, String>> onboardingData = [
     {
       "title": "Welcome to Share Sampatti",
-      "desc": " Real estate fractional ownership made easy."
+      "desc": " Real estate fractional ownership made easy.",
+      "image": "assets/images/motivation1.jpg"
     },
     {
       "title": "Smart Investments",
-      "desc": "Invest smartly in properties with low capital."
+      "desc": "Invest smartly in properties with low capital.",
+      "image": "assets/images/motivation2.jpg"
     },
     {
       "title": "Track & Grow",
-      "desc": "Track your investments and see them grow."
+      "desc": "Track your investments and see them grow.",
+      "image": "assets/images/motivation3.jpg"
     },
-    {
+    /*{
       "title": "Invest Simplified",
-      "desc": "Track your investments and see them grow."
-    },
+      "desc": "Track your investments and see them grow.",
+      "image": "assets/images/motivation1.jpg"
+    },*/
+
   ];
 
   @override
@@ -70,7 +75,7 @@ class OnboardingScreenState extends State<OnboardingScreen> {
           ),
 
           // Get Started Button
-          if (currentPage == 3)
+          if (currentPage == 2)
             Positioned(
               bottom: 40,
               left: 40,
@@ -83,7 +88,7 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                 text: "Get Started",
               ),
             ),
-          if (currentPage < 3)
+          if (currentPage < 2)
             Positioned(
               bottom: 40,
               left: 40,
@@ -101,7 +106,7 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                 text: "Next",
               ),
             ),
-          if (currentPage < 3)
+          if (currentPage < 2)
             Positioned(
               top: 60,
               right: 30,
@@ -163,6 +168,17 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                 color: Theme.of(context).textTheme.labelMedium?.color,
                 fontSize: Constants.fontSizeSubTitle,
               ),
+            ),
+          ),
+          SizedBox(height: 20,),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.asset(
+              data["image"]!,
+              height: Get.height * 0.5,
+              width: Get.width * 0.8,
+              fit: BoxFit.fill,
+            
             ),
           ),
           SizedBox(
