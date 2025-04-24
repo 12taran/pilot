@@ -12,6 +12,7 @@ import 'package:pilot_project/presentation/controllers/pilotController.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/screens/user/profile.dart';
 import 'package:pilot_project/routes/page_route.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -26,11 +27,7 @@ class _HomePageState extends State<HomePage> {
     'assets/images/chandigarh.jpg',
     'assets/images/kasol.jpg'
   ];
-  List<String> motivation = [
-    "assets/images/motivation1.jpg",
-    "assets/images/motivation2.jpg",
-    "assets/images/motivation3.jpg",
-  ];
+  
   PropertyController propertyController = Get.put(PropertyController());
   Pilotcontroller pilotcontroller = Get.put(Pilotcontroller());
   @override
@@ -158,49 +155,28 @@ class _HomePageState extends State<HomePage> {
                 
                         
                       ]),
-                      boxShadow: [BoxShadow(spreadRadius: 1,blurRadius: 5)],
+                 
                       border: Border.all(
                         color: const Color.fromARGB(255, 107, 106, 106),
                         width:0.5,
                       )),
                   height: Get.height * 0.2,
                   width: Get.width*0.9,
-                  child: Stack(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    
                     children: [
-                      Positioned(left: 0,bottom:0,
-                        child:Image.asset('assets/images/women.png',
-                        fit: BoxFit.fill,
-                        height: Get.height * 0.2,
-                        width: Get.width*0.3,)),
-                      /*Positioned(
-                        right: 20,bottom:40,
-                        child: Text('Share Sampatti',
-                            style: GoogleFonts.acme(
-                                fontSize: 40,
-                                fontWeight: FontWeight.w700,
-
-                                color:Color.fromARGB(255, 236, 236, 224)// const Color.fromARGB(255, 129, 125, 125)
-                                )),
-                      ),*/
-                      Positioned(
-                        top: 30,right:10,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            /*Text('Invest in Real estate Easily',
-                              style: GoogleFonts.aleo(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w900,
-                                  color: Colors.white)
-                                  ),*/
-                      Text(
+                      /*Text('Invest in Real estate Easily',
                         style: GoogleFonts.aleo(
                             fontSize: 20,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.white)
+                            ),*/
+                            Text(   style: GoogleFonts.aleo(
+                            fontSize: 20,
                             fontWeight: FontWeight.w500,
-                            color: const Color.fromARGB(255, 251, 245, 245)),
-                        "Real Estate for Everyone.",
-                      ),
+                            color: Color.fromARGB(255, 251, 245, 245)),  "Investing in Real Estate \nmade easy for everyone",),
+                      
                     ],
                   ),
                 ),
@@ -270,7 +246,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Image.asset(
                                   propertyController.properties[i]['image']!,
                                   fit: BoxFit.cover,
-                                  height: Get.height * 0.22,
+                                  height: Get.height * 0.2,
                                   width: Get.width * 0.9,
                                 ),
                               ),
@@ -326,13 +302,24 @@ class _HomePageState extends State<HomePage> {
                                       Get.toNamed(PageRoutes.propertydetail,
                                           arguments: detail);
                                     },
-                                    child: Text(
-                                      'Invest Now',
-                                      style: GoogleFonts.aBeeZee(
-                                        fontSize: Constants.fontSizeSmall,
-                                        fontWeight: FontWeight.w400,
-                                        color: Color.fromARGB(255, 232, 125, 43),
-                                        letterSpacing: 1,
+                                    child: Container(
+                                      height: Get.height * 0.03,
+                                      width: Get.width * 0.25,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                         color: Colors.white,
+                                          ),
+                                      child: Center(
+                                        child: Text(
+                                          'Invest Now',
+                                          style: GoogleFonts.aBeeZee(
+                                            fontSize: Constants.fontSizeSmall,
+                                            fontWeight: FontWeight.w600,
+                                            color: Color.fromARGB(255, 232, 125, 43),
+                                            letterSpacing: 1,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   )),
@@ -522,50 +509,76 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(5.0),
+            Padding(
+                padding: const EdgeInsets.all(1.0),
                 child: Container(
+                  width: Get.width*0.95,
                   decoration: BoxDecoration(
-                      boxShadow: const [
-                        BoxShadow(spreadRadius: 1, blurRadius: 5)
-                      ],
-                      borderRadius: BorderRadius.circular(20),
-                      gradient: const LinearGradient(colors: [
-                        Color.fromARGB(255, 75, 138, 75),
-                        Color.fromARGB(255, 44, 121, 39),
-                        Color.fromARGB(255, 37, 72, 33),
-                      ])),
+                     border: Border.all(
+    color: const Color.fromARGB(255, 107, 106, 106),
+    width:0.5,
+  ),
+                      borderRadius: BorderRadius.circular(10),
+                      shape: BoxShape.rectangle,
+                      boxShadow: [BoxShadow(spreadRadius: 1,blurRadius:2)],
+                     color: Color.fromARGB(255, 236, 233, 233)
+                      ),
                   height: Get.height * 0.2,
-                  width: Get.width * 0.9,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child: Stack(
+                    alignment:Alignment.topCenter,
                     children: [
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              children: [
-                                Text(
-                                    "Let's Connect to get you\n Started with PILOT",
-                                    style: TextStyle(
-                                        fontSize: Constants.fontSizeSmall,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white)),
-                                CustomButtons(
-                                    borderRadius: 20,
-                                    color: Colors.white,
-                                    textColor: Colors.orange,
-                                    width: Get.width * 0.4,
-                                    text: 'Call Us',
-                                    onPressed: () {})
-                              ],
-                            )
-                          ]),
+                      
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(' The smart way to invest in assets',
+                              style: TextStyle(
+                                  fontSize: Constants.fontSizeSubTitle,
+                                  fontWeight: FontWeight.w600,
+                                  color: const Color.fromARGB(255, 2, 2, 72))),
+                                   Text('fractionally, securely, profitably',
+                              style: TextStyle(
+                                  fontSize: Constants.fontSizeSubTitle,
+                                  fontWeight: FontWeight.w600,
+                                  color: const Color.fromARGB(255, 2, 2, 72))),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          GlowContainer(
+                            containerOptions:
+                                const ContainerOptions(borderRadius: 10,borderSide: BorderSide(width: 2)
+                                ),
+                            // optional, or customize
+                            gradientColors: const [
+                              Colors.orange,
+                              Color.fromARGB(255, 221, 96, 58),
+                              
+                            ],
+                            glowRadius: 5,
+                            // match button's border
+                            child: CustomButtons(
+                              width: Get.width * 0.7,
+                              borderRadius: 10,
+                              margin: const EdgeInsets.all(0),
+                              color: Colors.white,
+                              textColor: Colors.orange,
+                              text: 'Invest Now',
+                              onPressed: () {
+                                print('Hello');
+                                  
+                              },
+                            ),
+                          )
+                        ],
+                      ),
                     ],
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+               
+              SizedBox(
+                height: 20
+              ),
               /*SizedBox(
                 height: Get.height * 0.01,
               ),*/
@@ -628,69 +641,63 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(height: 20),
               Padding(
-                padding: const EdgeInsets.all(1.0),
+                padding: const EdgeInsets.all(5.0),
                 child: Container(
-                  width: Get.width * 0.95,
                   decoration: BoxDecoration(
-                      border: Border.all(
-                        color: const Color.fromARGB(255, 107, 106, 106),
-                        width: 0.5,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                      shape: BoxShape.rectangle,
-                      boxShadow: const [
-                        BoxShadow(spreadRadius: 1, blurRadius: 2)
-                      ],
-                      color: const Color.fromARGB(255, 236, 233, 233)),
+                    boxShadow: [BoxShadow(spreadRadius: 1,blurRadius: 5)],
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: const LinearGradient(colors: [
+                    Color.fromARGB(255, 75, 138, 75),
+                        Color.fromARGB(255, 44, 121, 39),
+                        Color.fromARGB(255, 37, 72, 33),
+                
+                        
+                      ])),
                   height: Get.height * 0.2,
-                  child: Stack(
-                    alignment: Alignment.topCenter,
+                  width: Get.width*0.9,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(' Invest in Real estate Easily',
-                              style: TextStyle(
-                                  fontSize: Constants.fontSizeSubTitle,
-                                  fontWeight: FontWeight.w600,
-                                  color: const Color.fromARGB(255, 2, 2, 72))),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          GlowContainer(
-                            containerOptions: const ContainerOptions(
-                                borderRadius: 10,
-                                borderSide: BorderSide(width: 2)),
-                            // optional, or customize
-                            gradientColors: const [
-                              Colors.orange,
-                              Color.fromARGB(255, 221, 96, 58),
-                            ],
-                            glowRadius: 5,
-                            // match button's border
-                            child: CustomButtons(
-                              width: Get.width * 0.7,
-                              borderRadius: 10,
-                              margin: const EdgeInsets.all(0),
-                              color: Colors.white,
-                              textColor: Colors.orange,
-                              text: 'Invest Now',
-                              onPressed: () {
-                                print('Hello');
-                                  
-                              },
-                            ),
-                          )
-                        ],
-                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                           
+                            Column(
+                              children: [
+                                Text(
+                                    "Let's Connect to get \nyou Started with PILOT",
+                                    style: TextStyle(
+                                        fontSize: Constants.fontSizeSubTitle,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white)),
+                                CustomButtons(
+                                  borderRadius: 20,
+                                    color: Colors.white,
+                                    textColor: Colors.orange,
+                                    width: Get.width * 0.4,
+                                    text: 'Call Us',
+                                    onPressed: () {_makePhoneCall('addNumber');},)
+                              ],
+                            )
+                          ]),
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ],
       )),
     );
   }
+
+  
+void _makePhoneCall(String phoneNumber) async {
+  final Uri url = Uri(scheme: 'tel', path: phoneNumber);
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url,mode: LaunchMode.externalApplication);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
 }

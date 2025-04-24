@@ -85,7 +85,7 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                       textStyle:
                           GoogleFonts.acme(fontSize: Constants.fontSizeBody),
                       onChanged: (v) {},
-                      focusedBorderColor: Colors.green.withBlue(200),
+                        focusedBorderColor: Theme.of(context).colorScheme.primary,
                       isLabelEnabled: false,
                       validator: (v) =>
                           v!.isEmpty ? 'Mobile Number is required' : null,
@@ -100,7 +100,7 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                         textStyle:
                             GoogleFonts.acme(fontSize: Constants.fontSizeBody),
                         onChanged: (v) {},
-                        focusedBorderColor: Colors.green.withBlue(200),
+                          focusedBorderColor: Theme.of(context).colorScheme.primary,
                         isLabelEnabled: false,
                         validator: (v) => v!.isEmpty ? 'OTP is required' : null,
                         keyboardType: TextInputType.number,

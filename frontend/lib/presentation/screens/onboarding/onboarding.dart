@@ -198,8 +198,8 @@ class OnboardingScreenState extends State<OnboardingScreen> {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       margin: const EdgeInsets.symmetric(horizontal: 6),
-      height: 8,
-      width: currentPage == index ? 12 : 8,
+      height: 6,
+      width: currentPage == index ? 18 : 6,
       decoration: BoxDecoration(
         color: currentPage == index
             ? Theme.of(context).colorScheme.primary

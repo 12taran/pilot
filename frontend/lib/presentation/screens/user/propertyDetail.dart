@@ -18,15 +18,26 @@ class _PropertydetailState extends State<Propertydetail> {
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            SizedBox(
-              width: double.infinity,
-              height: Get.height * 0.3,
-              child:   Image.asset(
-                widget.property['image']!,
-                fit: BoxFit.fill,
-              ) ),
-          const SizedBox(
-            height: 1,
+            Stack(
+            children: [
+              Image.asset(
+                widget.property['image']!, // Replace with your asset or use Image.network
+                width: double.infinity,
+                height: 250,
+                fit: BoxFit.cover,
+              ),
+              Positioned(
+                top: 40,
+                left: 16,
+                child: GestureDetector(
+                  onTap: () => Get.back(),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    child: Icon(Icons.arrow_back),
+                  ),
+                ),
+              ),
+            ],
           ),
           Divider(thickness:2),
           Row(
@@ -92,39 +103,7 @@ class _PropertydetailState extends State<Propertydetail> {
             ),
           )
           ,
-           Padding(
-             padding: const EdgeInsets.all(10.0),
-             child: Row(
-                                      children: [
-                                        Text(
-                                          "Rs ${widget.property['price']!}/- ",
-                                          style: TextStyle(
-                                              fontSize: Constants.fontSizeBody,
-                                              fontWeight: FontWeight.w800,
-                                              color: const Color.fromARGB(
-                                                  255, 26, 27, 26)),
-                                        ),
-                                        const Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Per',
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 26, 27, 26)),
-                                            ),
-                                            Text(
-                                              'SQFT',
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 26, 27, 26)),
-                                            )
-                                          ],
-                                        )
-                                      ],
-                                    ),
-           ),
+           
            Divider(thickness: 2,),
            Padding(
   padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -135,14 +114,44 @@ class _PropertydetailState extends State<Propertydetail> {
   ),
 ),
 Spacer(),
-Center(
-  child: CustomButtons(
-    width: Get.width*0.7,
-    text:'Contact Seller',
-  color: Colors.orange,
-  borderRadius: 20,
-   onPressed: (){}),
-)
+Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            color: Colors.grey[100],
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Price per Alt.SQFT'),
+                    SizedBox(height: 4),
+                    Text(
+                      "Rs ${widget.property['price']!}",
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                     Row(
+                  children: [
+                    CustomButtons(
+                      borderRadius: 20,
+                      width: Get.width*0.3,
+                      color: Colors.orange,
+                      onPressed: () {},
+                      text: 'Sell',
+                    ),
+                    SizedBox(width: 10),
+                   CustomButtons(
+                    borderRadius: 20,
+                    width: Get.width*0.55,
+                    text: 'Buy', onPressed:(){})
+                  ],
+                ),
+                  ],
+                ),
+               
+              ],
+            ),
+),
+
 
          
 
