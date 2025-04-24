@@ -35,11 +35,12 @@ class OnboardingScreenState extends State<OnboardingScreen> {
       "desc": "Track your investments and see them grow.",
       "image": "assets/images/motivation3.jpg"
     },
-    {
+    /*{
       "title": "Invest Simplified",
       "desc": "Track your investments and see them grow.",
       "image": "assets/images/motivation1.jpg"
-    },
+    },*/
+
   ];
 
   @override
@@ -74,7 +75,7 @@ class OnboardingScreenState extends State<OnboardingScreen> {
           ),
 
           // Get Started Button
-          if (currentPage == 3)
+          if (currentPage == 2)
             Positioned(
               bottom: 40,
               left: 40,
@@ -87,7 +88,7 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                 text: "Get Started",
               ),
             ),
-          if (currentPage < 3)
+          if (currentPage < 2)
             Positioned(
               bottom: 40,
               left: 40,
@@ -105,7 +106,7 @@ class OnboardingScreenState extends State<OnboardingScreen> {
                 text: "Next",
               ),
             ),
-          if (currentPage < 3)
+          if (currentPage < 2)
             Positioned(
               top: 60,
               right: 30,

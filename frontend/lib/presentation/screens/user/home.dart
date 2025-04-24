@@ -168,12 +168,12 @@ class _HomePageState extends State<HomePage> {
                   width: Get.width*0.95,
                   child: Stack(
                     children: [
-                      Positioned(left: 0,bottom:0,
+                     /* Positioned(left: 0,bottom:0,
                         child:Image.asset('assets/images/women.png',
                         fit: BoxFit.fill,
                         height: Get.height * 0.2,
-                        width: Get.width*0.3,)),
-                      /*Positioned(
+                        width: Get.width*0.3,)),*/
+                      Positioned(
                         right: 20,bottom:40,
                         child: Text('Share Sampatti',
                             style: GoogleFonts.acme(
@@ -182,7 +182,7 @@ class _HomePageState extends State<HomePage> {
 
                                 color:Color.fromARGB(255, 236, 236, 224)// const Color.fromARGB(255, 129, 125, 125)
                                 )),
-                      ),*/
+                      ),
                       Positioned(
                         top: 30,right:10,
                         child: Column(
@@ -263,6 +263,25 @@ class _HomePageState extends State<HomePage> {
                                         fontWeight: FontWeight.w500),
                                   ),
                                 ),]),
+                                 Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Center(
+                                child: ClipRRect(
+                                  borderRadius:
+                                      const BorderRadius.all(Radius.circular(5)),
+                                  child: Image.asset(
+                                    propertyController.properties[i]['image']!,
+                                    fit: BoxFit.cover,
+                                    height: Get.height * 0.22,
+                                    width: Get.width * 0.8,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Divider(
+                              color: Colors.grey,
+                              thickness: 1,
+                            ),
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 4.0),
@@ -326,19 +345,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             
-                            Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: ClipRRect(
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(5)),
-                                child: Image.asset(
-                                  propertyController.properties[i]['image']!,
-                                  fit: BoxFit.cover,
-                                  height: Get.height * 0.22,
-                                  width: Get.width * 0.9,
-                                ),
-                              ),
-                            ),
+                           
                           
                            
                             
