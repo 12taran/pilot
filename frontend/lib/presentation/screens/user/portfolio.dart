@@ -15,10 +15,6 @@ class PortfolioPage extends StatefulWidget {
 }
 
 class _PortfolioPageState extends State<PortfolioPage> {
- 
-
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +30,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
         padding: 0,
         margin: const EdgeInsets.all(10),
         //  backgroundColor: Colors.black,
-        height: Get.height * 0.35,
+        height: Get.height * 0.3,
         width: double.infinity,
         child: Stack(
           children: [
@@ -46,7 +42,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                   style: GoogleFonts.acme(
                       fontSize: 35,
                       fontWeight: FontWeight.w900,
-                      color: Colors.black12),
+                      color: Colors.black26),
                   textAlign: TextAlign.start,
                 )),
             Positioned(
@@ -106,7 +102,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
               child: Column(
                 children: [
                   Text(
-                    'Invested Amount',
+                    'Invested',
                     style: GoogleFonts.aleo(
                         fontSize: Constants.fontSizeSubTitle,
                         fontWeight: FontWeight.w500),
@@ -121,6 +117,39 @@ class _PortfolioPageState extends State<PortfolioPage> {
                     textAlign: TextAlign.start,
                   )
                 ],
+              ),
+            ),
+            Positioned(
+              bottom: 60,
+              right: 20,
+              child: Column(
+                children: [
+                  Text(
+                    'Properties   ',
+                    style: GoogleFonts.aleo(
+                        fontSize: Constants.fontSizeSubTitle,
+                        fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.start,
+                  ),
+                  Text(
+                    '🏡  2',
+                    style: GoogleFonts.acme(
+                        fontSize: Constants.fontSizeExtraLarge,
+                        color: Colors.green),
+                    textAlign: TextAlign.start,
+                  )
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Opacity(
+                opacity: 0.3, // 0.0 = fully transparent, 1.0 = fully opaque
+                child: Image.asset(
+                  'assets/images/cropped-portfolio_background.png',
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ],
