@@ -21,7 +21,7 @@ class Drawer extends StatelessWidget {
             Container(
               width: Get.width,
               height: Get.height * 0.2,
-              color: Theme.of(context).colorScheme.primary,
+              color: Theme.of(context).appBarTheme.backgroundColor,
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

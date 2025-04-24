@@ -449,57 +449,62 @@ class _HomePageState extends State<HomePage> {
     borderRadius: BorderRadius.circular(5),
     color: const Color.fromARGB(255, 211, 223, 212),
   ),
-  child: Padding(
-    padding: const EdgeInsets.only(top: 10, left: 5, bottom: 10),
-    child: Column(
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        //SizedBox(height: Get.height * 0.015), // 1.5% of screen height
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(5),
-              child: Image.asset(
-                propertyController.properties[index]['image']!,
-                fit: BoxFit.cover,
-                height: Get.height * 0.25,
-                width: Get.width * 0.4,
+  child: Column(
+    mainAxisSize: MainAxisSize.max,
+    children: [
+      //SizedBox(height: Get.height * 0.015), // 1.5% of screen height
+      Row(
+        //mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            flex: 7,
+            child: Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(2),
+                child: Image.asset(
+                  propertyController.properties[index]['image']!,
+                  fit: BoxFit.fill,
+                  height: Get.height * 0.278,
+                  width: Get.width * 0.6,
+                ),
               ),
             ),
-          SizedBox(width: Get.width * 0.02), // Space between image and text
-            Expanded( // To avoid text overflow
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center, // Left align
-                children: [
-                  Text(
-                    pilotcontroller.boardMembers[index]['name']!,
-                    style: GoogleFonts.actor(
-                      fontSize: Constants.fontSizeSmall,
-                      fontWeight: FontWeight.w500,
-                      color: const Color.fromARGB(255, 26, 24, 24),
-                    ),
-                    overflow: TextOverflow.ellipsis, // To prevent overflow
+          ),
+        SizedBox(width: Get.width * 0.02), // Space between image and text
+          Expanded( 
+            flex: 5,// To avoid text overflow
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center, // Left align
+              children: [
+                Text(
+                  pilotcontroller.boardMembers[index]['name']!,
+                  maxLines: 2,
+                  style: GoogleFonts.actor(
+                    fontSize: Constants.fontSizeBody,
+                  
+                    fontWeight: FontWeight.w900,
+                    color: const Color.fromARGB(255, 26, 24, 24),
                   ),
-                  Text(
-                    pilotcontroller.boardMembers[index]['designation']!,
-                    maxLines: 2,
-                    style: GoogleFonts.actor(
-                      fontSize: Constants.fontSizeBody,
-                      fontWeight: FontWeight.w900,
-                      color: const Color.fromARGB(255, 31, 31, 31),
-                    ),
-                    overflow: TextOverflow.ellipsis,
+                  overflow: TextOverflow.ellipsis, // To prevent overflow
+                ),
+                Text(
+                  pilotcontroller.boardMembers[index]['designation']!,
+                  maxLines: 2,
+                  style: GoogleFonts.actor(
+                      fontSize: Constants.fontSizeTiny,
+                    fontWeight: FontWeight.w500,
+                    color: const Color.fromARGB(255, 31, 31, 31),
                   ),
-                ],
-              ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
             ),
-          ],
-        ),
-      ],
-    ),
+          ),
+        ],
+      ),
+    ],
   ),
 );
 
