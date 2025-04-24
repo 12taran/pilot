@@ -531,7 +531,12 @@ class _HomePageState extends State<HomePage> {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(' Invest in Real estate Easily',
+                          Text(' The smart way to invest in assets',
+                              style: TextStyle(
+                                  fontSize: Constants.fontSizeSubTitle,
+                                  fontWeight: FontWeight.w600,
+                                  color: const Color.fromARGB(255, 2, 2, 72))),
+                                   Text('fractionally, securely, profitably',
                               style: TextStyle(
                                   fontSize: Constants.fontSizeSubTitle,
                                   fontWeight: FontWeight.w600,
