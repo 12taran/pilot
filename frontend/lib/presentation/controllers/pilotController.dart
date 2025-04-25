@@ -21,9 +21,27 @@ class Pilotcontroller extends GetxController{
     "name": "Mr. Vinay Sethi",
     "designation": "Director",
      "image": "assets/images/property1.jpg",
-  },
+  },];
  
-];
+ final List<Map<String, String>> benefits = [
+    {
+      "title": "Reduce risk",
+      "description": "By diversifying your investments into a portfolio of real estate assets",
+    },
+    {
+      "title": "Convenience",
+      "description": "Easy to buy & sell, 1 SQFT at a time",
+    },
+    {
+      "title": "Hassle Free",
+      "description": "Professional Property Management Services by Master Property Manager (MPM)",
+    },
+    {
+      "title": "Long Term Profits",
+      "description": "Long term capital appreciation",
+    },
+  ];
+
 
 
 }

@@ -444,76 +444,70 @@ class _HomePageState extends State<HomePage> {
                       ),
                       items: List.generate(3, (index) {
                         return Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: const Color.fromARGB(255, 211, 223, 212),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 10, left: 5, bottom: 10),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                //SizedBox(height: Get.height * 0.015), // 1.5% of screen height
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(5),
-                                      child: Image.asset(
-                                        propertyController.properties[index]
-                                            ['image']!,
-                                        fit: BoxFit.cover,
-                                        height: Get.height * 0.25,
-                                        width: Get.width * 0.4,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                        width: Get.width *
-                                            0.02), // Space between image and text
-                                    Expanded(
-                                      // To avoid text overflow
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment
-                                            .center, // Left align
-                                        children: [
-                                          Text(
-                                            pilotcontroller.boardMembers[index]
-                                                ['name']!,
-                                            style: GoogleFonts.actor(
-                                              fontSize: Constants.fontSizeSmall,
-                                              fontWeight: FontWeight.w500,
-                                              color: const Color.fromARGB(
-                                                  255, 26, 24, 24),
-                                            ),
-                                            overflow: TextOverflow
-                                                .ellipsis, // To prevent overflow
-                                          ),
-                                          Text(
-                                            pilotcontroller.boardMembers[index]
-                                                ['designation']!,
-                                            maxLines: 2,
-                                            style: GoogleFonts.actor(
-                                              fontSize: Constants.fontSizeBody,
-                                              fontWeight: FontWeight.w900,
-                                              color: const Color.fromARGB(
-                                                  255, 31, 31, 31),
-                                            ),
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(5),
+    color: const Color.fromARGB(255, 211, 223, 212),
+  ),
+  child: Column(
+    mainAxisSize: MainAxisSize.max,
+    children: [
+      //SizedBox(height: Get.height * 0.015), // 1.5% of screen height
+      Row(
+        //mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            flex: 7,
+            child: Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(2),
+                child: Image.asset(
+                  propertyController.properties[index]['image']!,
+                  fit: BoxFit.fill,
+                  height: Get.height * 0.278,
+                  width: Get.width * 0.6,
+                ),
+              ),
+            ),
+          ),
+        SizedBox(width: Get.width * 0.02), // Space between image and text
+          Expanded( 
+            flex: 5,// To avoid text overflow
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center, // Left align
+              children: [
+                Text(
+                  pilotcontroller.boardMembers[index]['name']!,
+                  maxLines: 2,
+                  style: GoogleFonts.actor(
+                    fontSize: Constants.fontSizeBody,
+                  
+                    fontWeight: FontWeight.w900,
+                    color: const Color.fromARGB(255, 26, 24, 24),
+                  ),
+                  overflow: TextOverflow.ellipsis, // To prevent overflow
+                ),
+                Text(
+                  pilotcontroller.boardMembers[index]['designation']!,
+                  maxLines: 2,
+                  style: GoogleFonts.actor(
+                      fontSize: Constants.fontSizeTiny,
+                    fontWeight: FontWeight.w500,
+                    color: const Color.fromARGB(255, 31, 31, 31),
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ],
+  ),
+);
+
+
                       }),
                     )
                   ],
@@ -536,6 +530,7 @@ class _HomePageState extends State<HomePage> {
                   child: Stack(
                     alignment: Alignment.topCenter,
                     children: [
+                      
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -544,7 +539,7 @@ class _HomePageState extends State<HomePage> {
                                   fontSize: Constants.fontSizeSubTitle,
                                   fontWeight: FontWeight.w600,
                                   color: const Color.fromARGB(255, 2, 2, 72))),
-                          Text('fractionally, securely, profitably',
+                                   Text('fractionally, securely, profitably',
                               style: TextStyle(
                                   fontSize: Constants.fontSizeSubTitle,
                                   fontWeight: FontWeight.w600,
@@ -553,13 +548,14 @@ class _HomePageState extends State<HomePage> {
                             height: 20,
                           ),
                           GlowContainer(
-                            containerOptions: const ContainerOptions(
-                                borderRadius: 10,
-                                borderSide: BorderSide(width: 2)),
+                            containerOptions:
+                                const ContainerOptions(borderRadius: 10,borderSide: BorderSide(width: 2)
+                                ),
                             // optional, or customize
                             gradientColors: const [
                               Colors.orange,
                               Color.fromARGB(255, 221, 96, 58),
+                              
                             ],
                             glowRadius: 5,
                             // match button's border
@@ -572,6 +568,7 @@ class _HomePageState extends State<HomePage> {
                               text: 'Invest Now',
                               onPressed: () {
                                 print('Hello');
+                                  
                               },
                             ),
                           )
