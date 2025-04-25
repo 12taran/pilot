@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
@@ -21,19 +20,19 @@ class OnboardingScreenState extends State<OnboardingScreen> {
 
   List<Map<String, String>> onboardingData = [
     {
-      "title": "Welcome to Share Sampatti",
+      "title": "Share Sampatti",
       "desc": " Real estate fractional ownership made easy.",
-      "image": "assets/images/motivation1.jpg"
+      "image": "assets/images/onboarding3.png"
     },
     {
       "title": "Smart Investments",
       "desc": "Invest smartly in properties with low capital.",
-      "image": "assets/images/motivation2.jpg"
+      "image": "assets/images/onboarding4.png"
     },
     {
       "title": "Track & Grow",
       "desc": "Track your investments and see them grow.",
-      "image": "assets/images/motivation3.jpg"
+      "image": "assets/images/onboarding2.png"
     },
     /*{
       "title": "Invest Simplified",
