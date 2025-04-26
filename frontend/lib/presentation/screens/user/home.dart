@@ -30,8 +30,8 @@ class _HomePageState extends State<HomePage> {
   List City = ['Mohali', '  Dhulera', 'Himachal'];
 
   List location = [
-    'assets/images/kasol.jpg',
-    'assets/images/chandigarh.jpg',
+    'assets/images/mohali.jpg',
+    'assets/images/chdpic.jpg',
     'assets/images/kasol.jpg'
   ];
 
