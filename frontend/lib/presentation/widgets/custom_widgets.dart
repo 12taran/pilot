@@ -146,11 +146,12 @@ class CustomWidgets {
                     children: [
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             "Invested",
                             style: GoogleFonts.aBeeZee(
-                              fontSize: Constants.fontSizeTinySmall,
+                              fontSize: Constants.fontSizeSmall,
                               fontWeight: FontWeight.w600,
                               color:
                                   Theme.of(context).textTheme.bodyLarge?.color,
@@ -159,7 +160,7 @@ class CustomWidgets {
                           Text(
                             "${Constants.rupeeSymbol}4,00,000",
                             style: GoogleFonts.aBeeZee(
-                              fontSize: Constants.fontSizeTinySmall,
+                              fontSize: Constants.fontSizeTinySmall + 1,
                               fontWeight: FontWeight.w600,
                               color: Theme.of(context).colorScheme.primary,
                             ),
@@ -168,11 +169,12 @@ class CustomWidgets {
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             "Current Value",
                             style: GoogleFonts.aBeeZee(
-                              fontSize: Constants.fontSizeTinySmall,
+                              fontSize: Constants.fontSizeSmall,
                               fontWeight: FontWeight.w600,
                               color:
                                   Theme.of(context).textTheme.bodyLarge?.color,
@@ -181,7 +183,7 @@ class CustomWidgets {
                           Text(
                             "${Constants.rupeeSymbol}8,00,000",
                             style: GoogleFonts.aBeeZee(
-                              fontSize: Constants.fontSizeTinySmall,
+                              fontSize: Constants.fontSizeTinySmall + 1,
                               fontWeight: FontWeight.w600,
                               color: Theme.of(context).colorScheme.primary,
                             ),
