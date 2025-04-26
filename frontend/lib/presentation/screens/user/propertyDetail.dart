@@ -75,7 +75,7 @@ Widget build(BuildContext context) {
                 height: Get.height * 0.035,
                 margin: const EdgeInsets.only(right: 10, top: 10),
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 227, 115, 63),
+                  color: Color.fromARGB(255, 146, 198, 232),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(
@@ -125,7 +125,7 @@ Widget build(BuildContext context) {
             child: Text(
               "!! Returns are not guaranteed and are subjected to market risks !!",
               style: GoogleFonts.lato(
-                color: Color.fromARGB(255, 105, 104, 104),
+                color: Color.fromARGB(255, 149, 149, 149),
                 fontSize: Constants.fontSizeTinySmall,
               ),
             ),

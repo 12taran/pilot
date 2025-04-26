@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:glow_container/glow_container.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/components/CustomContainer.dart';
 import 'package:pilot_project/core/config.dart';
@@ -38,55 +39,78 @@ class _PropertyCardState extends State<PropertyCard> {
                   width: Get.width * 0.9,
                 ),
               ),
-              Text(
-                widget.property['name']!,
-                maxLines: 2,
-                style: GoogleFonts.almarai(
-                    color: Theme.of(context).textTheme.bodySmall?.color,
-                    fontSize: Constants.fontSizeSmall + 2,
-                    fontWeight: FontWeight.w500),
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "${Constants.rupeeSymbol}${widget.property['price']!}/- ",
-                        style: GoogleFonts.andika(
-                            fontSize: Constants.fontSizeSubTitle,
-                            fontWeight: FontWeight.w900,
-                            color:
-                                Theme.of(context).textTheme.bodyLarge?.color),
+                        widget.property['name']!,
+                        maxLines: 2,
+                        style: GoogleFonts.almarai(
+                            color: Theme.of(context).textTheme.bodySmall?.color,
+                            fontSize: Constants.fontSizeSmall + 2,
+                            fontWeight: FontWeight.w500),
                       ),
-                      Text(
-                        'SQFT',
-                        style: TextStyle(
-                            fontSize: 12,
-                            color:
-                                Theme.of(context).textTheme.bodyLarge?.color),
-                      )
-                    ],
+                       Row(
+                children: [
+                  Text(
+                    "${Constants.rupeeSymbol}${widget.property['price']!}/- ",
+                    style: GoogleFonts.andika(
+                        fontSize: Constants.fontSizeSubTitle,
+                        fontWeight: FontWeight.w900,
+                        color:
+                            Theme.of(context).textTheme.bodyLarge?.color),
                   ),
-                  // const SizedBox(height: 10),
-                  GestureDetector(
+                  Text(
+                    'SQFT',
+                    style: TextStyle(
+                        fontSize: 12,
+                        color:
+                            Theme.of(context).textTheme.bodyLarge?.color),
+                  )
+                ],
+              )
+                    
+                  
+                ],
+              ),
+               GestureDetector(
                     onTap: () {
                       print('Invest now1');
                       Map<String, String> detail = widget.property;
                       Get.toNamed(PageRoutes.propertydetail, arguments: detail);
                     },
-                    child: Text(
-                      'Invest Now ',
-                      style: GoogleFonts.aBeeZee(
-                        fontSize: Constants.fontSizeSmall,
-                        fontWeight: FontWeight.w600,
-                        color: Theme.of(context).colorScheme.primary,
-                        letterSpacing: 1,
+                    child: GlowContainer(
+                      gradientColors: [Colors.green],
+                      containerOptions: ContainerOptions(
+                        margin: const EdgeInsets.all(2),
+                        width: Get.width * 0.27,
+                        height: Get.height * 0.04,
+                        borderRadius: 5,
+                        backgroundColor: Colors.white,
+                      
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Invest Now ',
+                          style: GoogleFonts.aBeeZee(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: const Color.fromARGB(255, 64, 255, 0),
+                            letterSpacing: 1,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ],
-              ),
-            ]));
+             
+              
+              
+            ])
+            ])
+            );
   }
 }

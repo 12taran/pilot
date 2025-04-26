@@ -82,14 +82,7 @@ class Drawer extends StatelessWidget {
             const Divider(
               thickness: 1,
             ),
-            ListTile(
-              trailing: const Icon(Icons.arrow_right),
-              leading: const Icon(Icons.monetization_on),
-              title: const Text('Virtual Wallet'),
-              onTap: () {
-                //  Get.toNamed(PageRoutes.setting);
-              },
-            ),
+            
             const Divider(
               thickness: 1,
             ),
