@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/widgets/custom_widgets.dart';
 
@@ -15,15 +17,24 @@ class _InvestpageState extends State<Investpage> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => propertyController.properties.isNotEmpty
-        ? ListView.builder(
-            itemCount: propertyController.properties.length,
-            itemBuilder: (context, index) {
-              return CustomWidgets.propertyCard(
-                propertyController,
-                  propertyController.properties[index],context);
-            },
-          )
-        : const SizedBox());
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Invest",
+          style: GoogleFonts.acme(fontSize: Constants.appBarTextSize),
+        ),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        centerTitle: true,
+      ),
+      body: Obx(() => propertyController.properties.isNotEmpty
+          ? ListView.builder(
+              itemCount: propertyController.properties.length,
+              itemBuilder: (context, index) {
+                return CustomWidgets.propertyCard(propertyController,
+                    propertyController.properties[index], context);
+              },
+            )
+          : const SizedBox()),
+    );
   }
 }

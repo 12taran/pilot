@@ -106,8 +106,8 @@ class OnboardingScreenState extends State<OnboardingScreen> {
             ),
           if (currentPage < 2)
             Positioned(
-              top: 60,
-              right: 30,
+              top: 30,
+              right: 15,
               child: TextButton(
                 child: Text(
                   'Skip',
@@ -141,7 +141,7 @@ class OnboardingScreenState extends State<OnboardingScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(
-            height: Get.height * 0.15,
+            height: Get.height * 0.1,
           ),
           Text(
             data["title"]!,
@@ -164,19 +164,19 @@ class OnboardingScreenState extends State<OnboardingScreen> {
               fontWeight: FontWeight.bold,
               textStyle: TextStyle(
                 color: Theme.of(context).textTheme.labelMedium?.color,
-                fontSize: Constants.fontSizeSubTitle,
+                fontSize: Constants.fontSizeSmall + 2,
               ),
             ),
           ),
           SizedBox(
-            height: 20,
+            height: Get.height * 0.15,
           ),
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.asset(
               data["image"]!,
-              height: Get.height * 0.45,
-              width: Get.width * 0.8,
+              height: Get.height * 0.3,
+              width: Get.width * 0.5,
               fit: BoxFit.fill,
             ),
           ),

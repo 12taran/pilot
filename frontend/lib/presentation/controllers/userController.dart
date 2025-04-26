@@ -5,9 +5,9 @@ import 'package:pilot_project/data/models/user_model.dart';
 import 'package:pilot_project/data/repos/user_repo.dart';
 
 class Usercontroller extends GetxController {
-  final nameController = TextEditingController();
-  final addressController = TextEditingController();
-  final mobileController = TextEditingController();
+  final nameController = TextEditingController(text: "User");
+  final addressController = TextEditingController(text: "Address");
+  final mobileController = TextEditingController(text: "123456XXXX");
   Future<void> setuserDetail(User user) async {
     nameController.text = user.fullname ?? "User";
     addressController.text = user.address ?? "Address";

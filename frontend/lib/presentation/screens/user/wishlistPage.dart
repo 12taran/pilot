@@ -16,11 +16,18 @@ class WishlistPage extends StatefulWidget {
 }
 
 class _WishlistPageState extends State<WishlistPage> {
-   PropertyController propertyController=Get.put(PropertyController());
+  PropertyController propertyController = Get.put(PropertyController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Center(child: const Text('My Wishlist'))),
+      appBar: AppBar(
+        title: Text(
+          'My Wishlist',
+          style: GoogleFonts.acme(fontSize: Constants.appBarTextSize),
+        ),
+        centerTitle: true,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+      ),
       body: Obx(() {
         return propertyController.isFav.isEmpty
             ? const Center(child: Text("Your wishlist is empty"))
@@ -49,51 +56,70 @@ class _WishlistPageState extends State<WishlistPage> {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              
+
                               const SizedBox(width: 10),
-                          
+
                               // Details + Delete Icon
                               Expanded(
                                 child: Stack(
                                   children: [
                                     // Property Details
                                     Padding(
-                                      padding: const EdgeInsets.only(right: 35.0), // leave space for delete icon
+                                      padding: const EdgeInsets.only(
+                                          right:
+                                              35.0), // leave space for delete icon
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                         children: [
-                                          Text(item['name'] ?? '', style: GoogleFonts.lato(fontSize:Constants.fontSizeSubTitle, fontWeight: FontWeight.bold)),
+                                          Text(item['name'] ?? '',
+                                              style: GoogleFonts.lato(
+                                                  fontSize: Constants
+                                                      .fontSizeSubTitle,
+                                                  fontWeight: FontWeight.bold)),
                                           const SizedBox(height: 4),
                                           Row(
                                             children: [
-                                              Icon(size: 20,
-                                                Icons.location_on,color: Colors.green[300],),
-                                              Text(item['location'] ?? '', style: const TextStyle(
-                                                fontSize: 15,
-                                              color: Color.fromARGB(255, 69, 65, 65))),
+                                              Icon(
+                                                size: 20,
+                                                Icons.location_on,
+                                                color: Colors.green[300],
+                                              ),
+                                              Text(item['location'] ?? '',
+                                                  style: const TextStyle(
+                                                      fontSize: 15,
+                                                      color: Color.fromARGB(
+                                                          255, 69, 65, 65))),
                                             ],
                                           ),
-                                          SizedBox(height: 10,),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
                                           GlowContainer(
                                             glowRadius: 8,
-                                            gradientColors: [Colors.white,Colors.yellow],
+                                            gradientColors: [
+                                              Colors.white,
+                                              Colors.yellow
+                                            ],
                                             containerOptions: ContainerOptions(
-                                              borderRadius: 10
-                                            ),
-                                            child: CustomButtons(width: Get.width*0.5,
-                                            margin: EdgeInsets.all(0),
-                                              text:'Invest Now', onPressed:(){
-                                                 Map<String, String> detail =
-                                            item;
-                                                                                  Get.toNamed(PageRoutes.propertydetail,
-                                            arguments: detail);
-                                              }),
+                                                borderRadius: 10),
+                                            child: CustomButtons(
+                                                width: Get.width * 0.5,
+                                                margin: EdgeInsets.all(0),
+                                                text: 'Invest Now',
+                                                onPressed: () {
+                                                  Map<String, String> detail =
+                                                      item;
+                                                  Get.toNamed(
+                                                      PageRoutes.propertydetail,
+                                                      arguments: detail);
+                                                }),
                                           )
                                         ],
                                       ),
                                     ),
-                                    
+
                                     // Delete Icon at Top Right
                                     Positioned(
                                       top: 0,
@@ -104,9 +130,11 @@ class _WishlistPageState extends State<WishlistPage> {
                                         child: IconButton(
                                           padding: EdgeInsets.zero,
                                           iconSize: 16,
-                                          icon: const Icon(Icons.delete, color: Colors.white),
+                                          icon: const Icon(Icons.delete,
+                                              color: Colors.white),
                                           onPressed: () {
-                                            propertyController.isFav.removeAt(index);
+                                            propertyController.isFav
+                                                .removeAt(index);
                                           },
                                         ),
                                       ),
@@ -117,8 +145,6 @@ class _WishlistPageState extends State<WishlistPage> {
                             ],
                           ),
                         )
-
-                       
                       ],
                     ),
                   );

@@ -23,6 +23,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
           "Portfolio",
           style: GoogleFonts.acme(fontSize: Constants.appBarTextSize),
         ),
+        backgroundColor: Theme.of(context).colorScheme.primary,
         centerTitle: true,
       ),
       body: CustomContainer(
@@ -54,13 +55,15 @@ class _PortfolioPageState extends State<PortfolioPage> {
                     'Current Value',
                     style: GoogleFonts.aleo(
                         fontSize: Constants.fontSizeSubTitle,
+                        textStyle: Theme.of(context).textTheme.displayLarge,
                         fontWeight: FontWeight.w500),
                   ),
                   Text(
                     '${Constants.rupeeSymbol} 14,000,900',
                     style: GoogleFonts.acme(
-                        fontSize: Constants.fontSizeExtraLarge,
-                        color: Colors.green),
+                      fontSize: Constants.fontSizeExtraLarge,
+                      color: Colors.green,
+                    ),
                     textAlign: TextAlign.start,
                   )
                 ],
@@ -75,6 +78,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                     'Overall Return',
                     style: GoogleFonts.aleo(
                         fontSize: Constants.fontSizeSubTitle,
+                        textStyle: Theme.of(context).textTheme.displayLarge,
                         fontWeight: FontWeight.w500),
                     textAlign: TextAlign.start,
                   ),
@@ -109,12 +113,14 @@ class _PortfolioPageState extends State<PortfolioPage> {
                     'Invested',
                     style: GoogleFonts.aleo(
                         fontSize: Constants.fontSizeSubTitle,
+                        textStyle: Theme.of(context).textTheme.displayLarge,
                         fontWeight: FontWeight.w500),
                     textAlign: TextAlign.start,
                   ),
                   Text(
                     '${Constants.rupeeSymbol} 6,57,305.24',
                     style: GoogleFonts.acme(
+                      textStyle: Theme.of(context).textTheme.displayLarge,
                       fontSize: Constants.fontSizeExtraLarge,
                       // color: Colors.green),
                     ),
@@ -129,14 +135,15 @@ class _PortfolioPageState extends State<PortfolioPage> {
               child: Column(
                 children: [
                   Text(
-                    'Properties   ',
+                    'Properties  ',
                     style: GoogleFonts.aleo(
+                        textStyle: Theme.of(context).textTheme.displayLarge,
                         fontSize: Constants.fontSizeSubTitle,
                         fontWeight: FontWeight.w500),
                     textAlign: TextAlign.start,
                   ),
                   Text(
-                    '🏡  2',
+                    '2',
                     style: GoogleFonts.acme(
                         fontSize: Constants.fontSizeExtraLarge,
                         color: Colors.green),
