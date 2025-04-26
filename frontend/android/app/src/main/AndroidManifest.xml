@@ -22,7 +22,7 @@
 			<action android:name="android.support.customtabs.action.CustomTabsService" />
 		</intent>
 	</queries>
-	<application android:label="pilot_project" android:icon="@mipmap/ic_launcher" android:hardwareAccelerated="true" android:supportsRtl="true">
+	<application android:label="Share Sampatti" android:icon="@mipmap/ic_launcher" android:hardwareAccelerated="true" android:supportsRtl="true">
 		<!-- Main Activity -->
 		<activity android:name=".MainActivity" android:exported="true" android:launchMode="singleTop" android:taskAffinity="" android:theme="@style/LaunchTheme" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode" android:hardwareAccelerated="true" android:windowSoftInputMode="adjustResize" android:enableOnBackInvokedCallback="true">
 			<intent-filter>
