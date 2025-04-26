@@ -36,7 +36,7 @@ class SplashScreenState extends State<SplashScreen> {
     });
 
     // Navigate after delay
-    Future.delayed(const Duration(seconds: 3), () async {
+    Future.delayed(const Duration(seconds: 2), () async {
       if (FirebaseAuth.instance.currentUser != null) {
         final sharedPreferences = await SharedPreferences.getInstance();
         log('User id h ${sharedPreferences.getString(Constants.USER_ID)}');
@@ -53,7 +53,7 @@ class SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Colors.white,
       body: Center(
         child: AnimatedOpacity(
           duration: const Duration(seconds: 2),
@@ -75,8 +75,8 @@ class SplashScreenState extends State<SplashScreen> {
                   "The Best Investment on Earth is Earth",
                   style: GoogleFonts.acme(
                     textStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontSize: Constants.fontSizeHeading,
-                        ),
+                        fontSize: Constants.fontSizeHeading,
+                        color: Colors.black),
                   ),
                   textAlign: TextAlign.center,
                 ),

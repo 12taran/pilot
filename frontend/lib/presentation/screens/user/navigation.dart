@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pilot_project/presentation/controllers/bottomNavController.dart';
 import 'package:pilot_project/presentation/screens/user/home.dart';
 import 'package:pilot_project/presentation/screens/user/investpage.dart';
 import 'package:pilot_project/presentation/screens/user/portfolio.dart';
@@ -12,20 +14,14 @@ class BottomNavScreen extends StatefulWidget {
 }
 
 class BottomNavScreenState extends State<BottomNavScreen> {
-  int _currentIndex = 0;
-
+  final BottomNavController bottomNavController =
+      Get.put(BottomNavController());
   final List<Widget> _pages = [
     HomePage(),
-     WishlistPage(),
+    WishlistPage(),
     const Investpage(),
     const PortfolioPage(),
   ];
-
-  void _onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
 
   final List<BottomNavigationBarItem> _navItems = [
     const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
@@ -38,18 +34,18 @@ class BottomNavScreenState extends State<BottomNavScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _pages[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: _onTabTapped,
-        items: _navItems,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: _currentIndex == 1
-            ? Colors.red
-            : Theme.of(context).colorScheme.primary,
-        unselectedItemColor: Colors.grey,
-      ),
-    );
+    return Obx(() => Scaffold(
+          body: _pages[bottomNavController.currentIndex.value],
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: bottomNavController.currentIndex.value,
+            onTap: bottomNavController.changeTabIndex,
+            items: _navItems,
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: bottomNavController.currentIndex == 1
+                ? Colors.red
+                : Theme.of(context).colorScheme.primary,
+            unselectedItemColor: Colors.grey,
+          ),
+        ));
   }
 }

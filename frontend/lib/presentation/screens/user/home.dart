@@ -10,9 +10,14 @@ import 'package:pilot_project/core/components/CustomContainer.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/core/utils.dart';
+import 'package:pilot_project/presentation/controllers/bottomNavController.dart';
 import 'package:pilot_project/presentation/controllers/pilotController.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
+import 'package:pilot_project/presentation/controllers/userController.dart';
+import 'package:pilot_project/presentation/screens/user/navigation.dart';
 import 'package:pilot_project/presentation/screens/user/profile.dart';
+import 'package:pilot_project/presentation/widgets/flip_card.dart';
+import 'package:pilot_project/presentation/widgets/propertyCard.dart';
 import 'package:pilot_project/routes/page_route.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -32,6 +37,7 @@ class _HomePageState extends State<HomePage> {
 
   PropertyController propertyController = Get.put(PropertyController());
   Pilotcontroller pilotcontroller = Get.put(Pilotcontroller());
+  BottomNavController bottomNavController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -188,165 +194,47 @@ class _HomePageState extends State<HomePage> {
                 height: 10,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      " Discover ",
+                      "Discover for ${Get.find<Usercontroller>().userDetail.value.fullname ?? "USER"}",
                       style: GoogleFonts.lato(
-                          fontSize: 35,
+                          fontSize: Constants.fontSizeExtraLarge,
                           fontWeight: FontWeight.w700,
-                          color: Color.fromARGB(255, 12, 3, 113)),
+                          color: Theme.of(context).textTheme.bodyLarge?.color),
                     ),
                     Text(
-                      " Start Investing Securely 🔒",
+                      "Start Investing Securely 🔒",
                       style: GoogleFonts.lato(
-                          fontSize: Constants.fontSizeHeading,
-                          color: Color.fromARGB(255, 49, 18, 171)),
+                          fontSize: Constants.fontSizeSmall,
+                          color: Theme.of(context).textTheme.bodyMedium?.color),
                     ),
                   ],
                 ),
               ),
               CarouselSlider(
                   items: [
-                    for (int i = 0; i < 6; i++)
+                    for (int i = 0;
+                        i < propertyController.properties.length;
+                        i++)
                       Center(
-                          child: CustomContainer(
-                              backgroundColor:
-                                  Color.fromARGB(255, 239, 238, 237),
-                              padding: 0,
-                              borderWidth: 3,
-                              borderRadius: 10,
-                              width: Get.width * 0.8,
-                              height: Get.height * 0.34,
-                              borderColor: Colors.white,
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 15.0, top: 4),
-                                      child: Text(
-                                        propertyController.properties[i]
-                                            ['name']!,
-                                        style: GoogleFonts.almarai(
-                                            color: Color.fromARGB(
-                                                255, 49, 18, 171),
-                                            fontSize: Constants.fontSizeBody,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: ClipRRect(
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(5)),
-                                        child: Image.asset(
-                                          propertyController.properties[i]
-                                              ['image']!,
-                                          fit: BoxFit.cover,
-                                          height: Get.height * 0.2,
-                                          width: Get.width * 0.9,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 2.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Text(
-                                                "Rs ${propertyController.properties[i]['price']!}/- ",
-                                                style: GoogleFonts.andika(
-                                                    fontSize: Constants
-                                                        .fontSizeSubTitle,
-                                                    fontWeight: FontWeight.w900,
-                                                    color: Color.fromARGB(
-                                                        255, 49, 18, 171)),
-                                              ),
-                                              const Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Per',
-                                                    style: TextStyle(
-                                                        fontSize: 12,
-                                                        color: Color.fromARGB(
-                                                            255, 49, 18, 171)),
-                                                  ),
-                                                  Text(
-                                                    'SQFT',
-                                                    style: TextStyle(
-                                                        fontSize: 12,
-                                                        color: Color.fromARGB(
-                                                            255, 49, 18, 171)),
-                                                  )
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                          // const SizedBox(height: 10),
-                                          Center(
-                                              child: GestureDetector(
-                                            onTap: () {
-                                              print('Invest now1');
-                                              Map<String, String> detail =
-                                                  propertyController
-                                                      .properties[i];
-                                              Get.toNamed(
-                                                  PageRoutes.propertydetail,
-                                                  arguments: detail);
-                                            },
-                                            child: Container(
-                                              height: Get.height * 0.03,
-                                              width: Get.width * 0.25,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                color: Colors.white,
-                                              ),
-                                              child: Center(
-                                                child: Text(
-                                                  'Invest Now',
-                                                  style: GoogleFonts.aBeeZee(
-                                                    fontSize:
-                                                        Constants.fontSizeSmall,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Color.fromARGB(
-                                                        255, 232, 125, 43),
-                                                    letterSpacing: 1,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          )),
-                                        ],
-                                      ),
-                                    ),
-                                  ])))
+                          child: PropertyCard(
+                              property: propertyController.properties[i]))
                   ],
                   options: CarouselOptions(
-                      viewportFraction: 0.8,
+                      enableInfiniteScroll: false,
+                      viewportFraction: 0.9,
                       enlargeCenterPage: false,
-                      aspectRatio: 16 / 9,
                       height: Get.height * 0.4)),
-              const SizedBox(
-                height: 10,
-              ),
               Center(
                   child: Text(
                 " !! Returns are not guaranteed and are subjected to market risks !! ",
                 style: GoogleFonts.lato(
-                    color: Color.fromARGB(255, 105, 104, 104),
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
                     fontSize: Constants.fontSizeTiny),
               ))
             ],
@@ -372,8 +260,9 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.only(left: 20.0, top: 20),
                       child: Text(
                         'Explore by Regions',
-                        style: TextStyle(
+                        style: GoogleFonts.lato(
                             fontSize: Constants.fontSizeHeading,
+                            textStyle: Theme.of(context).textTheme.displayLarge,
                             fontWeight: FontWeight.w800),
                       ),
                     ),
@@ -407,8 +296,11 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   Text(
                                     City[index],
-                                    style: TextStyle(
+                                    style: GoogleFonts.lato(
                                         fontSize: Constants.fontSizeSmall,
+                                        textStyle: Theme.of(context)
+                                            .textTheme
+                                            .displayLarge,
                                         fontWeight: FontWeight.w700),
                                   ),
                                 ],
@@ -436,78 +328,93 @@ class _HomePageState extends State<HomePage> {
                     ),
                     CarouselSlider(
                       options: CarouselOptions(
-                        height: Get.height * 0.28,
-                        enlargeCenterPage: true,
-                        enableInfiniteScroll: true,
-                        autoPlay: false,
-                        aspectRatio: 16 / 11,
-                      ),
+                          height: Get.height * 0.28,
+                          enlargeCenterPage: false,
+                          enableInfiniteScroll: false,
+                          autoPlay: false,
+                          scrollPhysics: const BouncingScrollPhysics(),
+                          pageSnapping: false,
+                          aspectRatio: 16 / 9,
+                          viewportFraction: 1),
                       items: List.generate(3, (index) {
-                        return Container(
-  decoration: BoxDecoration(
-    borderRadius: BorderRadius.circular(5),
-    color: const Color.fromARGB(255, 211, 223, 212),
-  ),
-  child: Column(
-    mainAxisSize: MainAxisSize.max,
-    children: [
-      //SizedBox(height: Get.height * 0.015), // 1.5% of screen height
-      Row(
-        //mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            flex: 7,
-            child: Center(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(2),
-                child: Image.asset(
-                  propertyController.properties[index]['image']!,
-                  fit: BoxFit.fill,
-                  height: Get.height * 0.278,
-                  width: Get.width * 0.6,
-                ),
-              ),
-            ),
-          ),
-        SizedBox(width: Get.width * 0.02), // Space between image and text
-          Expanded( 
-            flex: 5,// To avoid text overflow
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center, // Left align
-              children: [
-                Text(
-                  pilotcontroller.boardMembers[index]['name']!,
-                  maxLines: 2,
-                  style: GoogleFonts.actor(
-                    fontSize: Constants.fontSizeBody,
-                  
-                    fontWeight: FontWeight.w900,
-                    color: const Color.fromARGB(255, 26, 24, 24),
-                  ),
-                  overflow: TextOverflow.ellipsis, // To prevent overflow
-                ),
-                Text(
-                  pilotcontroller.boardMembers[index]['designation']!,
-                  maxLines: 2,
-                  style: GoogleFonts.actor(
-                      fontSize: Constants.fontSizeTiny,
-                    fontWeight: FontWeight.w500,
-                    color: const Color.fromARGB(255, 31, 31, 31),
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    ],
-  ),
-);
-
-
+                        return FlipCard(
+                            index: index,
+                            boardMember: pilotcontroller.boardMembers[index]);
+                        // Container(
+                        //   width: Get.width * 0.9,
+                        //   decoration: BoxDecoration(
+                        //     borderRadius: BorderRadius.circular(5),
+                        //     color: const Color.fromARGB(255, 211, 223, 212),
+                        //   ),
+                        //   child: Column(
+                        //     mainAxisSize: MainAxisSize.max,
+                        //     children: [
+                        //       //SizedBox(height: Get.height * 0.015), // 1.5% of screen height
+                        //       Row(
+                        //         //mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        //         crossAxisAlignment: CrossAxisAlignment.center,
+                        //         children: [
+                        //           Expanded(
+                        //             flex: 7,
+                        //             child: Center(
+                        //               child: ClipRRect(
+                        //                 borderRadius: BorderRadius.circular(2),
+                        //                 child: Image.asset(
+                        //                   pilotcontroller.boardMembers[index]
+                        //                       ['image']!,
+                        //                   fit: BoxFit.fill,
+                        //                   height: Get.height * 0.278,
+                        //                   width: Get.width * 0.6,
+                        //                 ),
+                        //               ),
+                        //             ),
+                        //           ),
+                        //           SizedBox(
+                        //               width: Get.width *
+                        //                   0.02), // Space between image and text
+                        //           Expanded(
+                        //             flex: 5, // To avoid text overflow
+                        //             child: Column(
+                        //               mainAxisAlignment:
+                        //                   MainAxisAlignment.center,
+                        //               crossAxisAlignment: CrossAxisAlignment
+                        //                   .center, // Left align
+                        //               children: [
+                        //                 Text(
+                        //                   pilotcontroller.boardMembers[index]
+                        //                       ['name']!,
+                        //                   textAlign: TextAlign.center,
+                        //                   maxLines: 2,
+                        //                   style: GoogleFonts.actor(
+                        //                     fontSize: Constants.fontSizeBody,
+                        //                     fontWeight: FontWeight.w900,
+                        //                     color: const Color.fromARGB(
+                        //                         255, 26, 24, 24),
+                        //                   ),
+                        //                   overflow: TextOverflow
+                        //                       .ellipsis, // To prevent overflow
+                        //                 ),
+                        //                 Text(
+                        //                   pilotcontroller.boardMembers[index]
+                        //                       ['designation']!,
+                        //                   textAlign: TextAlign.center,
+                        //                   maxLines: 2,
+                        //                   style: GoogleFonts.actor(
+                        //                     fontSize: Constants.fontSizeTiny,
+                        //                     fontWeight: FontWeight.w500,
+                        //                     color: const Color.fromARGB(
+                        //                         255, 31, 31, 31),
+                        //                   ),
+                        //                   overflow: TextOverflow.ellipsis,
+                        //                 ),
+                        //               ],
+                        //             ),
+                        //           ),
+                        //         ],
+                        //       ),
+                        //     ],
+                        //   ),
+                        // );
                       }),
                     )
                   ],
@@ -530,7 +437,6 @@ class _HomePageState extends State<HomePage> {
                   child: Stack(
                     alignment: Alignment.topCenter,
                     children: [
-                      
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -539,7 +445,7 @@ class _HomePageState extends State<HomePage> {
                                   fontSize: Constants.fontSizeSubTitle,
                                   fontWeight: FontWeight.w600,
                                   color: const Color.fromARGB(255, 2, 2, 72))),
-                                   Text('fractionally, securely, profitably',
+                          Text('fractionally, securely, profitably',
                               style: TextStyle(
                                   fontSize: Constants.fontSizeSubTitle,
                                   fontWeight: FontWeight.w600,
@@ -548,14 +454,13 @@ class _HomePageState extends State<HomePage> {
                             height: 20,
                           ),
                           GlowContainer(
-                            containerOptions:
-                                const ContainerOptions(borderRadius: 10,borderSide: BorderSide(width: 2)
-                                ),
+                            containerOptions: const ContainerOptions(
+                                borderRadius: 10,
+                                borderSide: BorderSide(width: 2)),
                             // optional, or customize
                             gradientColors: const [
                               Colors.orange,
                               Color.fromARGB(255, 221, 96, 58),
-                              
                             ],
                             glowRadius: 5,
                             // match button's border
@@ -568,7 +473,7 @@ class _HomePageState extends State<HomePage> {
                               text: 'Invest Now',
                               onPressed: () {
                                 print('Hello');
-                                  
+                                bottomNavController.changeTabIndex(2);
                               },
                             ),
                           )
@@ -583,9 +488,13 @@ class _HomePageState extends State<HomePage> {
                 height: Get.height * 0.01,
               ),*/
               Container(
+                //borderRadius: BorderRadius.circular(20),
                 decoration: const BoxDecoration(
-                    //borderRadius: BorderRadius.circular(20),
-                    color: Color.fromARGB(255, 197, 239, 220)),
+                    gradient: LinearGradient(colors: [
+                  Color.fromARGB(255, 190, 204, 215),
+                  Color.fromARGB(255, 146, 182, 118),
+                  Color.fromARGB(255, 173, 194, 173)
+                ])),
                 height: Get.height * 0.23,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -596,6 +505,7 @@ class _HomePageState extends State<HomePage> {
                         'Explore by Themes',
                         style: TextStyle(
                             fontSize: Constants.fontSizeHeading,
+                            color: Theme.of(context).colorScheme.surface,
                             fontWeight: FontWeight.w800),
                       ),
                     ),
@@ -631,6 +541,8 @@ class _HomePageState extends State<HomePage> {
                                   propertyController.properties[index]['type']!,
                                   style: TextStyle(
                                       fontSize: Constants.fontSizeSmall,
+                                      color:
+                                          Theme.of(context).colorScheme.surface,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ],
@@ -674,7 +586,7 @@ class _HomePageState extends State<HomePage> {
                                   width: Get.width * 0.4,
                                   text: 'Call Us',
                                   onPressed: () {
-                                    _makePhoneCall('addNumber');
+                                    _makePhoneCall('9317872934');
                                   },
                                 )
                               ],
@@ -691,10 +603,10 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _makePhoneCall(String phoneNumber) async {
+  Future<void> _makePhoneCall(String phoneNumber) async {
     final Uri url = Uri(scheme: 'tel', path: phoneNumber);
     if (await canLaunchUrl(url)) {
-      await launchUrl(url, mode: LaunchMode.externalApplication);
+      await launchUrl(url);
     } else {
       throw 'Could not launch $url';
     }

@@ -17,7 +17,8 @@ class AppTheme {
     textTheme: const TextTheme(
         bodyLarge: TextStyle(color: Colors.black),
         bodyMedium: TextStyle(color: Colors.black),
-        labelMedium: TextStyle(color: Colors.black54)),
+        labelMedium: TextStyle(color: Colors.black54),
+        displayLarge: TextStyle(color: Colors.black54)),
     colorScheme: const ColorScheme.light(
       primary: const Color.fromARGB(255, 87, 187, 91),
       secondary: const Color.fromARGB(255, 56, 98, 57),
@@ -43,10 +44,10 @@ class AppTheme {
       foregroundColor: Colors.white,
     ),
     textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: Colors.white),
-      bodyMedium: TextStyle(color: Colors.white),
-      labelMedium: TextStyle(color: Colors.white54),
-    ),
+        bodyLarge: TextStyle(color: Colors.white),
+        bodyMedium: TextStyle(color: Colors.white),
+        labelMedium: TextStyle(color: Colors.white54),
+        displayLarge: TextStyle(color: Colors.black45)),
     colorScheme: const ColorScheme.dark(
       primary: Color.fromARGB(255, 87, 187, 91),
       secondary: const Color.fromARGB(255, 56, 98, 57),
