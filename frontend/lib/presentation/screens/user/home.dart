@@ -261,9 +261,8 @@ class _HomePageState extends State<HomePage> {
                       child: Text(
                         'Explore by Regions',
                         style: GoogleFonts.aleo(
-                                      fontSize: Constants.fontSizeHeading,
-                                      color:
-                                          Theme.of(context).primaryColor,
+                            fontSize: Constants.fontSizeHeading,
+                            color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.w800),
                       ),
                     ),
@@ -298,10 +297,9 @@ class _HomePageState extends State<HomePage> {
                                   Text(
                                     City[index],
                                     style: GoogleFonts.aleo(
-                                      fontSize: Constants.fontSizeSmall,
-                                      color:
-                                          Theme.of(context).primaryColor,
-                            fontWeight: FontWeight.bold),
+                                        fontSize: Constants.fontSizeSmall,
+                                        color: Theme.of(context).primaryColor,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               )
@@ -440,8 +438,8 @@ class _HomePageState extends State<HomePage> {
                   child: Stack(
                     alignment: Alignment.topCenter,
                     children: [
-                Opacity(
-                  opacity: 0.5,
+                      Opacity(
+                        opacity: 0.5,
                         child: Image.asset(
                           'assets/images/invest.png',
                           fit: BoxFit.fill,
@@ -516,9 +514,8 @@ class _HomePageState extends State<HomePage> {
                       child: Text(
                         'Explore by Themes',
                         style: GoogleFonts.aleo(
-                                      fontSize: Constants.fontSizeHeading,
-                                      color:
-                                          Theme.of(context).primaryColor,
+                            fontSize: Constants.fontSizeHeading,
+                            color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.w800),
                       ),
                     ),
@@ -548,18 +545,21 @@ class _HomePageState extends State<HomePage> {
                                     child: CircleAvatar(
                                       radius: 40,
                                       backgroundColor: Colors.white,
-                                      backgroundImage: AssetImage( propertyController.properties[index]['image']!,
-                                          ), // Yahi main kaam karta hai
+                                      backgroundImage: AssetImage(
+                                        propertyController.properties[index]
+                                            ['image']!,
+                                      ), // Yahi main kaam karta hai
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: 5,),
+                                SizedBox(
+                                  height: 5,
+                                ),
                                 Text(
                                   propertyController.properties[index]['type']!,
                                   style: GoogleFonts.aleo(
                                       fontSize: Constants.fontSizeSmall,
-                                      color:
-                                          Theme.of(context).primaryColor,
+                                      color: Theme.of(context).primaryColor,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ],
@@ -592,27 +592,31 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Center(
                                   child: Text(
-                                    maxLines: 2,
+                                      maxLines: 2,
                                       "You are just a call away from ",
                                       style: GoogleFonts.aleo(
                                           fontSize: Constants.fontSizeSubTitle,
                                           fontWeight: FontWeight.w600,
                                           color: Colors.white)),
                                 ),
-                                Text('your dream Investment',style: GoogleFonts.aleo(
-                                          fontSize: Constants.fontSizeSubTitle,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.white)),
-                                        SizedBox(
-                                          height: Get.height * 0.02,
-                                        ),
-                                CustomButtons(width: Get.width * 0.4,color: Color.fromARGB(255, 144, 224, 113),
-                                textColor: Colors.white,
-                                
-                                borderRadius: 20,
-                                  text: 'Call Us', onPressed: (){_makePhoneCall('677');},)
-                               
-                                
+                                Text('your dream Investment',
+                                    style: GoogleFonts.aleo(
+                                        fontSize: Constants.fontSizeSubTitle,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white)),
+                                SizedBox(
+                                  height: Get.height * 0.02,
+                                ),
+                                CustomButtons(
+                                  width: Get.width * 0.4,
+                                  color: Color.fromARGB(255, 144, 224, 113),
+                                  textColor: Colors.white,
+                                  borderRadius: 20,
+                                  text: 'Call Us',
+                                  onPressed: () {
+                                    _makePhoneCall('8006644389');
+                                  },
+                                )
                               ],
                             )
                           ]),
