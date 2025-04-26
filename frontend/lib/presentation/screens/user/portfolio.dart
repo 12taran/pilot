@@ -30,6 +30,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
       body: Column(
         children: [
           CustomContainer(
+            borderRadius: 20,
             borderColor: Theme.of(context).colorScheme.primary,
             padding: 0,
             margin: const EdgeInsets.all(10),
