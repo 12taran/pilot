@@ -5,6 +5,7 @@ import 'package:pilot_project/core/config.dart';
 
 class AppTheme {
   static final ThemeData light = ThemeData(
+    cardColor: Colors.white,
     brightness: Brightness.light,
     fontFamily: Constants.fontFamily,
     primaryColor: Colors.black,
@@ -34,6 +35,7 @@ class AppTheme {
   );
 
   static final ThemeData dark = ThemeData(
+    cardColor: Colors.grey,
     brightness: Brightness.dark,
     fontFamily: Constants.fontFamily,
     primaryColor: Color.fromARGB(0, 88, 125, 90),
