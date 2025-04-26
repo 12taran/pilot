@@ -5,7 +5,7 @@ import 'package:pilot_project/presentation/screens/authScreens/email_password_si
 import 'package:pilot_project/presentation/screens/authScreens/phone_signIn.dart';
 import 'package:pilot_project/presentation/screens/authScreens/phone_sign_up.dart';
 import 'package:pilot_project/presentation/screens/authScreens/register.dart';
-import 'package:pilot_project/presentation/screens/authScreens/userDetail.dart';
+import 'package:pilot_project/presentation/screens/user/userDetail.dart';
 
 import 'package:pilot_project/presentation/screens/onboarding/onboarding.dart';
 
@@ -40,16 +40,16 @@ class PageRoutes {
   static List<GetPage> getPageRoutes() {
     // final globleMiddleware = [GlobalMiddleware()];
     return [
-      GetPage(name: invest, page:() => const Investpage(),
-    
+      GetPage(
+        name: invest,
+        page: () => const Investpage(),
         transitionDuration: const Duration(milliseconds: 300),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);
           Get.lazyPut(() => PropertyController());
         }),
-       
-        ),
+      ),
       GetPage(
         name: splashScreen,
         page: () => const SplashScreen(),
@@ -124,7 +124,7 @@ class PageRoutes {
       ),
       GetPage(
         name: drawerProfile,
-        page: () => const ProfilePage(),
+        page: () => ProfilePage(),
         transition: Transition.zoom,
         transitionDuration: const Duration(milliseconds: 300),
         binding: BindingsBuilder(() async {

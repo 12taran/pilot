@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="facebook_app_id">1781967185685903</string>
-    <string name="app_name">Pilot App</string> <!-- Add this line -->
+    <string name="app_name">pilot_project</string> <!-- Add this line -->
     <string name="fb_login_protocol_scheme">fb1781967185685903</string>
-    <string name="facebook_client_token">6e75877ac8ba5530aa62da37cd576847</string>
+    <string name="facebook_client_token">fcf629363624b77b2a607afa6f12b387</string>
 </resources>

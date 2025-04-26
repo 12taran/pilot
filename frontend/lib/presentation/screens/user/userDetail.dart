@@ -1,17 +1,16 @@
 // ignore_for_file: use_key_in_widget_constructors
 
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pilot_project/core/components/MyTextField.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
-import 'package:pilot_project/core/utils.dart';
-import 'package:pilot_project/presentation/controllers/authController.dart';
-import 'package:pilot_project/presentation/widgets/utils_widget.dart';
+import 'package:pilot_project/presentation/controllers/userController.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserDetail extends StatefulWidget {
   const UserDetail({super.key});
@@ -23,12 +22,14 @@ class UserDetail extends StatefulWidget {
 class _UserDetailState extends State<UserDetail> {
   File? _profileImage;
   final picker = ImagePicker();
-  AuthController controller=AuthController();
-  // Editable controllers
-  final nameController = TextEditingController(text: "Harry Wilson");
-  final addressController = TextEditingController(text: "Mohali");
-  final mobileController = TextEditingController(text: "1234569087",);
+  final usercontroller =
+      Get.find<Usercontroller>(); // This gets the already created controller
 
+  // Editable controllers@override
+  @override
+  void initState() {
+    super.initState();
+  }
 
   Future<void> _pickImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -42,13 +43,11 @@ class _UserDetailState extends State<UserDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    
       appBar: AppBar(
-          backgroundColor:const Color.fromARGB(255, 56, 98, 57),
+        backgroundColor: const Color.fromARGB(255, 56, 98, 57),
         title: const Text("User Profile"),
         centerTitle: true,
       ),
-    
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -66,7 +65,7 @@ class _UserDetailState extends State<UserDetail> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(color: Colors.white, width: 4),
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                               color: Colors.black26,
                               blurRadius: 10,
@@ -91,7 +90,7 @@ class _UserDetailState extends State<UserDetail> {
                         onTap: _pickImage,
                         child: Container(
                           padding: const EdgeInsets.all(4),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Colors.white,
                             shape: BoxShape.circle,
                             boxShadow: [
@@ -102,7 +101,11 @@ class _UserDetailState extends State<UserDetail> {
                               ),
                             ],
                           ),
-                          child: const Icon(Icons.edit, size: 20,color: Colors.grey,),
+                          child: const Icon(
+                            Icons.edit,
+                            size: 20,
+                            color: Colors.grey,
+                          ),
                         ),
                       ),
                     ),
@@ -114,50 +117,68 @@ class _UserDetailState extends State<UserDetail> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
-                   Padding(
-                     padding: const EdgeInsets.all(10.0),
-                     child: MyTextField(labelText:'Name', onChanged:(value){},
-                                  textStyle: TextStyle(color: Colors.black),  
-                     prefixIcon: Icon(Icons.person,color: Colors.black,),
-                     controller: nameController,),
-                   ),
-                   Padding(
-                     padding: const EdgeInsets.all(10.0),
-                     child: MyTextField(labelText:'Phone No.', onChanged:(value){},
-                    textStyle: TextStyle(color: Colors.black),
-                     enable: false,
-                     prefixIcon: Icon(Icons.phone,color: Colors.black,),
-                     controller:mobileController,),
-                   ),
-                   Padding(
-                     padding: const EdgeInsets.all(10.0),
-                     child: MyTextField(labelText:'Address', onChanged:(value){},
-                     textStyle: TextStyle(color: Colors.black),
-                     prefixIcon: Icon(Icons.email,color: Colors.black,),
-                     controller: addressController,),
-                   )
-                    
-                  
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: MyTextField(
+                        labelText: 'Name',
+                        onChanged: (value) {},
+                        textStyle: const TextStyle(color: Colors.black),
+                        prefixIcon: const Icon(
+                          Icons.person,
+                          color: Colors.black,
+                        ),
+                        controller: usercontroller.nameController,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: MyTextField(
+                        labelText: 'Phone No.',
+                        onChanged: (value) {},
+                        textStyle: const TextStyle(color: Colors.black),
+                        enable: false,
+                        prefixIcon: const Icon(
+                          Icons.phone,
+                          color: Colors.black,
+                        ),
+                        controller: usercontroller.mobileController,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: MyTextField(
+                        labelText: 'Address',
+                        onChanged: (value) {},
+                        textStyle: const TextStyle(color: Colors.black),
+                        prefixIcon: const Icon(
+                          Icons.email,
+                          color: Colors.black,
+                        ),
+                        controller: usercontroller.addressController,
+                      ),
+                    )
                   ],
                 ),
               ),
-              SizedBox(height: Get.height*0.2,),
-              CustomButtons(color:const Color.fromARGB(255, 56, 98, 57) ,
-      fontSize: 20,
-      width:Get.width*0.5,
-        text:'Save'
-        ,
-       onPressed:(){
-                   controller.editUser(nameController.text,addressController.text);
-                 // Utils.showToast(message: 'User Details saved Successfully');
-                 Future.delayed(Duration(seconds: 1),() {Get.back();});}),
-             
+              SizedBox(
+                height: Get.height * 0.2,
+              ),
+              CustomButtons(
+                  color: const Color.fromARGB(255, 56, 98, 57),
+                  fontSize: 20,
+                  width: Get.width * 0.5,
+                  text: 'Save',
+                  onPressed: () async {
+                    final prefs = await SharedPreferences.getInstance();
+                    String? userId = prefs.getString(Constants.USER_ID);
+                    usercontroller.editUser(usercontroller.nameController.text,
+                        usercontroller.addressController.text, userId ?? "");
+                    // Utils.showToast(message: 'User Details saved Successfully');
+                  }),
             ],
           ),
         ),
       ),
     );
   }
-
- 
 }

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pilot_project/core/app_theme.dart';
 import 'package:pilot_project/presentation/controllers/theme_controller.dart';
+import 'package:pilot_project/presentation/controllers/userController.dart';
 import 'package:pilot_project/routes/page_route.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -16,6 +17,13 @@ void main() async {
   runApp(const MyApp());
 }
 
+class InitialBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.put(Usercontroller());
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -25,6 +33,7 @@ class MyApp extends StatelessWidget {
     ThemeController themeController = Get.put(ThemeController());
     return ScreenUtilInit(
       child: GetMaterialApp(
+        initialBinding: InitialBinding(),
         theme: AppTheme.light,
         darkTheme: AppTheme.dark,
         themeMode: themeController.theme,

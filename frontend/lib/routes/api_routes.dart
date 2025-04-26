@@ -3,7 +3,7 @@ class ApiRoutes {
 
   static String apiEndpoint = "api/v1/user/";
 
-  static String serverUrl = "http://192.168.1.124:4000/";
+  static String serverUrl = "http://192.168.114.16:4000/";
 
   // static String serverUrl = "http://localhost:8000/";
   String baseUrl = "$serverUrl$apiEndpoint";
@@ -11,5 +11,6 @@ class ApiRoutes {
   String userRegisterVerify = "register/phone";
   String userRegister = "";
   String userLogin = "login";
-  String userEdit = "edit/:id";
+  String userEdit = "edit";
+  String getUser = "getById";
 }

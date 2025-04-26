@@ -133,7 +133,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                       GestureDetector(
                         onTap: start == 0
                             ? () {
-                                authController.sendOtp();
+                                authController.sendOtp(false);
                                 startTimer();
                               }
                             : null,
@@ -160,7 +160,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                           onPressed: () async {
                             authController.isOtpSent.value
                                 ? authController.verifyOtp(false)
-                                : await authController.sendOtp();
+                                : await authController.sendOtp(false);
                             print('Otp sends');
                           }),
                     ),

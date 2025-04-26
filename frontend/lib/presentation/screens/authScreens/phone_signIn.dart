@@ -109,7 +109,7 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                       GestureDetector(
                         onTap: start == 0
                             ? () {
-                                authController.sendOtp();
+                                authController.sendOtp(true);
                                 startTimer();
                               }
                             : null,
@@ -136,7 +136,7 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                           onPressed: () async {
                             authController.isOtpSent.value
                                 ? authController.verifyOtp(true)
-                                : await authController.sendOtp();
+                                : await authController.sendOtp(true);
                             print('Otp sends');
                           }),
                     ),
@@ -206,7 +206,11 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Icon(Icons.facebook, size: 20,color: Colors.indigo,),
+                                    Icon(
+                                      Icons.facebook,
+                                      size: 20,
+                                      color: Colors.indigo,
+                                    ),
                                   ],
                                 ),
                                 onPressed: () async {
@@ -223,7 +227,8 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                           style: GoogleFonts.acme(
                               color: Theme.of(context).colorScheme.primary,
                               decoration: TextDecoration.underline,
-                              decorationColor: Theme.of(context).colorScheme.primary),
+                              decorationColor:
+                                  Theme.of(context).colorScheme.primary),
                         ),
                         onPressed: () {
                           Get.toNamed(PageRoutes.phonesignup);
