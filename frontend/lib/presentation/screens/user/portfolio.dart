@@ -35,7 +35,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
             padding: 0,
             margin: const EdgeInsets.all(10),
             backgroundColor: Theme.of(context).colorScheme.background,
-            height: Get.height * 0.3,
+            height: Get.height * 0.25,
             width: double.infinity,
             child: Stack(
               children: [
