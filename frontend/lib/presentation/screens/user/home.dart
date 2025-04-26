@@ -260,9 +260,10 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.only(left: 20.0, top: 20),
                       child: Text(
                         'Explore by Regions',
-                        style: GoogleFonts.lato(
-                            fontSize: Constants.fontSizeHeading,
-                            textStyle: Theme.of(context).textTheme.displayLarge,
+                        style: GoogleFonts.aleo(
+                                      fontSize: Constants.fontSizeHeading,
+                                      color:
+                                          Theme.of(context).primaryColor,
                             fontWeight: FontWeight.w800),
                       ),
                     ),
@@ -296,12 +297,11 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   Text(
                                     City[index],
-                                    style: GoogleFonts.lato(
-                                        fontSize: Constants.fontSizeSmall,
-                                        textStyle: Theme.of(context)
-                                            .textTheme
-                                            .displayLarge,
-                                        fontWeight: FontWeight.w700),
+                                    style: GoogleFonts.aleo(
+                                      fontSize: Constants.fontSizeSmall,
+                                      color:
+                                          Theme.of(context).primaryColor,
+                            fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               )
@@ -335,11 +335,14 @@ class _HomePageState extends State<HomePage> {
                           scrollPhysics: const BouncingScrollPhysics(),
                           pageSnapping: false,
                           aspectRatio: 16 / 9,
-                          viewportFraction: 1),
+                          viewportFraction: 0.8),
                       items: List.generate(3, (index) {
-                        return FlipCard(
-                            index: index,
-                            boardMember: pilotcontroller.boardMembers[index]);
+                        return Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: FlipCard(
+                              index: index,
+                              boardMember: pilotcontroller.boardMembers[index]),
+                        );
                         // Container(
                         //   width: Get.width * 0.9,
                         //   decoration: BoxDecoration(
@@ -437,6 +440,15 @@ class _HomePageState extends State<HomePage> {
                   child: Stack(
                     alignment: Alignment.topCenter,
                     children: [
+                Opacity(
+                  opacity: 0.5,
+                        child: Image.asset(
+                          'assets/images/invest.png',
+                          fit: BoxFit.fill,
+                          height: Get.height * 0.2,
+                          width: Get.width * 0.95,
+                        ),
+                      ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -503,9 +515,10 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.only(left: 20.0, top: 20),
                       child: Text(
                         'Explore by Themes',
-                        style: TextStyle(
-                            fontSize: Constants.fontSizeHeading,
-                            color: Theme.of(context).colorScheme.surface,
+                        style: GoogleFonts.aleo(
+                                      fontSize: Constants.fontSizeHeading,
+                                      color:
+                                          Theme.of(context).primaryColor,
                             fontWeight: FontWeight.w800),
                       ),
                     ),
@@ -518,31 +531,35 @@ class _HomePageState extends State<HomePage> {
                           for (int index = 0; index < 3; index++)
                             Column(
                               children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.3),
-                                        spreadRadius: 2,
-                                        blurRadius: 6,
-                                        offset: const Offset(0, 3),
-                                      ),
-                                    ],
-                                  ),
-                                  child: CircleAvatar(
-                                    radius: 40,
-                                    backgroundColor: Colors.white,
-                                    backgroundImage: AssetImage(location[
-                                        index]), // Yahi main kaam karta hai
+                                GestureDetector(
+                                  onTap: () => print('Invest now2'),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.3),
+                                          spreadRadius: 2,
+                                          blurRadius: 6,
+                                          offset: const Offset(0, 3),
+                                        ),
+                                      ],
+                                    ),
+                                    child: CircleAvatar(
+                                      radius: 40,
+                                      backgroundColor: Colors.white,
+                                      backgroundImage: AssetImage( propertyController.properties[index]['image']!,
+                                          ), // Yahi main kaam karta hai
+                                    ),
                                   ),
                                 ),
+                                SizedBox(height: 5,),
                                 Text(
                                   propertyController.properties[index]['type']!,
-                                  style: TextStyle(
+                                  style: GoogleFonts.aleo(
                                       fontSize: Constants.fontSizeSmall,
                                       color:
-                                          Theme.of(context).colorScheme.surface,
+                                          Theme.of(context).primaryColor,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ],
@@ -573,22 +590,29 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Column(
                               children: [
-                                Text(
-                                    "Let's Connect to get \nyou Started with PILOT",
-                                    style: TextStyle(
-                                        fontSize: Constants.fontSizeSubTitle,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white)),
-                                CustomButtons(
-                                  borderRadius: 20,
-                                  color: Colors.white,
-                                  textColor: Colors.orange,
-                                  width: Get.width * 0.4,
-                                  text: 'Call Us',
-                                  onPressed: () {
-                                    _makePhoneCall('9317872934');
-                                  },
-                                )
+                                Center(
+                                  child: Text(
+                                    maxLines: 2,
+                                      "You are just a call away from ",
+                                      style: GoogleFonts.aleo(
+                                          fontSize: Constants.fontSizeSubTitle,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white)),
+                                ),
+                                Text('your dream Investment',style: GoogleFonts.aleo(
+                                          fontSize: Constants.fontSizeSubTitle,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white)),
+                                        SizedBox(
+                                          height: Get.height * 0.02,
+                                        ),
+                                CustomButtons(width: Get.width * 0.4,color: Color.fromARGB(255, 144, 224, 113),
+                                textColor: Colors.white,
+                                
+                                borderRadius: 20,
+                                  text: 'Call Us', onPressed: (){_makePhoneCall('677');},)
+                               
+                                
                               ],
                             )
                           ]),

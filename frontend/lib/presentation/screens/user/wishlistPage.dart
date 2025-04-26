@@ -30,13 +30,13 @@ class _WishlistPageState extends State<WishlistPage> {
       ),
       body: Obx(() {
         return propertyController.isFav.isEmpty
-            ? const Center(child: Text("Your wishlist is empty"))
+            ? Center(child: Text("Your wishlist is empty",style: GoogleFonts.aleo(fontSize: Constants.appBarTextSize),))
             : ListView.builder(
                 itemCount: propertyController.isFav.length,
                 itemBuilder: (context, index) {
                   final item = propertyController.isFav[index];
                   return Card(
-                    color: Color.fromARGB(255, 211, 191, 162),
+                    color: Theme.of(context).cardColor,
                     margin: const EdgeInsets.all(10),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
