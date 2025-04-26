@@ -94,27 +94,30 @@ class _WishlistPageState extends State<WishlistPage> {
                                             ],
                                           ),
                                           SizedBox(
-                                            height: 10,
+                                            height: 30,
                                           ),
-                                          GlowContainer(
-                                            glowRadius: 8,
-                                            gradientColors: [
-                                              Colors.white,
-                                              Colors.yellow
-                                            ],
-                                            containerOptions: ContainerOptions(
-                                                borderRadius: 10),
-                                            child: CustomButtons(
-                                                width: Get.width * 0.5,
-                                                margin: EdgeInsets.all(0),
-                                                text: 'Invest Now',
-                                                onPressed: () {
-                                                  Map<String, String> detail =
-                                                      item;
-                                                  Get.toNamed(
-                                                      PageRoutes.propertydetail,
-                                                      arguments: detail);
-                                                }),
+                                          Align(
+                                            alignment: Alignment.bottomRight,
+                                            child: GlowContainer(
+                                              glowRadius: 8,
+                                              gradientColors: [
+                                                Colors.white,
+                                                Colors.yellow
+                                              ],
+                                              containerOptions: ContainerOptions(
+                                                  borderRadius: 10),
+                                              child: CustomButtons(
+                                                  width: Get.width * 0.4,
+                                                  margin: EdgeInsets.all(0),
+                                                  text: 'Invest Now',
+                                                  onPressed: () {
+                                                    Map<String, String> detail =
+                                                        item;
+                                                    Get.toNamed(
+                                                        PageRoutes.propertydetail,
+                                                        arguments: detail);
+                                                  }),
+                                            ),
                                           )
                                         ],
                                       ),
