@@ -30,20 +30,19 @@ class _InvestpageState extends State<Investpage> {
       body: Obx(() => propertyController.properties.isNotEmpty
     ? Column(
         children: [
-          SizedBox(
-            height: Get.height * 0.02,
+         
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: MyTextField(
+              width: Get.width * 0.9,
+              isLabelEnabled: false,
+              labelText: 'Themes',
+              onChanged: (value) {
+                // implement search/filter logic here
+              },
+            ),
           ),
-          MyTextField(
-            width: Get.width * 0.9,
-            isLabelEnabled: false,
-            labelText: 'Themes',
-            onChanged: (value) {
-              // implement search/filter logic here
-            },
-          ),
-          SizedBox(
-            height: Get.height * 0.02,
-          ),
+          
           Expanded(
             child: ListView.builder(
               itemCount: propertyController.properties.length,

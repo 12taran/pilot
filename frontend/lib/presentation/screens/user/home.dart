@@ -31,8 +31,8 @@ class _HomePageState extends State<HomePage> {
 
   List location = [
     'assets/images/mohali.jpg',
-    'assets/images/chdpic.jpg',
-    'assets/images/kasol.jpg'
+    'assets/images/dholera.jpg',
+    'assets/images/chandigarh.jpg'
   ];
 
   PropertyController propertyController = Get.put(PropertyController());
