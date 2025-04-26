@@ -30,12 +30,11 @@ class _PortfolioPageState extends State<PortfolioPage> {
       body: Column(
         children: [
           CustomContainer(
-            borderRadius: 20,
             borderColor: Theme.of(context).colorScheme.primary,
             padding: 0,
             margin: const EdgeInsets.all(10),
             backgroundColor: Theme.of(context).colorScheme.background,
-            height: Get.height * 0.25,
+            height: Get.height * 0.27,
             width: double.infinity,
             child: Stack(
               children: [
@@ -59,7 +58,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                         'Current Value',
                         style: GoogleFonts.aleo(
                             fontSize: Constants.fontSizeSubTitle,
-                            textStyle: Theme.of(context).textTheme.displayLarge,
+                            color: Theme.of(context).textTheme.bodyLarge?.color,
                             fontWeight: FontWeight.w500),
                       ),
                       Text(
@@ -82,7 +81,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                         'Overall Return',
                         style: GoogleFonts.aleo(
                             fontSize: Constants.fontSizeSubTitle,
-                            textStyle: Theme.of(context).textTheme.displayLarge,
+                            color: Theme.of(context).textTheme.bodyLarge?.color,
                             fontWeight: FontWeight.w500),
                         textAlign: TextAlign.start,
                       ),
@@ -109,7 +108,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                   ),
                 ),
                 Positioned(
-                  bottom: 60,
+                  bottom: 40,
                   left: 20,
                   child: Column(
                     children: [
@@ -117,12 +116,12 @@ class _PortfolioPageState extends State<PortfolioPage> {
                         'Invested',
                         style: GoogleFonts.aleo(
                             fontSize: Constants.fontSizeSubTitle,
-                            textStyle: Theme.of(context).textTheme.displayLarge,
+                            color: Theme.of(context).textTheme.bodyLarge?.color,
                             fontWeight: FontWeight.w500),
                         textAlign: TextAlign.start,
                       ),
                       Text(
-                        '${Constants.rupeeSymbol} 6,57,305.24',
+                        '${Constants.rupeeSymbol} 6,57,30,524',
                         style: GoogleFonts.acme(
                           textStyle: Theme.of(context).textTheme.displayLarge,
                           fontSize: Constants.fontSizeExtraLarge,
@@ -134,14 +133,14 @@ class _PortfolioPageState extends State<PortfolioPage> {
                   ),
                 ),
                 Positioned(
-                  bottom: 60,
+                  bottom: 40,
                   right: 20,
                   child: Column(
                     children: [
                       Text(
                         'Properties  ',
                         style: GoogleFonts.aleo(
-                            textStyle: Theme.of(context).textTheme.displayLarge,
+                            color: Theme.of(context).textTheme.bodyLarge?.color,
                             fontSize: Constants.fontSizeSubTitle,
                             fontWeight: FontWeight.w500),
                         textAlign: TextAlign.start,
