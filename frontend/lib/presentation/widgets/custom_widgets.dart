@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:pilot_project/core/components/CustomContainer.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/routes/page_route.dart';
@@ -100,6 +102,102 @@ class CustomWidgets {
           ],
         ),
       ),
+    );
+  }
+
+  static Widget portfolioCard(BuildContext context, int index) {
+    return Column(
+      children: [
+        CustomContainer(
+          backgroundColor: Theme.of(context).cardColor,
+          padding: 2,
+          borderRadius: 0,
+          margin: EdgeInsets.all(0),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: Column(
+              children: [
+                Row(children: [
+                  Icon(Icons.house),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'Property ${index + 1} ',
+                    style: GoogleFonts.aBeeZee(
+                      fontSize: Constants.fontSizeBody,
+                      fontWeight: FontWeight.w600,
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
+                    ),
+                  ),
+                ]),
+                SizedBox(
+                  height: 5,
+                ),
+                CustomContainer(
+                  borderColor: Colors.grey,
+                  elevation: 10,
+                  backgroundColor: Theme.of(context).cardColor,
+                  borderRadius: 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Invested",
+                            style: GoogleFonts.aBeeZee(
+                              fontSize: Constants.fontSizeTinySmall,
+                              fontWeight: FontWeight.w600,
+                              color:
+                                  Theme.of(context).textTheme.bodyLarge?.color,
+                            ),
+                          ),
+                          Text(
+                            "${Constants.rupeeSymbol}4,00,000",
+                            style: GoogleFonts.aBeeZee(
+                              fontSize: Constants.fontSizeTinySmall,
+                              fontWeight: FontWeight.w600,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Current Value",
+                            style: GoogleFonts.aBeeZee(
+                              fontSize: Constants.fontSizeTinySmall,
+                              fontWeight: FontWeight.w600,
+                              color:
+                                  Theme.of(context).textTheme.bodyLarge?.color,
+                            ),
+                          ),
+                          Text(
+                            "${Constants.rupeeSymbol}8,00,000",
+                            style: GoogleFonts.aBeeZee(
+                              fontSize: Constants.fontSizeTinySmall,
+                              fontWeight: FontWeight.w600,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Container(
+          color: Theme.of(context).dividerColor,
+          height: 1,
+        )
+      ],
     );
   }
 }

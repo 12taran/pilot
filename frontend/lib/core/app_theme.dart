@@ -47,7 +47,7 @@ class AppTheme {
         bodyLarge: TextStyle(color: Colors.white),
         bodyMedium: TextStyle(color: Colors.white),
         labelMedium: TextStyle(color: Colors.white54),
-        displayLarge: TextStyle(color: Colors.black45)),
+        displayLarge: TextStyle(color: Colors.white60)),
     colorScheme: const ColorScheme.dark(
       primary: Color.fromARGB(255, 87, 187, 91),
       secondary: const Color.fromARGB(255, 56, 98, 57),
