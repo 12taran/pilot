@@ -6,6 +6,7 @@ import 'package:pilot_project/presentation/screens/authScreens/email_password_si
 import 'package:pilot_project/presentation/screens/authScreens/phone_signIn.dart';
 import 'package:pilot_project/presentation/screens/authScreens/phone_sign_up.dart';
 import 'package:pilot_project/presentation/screens/authScreens/register.dart';
+import 'package:pilot_project/presentation/screens/user/filter.dart';
 import 'package:pilot_project/presentation/screens/user/userDetail.dart';
 
 import 'package:pilot_project/presentation/screens/onboarding/onboarding.dart';
@@ -36,6 +37,7 @@ class PageRoutes {
   static const String userDetail = "/userDetail";
   static const String propertydetail = "/propertyDetails";
   static const String register = "/register";
+  static const String filterPage = "/filterPage";
 
   // get product category
   static List<GetPage> getPageRoutes() {
@@ -157,6 +159,22 @@ class PageRoutes {
         name: propertydetail,
         page: () => Propertydetail(
           property: Get.arguments as PropertyModel,
+        ),
+        transition: Transition.zoom,
+        transitionDuration: const Duration(milliseconds: 200),
+        binding: BindingsBuilder(() async {
+          final sharedPreferences = await SharedPreferences.getInstance();
+          Get.put(() => sharedPreferences, permanent: true);
+          Get.lazyPut(
+            () => PropertyController(),
+          );
+        }),
+      ),
+       GetPage(
+        name: filterPage,
+        page: () => FilterPage(
+          filterKey: Get.arguments['filterKey'],
+          filterValue: Get.arguments['filterValue'],
         ),
         transition: Transition.zoom,
         transitionDuration: const Duration(milliseconds: 200),

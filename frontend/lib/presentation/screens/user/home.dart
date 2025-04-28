@@ -275,23 +275,30 @@ class _HomePageState extends State<HomePage> {
                             for (int index = 0; index < 3; index++)
                               Column(
                                 children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.3),
-                                          spreadRadius: 2,
-                                          blurRadius: 6,
-                                          offset: const Offset(0, 3),
-                                        ),
-                                      ],
-                                    ),
-                                    child: CircleAvatar(
-                                      radius: 40,
-                                      backgroundColor: Colors.white,
-                                      backgroundImage: AssetImage(location[
-                                          index]), // Yahi main kaam karta hai
+                                  GestureDetector(
+                                    onTap: () {
+                                         Get.toNamed(PageRoutes.filterPage,
+                                        arguments: { 'filterKey': 'location',
+  'filterValue': propertyController.properties[index]['location'],});
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.3),
+                                            spreadRadius: 2,
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 3),
+                                          ),
+                                        ],
+                                      ),
+                                      child: CircleAvatar(
+                                        radius: 40,
+                                        backgroundColor: Colors.white,
+                                        backgroundImage: AssetImage(location[
+                                            index]), // Yahi main kaam karta hai
+                                      ),
                                     ),
                                   ),
                                   Text(
@@ -529,7 +536,11 @@ class _HomePageState extends State<HomePage> {
                             Column(
                               children: [
                                 GestureDetector(
-                                  onTap: () => print('Invest now2'),
+                                  onTap: (){
+                                    Get.toNamed(PageRoutes.filterPage,
+                                        arguments:{ 'filterKey':'type','filterValue':propertyController
+                                            .properties[index]['type']});
+                                  },
                                   child: Container(
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
