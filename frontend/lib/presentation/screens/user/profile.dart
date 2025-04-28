@@ -139,7 +139,9 @@ class ProfilePage extends StatelessWidget {
               trailing: Icon(Icons.arrow_right),
               leading: const Icon(Icons.question_mark),
               title: const Text('FAQs'),
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(PageRoutes.faqs);
+              },
             ),
             Divider(
               thickness: 1,

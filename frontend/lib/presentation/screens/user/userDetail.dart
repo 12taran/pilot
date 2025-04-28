@@ -9,6 +9,7 @@ import 'package:pilot_project/core/components/MyTextField.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/presentation/controllers/userController.dart';
+import 'package:pilot_project/presentation/utils_widget.dart';
 import 'package:pilot_project/routes/api_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -45,7 +46,7 @@ class _UserDetailState extends State<UserDetail> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 56, 98, 57),
-        title: const Text("User Profile"),
+        title: const Text("Profile"),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -58,7 +59,33 @@ class _UserDetailState extends State<UserDetail> {
                   alignment: Alignment.topRight,
                   children: [
                     GestureDetector(
-                      onTap: _pickImage,
+                      onTap: () {
+                        UtilsWidget.showWebDialog(
+                          // height: Get.height * 0.8,
+                          // width: Get.width * 0.9,
+                          context: context,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              border: Border.all(color: Colors.white, width: 4),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 10,
+                                  offset: Offset(0, 5),
+                                ),
+                              ],
+                              image: DecorationImage(
+                                image: _profileImage != null
+                                    ? FileImage(_profileImage!) as ImageProvider
+                                    : NetworkImage(
+                                        '${ApiRoutes.imageRoutes}${usercontroller.userImageUrl.value}'),
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                       child: Container(
                         width: 130,
                         height: 130,
@@ -175,6 +202,7 @@ class _UserDetailState extends State<UserDetail> {
                         usercontroller.addressController.text,
                         userId ?? "",
                         _profileImage);
+
                     // Utils.showToast(message: 'User Details saved Successfully');
                   }),
             ],
