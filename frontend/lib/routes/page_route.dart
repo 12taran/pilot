@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pilot_project/data/models/property_model.dart';
 import 'package:pilot_project/presentation/controllers/authController.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/screens/authScreens/email_password_sign_up.dart';
@@ -157,7 +158,7 @@ class PageRoutes {
       GetPage(
         name: propertydetail,
         page: () => Propertydetail(
-          property: Get.arguments as Map<String, String>,
+          property: Get.arguments as PropertyModel,
         ),
         transition: Transition.zoom,
         transitionDuration: const Duration(milliseconds: 200),

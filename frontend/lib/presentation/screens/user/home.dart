@@ -558,7 +558,7 @@ class _HomePageState extends State<HomePage> {
                                       backgroundColor: Colors.white,
                                       backgroundImage: AssetImage(
                                         propertyController.properties[index]
-                                            ['image']!,
+                                            .image!,
                                       ), // Yahi main kaam karta hai
                                     ),
                                   ),
@@ -567,7 +567,7 @@ class _HomePageState extends State<HomePage> {
                                   height: 5,
                                 ),
                                 Text(
-                                  propertyController.properties[index]['type']!,
+                                  propertyController.properties[index].type!,
                                   style: GoogleFonts.aleo(
                                       fontSize: Constants.fontSizeSmall,
                                       color: Theme.of(context).primaryColor,

@@ -4,11 +4,12 @@ import 'package:glow_container/glow_container.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
+import 'package:pilot_project/data/models/property_model.dart';
 import 'package:pilot_project/presentation/controllers/pilotController.dart';
 
 class Propertydetail extends StatefulWidget {
   const Propertydetail({super.key, required this.property});
-  final Map<String, String> property;
+  final PropertyModel property;
   @override
   State<Propertydetail> createState() => _PropertydetailState();
 }
@@ -27,7 +28,7 @@ Widget build(BuildContext context) {
           Stack(
             children: [
               Image.asset(
-                widget.property['image']!,
+                widget.property.image,
                 width: double.infinity,
                 height: 250,
                 fit: BoxFit.cover,
@@ -54,13 +55,13 @@ Widget build(BuildContext context) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.property['name']!,
+                      widget.property.name!,
                       style: GoogleFonts.acme(
                         fontSize: Constants.fontSizeExtraLarge,
                       ),
                     ),
                     Text(
-                      widget.property['desc']!,
+                      widget.property.desc!,
                       style: GoogleFonts.lato(
                         fontSize: Constants.fontSizeBody,
                         fontWeight: FontWeight.w400,
@@ -80,7 +81,7 @@ Widget build(BuildContext context) {
                 ),
                 child: Center(
                   child: Text(
-                    widget.property['type']!,
+                    widget.property.type!,
                     style: GoogleFonts.abel(
                       fontSize: Constants.fontSizeSubTitle,
                       fontWeight: FontWeight.w800,
@@ -98,7 +99,7 @@ Widget build(BuildContext context) {
                 Icon(Icons.location_on),
                 SizedBox(width: 5),
                 Text(
-                  widget.property['location']!,
+                  widget.property.location!,
                   style: GoogleFonts.lato(
                     fontSize: Constants.fontSizeSubTitle,
                     fontWeight: FontWeight.w400,
@@ -135,7 +136,7 @@ Widget build(BuildContext context) {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
-              widget.property['description'] ?? 'No description available',
+              widget.property.desc ?? 'No description available',
               style: GoogleFonts.lato(
                 fontSize: Constants.fontSizeSubTitle,
                 fontWeight: FontWeight.w500,
@@ -193,7 +194,7 @@ Widget build(BuildContext context) {
             ),
           ),
           Text(
-            "Rs ${widget.property['price']!}",
+            "Rs ${widget.property.price!}",
             style: GoogleFonts.aleo(
               fontSize: Constants.fontSizeHeading,
               fontWeight: FontWeight.w800,

@@ -3,12 +3,13 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/components/CustomContainer.dart';
 import 'package:pilot_project/core/config.dart';
+import 'package:pilot_project/data/models/property_model.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/routes/page_route.dart';
 
 class CustomWidgets {
   static Widget propertyCard(PropertyController controller,
-      Map<String, String> property, BuildContext context) {
+      PropertyModel property, BuildContext context) {
     return Card(
       elevation: 4,
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
@@ -23,7 +24,7 @@ class CustomWidgets {
               borderRadius: BorderRadius.circular(12),
               child: Center(
                 child: Image.asset(
-                  property['image']!,
+                  property.image!,
                   height: 100,
                   width: 100,
                   fit: BoxFit.cover,
@@ -38,7 +39,7 @@ class CustomWidgets {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    property['name']!,
+                    property.name,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -47,7 +48,7 @@ class CustomWidgets {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "Price: ${Constants.rupeeSymbol}${property['price']}",
+                    "Price: ${Constants.rupeeSymbol}${property.price}",
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const SizedBox(height: 12),

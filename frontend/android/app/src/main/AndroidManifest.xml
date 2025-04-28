@@ -11,7 +11,6 @@
 			<action android:name="android.intent.action.VIEW" />
 			<data android:scheme="sms" />
 		</intent>
-		
 		<!-- Query for TEL (phone call) support -->
 		<intent>
 			<action android:name="android.intent.action.VIEW" />
@@ -43,6 +42,7 @@
 		<!-- Facebook SDK Meta-Data -->
 		<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />
 		<meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token" />
+		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDYv0cOlaTX5gNI0fCYFlatAilJ9RcVhT4" />
 		<!-- Required by Flutter -->
 		<meta-data android:name="flutterEmbedding" android:value="2" />
 	</application>

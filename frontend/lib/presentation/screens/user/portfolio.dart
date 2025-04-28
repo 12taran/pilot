@@ -1,12 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/components/CustomContainer.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/presentation/widgets/custom_widgets.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class PortfolioPage extends StatefulWidget {
   const PortfolioPage({super.key});
