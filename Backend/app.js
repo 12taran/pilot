@@ -2,6 +2,7 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import multer from "multer";
 import connectDB from "./utils/db.js";
 import userRoute from "./routes/user.route.js";
 
@@ -14,6 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors({ origin: "*" }));
 
+app.use('/uploads', express.static('uploads'));
+
 const PORT = process.env.PORT;
 
 app.get("/", (req, res) => {
@@ -22,6 +25,22 @@ app.get("/", (req, res) => {
 
 // api's
 app.use("/api/v1/user", userRoute);
+
+//  Global error handler for image multer
+app.use((err, req, res, next) => {
+  if (err instanceof multer.MulterError || err.message.includes("Unexpected field")) {
+    return res.status(400).json({
+      message: "Please upload only one image",
+      success: false,
+    });
+  }
+
+  console.error(err.stack);
+  res.status(500).json({
+    message: "Something went wrong",
+    success: false,
+  });
+});
 
 app.listen(PORT, () => {
   connectDB();
