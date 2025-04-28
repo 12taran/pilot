@@ -277,16 +277,20 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   GestureDetector(
                                     onTap: () {
-                                         Get.toNamed(PageRoutes.filterPage,
-                                        arguments: { 'filterKey': 'location',
-  'filterValue': propertyController.properties[index]['location'],});
+                                      Get.toNamed(PageRoutes.filterPage,
+                                          arguments: {
+                                            'filterKey': 'location',
+                                            'filterValue': propertyController
+                                                .properties[index].location,
+                                          });
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         boxShadow: [
                                           BoxShadow(
-                                            color: Colors.black.withOpacity(0.3),
+                                            color:
+                                                Colors.black.withOpacity(0.3),
                                             spreadRadius: 2,
                                             blurRadius: 6,
                                             offset: const Offset(0, 3),
@@ -536,10 +540,13 @@ class _HomePageState extends State<HomePage> {
                             Column(
                               children: [
                                 GestureDetector(
-                                  onTap: (){
+                                  onTap: () {
                                     Get.toNamed(PageRoutes.filterPage,
-                                        arguments:{ 'filterKey':'type','filterValue':propertyController
-                                            .properties[index]['type']});
+                                        arguments: {
+                                          'filterKey': 'type',
+                                          'filterValue': propertyController
+                                              .properties[index].type
+                                        });
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
@@ -557,8 +564,8 @@ class _HomePageState extends State<HomePage> {
                                       radius: 40,
                                       backgroundColor: Colors.white,
                                       backgroundImage: AssetImage(
-                                        propertyController.properties[index]
-                                            .image!,
+                                        propertyController
+                                            .properties[index].image!,
                                       ), // Yahi main kaam karta hai
                                     ),
                                   ),

@@ -28,7 +28,8 @@ class PropertyController extends GetxController {
         longitude: 72.5714,
         price: "18,50,000",
         type: "Residential",
-        description: "Located in a peaceful neighborhood of Ahmedabad, Sunset Heights offers semi-furnished 2BHK apartments with natural lighting, a gym, a clubhouse, and children's play area. Ideal for small families.",
+        description:
+            "Located in a peaceful neighborhood of Ahmedabad, Sunset Heights offers semi-furnished 2BHK apartments with natural lighting, a gym, a clubhouse, and children's play area. Ideal for small families.",
       ),
       PropertyModel(
         name: "Corporate Plaza",
@@ -39,7 +40,8 @@ class PropertyController extends GetxController {
         longitude: 72.6833,
         price: "35,00,000",
         type: "Commercial",
-        description: "A modern commercial space in GIFT City, Corporate Plaza is perfect for startups and enterprises. Fully furnished offices, high-speed internet, and conference rooms included.",
+        description:
+            "A modern commercial space in GIFT City, Corporate Plaza is perfect for startups and enterprises. Fully furnished offices, high-speed internet, and conference rooms included.",
       ),
       PropertyModel(
         name: "Green Valley Residency",
@@ -50,7 +52,8 @@ class PropertyController extends GetxController {
         longitude: 73.1812,
         price: "12,75,000",
         type: "Holiday Homes",
-        description: "Green Valley offers 1BHK and 2BHK flats surrounded by greenery. A gated community with jogging tracks and ample parking space, perfect for peaceful living.",
+        description:
+            "Green Valley offers 1BHK and 2BHK flats surrounded by greenery. A gated community with jogging tracks and ample parking space, perfect for peaceful living.",
       ),
       PropertyModel(
         name: "Metro View Apartments",
@@ -61,7 +64,8 @@ class PropertyController extends GetxController {
         longitude: 72.8311,
         price: "22,00,000",
         type: "Residential",
-        description: "Centrally located near Surat Metro Station, this fully furnished apartment offers 3BHK units with modern interiors, 24x7 water supply, and power backup.",
+        description:
+            "Centrally located near Surat Metro Station, this fully furnished apartment offers 3BHK units with modern interiors, 24x7 water supply, and power backup.",
       ),
       PropertyModel(
         name: "Industrial Work Hub",
@@ -72,7 +76,8 @@ class PropertyController extends GetxController {
         longitude: 72.3818,
         price: "40,00,000",
         type: "Commercial",
-        description: "Spacious industrial work area in Sanand ideal for manufacturing units. Features include easy highway access, truck loading bay, and customizable layout.",
+        description:
+            "Spacious industrial work area in Sanand ideal for manufacturing units. Features include easy highway access, truck loading bay, and customizable layout.",
       ),
       PropertyModel(
         name: "The Urban Nest",
@@ -83,7 +88,8 @@ class PropertyController extends GetxController {
         longitude: 72.6500,
         price: "16,20,000",
         type: "Residential",
-        description: "A modern apartment complex in Gandhinagar featuring semi-furnished 2BHK units with balcony views, rooftop garden, and 24/7 security.",
+        description:
+            "A modern apartment complex in Gandhinagar featuring semi-furnished 2BHK units with balcony views, rooftop garden, and 24/7 security.",
       ),
     ];
     filteredProperties.value = properties; // Initialize filtered properties
