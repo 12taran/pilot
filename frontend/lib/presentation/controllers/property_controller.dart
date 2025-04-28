@@ -4,12 +4,17 @@ import 'package:pilot_project/data/models/property_model.dart';
 
 class PropertyController extends GetxController {
   RxList<PropertyModel> properties = <PropertyModel>[].obs;
-   RxList<PropertyModel> isFav = <PropertyModel>[].obs;
+  RxList<PropertyModel> filteredProperties = <PropertyModel>[].obs; // For filtered results
+  RxList<PropertyModel> isFav = <PropertyModel>[].obs;
+
+  List<String> types = ["Residential", "Commercial", "Holiday Homes"]; // Available types
+  List<String> locations = ["Ahmedabad", "GIFT City", "Vadodara", "Surat", "Sanand", "Gandhinagar"]; // Available locations
 
   @override
   void onInit() {
     super.onInit();
     loadProperties();
+    filteredProperties.value = properties; // Initialize filtered properties
   }
 
   void loadProperties() {
@@ -81,5 +86,25 @@ class PropertyController extends GetxController {
         description: "A modern apartment complex in Gandhinagar featuring semi-furnished 2BHK units with balcony views, rooftop garden, and 24/7 security.",
       ),
     ];
+    filteredProperties.value = properties; // Initialize filtered properties
+  }
+
+  // Filter by Type
+  void filterByType(String type) {
+    filteredProperties.value = properties.where((property) {
+      return property.type == type;
+    }).toList();
+  }
+
+  // Filter by Location
+  void filterByLocation(String location) {
+    filteredProperties.value = properties.where((property) {
+      return property.location == location;
+    }).toList();
+  }
+
+  // Reset Filters
+  void resetFilters() {
+    filteredProperties.value = properties;
   }
 }

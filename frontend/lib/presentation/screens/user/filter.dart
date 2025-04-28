@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pilot_project/data/models/property_model.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/widgets/propertyCard.dart';
 class FilterPage extends StatefulWidget {
@@ -28,7 +29,7 @@ class _FilterPageState extends State<FilterPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, String>> properties = propertyController.properties;
+    List<PropertyModel> properties = propertyController.properties;
 
     // Get unique filter options based on the filterKey
     List<String> filterOptions = properties
