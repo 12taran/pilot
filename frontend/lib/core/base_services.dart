@@ -365,6 +365,49 @@ class BaseService extends GetxService {
     }
   }
 
+  Future<dio.Response?> patchMultiPartData({
+    required String endPoint,
+    required bool isTokenRequired,
+    required Map<String, dynamic>? body,
+    required Map<String, File>? files,
+  }) async {
+    try {
+      sharedPreferences ??= await SharedPreferences.getInstance();
+      String token = sharedPreferences!.getString(Constants.TOKEN) ?? '';
+
+      // Create form data body
+      dio.FormData formData = dio.FormData.fromMap(body ?? {});
+
+      // Add files to form data properly
+      if (files != null && files.isNotEmpty) {
+        for (var entry in files.entries) {
+          formData.files.add(
+            MapEntry(
+              entry.key,
+              await dio.MultipartFile.fromFile(
+                entry.value.path,
+                filename: entry.value.path.split("/").last,
+              ),
+            ),
+          );
+        }
+      }
+
+      // Make the PATCH request
+      dio.Response response = await _dioMultiPart(token).patch(
+        endPoint,
+        data: formData,
+      );
+
+      return response;
+    } on dio.DioError catch (e) {
+      return e.response;
+    } catch (e) {
+      log("Unexpected error in patchMultiPartData: $e");
+      return null;
+    }
+  }
+
   postMultiPartDataBytes(
       {required String endPoint,
       required bool isTokenRequired,

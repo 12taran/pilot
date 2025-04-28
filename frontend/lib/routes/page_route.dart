@@ -130,7 +130,7 @@ class PageRoutes {
       GetPage(
         name: drawerProfile,
         page: () => ProfilePage(),
-        transition: Transition.zoom,
+        transition: Transition.leftToRight,
         transitionDuration: const Duration(milliseconds: 300),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();

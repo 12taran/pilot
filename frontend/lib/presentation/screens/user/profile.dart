@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/presentation/controllers/theme_controller.dart';
 import 'package:pilot_project/presentation/controllers/userController.dart';
 import 'package:pilot_project/presentation/utils_widget.dart';
+import 'package:pilot_project/routes/api_routes.dart';
 
 import 'package:pilot_project/routes/page_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,15 +33,21 @@ class ProfilePage extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Container(
-                        width: Get.width * 0.2,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.white),
-                        ),
-                        child: Image.asset(
-                          "assets/images/onboarding1.png",
-                          fit: BoxFit.fill,
+                      Obx(
+                        () => Container(
+                          width: Get.width * 0.2,
+                          height: Get.width *
+                              0.2, // Ensure height matches width for a perfect circle
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.white),
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                  '${ApiRoutes.imageRoutes}${usercontroller.userImageUrl.value}'),
+                              fit: BoxFit
+                                  .cover, // Ensures the image covers the entire container
+                            ),
+                          ),
                         ),
                       ),
                       const SizedBox(width: 20),

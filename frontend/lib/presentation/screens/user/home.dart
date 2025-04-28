@@ -18,6 +18,7 @@ import 'package:pilot_project/presentation/screens/user/navigation.dart';
 import 'package:pilot_project/presentation/screens/user/profile.dart';
 import 'package:pilot_project/presentation/widgets/flip_card.dart';
 import 'package:pilot_project/presentation/widgets/propertyCard.dart';
+import 'package:pilot_project/routes/api_routes.dart';
 import 'package:pilot_project/routes/page_route.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -36,6 +37,7 @@ class _HomePageState extends State<HomePage> {
   ];
 
   PropertyController propertyController = Get.put(PropertyController());
+  Usercontroller usercontroller = Get.find();
   Pilotcontroller pilotcontroller = Get.put(Pilotcontroller());
   BottomNavController bottomNavController = Get.find();
   @override
@@ -83,14 +85,29 @@ class _HomePageState extends State<HomePage> {
                         ),
                         child: Center(
                           child: GestureDetector(
-                              onTap: () {
-                                Get.to(
-                                  ProfilePage(),
-                                  transition: Transition.leftToRight,
-                                  duration: const Duration(milliseconds: 300),
-                                );
-                              },
-                              child: Icon(Icons.person)),
+                            onTap: () {
+                              Get.toNamed(
+                                PageRoutes.drawerProfile,
+                              );
+                            },
+                            child: Obx(
+                              () => Container(
+                                width: Get.width * 0.2,
+                                height: Get.width *
+                                    0.2, // Ensure height matches width for a perfect circle
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(color: Colors.white),
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                        '${ApiRoutes.imageRoutes}${usercontroller.userImageUrl.value}'),
+                                    fit: BoxFit
+                                        .cover, // Ensures the image covers the entire container
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       )),
                   Expanded(

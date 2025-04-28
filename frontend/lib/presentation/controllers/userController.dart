@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pilot_project/core/utils.dart';
@@ -6,12 +8,15 @@ import 'package:pilot_project/data/repos/user_repo.dart';
 
 class Usercontroller extends GetxController {
   final nameController = TextEditingController(text: "User");
+
   final addressController = TextEditingController(text: "Address");
   final mobileController = TextEditingController(text: "123456XXXX");
+  final RxString userImageUrl = "".obs;
   Future<void> setuserDetail(User user) async {
     nameController.text = user.fullname ?? "User";
     addressController.text = user.address ?? "Address";
     mobileController.text = user.phoneNumber ?? "Mobile";
+    userImageUrl.value = user.image ?? "";
   }
 
   Rx<User> userDetail = User().obs;
@@ -27,8 +32,10 @@ class Usercontroller extends GetxController {
     }
   }
 
-  Future<bool> editUser(String fullname, String address, String userId) async {
-    bool isSuccess = await UserRepo().userEdit(userId, fullname, address);
+  Future<bool> editUser(
+      String fullname, String address, String userId, File? image) async {
+    bool isSuccess =
+        await UserRepo().userEdit(userId, fullname, address, image);
     if (isSuccess) {
       await getUserDetails(userId);
     }

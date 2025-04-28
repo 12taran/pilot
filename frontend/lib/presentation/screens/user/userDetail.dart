@@ -9,6 +9,7 @@ import 'package:pilot_project/core/components/MyTextField.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/presentation/controllers/userController.dart';
+import 'package:pilot_project/routes/api_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserDetail extends StatefulWidget {
@@ -73,10 +74,9 @@ class _UserDetailState extends State<UserDetail> {
                           ],
                           image: DecorationImage(
                             image: _profileImage != null
-                                ? FileImage(_profileImage!)
-                                : const AssetImage(
-                                        "assets/images/onboarding1.png")
-                                    as ImageProvider,
+                                ? FileImage(_profileImage!) as ImageProvider
+                                : NetworkImage(
+                                    '${ApiRoutes.imageRoutes}${usercontroller.userImageUrl.value}'),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -170,8 +170,11 @@ class _UserDetailState extends State<UserDetail> {
                   onPressed: () async {
                     final prefs = await SharedPreferences.getInstance();
                     String? userId = prefs.getString(Constants.USER_ID);
-                    usercontroller.editUser(usercontroller.nameController.text,
-                        usercontroller.addressController.text, userId ?? "");
+                    usercontroller.editUser(
+                        usercontroller.nameController.text,
+                        usercontroller.addressController.text,
+                        userId ?? "",
+                        _profileImage);
                     // Utils.showToast(message: 'User Details saved Successfully');
                   }),
             ],
