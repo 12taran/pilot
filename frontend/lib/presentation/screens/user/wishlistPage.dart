@@ -5,6 +5,7 @@ import 'package:glow_container/glow_container.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
+import 'package:pilot_project/data/models/property_model.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/routes/page_route.dart';
 
@@ -50,7 +51,7 @@ class _WishlistPageState extends State<WishlistPage> {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(8),
                                 child: Image.asset(
-                                  item['image']!,
+                                  item.image!,
                                   width: Get.width * 0.3,
                                   height: Get.height * 0.15,
                                   fit: BoxFit.cover,
@@ -73,7 +74,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                             CrossAxisAlignment.start,
                                         //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                         children: [
-                                          Text(item['name'] ?? '',
+                                          Text(item.name ?? '',
                                               style: GoogleFonts.lato(
                                                   fontSize: Constants
                                                       .fontSizeSubTitle,
@@ -86,7 +87,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                                 Icons.location_on,
                                                 color: Colors.green[300],
                                               ),
-                                              Text(item['location'] ?? '',
+                                              Text(item.location ?? '',
                                                   style: const TextStyle(
                                                       fontSize: 15,
                                                       color: Color.fromARGB(
@@ -111,7 +112,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                                   margin: EdgeInsets.all(0),
                                                   text: 'Invest Now',
                                                   onPressed: () {
-                                                    Map<String, String> detail =
+                                                    PropertyModel detail =
                                                         item;
                                                     Get.toNamed(
                                                         PageRoutes.propertydetail,

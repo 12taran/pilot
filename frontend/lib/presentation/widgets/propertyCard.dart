@@ -4,11 +4,12 @@ import 'package:glow_container/glow_container.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/components/CustomContainer.dart';
 import 'package:pilot_project/core/config.dart';
+import 'package:pilot_project/data/models/property_model.dart';
 import 'package:pilot_project/routes/page_route.dart';
 
 class PropertyCard extends StatefulWidget {
   const PropertyCard({super.key, required this.property});
-  final Map<String, String> property;
+  final PropertyModel property;
 
   @override
   State<PropertyCard> createState() => _PropertyCardState();
@@ -33,7 +34,7 @@ class _PropertyCardState extends State<PropertyCard> {
               ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(5)),
                 child: Image.asset(
-                  widget.property['image']!,
+                  widget.property.image!,
                   fit: BoxFit.cover,
                   height: Get.height * 0.2,
                   width: Get.width * 0.9,
@@ -47,7 +48,7 @@ class _PropertyCardState extends State<PropertyCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.property['name']!,
+                        widget.property.name!,
                         maxLines: 2,
                         style: GoogleFonts.almarai(
                             color: Theme.of(context).textTheme.bodySmall?.color,
@@ -57,7 +58,7 @@ class _PropertyCardState extends State<PropertyCard> {
                        Row(
                 children: [
                   Text(
-                    "${Constants.rupeeSymbol}${widget.property['price']!}/- ",
+                    "${Constants.rupeeSymbol}${widget.property.price!}/- ",
                     style: GoogleFonts.andika(
                         fontSize: Constants.fontSizeSubTitle,
                         fontWeight: FontWeight.w900,
@@ -80,7 +81,7 @@ class _PropertyCardState extends State<PropertyCard> {
                GestureDetector(
                     onTap: () {
                       print('Invest now1');
-                      Map<String, String> detail = widget.property;
+                      PropertyModel detail = widget.property;
                       Get.toNamed(PageRoutes.propertydetail, arguments: detail);
                     },
                     child: GlowContainer(
