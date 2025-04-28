@@ -136,7 +136,7 @@ class _MyTextFieldState extends State<MyTextField> {
         fillColor: Colors.white,
         hintText: widget.overrideHintText
             ? widget.hintText
-            : "Enter ${widget.labelText}",
+            : " ${widget.labelText}",
         hintStyle: widget.hintTextStyle ??
             TextStyle(fontSize: 15.sp, color: Theme.of(context).hintColor),
         contentPadding: widget.contentPadding,

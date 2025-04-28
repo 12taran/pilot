@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
+import 'package:pilot_project/presentation/widgets/propertyCard.dart';
 class FilterPage extends StatefulWidget {
   const FilterPage({
     Key? key,
@@ -88,21 +89,7 @@ class _FilterPageState extends State<FilterPage> {
               itemCount: filteredProperties.length,
               itemBuilder: (context, index) {
                 var property = filteredProperties[index];
-                return Card(
-                  margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                  child: ListTile(
-                    leading: Image.asset(
-                      property['image']!,
-                      width: 60,
-                      fit: BoxFit.cover,
-                    ),
-                    title: Text(property['name']!),
-                    subtitle: Text('${property['location']} - ₹${property['price']}'),
-                    onTap: () {
-                      // Navigate to property detail if needed
-                    },
-                  ),
-                );
+                return PropertyCard(property: property);
               },
             ),
           ),
