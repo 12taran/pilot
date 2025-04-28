@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pilot_project/data/models/property_model.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
+
 class FilterPage extends StatefulWidget {
   const FilterPage({
     Key? key,
@@ -27,19 +29,39 @@ class _FilterPageState extends State<FilterPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, String>> properties = propertyController.properties;
+    List<PropertyModel> properties = propertyController.properties;
 
     // Get unique filter options based on the filterKey
     List<String> filterOptions = properties
-        .map((e) => e[widget.filterKey] ?? '')
+        .map((e) {
+          switch (widget.filterKey) {
+            case 'location':
+              return e.location;
+            case 'type':
+              return e.type;
+            case 'desc':
+              return e.desc;
+            default:
+              return '';
+          }
+        })
         .toSet()
         .toList()
       ..removeWhere((element) => element.isEmpty);
 
     // Filter properties based on selected filter value
-    List<Map<String, String>> filteredProperties = properties
-        .where((property) => property[widget.filterKey] == selectedFilterValue)
-        .toList();
+    List<PropertyModel> filteredProperties = properties.where((property) {
+      switch (widget.filterKey) {
+        case 'location':
+          return property.location == selectedFilterValue;
+        case 'type':
+          return property.type == selectedFilterValue;
+        case 'desc':
+          return property.desc == selectedFilterValue;
+        default:
+          return false;
+      }
+    }).toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -60,7 +82,8 @@ class _FilterPageState extends State<FilterPage> {
                     });
                   },
                   child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     decoration: BoxDecoration(
                       color: selectedFilterValue == filterOptions[index]
@@ -89,15 +112,16 @@ class _FilterPageState extends State<FilterPage> {
               itemBuilder: (context, index) {
                 var property = filteredProperties[index];
                 return Card(
-                  margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                   child: ListTile(
                     leading: Image.asset(
-                      property['image']!,
+                      property.image,
                       width: 60,
                       fit: BoxFit.cover,
                     ),
-                    title: Text(property['name']!),
-                    subtitle: Text('${property['location']} - ₹${property['price']}'),
+                    title: Text(property.name),
+                    subtitle: Text('${property.location} - ₹${property.price}'),
                     onTap: () {
                       // Navigate to property detail if needed
                     },

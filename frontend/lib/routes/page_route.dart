@@ -6,6 +6,7 @@ import 'package:pilot_project/presentation/screens/authScreens/email_password_si
 import 'package:pilot_project/presentation/screens/authScreens/phone_signIn.dart';
 import 'package:pilot_project/presentation/screens/authScreens/phone_sign_up.dart';
 import 'package:pilot_project/presentation/screens/authScreens/register.dart';
+import 'package:pilot_project/presentation/screens/place_location_screen.dart';
 import 'package:pilot_project/presentation/screens/user/filter.dart';
 import 'package:pilot_project/presentation/screens/user/userDetail.dart';
 
@@ -38,6 +39,7 @@ class PageRoutes {
   static const String propertydetail = "/propertyDetails";
   static const String register = "/register";
   static const String filterPage = "/filterPage";
+  static const String mapPage = "/mapPage";
 
   // get product category
   static List<GetPage> getPageRoutes() {
@@ -170,11 +172,28 @@ class PageRoutes {
           );
         }),
       ),
-       GetPage(
+      GetPage(
         name: filterPage,
         page: () => FilterPage(
           filterKey: Get.arguments['filterKey'],
           filterValue: Get.arguments['filterValue'],
+        ),
+        transition: Transition.zoom,
+        transitionDuration: const Duration(milliseconds: 200),
+        binding: BindingsBuilder(() async {
+          final sharedPreferences = await SharedPreferences.getInstance();
+          Get.put(() => sharedPreferences, permanent: true);
+          Get.lazyPut(
+            () => PropertyController(),
+          );
+        }),
+      ),
+      GetPage(
+        name: mapPage,
+        page: () => PlaceLocationMapScreen(
+          latitude: (Get.arguments['latitude'] ?? 0).toDouble(),
+          longitude: (Get.arguments['longitude'] ?? 0).toDouble(),
+          placeName: Get.arguments['placeName'] ?? '',
         ),
         transition: Transition.zoom,
         transitionDuration: const Duration(milliseconds: 200),
