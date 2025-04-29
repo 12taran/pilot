@@ -20,10 +20,16 @@ class _InvestpageState extends State<Investpage> {
   final PropertyController propertyController = Get.put(PropertyController());
   final TextEditingController searchController = TextEditingController();
 
+
+  
+  String? selectedFilterValue; // ✅ Add this line
+
+  
+
   @override
   void initState() {
-    //super.initState();
-    propertyController.loadProperties(); // Load properties when the widget is initialized
+    super.initState();
+    propertyController.loadProperties(); // Load properties initially
   }
 
   @override
@@ -36,57 +42,79 @@ class _InvestpageState extends State<Investpage> {
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.filter_list, color: Colors.white),
+            onPressed: () {
+              _showFilterDialog(context); // Show filter dialog
+            },
+          ),
+        ],
       ),
       body: Obx(() {
         if (propertyController.filteredProperties.isEmpty) {
-          return const Center(child: Text('No properties found.'));
+          return const Center(
+            child: Text(
+              'No properties found.',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            ),
+          );
         } else {
-          return Column(
+          return  Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child:MyTextField(
-  controller: searchController,
-   trailing: searchController.text.isNotEmpty
-      ? IconButton(
-          icon: const Icon(Icons.clear),
-          onPressed: () {
-            searchController.clear();
-            propertyController.resetFilters(); // Reset full list
-          },
-        )
-      : null,
-  
-  prefixIcon: IconButton(
-    icon: Icon(
-      Icons.filter_list_alt,
-      color: Theme.of(context).colorScheme.primary,
-    ),
-    onPressed: () {
-      _showFilterDialog(context);
+              Container(
+  height: 50,
+  child: ListView.builder(
+    scrollDirection: Axis.horizontal,
+    itemCount: propertyController.types.length, // Use the correct list
+    itemBuilder: (context, index) {
+      final filterOption = propertyController.types[index]; // Get the filter option
+      return GestureDetector(
+        onTap: () {
+          setState(() {
+            selectedFilterValue = filterOption; // Update the selected filter
+            propertyController.filterByType(filterOption); // Apply the filter
+          });
+        },
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          decoration: BoxDecoration(
+            color: selectedFilterValue == filterOption
+                ? Colors.blue
+                : Colors.grey[300],
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Center(
+            child: Text(
+              filterOption,
+              style: TextStyle(
+                color: selectedFilterValue == filterOption
+                    ? Colors.white
+                    : Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      );
     },
   ),
-  width: Get.width * 0.9,
-  isLabelEnabled: false,
-  labelText: "Search By Name",
-  onChanged: (value) {
-   // propertyController.searchProperties(value!);
-  },
 ),
 
-              ),
+         
               Expanded(
-                child: ListView.builder(
-                  itemCount: propertyController.filteredProperties.length,
-                  itemBuilder: (context, index) {
-                    return CustomWidgets.propertyCard(
-                      propertyController,
-                      propertyController.filteredProperties[index],
-                      context,
-                    );
-                  },
-                ),
-              ),
+                    child: ListView.builder(
+                      itemCount: propertyController.filteredProperties.length,
+                      itemBuilder: (context, index) {
+                        return CustomWidgets.propertyCard(
+                          propertyController,
+                          propertyController.filteredProperties[index],
+                          context,
+                        );
+                      },
+                    ),
+                  ),
             ],
           );
         }
@@ -94,31 +122,19 @@ class _InvestpageState extends State<Investpage> {
     );
   }
 
- void _showFilterDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: const Text('Select Filter Type'),
-        content: SingleChildScrollView(
-          child: Column(
+  // Filter Dialog
+  void _showFilterDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Filter Properties'),
+          content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              ExpansionTile(
-                leading: const Icon(Icons.category),
-                title: const Text('Type'),
-                children: propertyController.types.map((type) {
-                  return ListTile(
-                    title: Text(type),
-                    onTap: () {
-                      Get.back();
-                      searchController.text = "Type: $type"; // ✅ Set selected type
-                      propertyController.filterByType(type);
-                      Utils.showToast(message: "Type '$type' selected");
-                    },
-                  );
-                }).toList(),
-              ),
+              // Type Filter
+          
+              // Location Filter
               ExpansionTile(
                 leading: const Icon(Icons.location_on),
                 title: const Text('Location'),
@@ -127,34 +143,42 @@ class _InvestpageState extends State<Investpage> {
                     title: Text(location),
                     onTap: () {
                       Get.back();
-                      searchController.text = "Location: $location"; // ✅ Set selected location
                       propertyController.filterByLocation(location);
                       Utils.showToast(message: "Location '$location' selected");
                     },
                   );
                 }).toList(),
               ),
-              const Divider(),
-              ListTile(
-                leading: const Icon(Icons.refresh),
-                title: const Text('Reset Filters'),
-                onTap: () {
-                  Get.back();
-                  searchController.clear(); // ✅ Clear the field
-                  propertyController.resetFilters();
-                  Utils.showToast(message: "Filters reset");
-                },
-              ),
             ],
           ),
-        ),
-      );
-    },
-  );
-}
+          actions: [
+            TextButton(
+              onPressed: () {
+                Get.back();
+                propertyController.resetFilters();
+                setState(() {
+            selectedFilterValue =''; // Update the selected filter
+           // Apply the filter
+          });
+                Utils.showToast(message: "Filters reset");
+              },
+              child: const Text('Reset Filters'),
+            ),
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: const Text('Close'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   void dispose() {
-    searchController.dispose(); // Dispose of the controller when the widget is removed from the widget tree
+    searchController.dispose();
     super.dispose();
   }
 }

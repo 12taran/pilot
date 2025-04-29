@@ -110,11 +110,18 @@ class PropertyController extends GetxController {
  void resetFilters() {
     filteredProperties.value = List.from(properties);
   }
+  
+  final RxList<String> selectedFilters = <String>[].obs;
 
-
-  void searchProperties(String query) {
-    properties.value = filteredProperties
-        .where((p) => p.name.toLowerCase().contains(query.toLowerCase()))
-        .toList();
+void addFilter(String filter) {
+  if (!selectedFilters.contains(filter)) {
+    selectedFilters.add(filter);
   }
+}
+
+void removeFilter(String filter) {
+  selectedFilters.remove(filter);
+}
+
+
 }
