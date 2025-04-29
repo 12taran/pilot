@@ -120,7 +120,7 @@ export const userEdit = async (req, res) => {
 
     // If the user has a previous image, delete it from the server
     if (image && user.image && user.image !== "userImage.jpg") {
-      const oldImagePath = path.join(__dirname, "../uploads", user.image);
+      const oldImagePath = path.join(__dirname, "../uploads/user", user.image);
       fs.unlink(oldImagePath, (err) => {
         if (err) {
           console.log("Error deleting old image: ", err);
@@ -130,7 +130,7 @@ export const userEdit = async (req, res) => {
 
 
     const updatedData = { fullname, address };
-    if (image) updatedData.image = image;
+    if (image) updatedData.image = `user/${image}`;
     
     const updatedUser = await User.findByIdAndUpdate(userId, updatedData, {
       new: true,
