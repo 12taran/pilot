@@ -47,7 +47,16 @@ class _InvestpageState extends State<Investpage> {
                 padding: const EdgeInsets.all(10.0),
                 child:MyTextField(
   controller: searchController,
-
+   trailing: searchController.text.isNotEmpty
+      ? IconButton(
+          icon: const Icon(Icons.clear),
+          onPressed: () {
+            searchController.clear();
+            propertyController.resetFilters(); // Reset full list
+          },
+        )
+      : null,
+  
   prefixIcon: IconButton(
     icon: Icon(
       Icons.filter_list_alt,
@@ -85,59 +94,67 @@ class _InvestpageState extends State<Investpage> {
     );
   }
 
-  void _showFilterDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Select Filter Type'),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ExpansionTile(
-                  leading: const Icon(Icons.category),
-                  title: const Text('Type'),
-                  children: propertyController.types.map((type) {
-                    return ListTile(
-                      title: Text(type),
-                      onTap: () {
-                        Get.back();
-                        propertyController.filterByType(type);
-                        Utils.showToast(message: "Type '$type' selected");
-                      },
-                    );
-                  }).toList(),
-                ),
-                ExpansionTile(
-                  leading: const Icon(Icons.location_on),
-                  title: const Text('Location'),
-                  children: propertyController.locations.map((location) {
-                    return ListTile(
-                      title: Text(location),
-                      onTap: () {
-                        Get.back();
-                        propertyController.filterByLocation(location);
-                        Utils.showToast(message: "Location '$location' selected");
-                      },
-                    );
-                  }).toList(),
-                ),
-                const Divider(),
-                ListTile(
-                  leading: const Icon(Icons.refresh),
-                  title: const Text('Reset Filters'),
-                  onTap: () {
-                    Get.back();
-                    propertyController.resetFilters();
-                    Utils.showToast(message: "Filters reset");
-                  },
-                ),
-              ],
-            ),
+ void _showFilterDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text('Select Filter Type'),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ExpansionTile(
+                leading: const Icon(Icons.category),
+                title: const Text('Type'),
+                children: propertyController.types.map((type) {
+                  return ListTile(
+                    title: Text(type),
+                    onTap: () {
+                      Get.back();
+                      searchController.text = "Type: $type"; // ✅ Set selected type
+                      propertyController.filterByType(type);
+                      Utils.showToast(message: "Type '$type' selected");
+                    },
+                  );
+                }).toList(),
+              ),
+              ExpansionTile(
+                leading: const Icon(Icons.location_on),
+                title: const Text('Location'),
+                children: propertyController.locations.map((location) {
+                  return ListTile(
+                    title: Text(location),
+                    onTap: () {
+                      Get.back();
+                      searchController.text = "Location: $location"; // ✅ Set selected location
+                      propertyController.filterByLocation(location);
+                      Utils.showToast(message: "Location '$location' selected");
+                    },
+                  );
+                }).toList(),
+              ),
+              const Divider(),
+              ListTile(
+                leading: const Icon(Icons.refresh),
+                title: const Text('Reset Filters'),
+                onTap: () {
+                  Get.back();
+                  searchController.clear(); // ✅ Clear the field
+                  propertyController.resetFilters();
+                  Utils.showToast(message: "Filters reset");
+                },
+              ),
+            ],
           ),
-        );
-      },
-    );
+        ),
+      );
+    },
+  );
+}
+  @override
+  void dispose() {
+    searchController.dispose(); // Dispose of the controller when the widget is removed from the widget tree
+    super.dispose();
   }
 }
