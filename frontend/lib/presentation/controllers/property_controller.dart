@@ -4,12 +4,25 @@ import 'package:pilot_project/data/models/property_model.dart';
 
 class PropertyController extends GetxController {
   RxList<PropertyModel> properties = <PropertyModel>[].obs;
-  RxList<PropertyModel> filteredProperties = <PropertyModel>[].obs; // For filtered results
+  RxList<PropertyModel> filteredProperties =
+      <PropertyModel>[].obs; // For filtered results
   RxList<PropertyModel> isFav = <PropertyModel>[].obs;
 
-  List<String> types = ["Residential", "Commercial", "Holiday Homes"]; // Available types
-  List<String> locations = ["Ahmedabad", "GIFT City", "Vadodara", "Surat", "Sanand", "Gandhinagar"]; // Available locations
-
+  List<String> types = [
+    "Residential",
+    "Commercial",
+    "Holiday Homes"
+  ]; // Available types
+  List<String> locations = [
+    "Ahmedabad",
+    "GIFT City",
+    "Vadodara",
+    "Surat",
+    "Sanand",
+    "Gandhinagar"
+  ]; // Available locations
+  RxString selectedType = "".obs;
+  RxString selectedLocation = "".obs;
   @override
   void onInit() {
     super.onInit();
@@ -96,32 +109,29 @@ class PropertyController extends GetxController {
   }
 
   // Filter by Type
- // Filter by Type
- void filterProperties({String? type, String? location}) {
-  filteredProperties.value = properties.where((p) {
-    final matchesType = type == null || p.type == type;
-    final matchesLocation = location == null || p.location == location;
-    return matchesType && matchesLocation;
-  }).toList();
-}
-  
+  // Filter by Type
+  void filterProperties({String? type, String? location}) {
+    filteredProperties.value = properties.where((p) {
+      final matchesType = type == null || p.type == type;
+      final matchesLocation = location == null || p.location == location;
+      return matchesType && matchesLocation;
+    }).toList();
+  }
 
   // Reset Filters
- void resetFilters() {
+  void resetFilters() {
     filteredProperties.value = List.from(properties);
   }
-  
+
   final RxList<String> selectedFilters = <String>[].obs;
 
-void addFilter(String filter) {
-  if (!selectedFilters.contains(filter)) {
-    selectedFilters.add(filter);
+  void addFilter(String filter) {
+    if (!selectedFilters.contains(filter)) {
+      selectedFilters.add(filter);
+    }
   }
-}
 
-void removeFilter(String filter) {
-  selectedFilters.remove(filter);
-}
-
-
+  void removeFilter(String filter) {
+    selectedFilters.remove(filter);
+  }
 }
