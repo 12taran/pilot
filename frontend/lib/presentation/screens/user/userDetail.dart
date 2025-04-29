@@ -4,11 +4,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pilot_project/core/components/MyTextField.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/presentation/controllers/userController.dart';
+import 'package:pilot_project/presentation/screens/user/photo.dart';
 import 'package:pilot_project/presentation/utils_widget.dart';
 import 'package:pilot_project/routes/api_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -46,7 +48,10 @@ class _UserDetailState extends State<UserDetail> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 56, 98, 57),
-        title: const Text("Profile"),
+        title: Text(
+          "Profile",
+          style: GoogleFonts.acme(fontSize: Constants.appBarTextSize),
+        ),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -60,31 +65,10 @@ class _UserDetailState extends State<UserDetail> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        UtilsWidget.showWebDialog(
-                          // height: Get.height * 0.8,
-                          // width: Get.width * 0.9,
-                          context: context,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              border: Border.all(color: Colors.white, width: 4),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.black26,
-                                  blurRadius: 10,
-                                  offset: Offset(0, 5),
-                                ),
-                              ],
-                              image: DecorationImage(
-                                image: _profileImage != null
-                                    ? FileImage(_profileImage!) as ImageProvider
-                                    : NetworkImage(
-                                        '${ApiRoutes.imageRoutes}${usercontroller.userImageUrl.value}'),
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ),
-                        );
+                        Get.to(() => PhotoView(
+                              imageUrl: usercontroller.userImageUrl.value,
+                              name: usercontroller.nameController.text,
+                            ));
                       },
                       child: Container(
                         width: 130,
