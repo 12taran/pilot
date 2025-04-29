@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pilot_project/core/app_theme.dart';
+import 'package:pilot_project/presentation/controllers/pilotController.dart';
 import 'package:pilot_project/presentation/controllers/theme_controller.dart';
 import 'package:pilot_project/presentation/controllers/userController.dart';
 import 'package:pilot_project/routes/page_route.dart';
@@ -21,6 +22,7 @@ class InitialBinding extends Bindings {
   @override
   void dependencies() {
     Get.put(Usercontroller());
+    Get.put(Pilotcontroller());
   }
 }
 
@@ -31,6 +33,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeController themeController = Get.put(ThemeController());
+    
     return ScreenUtilInit(
       child: GetMaterialApp(
         initialBinding: InitialBinding(),
