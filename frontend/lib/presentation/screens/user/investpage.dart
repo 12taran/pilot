@@ -8,9 +8,8 @@ import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/core/utils.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/widgets/custom_widgets.dart';
-
 class Investpage extends StatefulWidget {
-  Investpage({super.key});
+  const Investpage({super.key});
 
   @override
   State<Investpage> createState() => _InvestpageState();
@@ -20,11 +19,8 @@ class _InvestpageState extends State<Investpage> {
   final PropertyController propertyController = Get.put(PropertyController());
   final TextEditingController searchController = TextEditingController();
 
-
-  
-  String? selectedFilterValue; // ✅ Add this line
-
-  
+  String? selectedType;
+  String? selectedLocation;
 
   @override
   void initState() {
@@ -60,61 +56,62 @@ class _InvestpageState extends State<Investpage> {
             ),
           );
         } else {
-          return  Column(
+          return Column(
             children: [
-              Container(
-  height: 50,
-  child: ListView.builder(
-    scrollDirection: Axis.horizontal,
-    itemCount: propertyController.types.length, // Use the correct list
-    itemBuilder: (context, index) {
-      final filterOption = propertyController.types[index]; // Get the filter option
-      return GestureDetector(
-        onTap: () {
-          setState(() {
-            selectedFilterValue = filterOption; // Update the selected filter
-            propertyController.filterByType(filterOption); // Apply the filter
-          });
-        },
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          decoration: BoxDecoration(
-            color: selectedFilterValue == filterOption
-                ? Colors.blue
-                : Colors.grey[300],
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Center(
-            child: Text(
-              filterOption,
-              style: TextStyle(
-                color: selectedFilterValue == filterOption
-                    ? Colors.white
-                    : Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ),
-      );
-    },
-  ),
-),
-
-         
-              Expanded(
-                    child: ListView.builder(
-                      itemCount: propertyController.filteredProperties.length,
-                      itemBuilder: (context, index) {
-                        return CustomWidgets.propertyCard(
-                          propertyController,
-                          propertyController.filteredProperties[index],
-                          context,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      // Type Filters
+                      ...propertyController.types.map((type) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: FilterChip(
+                            label: Text(type),
+                            selected: selectedType == type,
+                            onSelected: (_) {
+                              setState(() {
+                                selectedType = type;
+                                propertyController.filterByType(type);
+                              });
+                            },
+                          ),
                         );
-                      },
-                    ),
+                      }).toList(),
+                      // Location Filters
+                      ...propertyController.locations.map((location) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: FilterChip(
+                            label: Text(location),
+                            selected: selectedLocation == location,
+                            onSelected: (_) {
+                              setState(() {
+                                selectedLocation = location;
+                                propertyController.filterByLocation(location);
+                              });
+                            },
+                          ),
+                        );
+                      }).toList(),
+                    ],
                   ),
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: propertyController.filteredProperties.length,
+                  itemBuilder: (context, index) {
+                    return CustomWidgets.propertyCard(
+                      propertyController,
+                      propertyController.filteredProperties[index],
+                      context,
+                    );
+                  },
+                ),
+              ),
             ],
           );
         }
@@ -133,7 +130,23 @@ class _InvestpageState extends State<Investpage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               // Type Filter
-          
+              ExpansionTile(
+                leading: const Icon(Icons.category),
+                title: const Text('Type'),
+                children: propertyController.types.map((type) {
+                  return ListTile(
+                    title: Text(type),
+                    onTap: () {
+                      Get.back();
+                      setState(() {
+                        selectedType = type;
+                      });
+                      propertyController.filterByType(type);
+                      Utils.showToast(message: "Type '$type' selected");
+                    },
+                  );
+                }).toList(),
+              ),
               // Location Filter
               ExpansionTile(
                 leading: const Icon(Icons.location_on),
@@ -143,6 +156,9 @@ class _InvestpageState extends State<Investpage> {
                     title: Text(location),
                     onTap: () {
                       Get.back();
+                      setState(() {
+                        selectedLocation = location;
+                      });
                       propertyController.filterByLocation(location);
                       Utils.showToast(message: "Location '$location' selected");
                     },
@@ -155,11 +171,11 @@ class _InvestpageState extends State<Investpage> {
             TextButton(
               onPressed: () {
                 Get.back();
-                propertyController.resetFilters();
                 setState(() {
-            selectedFilterValue =''; // Update the selected filter
-           // Apply the filter
-          });
+                  selectedType = null;
+                  selectedLocation = null;
+                });
+                propertyController.resetFilters();
                 Utils.showToast(message: "Filters reset");
               },
               child: const Text('Reset Filters'),
