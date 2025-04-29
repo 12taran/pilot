@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import 'package:pilot_project/core/app_theme.dart';
-import 'package:pilot_project/presentation/controllers/pilotController.dart';
+import 'package:pilot_project/dependency_injection.dart';
+import 'package:pilot_project/presentation/controllers/help_and_supportController.dart';
+import 'package:pilot_project/presentation/controllers/no_internet_controller.dart';
 import 'package:pilot_project/presentation/controllers/theme_controller.dart';
 import 'package:pilot_project/presentation/controllers/userController.dart';
 import 'package:pilot_project/routes/page_route.dart';
@@ -16,24 +19,31 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MyApp());
+  DependencyInjection.init();
 }
 
 class InitialBinding extends Bindings {
   @override
   void dependencies() {
     Get.put(Usercontroller());
-    Get.put(Pilotcontroller());
+    Get.put(HelpAndSupportController());
   }
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+  final NetworkController connectivityController = Get.put(NetworkController());
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     ThemeController themeController = Get.put(ThemeController());
-    
+
     return ScreenUtilInit(
       child: GetMaterialApp(
         initialBinding: InitialBinding(),

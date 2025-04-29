@@ -9,6 +9,7 @@ import 'package:pilot_project/core/components/CustomContainer.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/presentation/controllers/bottomNavController.dart';
+import 'package:pilot_project/presentation/controllers/help_and_supportController.dart';
 import 'package:pilot_project/presentation/controllers/pilotController.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/controllers/userController.dart';
@@ -645,7 +646,8 @@ class _HomePageState extends State<HomePage> {
                                   borderRadius: 20,
                                   text: 'Call Us',
                                   onPressed: () {
-                                    _makePhoneCall('8006644389');
+                                    Get.find<HelpAndSupportController>()
+                                        .makePhoneCall('8006644389');
                                   },
                                 )
                               ],
@@ -662,12 +664,4 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Future<void> _makePhoneCall(String phoneNumber) async {
-    final Uri url = Uri(scheme: 'tel', path: phoneNumber);
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
 }

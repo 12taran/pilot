@@ -1,12 +1,14 @@
 import 'package:get/get.dart';
 import 'package:pilot_project/data/models/property_model.dart';
 import 'package:pilot_project/presentation/controllers/authController.dart';
+import 'package:pilot_project/presentation/controllers/no_internet_controller.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/screens/authScreens/email_password_sign_up.dart';
 import 'package:pilot_project/presentation/screens/authScreens/phone_signIn.dart';
 import 'package:pilot_project/presentation/screens/authScreens/phone_sign_up.dart';
 import 'package:pilot_project/presentation/screens/authScreens/register.dart';
 import 'package:pilot_project/presentation/screens/faqs.dart';
+import 'package:pilot_project/presentation/screens/no_internet_screen.dart';
 import 'package:pilot_project/presentation/screens/place_location_screen.dart';
 import 'package:pilot_project/presentation/screens/user/filter.dart';
 import 'package:pilot_project/presentation/screens/user/userDetail.dart';
@@ -42,6 +44,7 @@ class PageRoutes {
   static const String filterPage = "/filterPage";
   static const String mapPage = "/mapPage";
   static const String faqs = "/faqs";
+  static const String noInternet = "/noInternet";
 
   // get product category
   static List<GetPage> getPageRoutes() {
@@ -215,6 +218,17 @@ class PageRoutes {
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);
+        }),
+      ),
+      GetPage(
+        name: noInternet,
+        page: () => NoInternet(),
+        transition: Transition.zoom,
+        transitionDuration: const Duration(milliseconds: 200),
+        binding: BindingsBuilder(() async {
+          final sharedPreferences = await SharedPreferences.getInstance();
+          Get.put(() => sharedPreferences, permanent: true);
+          Get.put(() => NetworkController(), permanent: true);
         }),
       )
     ];

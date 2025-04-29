@@ -80,10 +80,11 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                     MyTextField(
                       labelText: "Name",
                       controller: authController.nameController,
-                      textStyle:
-                          GoogleFonts.acme(fontSize: Constants.fontSizeBody),
+                      textStyle: GoogleFonts.acme(
+                          fontSize: Constants.fontSizeBody,
+                          color: Colors.black),
                       onChanged: (v) {},
-                        focusedBorderColor: Theme.of(context).colorScheme.primary,
+                      focusedBorderColor: Theme.of(context).colorScheme.primary,
                       isLabelEnabled: false,
                       validator: (v) => v!.isEmpty ? ' Name is required' : null,
                       keyboardType: TextInputType.name,
@@ -94,7 +95,8 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                       maxLength: 10,
                       controller: authController.phoneController,
                       textStyle:
-                          GoogleFonts.acme(fontSize: Constants.fontSizeBody),
+                          GoogleFonts.acme(fontSize: Constants.fontSizeBody,
+                          color: Colors.black),
                       onChanged: (v) {},
                       focusedBorderColor: Theme.of(context).colorScheme.primary,
                       isLabelEnabled: false,
@@ -109,7 +111,7 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                       textStyle:
                           GoogleFonts.acme(fontSize: Constants.fontSizeBody),
                       onChanged: (v) {},
-                        focusedBorderColor: Theme.of(context).colorScheme.primary,
+                      focusedBorderColor: Theme.of(context).colorScheme.primary,
                       isLabelEnabled: false,
                       validator: (v) =>
                           v!.isEmpty ? ' Address is required' : null,
@@ -229,7 +231,11 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                                 child: const Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(Icons.facebook, size: 20,color: Colors.indigo,),
+                                    Icon(
+                                      Icons.facebook,
+                                      size: 20,
+                                      color: Colors.indigo,
+                                    ),
                                   ],
                                 ),
                                 onPressed: () async {
@@ -246,7 +252,8 @@ class PhoneSignUpScreenState extends State<PhoneSignUpScreen> {
                           style: GoogleFonts.acme(
                               color: Theme.of(context).colorScheme.primary,
                               decoration: TextDecoration.underline,
-                    decorationColor: Theme.of(context).colorScheme.primary),
+                              decorationColor:
+                                  Theme.of(context).colorScheme.primary),
                         ),
                         onPressed: () {
                           Get.toNamed(PageRoutes.phonesignin);

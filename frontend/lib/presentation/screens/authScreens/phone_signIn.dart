@@ -82,10 +82,11 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                       labelText: "Mobile Number",
                       maxLength: 10,
                       controller: authController.phoneController,
-                      textStyle:
-                          GoogleFonts.acme(fontSize: Constants.fontSizeBody),
+                      textStyle: GoogleFonts.acme(
+                          fontSize: Constants.fontSizeBody,
+                          color: Colors.black),
                       onChanged: (v) {},
-                        focusedBorderColor: Theme.of(context).colorScheme.primary,
+                      focusedBorderColor: Theme.of(context).colorScheme.primary,
                       isLabelEnabled: false,
                       validator: (v) =>
                           v!.isEmpty ? 'Mobile Number is required' : null,
@@ -100,7 +101,8 @@ class PhoneSignInScreenState extends State<PhoneSignInScreen> {
                         textStyle:
                             GoogleFonts.acme(fontSize: Constants.fontSizeBody),
                         onChanged: (v) {},
-                          focusedBorderColor: Theme.of(context).colorScheme.primary,
+                        focusedBorderColor:
+                            Theme.of(context).colorScheme.primary,
                         isLabelEnabled: false,
                         validator: (v) => v!.isEmpty ? 'OTP is required' : null,
                         keyboardType: TextInputType.number,
