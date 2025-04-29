@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/config.dart';
 
@@ -113,7 +114,7 @@ class _MyTextFieldState extends State<MyTextField> {
       onTap: widget.onTap,
       enabled: widget.enable,
       readOnly: widget.readOnly,
-      cursorColor:Colors.black,
+      cursorColor: Colors.black,
       autofocus: widget.autofocus,
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
@@ -126,17 +127,15 @@ class _MyTextFieldState extends State<MyTextField> {
       textAlign: widget.textAlign,
       style: widget.textStyle ??
           TextStyle(
-            color: Theme.of(context).textTheme.bodySmall?.color,
+            color: Colors.black,
             fontSize: Constants.fontSizeTinySmall,
           ),
-      
       decoration: InputDecoration(
         labelStyle: GoogleFonts.aBeeZee(),
         filled: true,
         fillColor: Colors.white,
-        hintText: widget.overrideHintText
-            ? widget.hintText
-            : " ${widget.labelText}",
+        hintText:
+            widget.overrideHintText ? widget.hintText : " ${widget.labelText}",
         hintStyle: widget.hintTextStyle ??
             TextStyle(fontSize: 15.sp, color: Theme.of(context).hintColor),
         contentPadding: widget.contentPadding,

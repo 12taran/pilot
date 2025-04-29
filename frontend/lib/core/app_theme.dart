@@ -35,7 +35,7 @@ class AppTheme {
   );
 
   static final ThemeData dark = ThemeData(
-    cardColor: Colors.white30,
+    cardColor: Colors.white12,
     brightness: Brightness.dark,
     fontFamily: Constants.fontFamily,
     primaryColor: Color.fromARGB(0, 88, 125, 90),
