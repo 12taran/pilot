@@ -96,21 +96,32 @@ class PropertyController extends GetxController {
   }
 
   // Filter by Type
+ // Filter by Type
   void filterByType(String type) {
-    filteredProperties.value = properties.where((property) {
-      return property.type == type;
-    }).toList();
+    filteredProperties.value = properties.where((p) => p.type == type).toList();
   }
 
   // Filter by Location
   void filterByLocation(String location) {
-    filteredProperties.value = properties.where((property) {
-      return property.location == location;
-    }).toList();
+    filteredProperties.value = properties.where((p) => p.location == location).toList();
   }
 
   // Reset Filters
-  void resetFilters() {
-    filteredProperties.value = properties;
+ void resetFilters() {
+    filteredProperties.value = List.from(properties);
   }
+  
+  final RxList<String> selectedFilters = <String>[].obs;
+
+void addFilter(String filter) {
+  if (!selectedFilters.contains(filter)) {
+    selectedFilters.add(filter);
+  }
+}
+
+void removeFilter(String filter) {
+  selectedFilters.remove(filter);
+}
+
+
 }

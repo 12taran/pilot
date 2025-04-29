@@ -52,7 +52,7 @@ class PageRoutes {
     return [
       GetPage(
         name: invest,
-        page: () => const Investpage(),
+        page: () =>  Investpage(),
         transitionDuration: const Duration(milliseconds: 300),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
