@@ -19,8 +19,7 @@ class UserRepo {
     if (image != null) {
       files["image"] = image;
     }
-    print("${image!.path} h ye");
-    print("${image!.uri} h ye");
+  
     final response = await BaseService().patchMultiPartData(
       endPoint: "${apiRoutes.userEdit}/$userId",
       body: body,

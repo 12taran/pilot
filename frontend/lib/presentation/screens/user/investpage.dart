@@ -40,7 +40,7 @@ class _InvestpageState extends State<Investpage> {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: const Icon(Icons.filter_list, color: Colors.white),
+            icon: const Icon(Icons.location_on, color: Colors.white),
             onPressed: () {
               _showFilterDialog(context); // Show filter dialog
             },
@@ -49,12 +49,40 @@ class _InvestpageState extends State<Investpage> {
       ),
       body: Obx(() {
         if (propertyController.filteredProperties.isEmpty) {
-          return const Center(
-            child: Text(
-              'No properties found.',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-            ),
-          );
+          return  Center(
+            child: Column(
+              children: [
+                Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      // Type Filters
+                      ...propertyController.types.map((type) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: FilterChip(
+                            label: Text(type),
+                            selected: selectedType == type,
+                            onSelected: (_) {
+                              setState(() {
+                                selectedType = type;
+                                propertyController.filterProperties(type:selectedType,location: selectedLocation);
+                              });
+                            },
+                          ),
+                        );
+                      }).toList(),]))),
+                      
+                    Text(
+                      'No properties found.',
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    ),
+                                  ],)
+                                  );
+
+                
         } else {
           return Column(
             children: [
@@ -74,14 +102,14 @@ class _InvestpageState extends State<Investpage> {
                             onSelected: (_) {
                               setState(() {
                                 selectedType = type;
-                                propertyController.filterByType(type);
+                                propertyController.filterProperties(type:selectedType,location: selectedLocation);
                               });
                             },
                           ),
                         );
                       }).toList(),
                       // Location Filters
-                      ...propertyController.locations.map((location) {
+                      /*...propertyController.locations.map((location) {
                         return Padding(
                           padding: const EdgeInsets.only(right: 8),
                           child: FilterChip(
@@ -95,7 +123,7 @@ class _InvestpageState extends State<Investpage> {
                             },
                           ),
                         );
-                      }).toList(),
+                      }).toList(),*/
                     ],
                   ),
                 ),
@@ -130,27 +158,11 @@ class _InvestpageState extends State<Investpage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               // Type Filter
-              ExpansionTile(
-                leading: const Icon(Icons.category),
-                title: const Text('Type'),
-                children: propertyController.types.map((type) {
-                  return ListTile(
-                    title: Text(type),
-                    onTap: () {
-                      Get.back();
-                      setState(() {
-                        selectedType = type;
-                      });
-                      propertyController.filterByType(type);
-                      Utils.showToast(message: "Type '$type' selected");
-                    },
-                  );
-                }).toList(),
-              ),
+            
               // Location Filter
               ExpansionTile(
                 leading: const Icon(Icons.location_on),
-                title: const Text('Location'),
+              title: selectedLocation == null ? Text('Location') : Text(selectedLocation!),
                 children: propertyController.locations.map((location) {
                   return ListTile(
                     title: Text(location),
@@ -159,7 +171,7 @@ class _InvestpageState extends State<Investpage> {
                       setState(() {
                         selectedLocation = location;
                       });
-                      propertyController.filterByLocation(location);
+                   propertyController.filterProperties(type:selectedType,location: selectedLocation);
                       Utils.showToast(message: "Location '$location' selected");
                     },
                   );

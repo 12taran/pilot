@@ -97,14 +97,14 @@ class PropertyController extends GetxController {
 
   // Filter by Type
  // Filter by Type
-  void filterByType(String type) {
-    filteredProperties.value = properties.where((p) => p.type == type).toList();
-  }
-
-  // Filter by Location
-  void filterByLocation(String location) {
-    filteredProperties.value = properties.where((p) => p.location == location).toList();
-  }
+ void filterProperties({String? type, String? location}) {
+  filteredProperties.value = properties.where((p) {
+    final matchesType = type == null || p.type == type;
+    final matchesLocation = location == null || p.location == location;
+    return matchesType && matchesLocation;
+  }).toList();
+}
+  
 
   // Reset Filters
  void resetFilters() {
