@@ -56,60 +56,96 @@ class _FaqsState extends State<Faqs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'FAQS',
-          style: GoogleFonts.acme(fontSize: Constants.appBarTextSize),
-        ),
-        centerTitle: true,
-      ),
       body: Column(
         children: [
           SizedBox(
-            height: Get.height * 0.04,
+            height: Get.height * 0.15,
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Theme.of(context).colorScheme.primary),
+            child: Text(
+              "FAQs",
+              style: GoogleFonts.aBeeZee(
+                fontSize: Constants.fontSizeBody,
+                color: Theme.of(context).textTheme.bodyLarge?.color,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: Get.height * 0.03,
           ),
           Text(
             'Frequently Asked Questions',
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            style: GoogleFonts.aBeeZee(
+              fontSize: Constants.fontSizeHeading,
+              fontWeight: FontWeight.w600,
+              color: Theme.of(context).textTheme.bodyLarge?.color,
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 'Dont see the answer you are looking for?',
-                style: TextStyle(fontSize: 12),
+                style: GoogleFonts.aBeeZee(
+                  fontSize: Constants.fontSizeTinySmall,
+                  fontWeight: FontWeight.w600,
+                  color: Theme.of(context).textTheme.bodyLarge?.color,
+                ),
               ),
               GestureDetector(
                 onTap: () {
                   _makePhoneCall('8006644389');
                 },
                 child: Text(
-                  'Get in Touch',
-                  style: TextStyle(
-                    color: Colors.green,
-                    fontSize: 15,
-                    decoration: TextDecoration
-                        .underline, // Add this line for the underline
+                  ' Get in Touch',
+                  style: GoogleFonts.aBeeZee(
+                    fontSize: Constants.fontSizeTinySmall,
+                    fontWeight: FontWeight.w600,
+                    color: Theme.of(context).colorScheme.primary,
+                    decorationColor: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ),
             ],
           ),
           SizedBox(
-            height: Get.height * 0.04,
+            height: Get.height * 0.02,
           ),
           Expanded(
             child: ListView.builder(
               itemCount: faqList.length,
               itemBuilder: (context, index) {
                 return CustomContainer(
+                  backgroundColor: Theme.of(context).cardColor,
+                  borderColor: Theme.of(context).dividerColor,
+                  borderRadius: 10,
                   padding: 0,
+                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   child: ExpansionTile(
-                    title: Text(faqList[index].question),
+                    title: Text(
+                      faqList[index].question,
+                      style: GoogleFonts.aBeeZee(
+                        fontSize: Constants.fontSizeSmall,
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).textTheme.bodyLarge?.color,
+                      ),
+                    ),
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(faqList[index].answer),
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          faqList[index].answer,
+                          style: GoogleFonts.aBeeZee(
+                            fontSize: Constants.fontSizeTinySmall + 1,
+                            fontWeight: FontWeight.w600,
+                            color:
+                                Theme.of(context).textTheme.labelMedium?.color,
+                          ),
+                        ),
                       ),
                     ],
                   ),
