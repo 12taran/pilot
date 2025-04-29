@@ -47,23 +47,19 @@ export const userVerify = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+    return res.status(500).json({
+      message: "Server problem while creating user",
+      success: false,
+    });
   }
 };
 
 export const userGet = async (req, res) => {
   try {
-    const userId = req.id;
-    const user = await User.find({ userId });
-
-    if (!user) {
-      return res.status(404).json({
-        message: "Profile not found",
-        success: false,
-      });
-    }
+    const users = await User.find(); 
     return res.status(200).json({
       success: true,
-      user,
+      users, 
     });
   } catch (error) {
     console.log(error);
@@ -77,7 +73,7 @@ export const userGet = async (req, res) => {
 export const userById = async (req, res) => {
   try {
     const {userId} = req.params;
-    const user = await User.findById(userId );// findById() expects the ID directly, not an object
+    const user = await User.findById(userId );
 
     if (!user) {
       return res.status(404).json({
