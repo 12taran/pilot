@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
 
 // api's
 app.use("/api/v1/user", userRoute);
-app.use("/api/v1/member", memberRoute);
+app.use("/api/v1/user/member", memberRoute);
 
 //  Global error handler for image multer
 app.use((err, req, res, next) => {
