@@ -90,7 +90,7 @@ class _PropertyCardState extends State<PropertyCard> {
                         margin: const EdgeInsets.all(2),
                         width: Get.width * 0.27,
                         height: Get.height * 0.04,
-                        borderRadius: 5,
+                        borderRadius: 15,
                         backgroundColor: Colors.white,
                       
                       ),

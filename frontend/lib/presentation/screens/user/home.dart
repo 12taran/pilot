@@ -494,8 +494,9 @@ class _HomePageState extends State<HomePage> {
                                 borderSide: BorderSide(width: 2)),
                             // optional, or customize
                             gradientColors: const [
-                              Colors.orange,
-                              Color.fromARGB(255, 221, 96, 58),
+                              Colors.yellow,
+                              Colors.green,
+                              Colors.greenAccent,
                             ],
                             glowRadius: 5,
                             // match button's border
@@ -504,7 +505,8 @@ class _HomePageState extends State<HomePage> {
                               borderRadius: 10,
                               margin: const EdgeInsets.all(0),
                               color: Colors.white,
-                              textColor: Colors.orange,
+                              textColor:Colors.greenAccent,
+                          
                               text: 'Invest Now',
                               onPressed: () {
                                 print('Hello');

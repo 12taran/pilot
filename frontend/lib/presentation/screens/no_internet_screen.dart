@@ -14,33 +14,37 @@ class _NoInternetState extends State<NoInternet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(title:Center(child: Text('Share Sampatti')),),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset(
-                'assets/icon/logo.png',
-                height: Get.height * 0.1,
-                width: Get.width * 0.8,
-              ),
-              SizedBox(
-                height: Get.height * 0.18,
-              ),
+
               Icon(
                 Icons.signal_wifi_off,
-                size: Get.height * 0.1,
+                size: Get.height * 0.05,
                 color: Colors.red,
               ),
-              SizedBox(
-                height: Get.height * 0.02,
-              ),
+            
               const Text(
                 'No Internet Connection',
                 textAlign: TextAlign.center,
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
+              ),
+              SizedBox(height: 20,),
+              const Text(
+                'Kindly turn on Mobile data or Wi-Fi to continue',
+                textAlign: TextAlign.center,
                 style: TextStyle(fontWeight: FontWeight.w700, fontSize: 23),
               ),
+
+                            Image.asset(
+                'assets/icon/logo.png',
+                height: Get.height * 0.5,
+                width: Get.width * 0.8,
+              ),
+           
             ],
           ),
         ));
