@@ -2,7 +2,6 @@
 
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,7 +10,6 @@ import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/presentation/controllers/userController.dart';
 import 'package:pilot_project/presentation/screens/user/photo.dart';
-import 'package:pilot_project/presentation/utils_widget.dart';
 import 'package:pilot_project/routes/api_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

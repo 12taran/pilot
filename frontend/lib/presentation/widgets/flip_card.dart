@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pilot_project/data/models/board_member.dart';
+import 'package:pilot_project/routes/api_routes.dart';
 
 class FlipCard extends StatefulWidget {
   final int index;
-  final Map<String, String> boardMember;
+  final Member boardMember;
 
   const FlipCard({
     super.key,
@@ -43,7 +45,7 @@ class _FlipCardState extends State<FlipCard>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: _flipCard,
+      //onTap: _flipCard,
       child: AnimatedBuilder(
         animation: _controller,
         builder: (context, child) {
@@ -75,11 +77,18 @@ class _FlipCardState extends State<FlipCard>
             child: Center(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(2),
-                child: Image.asset(
-                  widget.boardMember['image']!,
-                  fit: BoxFit.fill,
-                  height: Get.height * 0.278,
-                  width: Get.width * 0.6,
+                child: Container(
+                  // Ensure height matches width for a perfect circle
+                  decoration: BoxDecoration(
+                    //shape: BoxShape.circle,
+                    border: Border.all(color: Colors.white),
+                    image: DecorationImage(
+                      image: NetworkImage(
+                          '${ApiRoutes.imageRoutes}${widget.boardMember.image!}'),
+                      fit: BoxFit
+                          .cover, // Ensures the image covers the entire container
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -91,7 +100,7 @@ class _FlipCardState extends State<FlipCard>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  widget.boardMember['name']!,
+                  widget.boardMember.name!,
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   style: GoogleFonts.actor(
@@ -102,7 +111,7 @@ class _FlipCardState extends State<FlipCard>
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  widget.boardMember['designation']!,
+                  widget.boardMember.designation!,
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   style: GoogleFonts.actor(
@@ -144,7 +153,7 @@ class _FlipCardState extends State<FlipCard>
             ),
             const SizedBox(height: 8),
             Text(
-              "Details about ${widget.boardMember['name']} like bio, achievements, etc. go here.",
+              "Details about ${widget.boardMember.name} like bio, achievements, etc. go here.",
               textAlign: TextAlign.center,
               style: GoogleFonts.actor(
                 fontSize: 14,

@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/components/CustomContainer.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
+import 'package:pilot_project/presentation/controllers/boardmember_controller.dart';
 import 'package:pilot_project/presentation/controllers/bottomNavController.dart';
 import 'package:pilot_project/presentation/controllers/help_and_supportController.dart';
 import 'package:pilot_project/presentation/controllers/pilotController.dart';
@@ -35,6 +36,7 @@ class _HomePageState extends State<HomePage> {
 
   PropertyController propertyController = Get.put(PropertyController());
   Usercontroller usercontroller = Get.find();
+  BoardMemberController boardMemberController = Get.find();
   Pilotcontroller pilotcontroller = Get.put(Pilotcontroller());
   BottomNavController bottomNavController = Get.find();
   @override
@@ -355,13 +357,16 @@ class _HomePageState extends State<HomePage> {
                           scrollPhysics: const BouncingScrollPhysics(),
                           pageSnapping: false,
                           aspectRatio: 16 / 9,
-                          viewportFraction: 0.8),
-                      items: List.generate(3, (index) {
+                          viewportFraction: 0.9),
+                      items: List.generate(
+                          boardMemberController
+                              .boardMembers.value!.data!.length, (index) {
                         return Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: FlipCard(
                               index: index,
-                              boardMember: pilotcontroller.boardMembers[index]),
+                              boardMember: boardMemberController
+                                  .boardMembers.value!.data![index]),
                         );
                         // Container(
                         //   width: Get.width * 0.9,

@@ -14,4 +14,5 @@ class ApiRoutes {
   String userLogin = "login";
   String userEdit = "edit";
   String getUser = "getById";
+  String getBoardMembers = "member/getAll";
 }
