@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pilot_project/core/components/MyTextField.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/core/utils.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
@@ -15,13 +14,22 @@ class Investpage extends StatefulWidget {
 }
 
 class _InvestpageState extends State<Investpage> {
-  final PropertyController propertyController = Get.put(PropertyController());
-  final TextEditingController searchController = TextEditingController();
+  final PropertyController propertyController = Get.find<PropertyController>();
 
   @override
   void initState() {
     super.initState();
     propertyController.loadProperties();
+    propertyController.filterProperties(
+        type: propertyController.selectedType.value,
+        location: propertyController.selectedLocation.value);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    propertyController.selectedLocation.value = "";
+    propertyController.selectedType.value = "";
   }
 
   @override
@@ -98,7 +106,6 @@ class _InvestpageState extends State<Investpage> {
             ),
           ],
         ));
-        
   }
 
   void _showFilterDialog(BuildContext context) {
@@ -165,11 +172,5 @@ class _InvestpageState extends State<Investpage> {
         );
       },
     );
-  }
-
-  @override
-  void dispose() {
-    searchController.dispose();
-    super.dispose();
   }
 }

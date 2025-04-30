@@ -19,7 +19,10 @@ class PropertyController extends GetxController {
     "Vadodara",
     "Surat",
     "Sanand",
-    "Gandhinagar"
+    "Gandhinagar",
+    "Mohali",
+    "Dhulera",
+    "Himachal"
   ]; // Available locations
   RxString selectedType = "".obs;
   RxString selectedLocation = "".obs;
@@ -72,7 +75,7 @@ class PropertyController extends GetxController {
         name: "Metro View Apartments",
         desc: "Fully Furnished",
         image: "assets/images/property5.jpg",
-        location: "Surat",
+        location: "Mohali",
         latitude: 21.1702,
         longitude: 72.8311,
         price: "22,00,000",
@@ -96,13 +99,80 @@ class PropertyController extends GetxController {
         name: "The Urban Nest",
         desc: "Semi Furnished",
         image: "assets/images/property6.jpg",
-        location: "Gandhinagar",
+        location: "Dhulera",
         latitude: 23.2230,
         longitude: 72.6500,
         price: "16,20,000",
         type: "Residential",
         description:
             "A modern apartment complex in Gandhinagar featuring semi-furnished 2BHK units with balcony views, rooftop garden, and 24/7 security.",
+      ),
+      PropertyModel(
+        name: "GIFT Homes Premium",
+        desc: "Fully Furnished",
+        image: "assets/images/property1.jpg",
+        location: "GIFT City",
+        latitude: 23.1500,
+        longitude: 72.6800,
+        price: "28,00,000",
+        type: "Residential",
+        description:
+            "Luxurious 2BHK apartment in the heart of GIFT City. Fully furnished with modular kitchen, modern bath fittings, and smart home features.",
+      ),
+
+      // Commercial in Ahmedabad
+      PropertyModel(
+        name: "Shree Business Tower",
+        desc: "Raw Space",
+        image: "assets/images/property2.jpg",
+        location: "Himachal",
+        latitude: 23.0350,
+        longitude: 72.5800,
+        price: "42,00,000",
+        type: "Commercial",
+        description:
+            "Office space ideal for startups and consulting firms. Prime location with good connectivity, lift and 24x7 security.",
+      ),
+
+      // Holiday Homes in Surat
+      PropertyModel(
+        name: "Surat Getaway Villas",
+        desc: "Semi Furnished",
+        image: "assets/images/property3.jpg",
+        location: "Surat",
+        latitude: 21.1800,
+        longitude: 72.8350,
+        price: "19,50,000",
+        type: "Holiday Homes",
+        description:
+            "Weekend retreat with villa-style homes, landscaped garden, pool access and close proximity to the river.",
+      ),
+
+      // Add more combinations
+      PropertyModel(
+        name: "Urban CoWork",
+        desc: "Fully Furnished",
+        image: "assets/images/property4.jpg",
+        location: "Vadodara",
+        latitude: 22.3100,
+        longitude: 73.2000,
+        price: "30,00,000",
+        type: "Commercial",
+        description:
+            "Ready-to-use co-working space ideal for freelancers and agencies. High-speed Wi-Fi and meeting rooms available.",
+      ),
+
+      PropertyModel(
+        name: "EcoNest Holiday Retreat",
+        desc: "Unfurnished",
+        image: "assets/images/property5.jpg",
+        location: "Sanand",
+        latitude: 23.0000,
+        longitude: 72.3900,
+        price: "15,00,000",
+        type: "Holiday Homes",
+        description:
+            "Nature-inspired homes with eco-friendly construction, perfect for holiday stays. Jogging track and campfire zone included.",
       ),
     ];
     filteredProperties.value = properties; // Initialize filtered properties
@@ -112,14 +182,18 @@ class PropertyController extends GetxController {
   // Filter by Type
   void filterProperties({String? type, String? location}) {
     filteredProperties.value = properties.where((p) {
-      final matchesType = type == null || p.type == type;
-      final matchesLocation = location == null || p.location == location;
+      final matchesType = type == null || type.isEmpty || p.type == type;
+      final matchesLocation =
+          location == null || location.isEmpty || p.location == location;
+
       return matchesType && matchesLocation;
     }).toList();
   }
 
   // Reset Filters
   void resetFilters() {
+    selectedType.value = "";
+    selectedLocation.value = "";
     filteredProperties.value = List.from(properties);
   }
 
