@@ -517,7 +517,7 @@ class _HomePageState extends State<HomePage> {
                             child: CustomButtons(
                               width: Get.width * 0.7,
                               borderRadius: 10,
-                              margin: const EdgeInsets.all(2),
+                              margin: const EdgeInsets.all(0),
                               color: Colors.white,
                               textColor:Colors.greenAccent,
                           
