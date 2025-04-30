@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/components/CustomContainer.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
+import 'package:pilot_project/data/models/board_member.dart';
 import 'package:pilot_project/presentation/controllers/boardmember_controller.dart';
 import 'package:pilot_project/presentation/controllers/bottomNavController.dart';
 import 'package:pilot_project/presentation/controllers/help_and_supportController.dart';
@@ -170,55 +171,51 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  gradient: const LinearGradient(colors: [
-                    Color.fromARGB(255, 75, 138, 75),
-                    Color.fromARGB(255, 44, 121, 39),
-                    Color.fromARGB(255, 37, 72, 33),
-                  ]),
-                  border: Border.all(
-                    color: const Color.fromARGB(255, 107, 106, 106),
-                    width: 0.5,
-                  )),
-              height: Get.height * 0.2,
-              width: Get.width * 0.9,
-              child:Stack(
-  children: [
-    // Background layer (can be a color, gradient, or image)
-   
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    gradient: const LinearGradient(colors: [
+                      Color.fromARGB(255, 75, 138, 75),
+                      Color.fromARGB(255, 44, 121, 39),
+                      Color.fromARGB(255, 37, 72, 33),
+                    ]),
+                    border: Border.all(
+                      color: const Color.fromARGB(255, 107, 106, 106),
+                      width: 0.5,
+                    )),
+                height: Get.height * 0.2,
+                width: Get.width * 0.9,
+                child: Stack(
+                  children: [
+                    // Background layer (can be a color, gradient, or image)
 
-    // Foreground content: logo + text
-    Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Opacity(
-            opacity: 0.8,
-            child: Image.asset(
-              'assets/icon/logo.png',
-              height: Get.height * 0.12,
-              width: Get.width * 0.3,
-              fit: BoxFit.contain,
-            ),
-          ),
-          
-          Text(
-            "Investing in Real Estate \nmade easy for everyone",
-            textAlign: TextAlign.center,
-            style: GoogleFonts.aleo(
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-              color: Color.fromARGB(255, 251, 245, 245),
-            ),
-          ),
-        ],
-      ),
-    ),
-  ],
-)
-
-            ),
+                    // Foreground content: logo + text
+                    Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Opacity(
+                            opacity: 0.8,
+                            child: Image.asset(
+                              'assets/icon/logo.png',
+                              height: Get.height * 0.12,
+                              width: Get.width * 0.3,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                          Text(
+                            "Investing in Real Estate \nmade easy for everyone",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.aleo(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                              color: Color.fromARGB(255, 251, 245, 245),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                )),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -234,7 +231,7 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Discover for ${Get.find<Usercontroller>().userDetail.value.fullname ?? "USER"}",
+                      "Discover for ${usercontroller.nameController.text ?? "USER"}",
                       style: GoogleFonts.lato(
                           fontSize: Constants.fontSizeExtraLarge,
                           fontWeight: FontWeight.w700,
@@ -377,13 +374,15 @@ class _HomePageState extends State<HomePage> {
                           viewportFraction: 0.9),
                       items: List.generate(
                           boardMemberController
-                              .boardMembers.value!.data!.length, (index) {
+                                  .boardMembers.value?.data?.length ??
+                              0, (index) {
                         return Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: FlipCard(
                               index: index,
                               boardMember: boardMemberController
-                                  .boardMembers.value!.data![index]),
+                                      .boardMembers.value?.data?[index] ??
+                                  Member()),
                         );
                         // Container(
                         //   width: Get.width * 0.9,
@@ -521,11 +520,10 @@ class _HomePageState extends State<HomePage> {
                             // match button's border
                             child: CustomButtons(
                               width: Get.width * 0.7,
-                              borderRadius: 10,
-                              margin: const EdgeInsets.all(2),
+                              borderRadius: 12,
+                              margin: const EdgeInsets.all(0),
                               color: Colors.white,
-                              textColor:Colors.greenAccent,
-                          
+                              textColor: Colors.greenAccent,
                               text: 'Invest Now',
                               onPressed: () {
                                 print('Hello');
