@@ -105,15 +105,7 @@ class ProfilePage extends StatelessWidget {
               title: const Text('Documents'),
               onTap: () {},
             ),
-            Divider(
-              thickness: 1,
-            ),
-            ListTile(
-              trailing: Icon(Icons.arrow_right),
-              leading: const Icon(Icons.monetization_on),
-              title: const Text('Virtual Wallet'),
-              onTap: () {},
-            ),
+       
             Divider(
               thickness: 1,
             ),

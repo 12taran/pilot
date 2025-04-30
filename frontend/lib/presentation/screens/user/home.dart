@@ -183,24 +183,41 @@ class _HomePageState extends State<HomePage> {
                   )),
               height: Get.height * 0.2,
               width: Get.width * 0.9,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  /*Text('Invest in Real estate Easily',
-                        style: GoogleFonts.aleo(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w900,
-                            color: Colors.white)
-                            ),*/
-                  Text(
-                    style: GoogleFonts.aleo(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 251, 245, 245)),
-                    "Investing in Real Estate \nmade easy for everyone",
-                  ),
-                ],
-              ),
+              child:Stack(
+  children: [
+    // Background layer (can be a color, gradient, or image)
+   
+
+    // Foreground content: logo + text
+    Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Opacity(
+            opacity: 0.8,
+            child: Image.asset(
+              'assets/icon/logo.png',
+              height: Get.height * 0.12,
+              width: Get.width * 0.3,
+              fit: BoxFit.contain,
+            ),
+          ),
+          
+          Text(
+            "Investing in Real Estate \nmade easy for everyone",
+            textAlign: TextAlign.center,
+            style: GoogleFonts.aleo(
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+              color: Color.fromARGB(255, 251, 245, 245),
+            ),
+          ),
+        ],
+      ),
+    ),
+  ],
+)
+
             ),
           ),
           Column(
@@ -496,8 +513,9 @@ class _HomePageState extends State<HomePage> {
                                 borderSide: BorderSide(width: 2)),
                             // optional, or customize
                             gradientColors: const [
-                              Colors.orange,
-                              Color.fromARGB(255, 221, 96, 58),
+                              Colors.yellow,
+                              Colors.green,
+                              Colors.greenAccent,
                             ],
                             glowRadius: 5,
                             // match button's border
@@ -506,7 +524,8 @@ class _HomePageState extends State<HomePage> {
                               borderRadius: 10,
                               margin: const EdgeInsets.all(2),
                               color: Colors.white,
-                              textColor: Colors.orange,
+                              textColor:Colors.greenAccent,
+                          
                               text: 'Invest Now',
                               onPressed: () {
                                 print('Hello');
