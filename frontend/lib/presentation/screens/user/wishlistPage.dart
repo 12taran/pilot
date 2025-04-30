@@ -37,7 +37,7 @@ class _WishlistPageState extends State<WishlistPage> {
                 itemBuilder: (context, index) {
                   final item = propertyController.isFav[index];
                   return Card(
-                    color: Theme.of(context).cardColor,
+                    color: const Color.fromARGB(255, 200, 221, 239),
                     margin: const EdgeInsets.all(10),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,

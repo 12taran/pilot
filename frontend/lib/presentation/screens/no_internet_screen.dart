@@ -34,7 +34,8 @@ class _NoInternetState extends State<NoInternet> {
               ),
               SizedBox(height: 20,),
               const Text(
-                'Kindly turn on Mobile data or Wi-Fi to continue',
+                maxLines: 2,
+                'Kindly turn on Mobile data\n or Wi-Fi to continue',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontWeight: FontWeight.w700, fontSize: 23),
               ),
