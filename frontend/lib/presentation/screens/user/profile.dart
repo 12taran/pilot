@@ -122,7 +122,7 @@ class ProfilePage extends StatelessWidget {
               trailing: Icon(Icons.arrow_right),
               leading: const Icon(Icons.person),
               title: const Text(' About Us'),
-              onTap: () {},
+              onTap: () {Get.toNamed(PageRoutes.aboutPage);},
             ),
             Divider(
               thickness: 1,
