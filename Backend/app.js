@@ -4,7 +4,9 @@ import cors from "cors";
 import dotenv from "dotenv";
 import multer from "multer";
 import connectDB from "./utils/db.js";
+
 import userRoute from "./routes/user.route.js";
+import memberRoute from "./routes/member.route.js";
 
 dotenv.config();
 
@@ -17,14 +19,13 @@ app.use(cors({ origin: "*" }));
 
 app.use('/uploads', express.static('uploads'));
 
-const PORT = process.env.PORT;
-
 app.get("/", (req, res) => {
   res.send(`Hello World`);
 });
 
 // api's
 app.use("/api/v1/user", userRoute);
+app.use("/api/v1/member", memberRoute);
 
 //  Global error handler for image multer
 app.use((err, req, res, next) => {
@@ -42,6 +43,7 @@ app.use((err, req, res, next) => {
   });
 });
 
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   connectDB();
   console.log(`Server is running on ${PORT}`);
