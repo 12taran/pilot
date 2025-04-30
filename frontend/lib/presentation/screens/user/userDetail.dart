@@ -130,6 +130,7 @@ class _UserDetailState extends State<UserDetail> {
                     Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: MyTextField(
+                        isLabelEnabled: false,
                         labelText: 'Name',
                         onChanged: (value) {},
                         textStyle: const TextStyle(color: Colors.black),
@@ -143,7 +144,7 @@ class _UserDetailState extends State<UserDetail> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                       child: MyTextField(
-                        labelText: 'Phone No.',
+                        labelText: 'Phone Number',
                         onChanged: (value) {},
                         textStyle: const TextStyle(color: Colors.black),
                         enable: false,

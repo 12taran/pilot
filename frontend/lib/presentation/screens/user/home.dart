@@ -25,7 +25,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List City = ['Mohali', '  Dhulera', 'Himachal'];
+  List city = ['Mohali', '  Dhulera', 'Himachal'];
 
   List location = [
     'assets/images/mohali.jpg',
@@ -291,12 +291,9 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   GestureDetector(
                                     onTap: () {
-                                      Get.toNamed(PageRoutes.filterPage,
-                                          arguments: {
-                                            'filterKey': 'location',
-                                            'filterValue': propertyController
-                                                .properties[index].location,
-                                          });
+                                      propertyController.selectedLocation
+                                          .value = city[index]; // Selected type
+                                      bottomNavController.changeTabIndex(2);
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
@@ -320,7 +317,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                   Text(
-                                    City[index],
+                                    city[index],
                                     style: GoogleFonts.aleo(
                                         fontSize: Constants.fontSizeSmall,
                                         color: Theme.of(context).primaryColor,
@@ -503,7 +500,7 @@ class _HomePageState extends State<HomePage> {
                             child: CustomButtons(
                               width: Get.width * 0.7,
                               borderRadius: 10,
-                              margin: const EdgeInsets.all(0),
+                              margin: const EdgeInsets.all(2),
                               color: Colors.white,
                               textColor:Colors.greenAccent,
                           
@@ -557,12 +554,10 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    Get.toNamed(PageRoutes.filterPage,
-                                        arguments: {
-                                          'filterKey': 'type',
-                                          'filterValue': propertyController
-                                              .properties[index].type
-                                        });
+                                    propertyController.selectedType.value =
+                                        propertyController.properties[index]
+                                            .type; // Selected type
+                                    bottomNavController.changeTabIndex(2);
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
@@ -665,5 +660,4 @@ class _HomePageState extends State<HomePage> {
       )),
     );
   }
-
 }
