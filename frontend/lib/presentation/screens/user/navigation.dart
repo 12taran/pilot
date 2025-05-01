@@ -36,9 +36,11 @@ class BottomNavScreenState extends State<BottomNavScreen> {
 
   final List<BottomNavigationBarItem> _navItems = [
     const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-    const BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Wishlist'),
+    const BottomNavigationBarItem(
+        icon: Icon(Icons.favorite), label: 'Wishlist'),
     const BottomNavigationBarItem(icon: Icon(Icons.inventory), label: 'Invest'),
-    const BottomNavigationBarItem(icon: Icon(Icons.work_outline), label: 'Portfolio'),
+    const BottomNavigationBarItem(
+        icon: Icon(Icons.work_outline), label: 'Portfolio'),
     const BottomNavigationBarItem(
         icon: Icon(Icons.work_history), label: 'Properties'),
   ];
@@ -55,74 +57,47 @@ class BottomNavScreenState extends State<BottomNavScreen> {
     Get.find<Usercontroller>().getUserDetails(userId);
   }
 
+  Future<bool> _onWillPop() async {
+    if (bottomNavController.currentIndex.value != 0) {
+      bottomNavController.currentIndex.value = 0;
+      return false;
+    } else {
+      print('onWillPop called');
 
-Future<bool> _onWillPop() async {
-  if (bottomNavController.currentIndex.value != 0) {
-    bottomNavController.currentIndex.value = 0;
-    return false;
-  } else {
-    print('onWillPop called');
+      final shouldExit = await UtilsWidget.showConfirmationDialog(
+        context: context,
+        message: 'You surely want to exit Share Sampatti?',
+        onYesPressed: () => Get.back(result: true),
+        onNoPressed: () => Get.back(result: false),
+      );
 
-    final shouldExit = await UtilsWidget.showConfirmationDialog(
-      context: context,
-      message:'You surely want to exit Share Sampatti?',
-    
-      onYesPressed: () => Get.back(result: true),
-      onNoPressed: () => Get.back(result: false),
-    );
-
-    return shouldExit ?? false;
+      return shouldExit ?? false;
+    }
   }
-}
-
-
-
-
-Future<bool> _onWillPop() async {
-  if (bottomNavController.currentIndex.value != 0) {
-    bottomNavController.currentIndex.value = 0;
-    return false;
-  } else {
-    print('onWillPop called');
-
-    final shouldExit = await UtilsWidget.showConfirmationDialog(
-      context: context,
-      message:'You surely want to exit Share Sampatti?',
-    
-      onYesPressed: () => Get.back(result: true),
-      onNoPressed: () => Get.back(result: false),
-    );
-
-    return shouldExit ?? false;
-  }
-}
-
-
 
   @override
-Widget build(BuildContext context) {
-  return PopScope(
-    canPop: false, // prevent automatic pop
-    onPopInvoked: (didPop) async {
-      if (!didPop) {
-        final shouldExit = await _onWillPop();
-        if (shouldExit) {
-          SystemNavigator.pop(); // Or: Navigator.of(context).pop()
+  Widget build(BuildContext context) {
+    return PopScope(
+      canPop: false, // prevent automatic pop
+      onPopInvoked: (didPop) async {
+        if (!didPop) {
+          final shouldExit = await _onWillPop();
+          if (shouldExit) {
+            SystemNavigator.pop(); // Or: Navigator.of(context).pop()
+          }
         }
-      }
-    },
-    child: Obx(() => Scaffold(
-          body: _pages[bottomNavController.currentIndex.value],
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: bottomNavController.currentIndex.value,
-            onTap: bottomNavController.changeTabIndex,
-            items: _navItems,
-            type: BottomNavigationBarType.fixed,
-            selectedItemColor: Theme.of(context).colorScheme.primary,
-            unselectedItemColor: Colors.grey,
-          ),
-        )),
-  );
-}
-
+      },
+      child: Obx(() => Scaffold(
+            body: _pages[bottomNavController.currentIndex.value],
+            bottomNavigationBar: BottomNavigationBar(
+              currentIndex: bottomNavController.currentIndex.value,
+              onTap: bottomNavController.changeTabIndex,
+              items: _navItems,
+              type: BottomNavigationBarType.fixed,
+              selectedItemColor: Theme.of(context).colorScheme.primary,
+              unselectedItemColor: Colors.grey,
+            ),
+          )),
+    );
+  }
 }
