@@ -332,20 +332,35 @@ class UtilsWidget {
         builder: (BuildContext context) {
           return AlertDialog(
             backgroundColor: Theme.of(context).colorScheme.background,
-            title: Text("Confirmation".tr),
-            content: Text(message ?? "del_conf".tr),
+            title: Text("Confirmation",
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.bold)),
+            content: Text(message!,style: TextStyle(fontSize: Constants.fontSizeSmall+2),),
             actions: <Widget>[
-              TextButton(
-                child: const Text("No",style: TextStyle(color: Colors.red),),
-                onPressed: () {
-                  onNoPressed();
-                },
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.red.withOpacity(0.1),
+                ),
+                child: TextButton(
+                  child: const Text("No",style: TextStyle(color: Colors.red),),
+                  onPressed: () {
+                    onNoPressed();
+                  },
+                ),
               ),
-              TextButton(
-                child: Text("YES",style: TextStyle(color: Colors.green),),
-                onPressed: () {
-                  onYesPressed();
-                },
+              Container(
+                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.green.withOpacity(0.1),
+                ),
+                child: TextButton(
+                  child: Text("YES",style: TextStyle(color: Colors.green),),
+                  onPressed: () {
+                    onYesPressed();
+                  },
+                ),
               ),
             ],
           );
