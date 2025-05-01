@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pilot_project/core/components/MyTextField.dart';
 
 class Addproperty extends StatefulWidget {
   const Addproperty({super.key});
@@ -22,11 +23,14 @@ class _AddpropertyState extends State<Addproperty> {
             const SizedBox(height: 20),
             // Add your form fields here
             // For example:
-            TextField(
-              decoration: InputDecoration(labelText: 'Property Name'),
+            MyTextField(
+              onChanged: (value) => {},
+            labelText: 'Property Name',
             ),
-            TextField(
-              decoration: InputDecoration(labelText: 'Property Location'),
+            SizedBox(height: 20,),
+            MyTextField(
+              onChanged: (value) => {},
+            labelText: 'Property Location',
             ),
             // Add more fields as needed
           ],
