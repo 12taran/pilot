@@ -11,6 +11,7 @@ import 'package:pilot_project/routes/api_routes.dart';
 import 'package:pilot_project/routes/page_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pilot_project/core/config.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
@@ -105,7 +106,6 @@ class ProfilePage extends StatelessWidget {
               title: const Text('Documents'),
               onTap: () {},
             ),
-       
             Divider(
               thickness: 1,
             ),
@@ -113,8 +113,9 @@ class ProfilePage extends StatelessWidget {
               trailing: Icon(Icons.arrow_right),
               leading: const Icon(Icons.food_bank_outlined),
               title: const Text('Bank Details'),
-              onTap: (){
-                Get.toNamed(PageRoutes.bankDetail);},
+              onTap: () {
+                Get.toNamed(PageRoutes.bankDetail);
+              },
             ),
             Divider(
               thickness: 1,
@@ -123,7 +124,9 @@ class ProfilePage extends StatelessWidget {
               trailing: Icon(Icons.arrow_right),
               leading: const Icon(Icons.person),
               title: const Text(' About Us'),
-              onTap: () {Get.toNamed(PageRoutes.aboutPage);},
+              onTap: () {
+                Get.toNamed(PageRoutes.aboutPage);
+              },
             ),
             Divider(
               thickness: 1,
@@ -147,7 +150,10 @@ class ProfilePage extends StatelessWidget {
                 UtilsWidget.showConfirmationDialog(
                     message: 'Are you sure you want to logout?',
                     onYesPressed: () async {
+                      final prefs = await SharedPreferences.getInstance();
+                      await prefs.clear();
                       await FirebaseAuth.instance.signOut();
+                      Get.reset();
                       // Get.find<AuthController>().isOtpSent.value = false;
                       Get.offAndToNamed(PageRoutes.phonesignup);
                     },
