@@ -64,7 +64,7 @@ class _PropertydetailState extends State<Propertydetail> {
                         style: GoogleFonts.lato(
                           fontSize: Constants.fontSizeBody,
                           fontWeight: FontWeight.w400,
-                          color: Theme.of(context).colorScheme.primary,
+                          color: Colors.orange,
                         ),
                       ),
                     ],
@@ -93,31 +93,68 @@ class _PropertydetailState extends State<Propertydetail> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 10.0, left: 10),
-              child: InkWell(
-                onTap: () {
-                  Get.toNamed(PageRoutes.mapPage, arguments: {
-                    'latitude': widget.property.latitude,
-                    'longitude': widget.property.longitude,
-                    'placeName': widget.property.name,
-                  });
-                },
-                child: Row(
-                  children: [
-                    Icon(Icons.location_on),
-                    SizedBox(width: 5),
-                    Text(
-                      widget.property.location!,
-                      style: GoogleFonts.lato(
-                        fontSize: Constants.fontSizeSubTitle,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.red,
-                      ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(PageRoutes.mapPage, arguments: {
+                        'latitude': widget.property.latitude,
+                        'longitude': widget.property.longitude,
+                        'placeName': widget.property.name,
+                      });
+                    },
+                    child: Row(
+                      children: [
+                        Icon(Icons.location_on),
+                        SizedBox(width: 5),
+                        Text(
+                          widget.property.location!,
+                          style: GoogleFonts.lato(
+                            fontSize: Constants.fontSizeSubTitle,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
+                  Center(
+              child: GestureDetector(
+                onTap: (){},
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primary,
+                      borderRadius: BorderRadius.circular(25),
+                      border: Border.all(color: const Color.fromARGB(255, 7, 57, 52)),
+                      boxShadow: [
+                        BoxShadow(
+                        
+                          spreadRadius: 0.5,
+                          blurRadius: 2,
+                          offset: Offset(0, 1),
+                        ),
+                      ],
+                    ),
+                    padding: EdgeInsets.all(12),
+                    width: Get.width * 0.4,
+                    height: Get.height * 0.05,
+                    child:Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [Icon(Icons.download,size: 13,),Text('Download Brochure',style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),)],),),
                 ),
               ),
             ),
-            Divider(thickness: 2),
+                ],
+              ),
+            ),
+            SizedBox(height: 10),
+            
+              
+            SizedBox(height: 20),
+            Divider(thickness: 1),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Row(
@@ -142,10 +179,22 @@ class _PropertydetailState extends State<Propertydetail> {
             ),
             SizedBox(height: 10),
             Divider(thickness: 1),
+            
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Description",
+                style: GoogleFonts.aBeeZee(
+                  color: Theme.of(context).colorScheme.primary,
+                    fontSize: Constants.fontSizeHeading,
+                    
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Text(
-                widget.property.desc ?? 'No description available',
+                widget.property.description ?? 'No description available',
                 style: GoogleFonts.lato(
                   fontSize: Constants.fontSizeSubTitle,
                   fontWeight: FontWeight.w500,
@@ -185,6 +234,7 @@ class _PropertydetailState extends State<Propertydetail> {
                 ),
               ),
             ),
+          
             SizedBox(height: 20),
           ],
         ),

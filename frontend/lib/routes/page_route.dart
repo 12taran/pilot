@@ -8,6 +8,7 @@ import 'package:pilot_project/presentation/screens/authScreens/email_password_si
 import 'package:pilot_project/presentation/screens/authScreens/phone_signIn.dart';
 import 'package:pilot_project/presentation/screens/authScreens/phone_sign_up.dart';
 import 'package:pilot_project/presentation/screens/authScreens/register.dart';
+import 'package:pilot_project/presentation/screens/docsScreen/bankScreen.dart';
 import 'package:pilot_project/presentation/screens/faqs.dart';
 import 'package:pilot_project/presentation/screens/no_internet_screen.dart';
 import 'package:pilot_project/presentation/screens/place_location_screen.dart';
@@ -49,6 +50,7 @@ class PageRoutes {
   static const String noInternet = "/noInternet";
   static const String aboutPage = "/aboutPage";
   static const String privacyPage = "/privacyPage";
+  static const String bankDetail = "/bankDetail";
 
   // get product category
   static List<GetPage> getPageRoutes() {
@@ -249,6 +251,17 @@ class PageRoutes {
       GetPage(
         name:privacyPage,
         page: () => PrivacyPolicyPage(),
+        transition: Transition.zoom,
+        transitionDuration: const Duration(milliseconds: 200),
+        binding: BindingsBuilder(() async {
+          final sharedPreferences = await SharedPreferences.getInstance();
+          Get.put(() => sharedPreferences, permanent: true);
+          
+        }),
+      ),
+       GetPage(
+        name:bankDetail,
+        page: () => BankDetailsScreen(),
         transition: Transition.zoom,
         transitionDuration: const Duration(milliseconds: 200),
         binding: BindingsBuilder(() async {

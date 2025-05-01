@@ -113,7 +113,8 @@ class ProfilePage extends StatelessWidget {
               trailing: Icon(Icons.arrow_right),
               leading: const Icon(Icons.food_bank_outlined),
               title: const Text('Bank Details'),
-              onTap: () {},
+              onTap: (){
+                Get.toNamed(PageRoutes.bankDetail);},
             ),
             Divider(
               thickness: 1,
