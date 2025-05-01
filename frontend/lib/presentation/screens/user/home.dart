@@ -17,7 +17,6 @@ import 'package:pilot_project/presentation/widgets/flip_card.dart';
 import 'package:pilot_project/presentation/widgets/propertyCard.dart';
 import 'package:pilot_project/routes/api_routes.dart';
 import 'package:pilot_project/routes/page_route.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   @override
