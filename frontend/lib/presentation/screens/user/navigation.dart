@@ -9,9 +9,6 @@ import 'package:pilot_project/presentation/screens/user/home.dart';
 import 'package:pilot_project/presentation/screens/user/investpage.dart';
 import 'package:pilot_project/presentation/screens/user/portfolio.dart';
 import 'package:pilot_project/presentation/screens/user/wishlistPage.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:pilot_project/presentation/utils_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,27 +23,8 @@ class BottomNavScreenState extends State<BottomNavScreen> {
   final BottomNavController bottomNavController =
       Get.put(BottomNavController());
 
-  final List<Widget> _pages = [
-    HomePage(),
-    WishlistPage(),
-    Investpage(),
-    const PortfolioPage(),
-    Properties()
-  ];
-
-  final List<BottomNavigationBarItem> _navItems = [
-    const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-    const BottomNavigationBarItem(
-        icon: Icon(Icons.favorite), label: 'Wishlist'),
-    const BottomNavigationBarItem(icon: Icon(Icons.inventory), label: 'Invest'),
-    const BottomNavigationBarItem(
-        icon: Icon(Icons.work_outline), label: 'Portfolio'),
-    const BottomNavigationBarItem(
-        icon: Icon(Icons.work_history), label: 'Properties'),
-  ];
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getUser();
   }
@@ -54,7 +32,14 @@ class BottomNavScreenState extends State<BottomNavScreen> {
   void getUser() async {
     final sharedPreferences = await SharedPreferences.getInstance();
     String userId = sharedPreferences.getString(Constants.USER_ID) ?? "";
-    Get.find<Usercontroller>().getUserDetails(userId);
+    await Get.find<Usercontroller>().getUserDetails(userId);
+
+    // Ensure current index is valid (especially if admin status changed)
+    final isAdmin = Get.find<Usercontroller>().userDetail.value.isAdmin == true;
+    final maxIndex = isAdmin ? 4 : 3;
+    if (bottomNavController.currentIndex.value > maxIndex) {
+      bottomNavController.currentIndex.value = 0;
+    }
   }
 
   Future<bool> _onWillPop() async {
@@ -62,8 +47,6 @@ class BottomNavScreenState extends State<BottomNavScreen> {
       bottomNavController.currentIndex.value = 0;
       return false;
     } else {
-      print('onWillPop called');
-
       final shouldExit = await UtilsWidget.showConfirmationDialog(
         context: context,
         message: 'You surely want to exit Share Sampatti?',
@@ -78,26 +61,59 @@ class BottomNavScreenState extends State<BottomNavScreen> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: false, // prevent automatic pop
+      canPop: false,
       onPopInvoked: (didPop) async {
         if (!didPop) {
           final shouldExit = await _onWillPop();
           if (shouldExit) {
-            SystemNavigator.pop(); // Or: Navigator.of(context).pop()
+            SystemNavigator.pop();
           }
         }
       },
-      child: Obx(() => Scaffold(
-            body: _pages[bottomNavController.currentIndex.value],
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: bottomNavController.currentIndex.value,
-              onTap: bottomNavController.changeTabIndex,
-              items: _navItems,
-              type: BottomNavigationBarType.fixed,
-              selectedItemColor: Theme.of(context).colorScheme.primary,
-              unselectedItemColor: Colors.grey,
+      child: Obx(() {
+        final userController = Get.find<Usercontroller>();
+        final isAdmin = userController.userDetail.value.isAdmin == true;
+
+        final List<Widget> pages = [
+          HomePage(),
+          WishlistPage(),
+          Investpage(),
+          const PortfolioPage(),
+          if (isAdmin) Properties(),
+        ];
+
+        final List<BottomNavigationBarItem> navItems = [
+          const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.favorite), label: 'Wishlist'),
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.inventory), label: 'Invest'),
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.work_outline), label: 'Portfolio'),
+          if (isAdmin)
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.work_history),
+              label: 'Properties',
             ),
-          )),
+        ];
+
+        final currentIndex = bottomNavController.currentIndex.value;
+        final safeIndex = currentIndex >= pages.length ? 0 : currentIndex;
+
+        return Scaffold(
+          body: pages[safeIndex],
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: safeIndex,
+            onTap: (index) {
+              bottomNavController.changeTabIndex(index);
+            },
+            items: navItems,
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: Theme.of(context).colorScheme.primary,
+            unselectedItemColor: Colors.grey,
+          ),
+        );
+      }),
     );
   }
 }
