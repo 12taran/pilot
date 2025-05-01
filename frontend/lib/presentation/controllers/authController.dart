@@ -6,7 +6,6 @@ import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:pilot_project/core/session_manager.dart';
 import 'package:pilot_project/core/utils.dart';
 import 'package:pilot_project/data/repos/auth_repo.dart';
 import 'package:pilot_project/routes/page_route.dart';
@@ -45,27 +44,51 @@ class AuthController extends GetxController {
     }
 
     String phone = "+91$phoneRaw";
-
     bool doesExist = await AuthRepo().userLogin(phoneRaw);
-    if (!doesExist && isLogin) {
-      return;
+    if (isLogin) {
+      if (doesExist) {
+        print('I am here');
+        await FirebaseAuth.instance.verifyPhoneNumber(
+          phoneNumber: phone,
+          verificationCompleted: (credential) {},
+          verificationFailed: (FirebaseAuthException ex) {
+            print("OTP verification failed: ${ex.code} - ${ex.message}");
+            Utils.showToast(message: ex.code.toString());
+            isOtpSent.value = false;
+          },
+          codeSent: (verificationId, resendToken) {
+            verificationIds = verificationId;
+            isOtpSent.value = true;
+          },
+          codeAutoRetrievalTimeout: (verificationId) {},
+          timeout: const Duration(seconds: 30),
+        );
+      } else {
+        Utils.showToast(message: "User not registered. Please register first.");
+        Get.toNamed(PageRoutes.phonesignup);
+      }
     } else {
-      print('I am here');
-      await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: phone,
-        verificationCompleted: (credential) {},
-        verificationFailed: (FirebaseAuthException ex) {
-          print("OTP verification failed: ${ex.code} - ${ex.message}");
-          Utils.showToast(message: ex.code.toString());
-          isOtpSent.value = false;
-        },
-        codeSent: (verificationId, resendToken) {
-          verificationIds = verificationId;
-          isOtpSent.value = true;
-        },
-        codeAutoRetrievalTimeout: (verificationId) {},
-        timeout: const Duration(seconds: 30),
-      );
+      if (doesExist) {
+        Utils.showToast(message: "User already registered. Please login.");
+        print("User already registered. Please login.");
+        Get.toNamed(PageRoutes.phonesignup);
+      } else {
+        await FirebaseAuth.instance.verifyPhoneNumber(
+          phoneNumber: phone,
+          verificationCompleted: (credential) {},
+          verificationFailed: (FirebaseAuthException ex) {
+            print("OTP verification failed: ${ex.code} - ${ex.message}");
+            Utils.showToast(message: ex.code.toString());
+            isOtpSent.value = false;
+          },
+          codeSent: (verificationId, resendToken) {
+            verificationIds = verificationId;
+            isOtpSent.value = true;
+          },
+          codeAutoRetrievalTimeout: (verificationId) {},
+          timeout: const Duration(seconds: 30),
+        );
+      }
     }
   }
 
@@ -144,7 +167,7 @@ class AuthController extends GetxController {
   Future<bool> userRegisterVerify(
       String phone, String name, String address) async {
     bool isSuccess = await AuthRepo().userRegisterVerify(phone, name, address);
-   
+    print('');
     return isSuccess;
   }
 

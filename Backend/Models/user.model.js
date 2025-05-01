@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema(
     },
     image : {
       type: String,
-      default: "userImage.jpg",
+      default: "user/userImage.jpg",
     }
   },
   { timestamps: true }

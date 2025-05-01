@@ -20,7 +20,7 @@ class _PropertyCardState extends State<PropertyCard> {
   Widget build(BuildContext context) {
     return CustomContainer(
         backgroundColor: Theme.of(context).cardColor,
-        padding: 2,
+        padding: 0,
         //margin: EdgeInsets.all(5),
         borderWidth: 3,
         borderRadius: 10,
@@ -40,69 +40,82 @@ class _PropertyCardState extends State<PropertyCard> {
                   width: Get.width * 0.9,
                 ),
               ),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.property.name!,
-                      maxLines: 2,
-                      style: GoogleFonts.almarai(
-                          color: Theme.of(context).textTheme.bodySmall?.color,
-                          fontSize: Constants.fontSizeSmall + 2,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "${Constants.rupeeSymbol}${widget.property.price!}/- ",
-                          style: GoogleFonts.andika(
-                              fontSize: Constants.fontSizeSubTitle,
-                              fontWeight: FontWeight.w900,
-                              color:
-                                  Theme.of(context).textTheme.bodyLarge?.color),
-                        ),
-                        Text(
-                          'SQFT',
-                          style: TextStyle(
-                              fontSize: 12,
-                              color:
-                                  Theme.of(context).textTheme.bodyLarge?.color),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-                GestureDetector(
-                  onTap: () {
-                    print('Invest now1');
-                    PropertyModel detail = widget.property;
-                    Get.toNamed(PageRoutes.propertydetail, arguments: detail);
-                  },
-                  child: GlowContainer(
-                    gradientColors: [Colors.green],
-                    containerOptions: ContainerOptions(
-                      margin: const EdgeInsets.all(2),
-                      width: Get.width * 0.27,
-                      height: Get.height * 0.04,
-                      borderRadius: 15,
-                      backgroundColor: Colors.white,
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Invest Now ',
-                        style: GoogleFonts.aBeeZee(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: const Color.fromARGB(255, 64, 255, 0),
-                          letterSpacing: 1,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.property.name!,
+                            maxLines: 2,
+                            style: GoogleFonts.almarai(
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.color,
+                                fontSize: Constants.fontSizeSmall + 2,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "${Constants.rupeeSymbol}${widget.property.price!}/- ",
+                                style: GoogleFonts.andika(
+                                    fontSize: Constants.fontSizeSubTitle,
+                                    fontWeight: FontWeight.w900,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.color),
+                              ),
+                              Text(
+                                'SQFT',
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.color),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          print('Invest now1');
+                          PropertyModel detail = widget.property;
+                          Get.toNamed(PageRoutes.propertydetail,
+                              arguments: detail);
+                        },
+                        child: GlowContainer(
+                          gradientColors: [Colors.green],
+                          containerOptions: ContainerOptions(
+                            // margin: const EdgeInsets.all(8),
+                            width: Get.width * 0.27,
+                            height: Get.height * 0.04,
+                            borderRadius: 15,
+                            backgroundColor: Colors.white,
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Invest Now ',
+                              style: GoogleFonts.aBeeZee(
+                                fontSize: Constants.iconSizeTiny + 2,
+                                fontWeight: FontWeight.w600,
+                                color: const Color.fromARGB(255, 64, 255, 0),
+                                letterSpacing: 1,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
-              ])
+                    ]),
+              )
             ]));
   }
 }

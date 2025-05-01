@@ -4,6 +4,8 @@ import 'package:pilot_project/presentation/controllers/authController.dart';
 import 'package:pilot_project/presentation/controllers/no_internet_controller.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/screens/about.dart';
+import 'package:pilot_project/presentation/screens/admin/addProperty.dart';
+import 'package:pilot_project/presentation/screens/admin/addedProperties.dart';
 import 'package:pilot_project/presentation/screens/authScreens/email_password_sign_up.dart';
 import 'package:pilot_project/presentation/screens/authScreens/phone_signIn.dart';
 import 'package:pilot_project/presentation/screens/authScreens/phone_sign_up.dart';
@@ -49,6 +51,8 @@ class PageRoutes {
   static const String noInternet = "/noInternet";
   static const String aboutPage = "/aboutPage";
   static const String privacyPage = "/privacyPage";
+  static const String properties = "/properties";
+  static const String addProperty = "/addProperty";
 
   // get product category
   static List<GetPage> getPageRoutes() {
@@ -235,26 +239,50 @@ class PageRoutes {
           Get.put(() => NetworkController(), permanent: true);
         }),
       ),
-       GetPage(
-        name:  aboutPage,
+      GetPage(
+        name: aboutPage,
         page: () => AboutPage(),
         transition: Transition.zoom,
         transitionDuration: const Duration(milliseconds: 200),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);
-          
         }),
       ),
       GetPage(
-        name:privacyPage,
+        name: privacyPage,
         page: () => PrivacyPolicyPage(),
         transition: Transition.zoom,
         transitionDuration: const Duration(milliseconds: 200),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);
-          
+        }),
+      ),
+      GetPage(
+        name: properties,
+        page: () => Properties(),
+        transition: Transition.zoom,
+        transitionDuration: const Duration(milliseconds: 200),
+        binding: BindingsBuilder(() async {
+          final sharedPreferences = await SharedPreferences.getInstance();
+          Get.put(() => sharedPreferences, permanent: true);
+          Get.lazyPut(
+            () => PropertyController(),
+          );
+        }),
+      ),
+      GetPage(
+        name: addProperty,
+        page: () => Addproperty(),
+        transition: Transition.zoom,
+        transitionDuration: const Duration(milliseconds: 200),
+        binding: BindingsBuilder(() async {
+          final sharedPreferences = await SharedPreferences.getInstance();
+          Get.put(() => sharedPreferences, permanent: true);
+          Get.lazyPut(
+            () => PropertyController(),
+          );
         }),
       ),
     ];

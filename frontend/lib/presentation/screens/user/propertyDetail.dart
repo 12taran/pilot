@@ -145,7 +145,7 @@ class _PropertydetailState extends State<Propertydetail> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Text(
-                widget.property.desc ?? 'No description available',
+                widget.property.description,
                 style: GoogleFonts.lato(
                   fontSize: Constants.fontSizeSubTitle,
                   fontWeight: FontWeight.w500,
@@ -205,7 +205,7 @@ class _PropertydetailState extends State<Propertydetail> {
               ),
             ),
             Text(
-              "Rs ${widget.property.price!}",
+              "${Constants.rupeeSymbol}${widget.property.price!}",
               style: GoogleFonts.aleo(
                 fontSize: Constants.fontSizeHeading,
                 fontWeight: FontWeight.w800,

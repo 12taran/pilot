@@ -127,50 +127,94 @@ class _UserDetailState extends State<UserDetail> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: MyTextField(
-                        isLabelEnabled: false,
-                        labelText: 'Name',
-                        onChanged: (value) {},
-                        textStyle: const TextStyle(color: Colors.black),
-                        prefixIcon: const Icon(
-                          Icons.person,
-                          color: Colors.black,
-                        ),
-                        controller: usercontroller.nameController,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            " Name",
+                            style: GoogleFonts.acme(
+                                fontSize: Constants.fontSizeSubTitle,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .displayMedium!
+                                    .color),
+                          ),
+                          MyTextField(
+                            isLabelEnabled: false,
+                            labelText: 'Name',
+                            onChanged: (value) {},
+                            textStyle: const TextStyle(color: Colors.black),
+                            prefixIcon: const Icon(
+                              Icons.person,
+                              color: Colors.black,
+                            ),
+                            controller: usercontroller.nameController,
+                          ),
+                        ],
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: MyTextField(
-                        labelText: 'Phone Number',
-                        onChanged: (value) {},
-                        textStyle: const TextStyle(color: Colors.black),
-                        enable: false,
-                        prefixIcon: const Icon(
-                          Icons.phone,
-                          color: Colors.black,
-                        ),
-                        controller: usercontroller.mobileController,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            " Phone Number",
+                            style: GoogleFonts.acme(
+                                fontSize: Constants.fontSizeSubTitle,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .displayMedium!
+                                    .color),
+                          ),
+                          MyTextField(
+                            labelText: 'Phone Number',
+                            isLabelEnabled: false,
+                            onChanged: (value) {},
+                            textStyle: const TextStyle(color: Colors.black),
+                            enable: false,
+                            prefixIcon: const Icon(
+                              Icons.phone,
+                              color: Colors.black,
+                            ),
+                            controller: usercontroller.mobileController,
+                          ),
+                        ],
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: MyTextField(
-                        labelText: 'Address',
-                        onChanged: (value) {},
-                        textStyle: const TextStyle(color: Colors.black),
-                        prefixIcon: const Icon(
-                          Icons.email,
-                          color: Colors.black,
-                        ),
-                        controller: usercontroller.addressController,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            " Address",
+                            style: GoogleFonts.acme(
+                                fontSize: Constants.fontSizeSubTitle,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .displayMedium!
+                                    .color),
+                          ),
+                          MyTextField(
+                            labelText: 'Address',
+                            isLabelEnabled: false,
+                            onChanged: (value) {},
+                            textStyle: const TextStyle(color: Colors.black),
+                            prefixIcon: const Icon(
+                              Icons.home,
+                              color: Colors.black,
+                            ),
+                            controller: usercontroller.addressController,
+                          ),
+                        ],
                       ),
                     )
                   ],
                 ),
               ),
               SizedBox(
-                height: Get.height * 0.2,
+                height: Get.height * 0.07,
               ),
               CustomButtons(
                   color: const Color.fromARGB(255, 56, 98, 57),
@@ -185,6 +229,7 @@ class _UserDetailState extends State<UserDetail> {
                         usercontroller.addressController.text,
                         userId ?? "",
                         _profileImage);
+                    FocusScope.of(context).unfocus();
 
                     // Utils.showToast(message: 'User Details saved Successfully');
                   }),

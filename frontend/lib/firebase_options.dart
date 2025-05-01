@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,15 +25,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -63,6 +54,40 @@ class DefaultFirebaseOptions {
     messagingSenderId: '531158953289',
     projectId: 'pilot-38a0f',
     storageBucket: 'pilot-38a0f.firebasestorage.app',
+    androidClientId: '531158953289-gpbb8icb34vhn3dcm121thd894il1ktr.apps.googleusercontent.com',
+    iosClientId: '531158953289-8fics4f0p8mg7l9eogjvjmbdu1rjo9j6.apps.googleusercontent.com',
     iosBundleId: 'com.example.pilotProject',
   );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyC0ueb3DYVs8UTI8O3KnZrUxQ3vwCKhufg',
+    appId: '1:531158953289:web:efe7390c5681d79d437e98',
+    messagingSenderId: '531158953289',
+    projectId: 'pilot-38a0f',
+    authDomain: 'pilot-38a0f.firebaseapp.com',
+    storageBucket: 'pilot-38a0f.firebasestorage.app',
+    measurementId: 'G-T5Z5QFTZ7H',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyB2bKfaWgK8gnfg1mAPm8ZOCuPqltfz3f0',
+    appId: '1:531158953289:ios:0418f5b73e86234a437e98',
+    messagingSenderId: '531158953289',
+    projectId: 'pilot-38a0f',
+    storageBucket: 'pilot-38a0f.firebasestorage.app',
+    androidClientId: '531158953289-gpbb8icb34vhn3dcm121thd894il1ktr.apps.googleusercontent.com',
+    iosClientId: '531158953289-8fics4f0p8mg7l9eogjvjmbdu1rjo9j6.apps.googleusercontent.com',
+    iosBundleId: 'com.example.pilotProject',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyC0ueb3DYVs8UTI8O3KnZrUxQ3vwCKhufg',
+    appId: '1:531158953289:web:afeffae6a27e33df437e98',
+    messagingSenderId: '531158953289',
+    projectId: 'pilot-38a0f',
+    authDomain: 'pilot-38a0f.firebaseapp.com',
+    storageBucket: 'pilot-38a0f.firebasestorage.app',
+    measurementId: 'G-XMG6KX07ME',
+  );
+
 }

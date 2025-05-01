@@ -31,6 +31,7 @@ class User {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final int? v;
+  final bool? isAdmin;
 
   User({
     this.image,
@@ -41,6 +42,7 @@ class User {
     this.createdAt,
     this.updatedAt,
     this.v,
+    this.isAdmin,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -55,6 +57,7 @@ class User {
       updatedAt:
           json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
       v: json['__v'] as int?,
+      isAdmin: json['isAdmin'] as bool?,
     );
   }
 
@@ -68,6 +71,7 @@ class User {
       'createdAt': createdAt?.toIso8601String(),
       'updatedAt': updatedAt?.toIso8601String(),
       '__v': v,
+      'isAdmin': isAdmin,
     };
   }
 }
