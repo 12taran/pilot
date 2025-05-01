@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./utils/db.js";
 import userRoute from "./routes/user.route.js";
+import paymentRoute from "./routes/payment.route.js";
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
 
 // api's
 app.use("/api/v1/user", userRoute);
+app.use("/api/v1/payment", paymentRoute);
 
 app.listen(PORT, () => {
   connectDB();
