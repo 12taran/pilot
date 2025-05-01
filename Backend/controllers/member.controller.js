@@ -61,10 +61,54 @@ export const getAllMembers = async (req, res) => {
     }
 }
 
+export const editMember = async (req, res) => {
+    try {
+      const { id, name, designation } = req.body;
+  
+      const member = await Member.findById(id);
+      if (!member) {
+        return res.status(404).json({
+          message: "Member not found",
+          success: false,
+        });
+      }
+  
+      let imagePath = member.image;
+  
+      // If a new image is uploaded
+      if (req.file) {
+        const oldImagePath = path.join(__dirname, "..", "uploads", member.image);
+        if (fs.existsSync(oldImagePath)) {
+          fs.unlinkSync(oldImagePath);
+        }
+        imagePath = `member/${req.file.filename}`;
+      }
+  
+      const updatedMember = await Member.findByIdAndUpdate(
+        id,
+        { name, designation, image: imagePath },
+        { new: true }
+      );
+  
+      return res.status(200).json({
+        message: "Member updated successfully",
+        success: true,
+        data: updatedMember,
+      });
+  
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({
+        message: "Failed to update member",
+        success: false,
+      });
+    }
+  };
+  
 
 export const deleteMember = async (req, res) => {
     try{
-        const {id} = req.params;
+        const {id} = req.body;
         const member = await Member.findById(id);
 
         if(!member){

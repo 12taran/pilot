@@ -1,0 +1,155 @@
+import { Property } from "../Models/property.model.js";
+import path from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Create a property
+export const createProperty = async (req, res) => {
+  try {
+    const images = req.files.map(file => `property/${file.filename}`);// It loops through each file and extracts the filename
+    const {
+      name,
+      furnished ,
+      location,
+      latitude,
+      longitude,
+      price,
+      type,
+      description,
+    } = req.body;
+
+    if (!name || !furnished || !location || !latitude || !longitude || !price || !type || !description || images.length === 0) {
+      return res.status(400).json({
+        message: "All fields are required",
+        success: false,
+      });
+    }
+
+    const newProperty = await Property.create({
+      name,
+      furnished,
+      location,
+      latitude,
+      longitude,
+      price,
+      type,
+      description,
+      images,
+    });
+
+    return res.status(201).json({
+      message: "Property created successfully",
+      success: true,
+      property: newProperty,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      message: "Failed to create property",
+      success: false,
+    });
+  }
+};
+
+// Edit property
+export const editProperty = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const property = await Property.findById(id);
+
+    if (!property) {
+      return res.status(404).json({
+        message: "Property not found",
+        success: false,
+      });
+    }
+
+    const images = 
+                req.files?.length > 0 // (?.) prevents errors if req.files is undefined
+                ? req.files.map(file => `property/${file.filename}`) 
+                : property.images;
+
+    // Delete old images if new ones are uploaded
+    if (req.files?.length > 0) {
+      property.images.forEach((img) => {
+        const oldPath = path.join(__dirname, `../uploads/${img}`);
+        if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
+      });
+    }
+
+    const updatedProperty = await Property.findByIdAndUpdate(
+      id,
+      {
+        ...req.body,
+        images,
+      },
+      { new: true }
+    );
+
+    return res.status(200).json({
+      message: "Property updated successfully",
+      success: true,
+      property: updatedProperty,
+    });
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      message: "Failed to update property",
+      success: false,
+    });
+  }
+};
+
+// Get all properties
+export const getAllProperties = async (req, res) => {
+  try {
+    const properties = await Property.find().sort({ createdAt: -1 }); // Sorts the results by the createdAt field in descending order
+    return res.status(200).json({
+      message: "Properties retrieved successfully",
+      success: true,
+      properties,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      message: "Failed to retrieve properties",
+      success: false,
+    });
+  }
+};
+
+// Delete property 
+export const deleteProperty = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const property = await Property.findById(id);
+    if (!property) {
+      return res.status(404).json({
+        message: "Property not found",
+        success: false,
+      });
+    }
+
+    // Delete images from disk
+    property.images.forEach((img) => {
+      const imgPath = path.join(__dirname, `../uploads/${img}`);
+      if (fs.existsSync(imgPath)) fs.unlinkSync(imgPath);
+    });
+
+    await property.deleteOne();
+
+    return res.status(200).json({
+      message: "Property deleted successfully",
+      success: true,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      message: "Failed to delete property",
+      success: false,
+    });
+  }
+};

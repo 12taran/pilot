@@ -186,3 +186,31 @@ export const userLogin = async (req, res) => {
     });
   }
 };
+
+export const makeAdmin = async (req, res) =>{
+  try {
+    const { targetUserId } = req.body;
+
+    const user = await User.findByIdAndUpdate(targetUserId,
+      {isAdmin : true},
+      {new : true}
+    );
+    if(!user){
+      return res.status(404).json({
+        message : "User not found",
+        success : false,
+      });
+    }
+    return res.status(200).json({
+      message : `${user.fullname} is now an admin`,
+      success : true,
+      user,
+    });
+  } catch (err){
+    console.log(err);
+    return res.status(500).json({
+      message : "Server problem",
+      success : false,
+    });
+  }
+}

@@ -7,6 +7,7 @@ import connectDB from "./utils/db.js";
 
 import userRoute from "./routes/user.route.js";
 import memberRoute from "./routes/member.route.js";
+import propertyRoute from "./routes/property.route.js";
 
 dotenv.config();
 
@@ -26,6 +27,8 @@ app.get("/", (req, res) => {
 // api's
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/user/member", memberRoute);
+app.use("/api/v1/user/property", propertyRoute);
+
 
 //  Global error handler for image multer
 app.use((err, req, res, next) => {
