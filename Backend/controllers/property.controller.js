@@ -56,7 +56,7 @@ export const createProperty = async (req, res) => {
 // Edit property
 export const editProperty = async (req, res) => {
   try {
-    const { id } = req.body;
+    const { propertyId: id } = req.body;
     const property = await Property.findById(id);
 
     if (!property) {
@@ -66,30 +66,24 @@ export const editProperty = async (req, res) => {
       });
     }
 
-    const images = 
-                req.files?.length > 0 // (?.) prevents errors if req.files is undefined
-                ? req.files.map(file => `property/${file.filename}`) 
-                : property.images;
+    // Keep existing images and add new ones (if any)
+    const newImages = req.files?.length > 0
+      ? req.files.map(file => `property/${file.filename}`)
+      : [];
 
-    // Delete old images if new ones are uploaded
-    if (req.files?.length > 0) {
-      property.images.forEach((img) => {
-        const oldPath = path.join(__dirname, `../uploads/${img}`);
-        if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
-      });
-    }
+    const updatedImages = [...property.images, ...newImages];
 
     const updatedProperty = await Property.findByIdAndUpdate(
       id,
       {
         ...req.body,
-        images,
+        images: updatedImages,
       },
       { new: true }
     );
 
     return res.status(200).json({
-      message: "Property updated successfully",
+      message: "Property updated successfully (old images retained)",
       success: true,
       property: updatedProperty,
     });
@@ -124,7 +118,7 @@ export const getAllProperties = async (req, res) => {
 // Delete property 
 export const deleteProperty = async (req, res) => {
   try {
-    const { id } = req.body;
+    const { propertyId : id } = req.body;
     const property = await Property.findById(id);
     if (!property) {
       return res.status(404).json({
