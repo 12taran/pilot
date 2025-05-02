@@ -150,12 +150,13 @@ class ProfilePage extends StatelessWidget {
                 UtilsWidget.showConfirmationDialog(
                     message: 'Are you sure you want to logout?',
                     onYesPressed: () async {
-                      final prefs = await SharedPreferences.getInstance();
-                      await prefs.clear();
                       await FirebaseAuth.instance.signOut();
-                      Get.reset();
                       // Get.find<AuthController>().isOtpSent.value = false;
                       Get.offAndToNamed(PageRoutes.phonesignup);
+                      final prefs = await SharedPreferences.getInstance();
+                      await prefs.clear();
+
+                      Get.reset();
                     },
                     onNoPressed: () {
                       Get.back();
