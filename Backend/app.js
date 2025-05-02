@@ -7,6 +7,8 @@ import connectDB from "./utils/db.js";
 
 import userRoute from "./routes/user.route.js";
 import memberRoute from "./routes/member.route.js";
+import propertyRoute from "./routes/property.route.js";
+import paymentRoute from "./routes/payment.route.js";
 
 dotenv.config();
 
@@ -26,6 +28,8 @@ app.get("/", (req, res) => {
 // api's
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/user/member", memberRoute);
+app.use("/api/v1/user/property", propertyRoute);
+
 
 //  Global error handler for image multer
 app.use((err, req, res, next) => {
@@ -43,7 +47,8 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT;app.use("/api/v1/payment", paymentRoute);
+
 app.listen(PORT, () => {
   connectDB();
   console.log(`Server is running on ${PORT}`);
