@@ -5,6 +5,7 @@ import 'package:pilot_project/core/components/CustomContainer.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/data/models/property_model.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
+import 'package:pilot_project/routes/api_routes.dart';
 import 'package:pilot_project/routes/page_route.dart';
 
 class CustomWidgets {
@@ -23,14 +24,13 @@ class CustomWidgets {
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Center(
-                child: Image.asset(
-                  property.image!,
-                  height: 100,
-                  width: 100,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+                child: Container
+(height: 100,width: 100,decoration: BoxDecoration(image: DecorationImage(image: NetworkImage(
+  '${ApiRoutes.imageRoutes}${property.images[0]}'),fit: BoxFit.cover,),
+))),)  ,              
+                
+              
+          
             const SizedBox(width: 16),
 
             // Property Info
@@ -39,7 +39,7 @@ class CustomWidgets {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    property.name,
+                    property.projectName,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),

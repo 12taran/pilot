@@ -33,8 +33,8 @@ class _PropertyCardState extends State<PropertyCard> {
             children: [
               ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
-                child: Image.asset(
-                  widget.property.image,
+                child: Image.network(
+                  widget.property.images[0],
                   fit: BoxFit.cover,
                   height: Get.height * 0.2,
                   width: Get.width * 0.9,
@@ -50,7 +50,7 @@ class _PropertyCardState extends State<PropertyCard> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            widget.property.name!,
+                            widget.property.projectName!,
                             maxLines: 2,
                             style: GoogleFonts.almarai(
                                 color: Theme.of(context)

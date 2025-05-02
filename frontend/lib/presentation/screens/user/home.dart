@@ -566,14 +566,14 @@ class _HomePageState extends State<HomePage> {
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          for (int index = 0; index < propertyController.properties.length; index++)
+                          for (int index = 0; index < propertyController.types.length; index++)
                             Column(
                               children: [
                                 GestureDetector(
                                   onTap: () {
                                     propertyController.selectedType.value =
-                                        propertyController.properties[index]
-                                            .type; // Selected type
+                                        propertyController.types[index]
+                                            ; // Selected type
                                     bottomNavController.changeTabIndex(2);
                                   },
                                   child: Container(
@@ -592,8 +592,7 @@ class _HomePageState extends State<HomePage> {
                                       radius: 40,
                                       backgroundColor: Colors.white,
                                       backgroundImage: AssetImage(
-                                        propertyController
-                                            .properties[index].image,
+                                       location[index],
                                       ), // Yahi main kaam karta hai
                                     ),
                                   ),
@@ -602,7 +601,7 @@ class _HomePageState extends State<HomePage> {
                                   height: 5,
                                 ),
                                 Text(
-                                  propertyController.properties[index].type,
+                                  propertyController.types[index],
                                   style: GoogleFonts.aleo(
                                       fontSize: Constants.fontSizeSmall,
                                       color: Theme.of(context).primaryColor,

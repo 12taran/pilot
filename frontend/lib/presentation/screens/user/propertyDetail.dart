@@ -5,6 +5,7 @@ import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/data/models/property_model.dart';
 import 'package:pilot_project/presentation/controllers/pilotController.dart';
+import 'package:pilot_project/routes/api_routes.dart';
 import 'package:pilot_project/routes/page_route.dart';
 
 class Propertydetail extends StatefulWidget {
@@ -26,12 +27,19 @@ class _PropertydetailState extends State<Propertydetail> {
           children: [
             Stack(
               children: [
-                Image.asset(
-                  widget.property.image,
-                  width: double.infinity,
-                  height: 250,
-                  fit: BoxFit.cover,
-                ),
+                Container(
+                  height: Get.height * 0.4,
+                  decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(
+                          '${ApiRoutes.imageRoutes}${    widget.property.images[0]}'),
+                      fit: BoxFit
+                          .cover, // Ensures the image covers the entire container
+                    ),
+                    ),
+                  ),
+                
+               
                 Positioned(
                   top: 40,
                   left: 16,
@@ -54,7 +62,7 @@ class _PropertydetailState extends State<Propertydetail> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.property.name!,
+                        widget.property.projectName!,
                         style: GoogleFonts.acme(
                           fontSize: Constants.fontSizeExtraLarge,
                         ),
@@ -94,59 +102,62 @@ class _PropertydetailState extends State<Propertydetail> {
                       Get.toNamed(PageRoutes.mapPage, arguments: {
                         'latitude': widget.property.latitude,
                         'longitude': widget.property.longitude,
-                        'placeName': widget.property.name,
+                        'placeName': widget.property.projectName,
                       });
                     },
                     child: Row(
                       children: [
                         Icon(Icons.location_on),
                         SizedBox(width: 5),
-                        Text(
-                          widget.property.location!,
-                          style: GoogleFonts.lato(
-                            fontSize: Constants.fontSizeSubTitle,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.red,
+                        SizedBox(
+                          width: Get.width * 0.4,
+                          child: Text(
+                          
+                            widget.property.address!,
+                            maxLines: 3,
+                            style: GoogleFonts.lato(
+                              fontSize: Constants.fontSizeSubTitle,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.red,
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  Center(
-              child: GestureDetector(
-                onTap: (){},
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primary,
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all(color: const Color.fromARGB(255, 7, 57, 52)),
-                      boxShadow: [
-                        BoxShadow(
-                        
-                          spreadRadius: 0.5,
-                          blurRadius: 2,
-                          offset: Offset(0, 1),
+                  GestureDetector(
+                    onTap: (){},
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primary,
+                          borderRadius: BorderRadius.circular(25),
+                          border: Border.all(color: const Color.fromARGB(255, 7, 57, 52)),
+                          boxShadow: [
+                            BoxShadow(
+                            
+                              spreadRadius: 0.5,
+                              blurRadius: 2,
+                              offset: Offset(0, 1),
+                            ),
+                          ],
                         ),
-                      ],
+                        padding: EdgeInsets.all(12),
+                        
+                        height: Get.height * 0.05,
+                        child:Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [Icon(Icons.download,size: 13,),Text('Download Brochure',style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),)],),),
                     ),
-                    padding: EdgeInsets.all(12),
-                    width: Get.width * 0.4,
-                    height: Get.height * 0.05,
-                    child:Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [Icon(Icons.download,size: 13,),Text('Download Brochure',style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),)],),),
-                ),
-              ),
-            ),
+                  ),
                 ],
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 30),
             
               
-            SizedBox(height: 20),
+          
             Divider(thickness: 1),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),

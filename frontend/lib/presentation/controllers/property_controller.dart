@@ -42,7 +42,7 @@ class PropertyController extends GetxController {
     filteredProperties.value = properties.where((p) {
       final matchesType = type == null || type.isEmpty || p.type == type;
       final matchesLocation =
-          location == null || location.isEmpty || p.location == location;
+          location == null || location.isEmpty || p.address == location;
 
       return matchesType && matchesLocation;
     }).toList();
