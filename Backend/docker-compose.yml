@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    container_name: mern-backend
+    ports:
+      - "${PORT}:${PORT}"  # Use PORT environment variable for dynamic port mapping
+    environment:
+      - PORT=${PORT}  # Pass the PORT environment variable to the container
+      - MONGO_URI=${MONGO_URI}  # Pass the MONGO_URI environment variable to the container
+    depends_on:
+      - mongo  # This ensures mongo starts first (though you may need to wait for DB readiness in code)
+    
+  mongo:
+    image: mongo:6.0
+    container_name: mern-mongo
+    restart: always
+    ports:
+      - "27017:27017"  # Default MongoDB port exposed
+    volumes:
+      - mongo-data:/data/db  # MongoDB data persistence
+  
+volumes:
+  mongo-data:
+
