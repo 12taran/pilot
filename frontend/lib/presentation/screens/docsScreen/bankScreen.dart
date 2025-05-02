@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pilot_project/core/components/MyTextField.dart';
+import 'package:pilot_project/core/components/custom_buttons.dart';
+import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/core/utils.dart';
 import 'package:pilot_project/presentation/controllers/bankController.dart';
 
@@ -19,16 +21,16 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
     return Scaffold(
       backgroundColor:Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor:Theme.of(context).colorScheme.primary,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.indigo),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         title: const Text(
           'Enter your bank details',
-          style: TextStyle(color: Colors.indigo, fontWeight: FontWeight.bold),
+          style: TextStyle(color:Colors.white, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         elevation: 0,
@@ -104,7 +106,11 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
                   return null;
                 },
               ),
-              label("Select Account Type"),
+              SizedBox(height: Get.height * 0.03),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Text( "Select Account Type",style: TextStyle(fontSize: Constants.fontSizeSmall+3, fontWeight: FontWeight.bold, )),
+              ),
               Row(
                 children: [
                   accountTypeRadio("Savings"),
@@ -112,17 +118,20 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
                   accountTypeRadio("Current"),
                 ],
               ),
-              if (bankController.accountType.isEmpty)
-                const Padding(
-                  padding: EdgeInsets.only(top: 8.0),
-                  child: Text(
-                    '!! Please select an account type',
-                    style: TextStyle(color: Colors.red, fontSize: 12),
-                  ),
-                ),
+              Obx(() {
+                return bankController.accountType.value.isEmpty
+                    ? const Padding(
+                        padding: EdgeInsets.only(top: 8.0),
+                        child: Text(
+                          '!! Please select an account type',
+                          style: TextStyle(color: Colors.red, fontSize: 12),
+                        ),
+                      )
+                    : const SizedBox.shrink(); // Return an empty widget if no error
+              }),
               const SizedBox(height: 20),
               Center(
-                child: ElevatedButton(
+                child: CustomButtons(
                   onPressed: () {
                     if (_formKey.currentState!.validate() && bankController.accountType.isNotEmpty) {
                       // Add account logic here
@@ -131,16 +140,8 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
                       Utils.showToast(message: "Please fill required details");
                     }
                   },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.orange,
-                    backgroundColor: Colors.white,
-                    side: const BorderSide(color: Colors.orange, width: 2),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 16),
-                  ),
-                  child: const Text("Add Account"),
+                  
+                  text:"Add Account",
                 ),
               ),
             ],
@@ -150,24 +151,16 @@ class _BankDetailsScreenState extends State<BankDetailsScreen> {
     );
   }
 
-  Widget label(String text) => Padding(
-        padding: const EdgeInsets.only(top: 20.0, bottom: 8.0),
-        child: Text(
-          text,
-          style: const TextStyle(fontWeight: FontWeight.w600),
-        ),
-      );
-
   Widget accountTypeRadio(String type) => Row(
         children: [
-          Radio<String>(
-            value: type,
-            groupValue: bankController.accountType.value,
-            onChanged: (value) {
-             bankController.accountType.value = value!;
-            },
-            activeColor: Colors.indigo,
-          ),
+          Obx(() => Radio<String>(
+                value: type,
+                groupValue: bankController.accountType.value,
+                onChanged: (value) {
+                  bankController.accountType.value = value!;
+                },
+                activeColor: Colors.indigo,
+              )),
           Text(type, style: const TextStyle(fontSize: 16)),
         ],
       );
