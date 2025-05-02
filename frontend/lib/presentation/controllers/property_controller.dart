@@ -9,11 +9,8 @@ class PropertyController extends GetxController {
       <PropertyModel>[].obs; // For filtered results
   RxList<PropertyModel> isFav = <PropertyModel>[].obs;
 
-  List<String> types = [
-    "Residential",
-    "Commercial",
-    "Holiday Homes"
-  ]; // Available types
+  RxList<String> types =
+      ["Residential", "Commercial", "Holiday Homes"].obs; // Available types
   List<String> locations = [
     "Ahmedabad",
     "GIFT City",
