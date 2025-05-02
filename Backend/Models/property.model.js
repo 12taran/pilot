@@ -2,15 +2,10 @@ import mongoose from "mongoose";
 
 const propertySchema = new mongoose.Schema(
     {
-        name : {
+        projectName : {
             type : String,
             required : true,
             trim : true,
-        },
-        furnished : {
-            type : String,
-            enum : ["Furnished","Semi-Furnished","Unfurnished","Raw space"],
-            required : true,
         },
         images: [
             {
@@ -18,7 +13,7 @@ const propertySchema = new mongoose.Schema(
               required: true,
             }
           ],
-          location: {
+          address: {
             type: String,
             required: true,
           },

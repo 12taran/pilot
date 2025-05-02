@@ -8,11 +8,12 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Create a property
 export const createProperty = async (req, res) => {
   try {
+    console.log(req.body);
+    console.log(req.files);
     const images = req.files.map(file => `property/${file.filename}`);// It loops through each file and extracts the filename
     const {
-      name,
-      furnished ,
-      location,
+      projectName,
+      address,
       latitude,
       longitude,
       price,
@@ -20,7 +21,7 @@ export const createProperty = async (req, res) => {
       description,
     } = req.body;
 
-    if (!name || !furnished || !location || !latitude || !longitude || !price || !type || !description || images.length === 0) {
+    if (!projectName  || !address || !latitude || !longitude || !price || !type || !description || images.length === 0) {
       return res.status(400).json({
         message: "All fields are required",
         success: false,
@@ -28,9 +29,8 @@ export const createProperty = async (req, res) => {
     }
 
     const newProperty = await Property.create({
-      name,
-      furnished,
-      location,
+      projectName,
+      address,
       latitude,
       longitude,
       price,

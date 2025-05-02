@@ -11,8 +11,8 @@ import {isAdmin} from "../middlewares/isAdmin.middleware.js";
 
 const router = express.Router();
 
-router.route('/create').post(isAdmin,
-    uploadPropertyImages.array("images", 20),
+router.route('/create').post(
+    uploadPropertyImages.array("images", 20),isAdmin,
     createProperty
 );
 router.route('/getAll').get(getAllProperties);
