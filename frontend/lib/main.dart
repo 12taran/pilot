@@ -8,6 +8,7 @@ import 'package:pilot_project/dependency_injection.dart';
 import 'package:pilot_project/presentation/controllers/boardmember_controller.dart';
 import 'package:pilot_project/presentation/controllers/help_and_supportController.dart';
 import 'package:pilot_project/presentation/controllers/no_internet_controller.dart';
+import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/controllers/theme_controller.dart';
 import 'package:pilot_project/presentation/controllers/userController.dart';
 import 'package:pilot_project/routes/page_route.dart';
@@ -29,6 +30,7 @@ class InitialBinding extends Bindings {
     Get.put(Usercontroller());
     Get.put(HelpAndSupportController());
     Get.put(BoardMemberController());
+    Get.put(PropertyController());
   }
 }
 

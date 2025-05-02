@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
     'assets/images/chandigarh.jpg'
   ];
 
-  PropertyController propertyController = Get.put(PropertyController());
+  PropertyController propertyController = Get.find();
   Usercontroller usercontroller = Get.find();
   BoardMemberController boardMemberController = Get.find();
   Pilotcontroller pilotcontroller = Get.put(Pilotcontroller());
@@ -566,7 +566,7 @@ class _HomePageState extends State<HomePage> {
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          for (int index = 0; index < 3; index++)
+                          for (int index = 0; index < propertyController.properties.length; index++)
                             Column(
                               children: [
                                 GestureDetector(
@@ -593,7 +593,7 @@ class _HomePageState extends State<HomePage> {
                                       backgroundColor: Colors.white,
                                       backgroundImage: AssetImage(
                                         propertyController
-                                            .properties[index].image!,
+                                            .properties[index].image,
                                       ), // Yahi main kaam karta hai
                                     ),
                                   ),
@@ -602,7 +602,7 @@ class _HomePageState extends State<HomePage> {
                                   height: 5,
                                 ),
                                 Text(
-                                  propertyController.properties[index].type!,
+                                  propertyController.properties[index].type,
                                   style: GoogleFonts.aleo(
                                       fontSize: Constants.fontSizeSmall,
                                       color: Theme.of(context).primaryColor,

@@ -59,14 +59,7 @@ class _PropertydetailState extends State<Propertydetail> {
                           fontSize: Constants.fontSizeExtraLarge,
                         ),
                       ),
-                      Text(
-                        widget.property.desc!,
-                        style: GoogleFonts.lato(
-                          fontSize: Constants.fontSizeBody,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.orange,
-                        ),
-                      ),
+                     
                     ],
                   ),
                 ),

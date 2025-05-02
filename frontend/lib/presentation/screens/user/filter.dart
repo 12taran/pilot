@@ -32,15 +32,14 @@ class _FilterPageState extends State<FilterPage> {
     List<PropertyModel> properties = propertyController.properties;
 
     // Get unique filter options based on the filterKey
-    List<String> filterOptions = properties
+    List<dynamic> filterOptions = properties
         .map((e) {
           switch (widget.filterKey) {
             case 'location':
               return e.location;
             case 'type':
               return e.type;
-            case 'desc':
-              return e.desc;
+           
             default:
               return '';
           }
@@ -56,8 +55,7 @@ class _FilterPageState extends State<FilterPage> {
           return property.location == selectedFilterValue;
         case 'type':
           return property.type == selectedFilterValue;
-        case 'desc':
-          return property.desc == selectedFilterValue;
+       
         default:
           return false;
       }
