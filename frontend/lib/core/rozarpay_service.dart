@@ -1,3 +1,4 @@
+import 'package:pilot_project/routes/api_routes.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -19,7 +20,7 @@ class RazorpayService {
   Future<void> openCheckout(int amount) async {
     // Call your backend to create order
     final response = await http.post(
-      Uri.parse("https://your-backend-url.com/order"),
+      Uri.parse("${ApiRoutes().baseUrl}order"),
       headers: {"Content-Type": "application/json"},
       body: jsonEncode({"amount": amount}),
     );
@@ -27,13 +28,13 @@ class RazorpayService {
     final data = jsonDecode(response.body)['data'];
 
     var options = {
-      'key': 'your_razorpay_key', // only key, not secret
+      'key': 'rzp_test_lSlqZQTgc9E6dg', // only key, not secret
       'amount': data['amount'],
       'name': 'Share Sampatti',
       'order_id': data['id'], // razorpay order_id from backend
-      'description': 'Payment for something',
+      'description': 'Payment for Property',
       'prefill': {
-        'contact': '9876543210',
+        'contact': '8006644674',
         'email': 'test@example.com',
       },
       'external': {
@@ -52,7 +53,7 @@ class RazorpayService {
     };
 
     final verifyResponse = await http.post(
-      Uri.parse("https://your-backend-url.com/paymentVerify"),
+      Uri.parse("${ApiRoutes().baseUrl}paymentVerify"),
       headers: {"Content-Type": "application/json"},
       body: jsonEncode(body),
     );
