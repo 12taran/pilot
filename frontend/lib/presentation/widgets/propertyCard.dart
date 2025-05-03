@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/components/CustomContainer.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/data/models/property_model.dart';
+import 'package:pilot_project/routes/api_routes.dart';
 import 'package:pilot_project/routes/page_route.dart';
 
 class PropertyCard extends StatefulWidget {
@@ -33,11 +34,14 @@ class _PropertyCardState extends State<PropertyCard> {
             children: [
               ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
-                child: Image.network(
-                  widget.property.images[0],
-                  fit: BoxFit.cover,
+                child: Container(
+                  width: Get.width * 0.87,
                   height: Get.height * 0.2,
-                  width: Get.width * 0.9,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(
+                              '${ApiRoutes.imageRoutes}${widget.property.images[0]}'),
+                          fit: BoxFit.fill)),
                 ),
               ),
               Padding(

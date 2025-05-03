@@ -1,17 +1,25 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:pilot_project/core/config.dart';
+import 'package:pilot_project/core/utils.dart';
+import 'package:pilot_project/data/models/property_model.dart';
+import 'package:pilot_project/data/repos/adminPropertyRepo.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class AddPropertyController extends GetxController {
+class AdminPropertyController extends GetxController {
   TextEditingController propertyNameController = TextEditingController();
   TextEditingController locationController = TextEditingController();
   TextEditingController pinCodeController = TextEditingController();
   TextEditingController latitudeController = TextEditingController();
   TextEditingController longitudeController = TextEditingController();
   TextEditingController priceInSqFeetController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
   RxString selectedPropertyType = "".obs;
+  RxList<File> selectedImages = <File>[].obs;
   Future<Map<String, double>?> getCoordinatesFromAddress(String address) async {
     final encodedAddress = Uri.encodeComponent(address);
     final url =
@@ -53,8 +61,46 @@ class AddPropertyController extends GetxController {
 
   void pricePerSqfeet(double areaInGaj, double price) {
     double areaInSqFeet = areaInGaj * 9;
+    print("area in gaj: $areaInGaj");
+    print("Price : $price");
+    print("Area in sq feet: $areaInSqFeet");
     double pricePerSqFeet = price / areaInSqFeet;
     print("Price per sq feet: $pricePerSqFeet");
     priceInSqFeetController.text = pricePerSqFeet.toStringAsFixed(2);
+  }
+
+  Future<void> addProperty() async {
+    String propertyName = propertyNameController.text;
+
+    String pinCode = pinCodeController.text;
+    String location = locationController.text + ", " + pinCode;
+    String latitude = latitudeController.text;
+    String longitude = longitudeController.text;
+    String priceInSqFeet = priceInSqFeetController.text;
+    String propertyType = selectedPropertyType.value;
+    final prefs = await SharedPreferences.getInstance();
+    String? userId = prefs.getString(Constants.USER_ID);
+
+    print('User ID: $userId');
+
+    List<File> images = selectedImages;
+    Map<String, String> property = {
+      "propertyName": propertyName,
+      "address": location,
+      "latitude": latitude,
+      "longitude": longitude,
+      "price": priceInSqFeet,
+      "type": propertyType,
+      'description': descriptionController.text,
+      "userId": userId ?? "",
+    };
+    bool created = await AdminpropertyRepo().createProperties(property, images);
+    if (created) {
+      print('Property created successfully');
+      Utils.showToast(message: 'Property created successfully');
+    } else {
+      print('Property creation failed');
+      Utils.showToast(message: 'Property creation failed');
+    }
   }
 }

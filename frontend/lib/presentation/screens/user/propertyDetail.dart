@@ -1,5 +1,7 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
@@ -41,19 +43,31 @@ class _PropertydetailState extends State<Propertydetail> {
           children: [
             Stack(
               children: [
-                Container(
-                  height: Get.height * 0.4,
-                  decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          '${ApiRoutes.imageRoutes}${    widget.property.images[0]}'),
-                      fit: BoxFit
-                          .cover, // Ensures the image covers the entire container
-                    ),
-                    ),
+                CarouselSlider(
+                  options: CarouselOptions(
+                    height: Get.height * 0.4,
+                    viewportFraction: 1.0,
+                    
+                    enlargeCenterPage: false,
+                    autoPlay: true,
                   ),
-                
-               
+                  items: widget.property.images.map((imageUrl) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          width: Get.width,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                  '${ApiRoutes.imageRoutes}$imageUrl'),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }).toList(),
+                ),
                 Positioned(
                   top: 40,
                   left: 16,
@@ -81,7 +95,6 @@ class _PropertydetailState extends State<Propertydetail> {
                           fontSize: Constants.fontSizeExtraLarge,
                         ),
                       ),
-                     
                     ],
                   ),
                 ),
@@ -126,7 +139,6 @@ class _PropertydetailState extends State<Propertydetail> {
                         SizedBox(
                           width: Get.width * 0.4,
                           child: Text(
-                          
                             widget.property.address!,
                             maxLines: 3,
                             style: GoogleFonts.lato(
@@ -183,9 +195,6 @@ class _PropertydetailState extends State<Propertydetail> {
               ),
             ),
             SizedBox(height: 30),
-            
-              
-          
             Divider(thickness: 1),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),

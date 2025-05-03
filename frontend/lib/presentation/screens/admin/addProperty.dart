@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -20,17 +21,17 @@ class Addproperty extends StatefulWidget {
   State<Addproperty> createState() => _AddpropertyState();
 }
 
-AddPropertyController addPropertyController = Get.put(AddPropertyController());
+AdminPropertyController addPropertyController =
+    Get.put(AdminPropertyController());
 
 class _AddpropertyState extends State<Addproperty> {
   final ImagePicker picker = ImagePicker();
-  List<File> _selectedImages = [];
+
   Future<void> _pickMultipleImages() async {
     final List<XFile>? pickedFiles = await picker.pickMultiImage();
     if (pickedFiles != null && pickedFiles.isNotEmpty) {
-      setState(() {
-        _selectedImages = pickedFiles.map((file) => File(file.path)).toList();
-      });
+      addPropertyController.selectedImages.value =
+          pickedFiles.map((file) => File(file.path)).toList();
     }
   }
 
@@ -51,6 +52,158 @@ class _AddpropertyState extends State<Addproperty> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 20),
+              Obx(
+                () {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Upload container
+
+                      const SizedBox(height: 15),
+
+                      // Preview carousel
+                      addPropertyController.selectedImages.isNotEmpty
+                          ? CarouselSlider.builder(
+                              itemCount:
+                                  addPropertyController.selectedImages.length +
+                                      1, // +1 for the "Add More" button
+                              options: CarouselOptions(
+                                height: Get.height * 0.3,
+                                viewportFraction: 1,
+                                enableInfiniteScroll: false,
+                                enlargeCenterPage: false,
+                              ),
+                              itemBuilder: (context, index, realIndex) {
+                                if (index ==
+                                    addPropertyController
+                                        .selectedImages.length) {
+                                  // "Add More" button at the end
+                                  return GestureDetector(
+                                    onTap: () async {
+                                      final List<XFile>? pickedFiles =
+                                          await picker.pickMultiImage();
+                                      if (pickedFiles != null &&
+                                          pickedFiles.isNotEmpty) {
+                                        setState(() {
+                                          addPropertyController.selectedImages
+                                              .addAll(
+                                            pickedFiles
+                                                .map((file) => File(file.path)),
+                                          );
+                                        });
+                                      }
+                                    },
+                                    child: Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 20),
+                                      decoration: BoxDecoration(
+                                        // color: Colors.grey.shade200,
+
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(color: Colors.grey),
+                                      ),
+                                      child: Center(
+                                        child: Icon(Icons.add,
+                                            size: 40,
+                                            color: Colors.grey.shade600),
+                                      ),
+                                    ),
+                                  );
+                                } else {
+                                  final file = addPropertyController
+                                      .selectedImages[index];
+                                  return CustomContainer(
+                                    padding: 5,
+                                    child: Stack(
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: Image.file(
+                                            file,
+                                            width: double.infinity,
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: 8,
+                                          right: 8,
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              addPropertyController
+                                                  .selectedImages
+                                                  .removeAt(index);
+                                            },
+                                            child: Container(
+                                              padding: const EdgeInsets.all(4),
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: Colors.black54,
+                                              ),
+                                              child: const Icon(
+                                                Icons.close,
+                                                size: 20,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }
+                              },
+                            )
+                          : CustomContainer(
+                              height: Get.height * 0.25,
+                              width: double.infinity,
+                              padding: 20,
+                              borderRadius: 12,
+                              borderWidth: 1.5,
+                              borderColor: Colors.grey.shade400,
+                              backgroundColor: Colors.grey.shade100,
+                              onTap: () async {
+                                await _pickMultipleImages();
+                              },
+                              child: Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.cloud_upload_outlined,
+                                      size: 50,
+                                      color: Colors.grey.shade600,
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Text(
+                                      'Tap to select images',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.grey.shade700,
+                                      ),
+                                    ),
+                                    if (addPropertyController
+                                        .selectedImages.isNotEmpty) ...[
+                                      const SizedBox(height: 10),
+                                      Text(
+                                        '${addPropertyController.selectedImages.length} image(s) selected',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.green.shade600,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ]
+                                  ],
+                                ),
+                              ),
+                            ),
+                    ],
+                  );
+                },
+              ),
               const SizedBox(height: 20),
               // Add your form fields here
               // For example:
@@ -199,7 +352,13 @@ class _AddpropertyState extends State<Addproperty> {
                 ),
               ),
               MyTextField(
-                onChanged: (value) => {},
+                keyboardType: TextInputType.number,
+                onChanged: (value) => {
+                  addPropertyController.pricePerSqfeet(
+                    double.tryParse(areaController.text) ?? 1.0,
+                    double.tryParse(priceController.text) ?? 0.0,
+                  )
+                },
                 labelText: 'Price',
                 textStyle: TextStyle(
                   fontSize: Constants.fontSizeSmall,
@@ -221,10 +380,12 @@ class _AddpropertyState extends State<Addproperty> {
                 ),
               ),
               MyTextField(
+                keyboardType: TextInputType.number,
                 onChanged: (value) => {
                   addPropertyController.pricePerSqfeet(
-                      double.tryParse(priceController.text) ?? 0.0,
-                      double.tryParse(areaController.text) ?? 1.0)
+                    double.tryParse(areaController.text) ?? 1.0,
+                    double.tryParse(priceController.text) ?? 0.0,
+                  )
                 },
                 labelText: 'Area In Gaj',
                 textStyle: TextStyle(
@@ -253,6 +414,7 @@ class _AddpropertyState extends State<Addproperty> {
                         ),
                       ),
                       MyTextField(
+                        keyboardType: TextInputType.number,
                         labelText: 'Price Per SqFeet',
                         textStyle: TextStyle(
                           fontSize: Constants.fontSizeSmall,
@@ -323,7 +485,12 @@ class _AddpropertyState extends State<Addproperty> {
               SizedBox(
                 height: 20,
               ),
-              CustomButtons(text: 'Add', onPressed: () {}),
+              CustomButtons(
+                  text: 'Add',
+                  onPressed: () async {
+                    await addPropertyController.addProperty();
+                    Get.back();
+                  }),
               SizedBox(
                 height: 50,
               ),

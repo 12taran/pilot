@@ -4,7 +4,7 @@ class ApiRoutes {
   static String apiEndpoint = "api/v1/user/";
   static String paymentEndPoint = "api/v1/payment/";
 
-  static String serverUrl = "http://192.168.114.227:4000/";
+  static String serverUrl = "http://192.168.114.16:4000/";
   static String imageRoutes = "${serverUrl}uploads/";
 
   // static String serverUrl = "http://localhost:8000/";
@@ -12,13 +12,12 @@ class ApiRoutes {
   String paymentRoute = "$serverUrl$paymentEndPoint";
 
   String userRegisterVerify = "register/phone";
-  
+
   String userLogin = "login";
   String userRegister = "";
   String userEdit = "edit";
   String getUser = "getById";
   String getBoardMembers = "member/get";
   String getProperties = "property/getAll";
-  
-
+  String addProperties = "property/create";
 }

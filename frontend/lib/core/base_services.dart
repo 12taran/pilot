@@ -324,37 +324,38 @@ class BaseService extends GetxService {
     }
   }
 
-  postMultiPartData2(
-      {required String endPoint,
-      required bool isTokenRequired,
-      required Map<String, dynamic>? body,
-      Map<String, File>? files}) async {
+  postMultiPartData2({
+    required String endPoint,
+    required bool isTokenRequired,
+    required Map<String, dynamic>? body,
+    Map<String, List<File>>? files,
+  }) async {
     try {
       sharedPreferences ??= await SharedPreferences.getInstance();
       String token = sharedPreferences!.getString(Constants.TOKEN) ?? '';
-      // FormData body;
-      // final bytes = await image.readAsBytes();
-      // final MultipartFile file = MultipartFile.fromBytes(bytes, filename: "picture");
-      // MapEntry<String, MultipartFile> imageEntry = MapEntry("image", file);
-      // body.files.add(imageEntry);
-      // create form data body
-      dio.FormData formData = dio.FormData.fromMap(body!);
-      // add files in form data
-      files?.forEach((key, value) async {
-        try {
-          print("forEach");
-          print(value.path);
-          print(key);
-          final dio.MultipartFile file = dio.MultipartFile.fromString(
-              value.path,
-              filename: key,
-              contentType: MediaType("image", "png"));
-          MapEntry<String, dio.MultipartFile> imageEntry = MapEntry(key, file);
-          formData.files.add(imageEntry);
-        } catch (e) {
-          log("forEach$e");
+
+      // Create form data from body
+      dio.FormData formData = dio.FormData.fromMap(body ?? {});
+
+      // Add files to form data
+      if (files != null) {
+        for (var entry in files.entries) {
+          String fieldName = entry.key;
+          List<File> fileList = entry.value;
+
+          for (var file in fileList) {
+            final fileName = file.path.split('/').last;
+            final dio.MultipartFile multipartFile =
+                await dio.MultipartFile.fromFile(
+              file.path,
+              filename: fileName,
+              contentType: MediaType("image", "png"), // change if needed
+            );
+            formData.files.add(MapEntry(fieldName, multipartFile));
+          }
         }
-      });
+      }
+
       dio.Response response = await _dioMultiPart(token).post(
         endPoint,
         data: formData,

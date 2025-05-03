@@ -24,13 +24,18 @@ class CustomWidgets {
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Center(
-                child: Container
-(height: 100,width: 100,decoration: BoxDecoration(image: DecorationImage(image: NetworkImage(
-  '${ApiRoutes.imageRoutes}${property.images[0]}'),fit: BoxFit.cover,),
-))),)  ,              
-                
-              
-          
+                  child: Container(
+                      height: 100,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(
+                              '${ApiRoutes.imageRoutes}${property.images[0]}'),
+                          fit: BoxFit.cover,
+                        ),
+                      ))),
+            ),
+
             const SizedBox(width: 16),
 
             // Property Info
