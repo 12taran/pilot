@@ -2,6 +2,7 @@ import { Property } from "../Models/property.model.js";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
+import { Investment } from "../Models/investment.model.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -10,10 +11,12 @@ export const createProperty = async (req, res) => {
   try {
     console.log(req.body);
     console.log(req.files);
+
     const images = req.files.map(file => `property/${file.filename}`);// It loops through each file and extracts the filename
     const {
       projectName,
       address,
+      area,
       latitude,
       longitude,
       price,
@@ -21,7 +24,8 @@ export const createProperty = async (req, res) => {
       description,
     } = req.body;
 
-    if (!projectName  || !address || !latitude || !longitude || !price || !type || !description || images.length === 0) {
+    const numericArea = Number(area);
+    if (!projectName  || !address || !area || !latitude || !longitude || !price || !type || !description  || isNaN(numericArea) || numericArea <= 0 || images.length === 0) {
       return res.status(400).json({
         message: "All fields are required",
         success: false,
@@ -31,6 +35,8 @@ export const createProperty = async (req, res) => {
     const newProperty = await Property.create({
       projectName,
       address,
+      area: numericArea,
+      availableArea: numericArea,
       latitude,
       longitude,
       price,
@@ -145,5 +151,83 @@ export const deleteProperty = async (req, res) => {
       message: "Failed to delete property",
       success: false,
     });
+  }
+};
+
+// Buy Property (Fractional Area)
+export const buyProperty = async (req, res) => {
+  try {
+    const { propertyId, areaToBuy, userId } = req.body;
+
+    const numericAreaToBuy = Number(areaToBuy);
+    if (isNaN(numericAreaToBuy) || numericAreaToBuy <= 0) {
+      return res.status(400).json({
+        message: "Invalid area to buy",
+        success: false,
+      });
+    }
+
+    const property = await Property.findById(propertyId);
+    if (!property || property.availableArea < numericAreaToBuy) {
+      return res.status(400).json({
+        message: "Not enough available area to buy",
+        success: false,
+      });
+    }
+
+    property.availableArea -= numericAreaToBuy;
+    await property.save();
+
+    await Investment.create({
+      userId,
+      propertyId,
+      areaInvested: numericAreaToBuy
+    });
+
+    return res.status(200).json({
+      message: `Successfully bought ${numericAreaToBuy} sq ft`,
+      remainingAvailableArea: property.availableArea,
+      success: true,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Failed to buy property", success: false });
+  }
+};
+
+// Extend Property Area
+export const extendPropertyArea = async (req, res) => {
+  try {
+    const { propertyId, areaToAdd } = req.body;
+    const numericArea = Number(areaToAdd);
+
+    if (isNaN(numericArea) || numericArea <= 0) {
+      return res.status(400).json({
+        message: "Area to add must be a positive number",
+        success: false,
+      });
+    }
+
+    const property = await Property.findById(propertyId);
+    if (!property) {
+      return res.status(404).json({
+        message: "Property not found",
+        success: false,
+      });
+    }
+
+    property.area += numericArea;
+    property.availableArea += numericArea;
+    await property.save();
+
+    return res.status(200).json({
+      message: `Area extended by ${numericArea} sq ft`,
+      success: true,
+      newTotalArea: property.area,
+      newAvailableArea: property.availableArea,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Failed to extend area", success: false });
   }
 };
