@@ -18,9 +18,11 @@ class RazorpayService {
   }
 
   Future<void> openCheckout(int amount) async {
+    print("Amount $amount");
     // Call your backend to create order
+    print("${ApiRoutes().paymentRoute}order");
     final response = await http.post(
-      Uri.parse("${ApiRoutes().baseUrl}order"),
+      Uri.parse("${ApiRoutes().paymentRoute}order"),
       headers: {"Content-Type": "application/json"},
       body: jsonEncode({"amount": amount}),
     );
@@ -53,13 +55,14 @@ class RazorpayService {
     };
 
     final verifyResponse = await http.post(
-      Uri.parse("${ApiRoutes().baseUrl}paymentVerify"),
+      Uri.parse("${ApiRoutes().paymentRoute}verify"),
       headers: {"Content-Type": "application/json"},
       body: jsonEncode(body),
     );
 
     final result = jsonDecode(verifyResponse.body);
     if (verifyResponse.statusCode == 200) {
+      print(result);
       print("Payment Verified: ${result['message']}");
     } else {
       print("Verification Failed: ${result['message']}");

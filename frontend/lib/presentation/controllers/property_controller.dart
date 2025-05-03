@@ -39,7 +39,7 @@ class PropertyController extends GetxController {
         location: "Ahmedabad",
         latitude: 23.0225,
         longitude: 72.5714,
-        price: "18,50,000",
+        price: "1805",
         type: "Residential",
         description:
             "Located in a peaceful neighborhood of Ahmedabad, Sunset Heights offers semi-furnished 2BHK apartments with natural lighting, a gym, a clubhouse, and children's play area. Ideal for small families.",
@@ -51,7 +51,7 @@ class PropertyController extends GetxController {
         location: "GIFT City",
         latitude: 23.1560,
         longitude: 72.6833,
-        price: "35,00,000",
+        price: "3500",
         type: "Commercial",
         description:
             "A modern commercial space in GIFT City, Corporate Plaza is perfect for startups and enterprises. Fully furnished offices, high-speed internet, and conference rooms included.",
@@ -63,7 +63,7 @@ class PropertyController extends GetxController {
         location: "Vadodara",
         latitude: 22.3072,
         longitude: 73.1812,
-        price: "12,75,000",
+        price: "1275",
         type: "Holiday Homes",
         description:
             "Green Valley offers 1BHK and 2BHK flats surrounded by greenery. A gated community with jogging tracks and ample parking space, perfect for peaceful living.",
@@ -75,7 +75,7 @@ class PropertyController extends GetxController {
         location: "Mohali",
         latitude: 21.1702,
         longitude: 72.8311,
-        price: "22,00,000",
+        price: "2200",
         type: "Residential",
         description:
             "Centrally located near Surat Metro Station, this fully furnished apartment offers 3BHK units with modern interiors, 24x7 water supply, and power backup.",
@@ -87,7 +87,7 @@ class PropertyController extends GetxController {
         location: "Sanand",
         latitude: 22.9920,
         longitude: 72.3818,
-        price: "40,00,000",
+        price: "4000",
         type: "Commercial",
         description:
             "Spacious industrial work area in Sanand ideal for manufacturing units. Features include easy highway access, truck loading bay, and customizable layout.",
@@ -99,7 +99,7 @@ class PropertyController extends GetxController {
         location: "Dhulera",
         latitude: 23.2230,
         longitude: 72.6500,
-        price: "16,20,000",
+        price: "1620",
         type: "Residential",
         description:
             "A modern apartment complex in Gandhinagar featuring semi-furnished 2BHK units with balcony views, rooftop garden, and 24/7 security.",
@@ -111,7 +111,7 @@ class PropertyController extends GetxController {
         location: "GIFT City",
         latitude: 23.1500,
         longitude: 72.6800,
-        price: "28,00,000",
+        price: "28000,",
         type: "Residential",
         description:
             "Luxurious 2BHK apartment in the heart of GIFT City. Fully furnished with modular kitchen, modern bath fittings, and smart home features.",
@@ -125,7 +125,7 @@ class PropertyController extends GetxController {
         location: "Himachal",
         latitude: 23.0350,
         longitude: 72.5800,
-        price: "42,00,000",
+        price: "42000",
         type: "Commercial",
         description:
             "Office space ideal for startups and consulting firms. Prime location with good connectivity, lift and 24x7 security.",
@@ -139,7 +139,7 @@ class PropertyController extends GetxController {
         location: "Surat",
         latitude: 21.1800,
         longitude: 72.8350,
-        price: "19,50,000",
+        price: "1970",
         type: "Holiday Homes",
         description:
             "Weekend retreat with villa-style homes, landscaped garden, pool access and close proximity to the river.",
@@ -153,7 +153,7 @@ class PropertyController extends GetxController {
         location: "Vadodara",
         latitude: 22.3100,
         longitude: 73.2000,
-        price: "30,00,000",
+        price: "3000",
         type: "Commercial",
         description:
             "Ready-to-use co-working space ideal for freelancers and agencies. High-speed Wi-Fi and meeting rooms available.",
@@ -166,7 +166,7 @@ class PropertyController extends GetxController {
         location: "Sanand",
         latitude: 23.0000,
         longitude: 72.3900,
-        price: "15,00,000",
+        price: "15000",
         type: "Holiday Homes",
         description:
             "Nature-inspired homes with eco-friendly construction, perfect for holiday stays. Jogging track and campfire zone included.",

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
+import 'package:pilot_project/core/rozarpay_service.dart';
 import 'package:pilot_project/data/models/property_model.dart';
 import 'package:pilot_project/presentation/controllers/pilotController.dart';
 import 'package:pilot_project/routes/page_route.dart';
@@ -16,7 +17,20 @@ class Propertydetail extends StatefulWidget {
 
 class _PropertydetailState extends State<Propertydetail> {
   Pilotcontroller pilotcontroller = Get.put(Pilotcontroller());
+  final razorpayService = RazorpayService();
+
   @override
+  void initState() {
+    super.initState();
+    razorpayService.init();
+  }
+
+  @override
+  void dispose() {
+    razorpayService.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,40 +133,50 @@ class _PropertydetailState extends State<Propertydetail> {
                       ],
                     ),
                   ),
-                  Center(
-              child: GestureDetector(
-                onTap: (){},
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primary,
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all(color: const Color.fromARGB(255, 7, 57, 52)),
-                      boxShadow: [
-                        BoxShadow(
-                        
-                          spreadRadius: 0.5,
-                          blurRadius: 2,
-                          offset: Offset(0, 1),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primary,
+                          borderRadius: BorderRadius.circular(25),
+                          border: Border.all(
+                              color: const Color.fromARGB(255, 7, 57, 52)),
+                          boxShadow: [
+                            BoxShadow(
+                              spreadRadius: 0.5,
+                              blurRadius: 2,
+                              offset: Offset(0, 1),
+                            ),
+                          ],
                         ),
-                      ],
+                        padding: EdgeInsets.all(10),
+                        //width: Get.width * 0.4,
+                        height: Get.height * 0.05,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.download,
+                              size: Constants.iconSizeSmall,
+                            ),
+                            Text(
+                              'Download Brochure',
+                              style: TextStyle(
+                                  fontSize: Constants.fontSizeTiny,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
+                      ),
                     ),
-                    padding: EdgeInsets.all(12),
-                    width: Get.width * 0.4,
-                    height: Get.height * 0.05,
-                    child:Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [Icon(Icons.download,size: 13,),Text('Download Brochure',style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),)],),),
-                ),
-              ),
-            ),
+                  ),
                 ],
               ),
             ),
             SizedBox(height: 10),
-            
-              
             SizedBox(height: 20),
             Divider(thickness: 1),
             Padding(
@@ -179,15 +203,13 @@ class _PropertydetailState extends State<Propertydetail> {
             ),
             SizedBox(height: 10),
             Divider(thickness: 1),
-            
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 "Description",
                 style: GoogleFonts.aBeeZee(
-                  color: Theme.of(context).colorScheme.primary,
+                    color: Theme.of(context).colorScheme.primary,
                     fontSize: Constants.fontSizeHeading,
-                    
                     fontWeight: FontWeight.bold),
               ),
             ),
@@ -234,7 +256,6 @@ class _PropertydetailState extends State<Propertydetail> {
                 ),
               ),
             ),
-          
             SizedBox(height: 20),
           ],
         ),
@@ -279,7 +300,10 @@ class _PropertydetailState extends State<Propertydetail> {
                   borderRadius: 10,
                   width: Get.width * 0.55,
                   text: 'Buy',
-                  onPressed: () {},
+                  onPressed: () {
+                    razorpayService
+                        .openCheckout(int.tryParse(widget.property.price) ?? 0);
+                  },
                 ),
               ],
             ),
