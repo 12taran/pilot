@@ -53,16 +53,19 @@ class _PropertyCardState extends State<PropertyCard> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            widget.property.projectName!,
-                            maxLines: 2,
-                            style: GoogleFonts.almarai(
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.color,
-                                fontSize: Constants.fontSizeSmall + 2,
-                                fontWeight: FontWeight.w500),
+                          SizedBox(
+                            width: Get.width * 0.5,
+                            child: Text(
+                              widget.property.projectName!,
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.almarai(
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.color,
+                                  fontSize: Constants.fontSizeSmall + 2,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                           Row(
                             children: [
