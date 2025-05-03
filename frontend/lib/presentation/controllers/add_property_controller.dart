@@ -18,6 +18,8 @@ class AdminPropertyController extends GetxController {
   TextEditingController longitudeController = TextEditingController();
   TextEditingController priceInSqFeetController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+    TextEditingController priceController = TextEditingController();
+  TextEditingController areaController = TextEditingController();
   RxString selectedPropertyType = "".obs;
   RxList<File> selectedImages = <File>[].obs;
   Future<Map<String, double>?> getCoordinatesFromAddress(String address) async {
@@ -103,5 +105,20 @@ class AdminPropertyController extends GetxController {
       print('Property creation failed');
       Utils.showToast(message: 'Property creation failed');
     }
+  }
+
+  void clearControllers() {
+    propertyNameController.clear();
+    locationController.clear();
+    pinCodeController.clear();
+    latitudeController.clear();
+    longitudeController.clear();
+    priceInSqFeetController.clear();
+    descriptionController.clear();
+    selectedImages.clear();
+    selectedPropertyType.value = "";
+    priceInSqFeetController.clear();
+    priceController.clear();
+    areaController.clear();
   }
 }

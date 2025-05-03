@@ -47,7 +47,6 @@ class _PropertydetailState extends State<Propertydetail> {
                   options: CarouselOptions(
                     height: Get.height * 0.4,
                     viewportFraction: 1.0,
-                    
                     enlargeCenterPage: false,
                     autoPlay: true,
                   ),
@@ -89,10 +88,14 @@ class _PropertydetailState extends State<Propertydetail> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        widget.property.projectName!,
-                        style: GoogleFonts.acme(
-                          fontSize: Constants.fontSizeExtraLarge,
+                      SizedBox(
+                        width: Get.width * 0.6,
+                        child: Text(
+                          widget.property.projectName!,
+                          maxLines: 3,
+                          style: GoogleFonts.acme(
+                            fontSize: Constants.fontSizeExtraLarge,
+                          ),
                         ),
                       ),
                     ],

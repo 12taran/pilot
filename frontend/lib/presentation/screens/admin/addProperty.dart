@@ -35,8 +35,6 @@ class _AddpropertyState extends State<Addproperty> {
     }
   }
 
-  TextEditingController priceController = TextEditingController();
-  TextEditingController areaController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -355,8 +353,12 @@ class _AddpropertyState extends State<Addproperty> {
                 keyboardType: TextInputType.number,
                 onChanged: (value) => {
                   addPropertyController.pricePerSqfeet(
-                    double.tryParse(areaController.text) ?? 1.0,
-                    double.tryParse(priceController.text) ?? 0.0,
+                    double.tryParse(
+                            addPropertyController.areaController.text) ??
+                        1.0,
+                    double.tryParse(
+                            addPropertyController.priceController.text) ??
+                        0.0,
                   )
                 },
                 labelText: 'Price',
@@ -366,7 +368,7 @@ class _AddpropertyState extends State<Addproperty> {
                   color: Theme.of(context).textTheme.bodySmall?.color,
                 ),
                 isLabelEnabled: false,
-                controller: priceController,
+                controller: addPropertyController.priceController,
               ),
               SizedBox(
                 height: 20,
@@ -383,8 +385,12 @@ class _AddpropertyState extends State<Addproperty> {
                 keyboardType: TextInputType.number,
                 onChanged: (value) => {
                   addPropertyController.pricePerSqfeet(
-                    double.tryParse(areaController.text) ?? 1.0,
-                    double.tryParse(priceController.text) ?? 0.0,
+                    double.tryParse(
+                            addPropertyController.areaController.text) ??
+                        1.0,
+                    double.tryParse(
+                            addPropertyController.priceController.text) ??
+                        0.0,
                   )
                 },
                 labelText: 'Area In Gaj',
@@ -394,7 +400,7 @@ class _AddpropertyState extends State<Addproperty> {
                   color: Theme.of(context).textTheme.bodySmall?.color,
                 ),
                 isLabelEnabled: false,
-                controller: areaController,
+                controller: addPropertyController.areaController,
               ),
               SizedBox(
                 height: 20,
@@ -490,6 +496,7 @@ class _AddpropertyState extends State<Addproperty> {
                   onPressed: () async {
                     await addPropertyController.addProperty();
                     Get.back();
+                    addPropertyController.clearControllers();
                   }),
               SizedBox(
                 height: 50,
