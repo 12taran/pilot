@@ -11,9 +11,9 @@ export const createProperty = async (req, res) => {
   try {
     console.log(req.body);
     console.log(req.files);
-
     const images = req.files.map(file => `property/${file.filename}`);// It loops through each file and extracts the filename
     const {
+      userId,
       projectName,
       address,
       area,
@@ -33,6 +33,7 @@ export const createProperty = async (req, res) => {
     }
 
     const newProperty = await Property.create({
+      userId,
       projectName,
       address,
       area: numericArea,
@@ -107,6 +108,26 @@ export const editProperty = async (req, res) => {
 export const getAllProperties = async (req, res) => {
   try {
     const properties = await Property.find().sort({ createdAt: -1 }); // Sorts the results by the createdAt field in descending order
+    return res.status(200).json({
+      message: "Properties retrieved successfully",
+      success: true,
+      properties,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      message: "Failed to retrieve properties",
+      success: false,
+    });
+  }
+};
+
+// Get all properties by id 
+export const getUserProperty = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    console.log(userId);
+    const properties = await Property.find({userId}).sort({ createdAt: -1 }); // in descending order
     return res.status(200).json({
       message: "Properties retrieved successfully",
       success: true,
