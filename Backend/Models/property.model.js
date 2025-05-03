@@ -17,6 +17,14 @@ const propertySchema = new mongoose.Schema(
             type: String,
             required: true,
           },
+          area: {
+            type: Number,
+            required: true,
+          },
+          availableArea: {
+            type: Number,
+            required: true,
+          },
           latitude: {
             type: Number,
             required: true,

@@ -4,6 +4,8 @@ import {
     getAllProperties,
     editProperty,
     deleteProperty,
+    buyProperty,
+    extendPropertyArea
 } from '../controllers/property.controller.js';
 
 import {uploadPropertyImages} from "../middlewares/uploadProperty.middleware.js";
@@ -17,15 +19,15 @@ router.route('/create').post(
 );
 router.route('/getAll').get(getAllProperties);
 router.route('/edit').patch(
-    (req, res, next) => { 
-        console.log("Headers:", req.headers["content-type"]);
-        next();
-    },
     uploadPropertyImages.array("images", 20),
     isAdmin,
     editProperty
 );
-
 router.route('/delete').delete(isAdmin, deleteProperty);
-
+router.route('/buy').post(buyProperty);
+router.route('/extend').patch(
+    uploadPropertyImages.array("images", 20),
+    isAdmin,
+    extendPropertyArea
+);
 export default router;

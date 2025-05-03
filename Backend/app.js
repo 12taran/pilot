@@ -8,6 +8,7 @@ import connectDB from "./utils/db.js";
 import userRoute from "./routes/user.route.js";
 import memberRoute from "./routes/member.route.js";
 import propertyRoute from "./routes/property.route.js";
+import investmentRoute from "./routes/investment.route.js";
 import paymentRoute from "./routes/payment.route.js";
 
 dotenv.config();
@@ -29,7 +30,8 @@ app.get("/", (req, res) => {
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/user/member", memberRoute);
 app.use("/api/v1/user/property", propertyRoute);
-
+app.use("/api/v1/user/investment", investmentRoute);
+app.use("/api/v1/payment", paymentRoute);
 
 //  Global error handler for image multer
 app.use((err, req, res, next) => {
@@ -47,7 +49,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT;app.use("/api/v1/payment", paymentRoute);
+const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
   connectDB();
