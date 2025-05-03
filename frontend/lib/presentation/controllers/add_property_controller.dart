@@ -85,14 +85,15 @@ class AdminPropertyController extends GetxController {
 
     List<File> images = selectedImages;
     Map<String, String> property = {
-      "propertyName": propertyName,
+      "projectName": propertyName,
       "address": location,
       "latitude": latitude,
       "longitude": longitude,
       "price": priceInSqFeet,
       "type": propertyType,
-      'description': descriptionController.text,
+      'description': "aaaa",
       "userId": userId ?? "",
+      "area": priceInSqFeet,
     };
     bool created = await AdminpropertyRepo().createProperties(property, images);
     if (created) {

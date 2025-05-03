@@ -25,6 +25,7 @@ export const createProperty = async (req, res) => {
     } = req.body;
 
     const numericArea = Number(area);
+
     if (!projectName  || !address || !area || !latitude || !longitude || !price || !type || !description  || isNaN(numericArea) || numericArea <= 0 || images.length === 0) {
       return res.status(400).json({
         message: "All fields are required",

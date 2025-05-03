@@ -13,7 +13,8 @@ class AdminpropertyRepo {
           isTokenRequired: false,
           files: {"images": files});
       print(response.data);
-      return true;
+
+      return response.data['success'];
     } catch (e) {
       print(e);
       return false;
