@@ -4,7 +4,7 @@ class ApiRoutes {
   static String apiEndpoint = "api/v1/user/";
   static String paymentEndPoint = "api/v1/payment/";
 
-  static String serverUrl = "http://192.168.114.227:4000/";
+  static String serverUrl = "http://192.168.114.16:4000/";
   static String imageRoutes = "${serverUrl}uploads/";
 
   // static String serverUrl = "http://localhost:8000/";
