@@ -35,7 +35,7 @@ app.use("/api/v1/user/property", propertyRoute);
 app.use((err, req, res, next) => {
   if (err instanceof multer.MulterError || err.message.includes("Unexpected field")) {
     return res.status(400).json({
-      message: "Please upload only one image",
+      message:"File upload error: " + err.message,
       success: false,
     });
   }

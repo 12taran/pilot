@@ -16,10 +16,16 @@ router.route('/create').post(
     createProperty
 );
 router.route('/getAll').get(getAllProperties);
-router.route('/edit').patch(isAdmin,
+router.route('/edit').patch(
+    (req, res, next) => { 
+        console.log("Headers:", req.headers["content-type"]);
+        next();
+    },
     uploadPropertyImages.array("images", 20),
+    isAdmin,
     editProperty
 );
+
 router.route('/delete').delete(isAdmin, deleteProperty);
 
 export default router;
