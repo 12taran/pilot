@@ -1,3 +1,4 @@
+import { User } from "../Models/user.model.js";
 import { Property } from "../Models/property.model.js";
 import path from "path";
 import fs from "fs";
@@ -178,6 +179,7 @@ export const deleteProperty = async (req, res) => {
 // Buy Property (Fractional Area)
 export const buyProperty = async (req, res) => {
   try {
+    console.log(req.body);
     const { propertyId, areaToBuy, userId } = req.body;
 
     const numericAreaToBuy = Number(areaToBuy);
@@ -205,8 +207,10 @@ export const buyProperty = async (req, res) => {
       areaInvested: numericAreaToBuy
     });
 
+    const user = await User.findById(userId);
+
     return res.status(200).json({
-      message: `Successfully bought ${numericAreaToBuy} sq ft`,
+      message: `${user.fullname} Successfully bought ${numericAreaToBuy} sq ft`,
       remainingAvailableArea: property.availableArea,
       success: true,
     });
