@@ -7,6 +7,7 @@ import 'package:pilot_project/core/components/CustomContainer.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/data/models/board_member.dart';
+import 'package:pilot_project/data/models/property_model.dart';
 import 'package:pilot_project/presentation/controllers/boardmember_controller.dart';
 import 'package:pilot_project/presentation/controllers/bottomNavController.dart';
 import 'package:pilot_project/presentation/controllers/help_and_supportController.dart';
@@ -249,8 +250,15 @@ class _HomePageState extends State<HomePage> {
                         i < propertyController.properties.length;
                         i++)
                       Center(
-                          child: PropertyCard(
-                              property: propertyController.properties[i]))
+                          child: GestureDetector(
+                            onTap: () {
+                              PropertyModel detail = propertyController.properties[i];
+                          Get.toNamed(PageRoutes.propertydetail,
+                              arguments: detail);
+                            },
+                            child: PropertyCard(
+                                property: propertyController.properties[i]),
+                          ))
                   ],
                   options: CarouselOptions(
                       enableInfiniteScroll: false,
