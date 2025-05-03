@@ -103,8 +103,8 @@ class ProfilePage extends StatelessWidget {
             ListTile(
               trailing: Icon(Icons.arrow_right),
               leading: const Icon(Icons.document_scanner),
-              title: const Text('Documents'),
-              onTap: () {},
+              title: const Text('KYC'),
+              onTap: () {Get.toNamed(PageRoutes.kyc);},
             ),
             Divider(
               thickness: 1,

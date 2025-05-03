@@ -12,6 +12,7 @@ import 'package:pilot_project/presentation/screens/authScreens/phone_sign_up.dar
 import 'package:pilot_project/presentation/screens/authScreens/register.dart';
 import 'package:pilot_project/presentation/screens/docsScreen/bankScreen.dart';
 import 'package:pilot_project/presentation/screens/faqs.dart';
+import 'package:pilot_project/presentation/screens/kyc/kycScreen.dart';
 import 'package:pilot_project/presentation/screens/no_internet_screen.dart';
 import 'package:pilot_project/presentation/screens/place_location_screen.dart';
 import 'package:pilot_project/presentation/screens/privacy.dart';
@@ -55,6 +56,9 @@ class PageRoutes {
   static const String properties = "/properties";
   static const String addProperty = "/addProperty";
   static const String bankDetail = "/bankDetail";
+  static const String kyc = "/kyc";
+  static const String panVerifyScreen = "/panVerifyScreen";
+  static const String aadharVerifyScreen = "/aadharVerifyScreen";
 
   // get product category
   static List<GetPage> getPageRoutes() {
@@ -332,6 +336,40 @@ class PageRoutes {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);
           
+        }),
+      ),
+      GetPage(
+        name: kyc,
+        page: () => KycScreen(),
+        //transition: Transition.zoom,
+        transitionDuration: const Duration(milliseconds: 200),
+        binding: BindingsBuilder(() async {
+          final sharedPreferences = await SharedPreferences.getInstance();
+          Get.put(() => sharedPreferences, permanent: true);
+        
+        
+        }),
+      ),
+      GetPage(
+        name: panVerifyScreen,
+        page: () => PanVerificationScreen(),
+       // transition: Transition.zoom,
+        transitionDuration: const Duration(milliseconds: 200),
+        binding: BindingsBuilder(() async {
+          final sharedPreferences = await SharedPreferences.getInstance();
+          Get.put(() => sharedPreferences, permanent: true);
+         
+        }),
+      ),
+      GetPage(
+        name: aadharVerifyScreen,
+        page: () => AadharVerificationScreen(),
+       // transition: Transition.zoom,
+        transitionDuration: const Duration(milliseconds: 200),
+        binding: BindingsBuilder(() async {
+          final sharedPreferences = await SharedPreferences.getInstance();
+          Get.put(() => sharedPreferences, permanent: true);
+         
         }),
       ),
     ];

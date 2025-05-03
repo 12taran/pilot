@@ -16,11 +16,17 @@ class _FaqsState extends State<Faqs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+   
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        //crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: Get.height * 0.10,
+            height: Get.height * 0.05,
           ),
+          Align(alignment: Alignment.topLeft,
+            child: IconButton(onPressed: (){Get.back();}, icon:Icon(Icons.arrow_back_ios_new_rounded))),
+
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
             decoration: BoxDecoration(

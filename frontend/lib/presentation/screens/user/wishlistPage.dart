@@ -51,7 +51,7 @@ class _WishlistPageState extends State<WishlistPage> {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(8),
                                 child: Image.asset(
-                                  item.image!,
+                                  item.images[0],
                                   width: Get.width * 0.3,
                                   height: Get.height * 0.15,
                                   fit: BoxFit.cover,
@@ -74,7 +74,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                             CrossAxisAlignment.start,
                                         //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                         children: [
-                                          Text(item.name ?? '',
+                                          Text(item.projectName,
                                               style: GoogleFonts.lato(
                                                   fontSize: Constants
                                                       .fontSizeSubTitle,
@@ -87,7 +87,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                                 Icons.location_on,
                                                 color: Colors.green[300],
                                               ),
-                                              Text(item.location ?? '',
+                                              Text(item.address,
                                                   style: const TextStyle(
                                                       fontSize: 15,
                                                       color: Color.fromARGB(

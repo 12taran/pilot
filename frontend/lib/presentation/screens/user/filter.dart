@@ -32,15 +32,14 @@ class _FilterPageState extends State<FilterPage> {
     List<PropertyModel> properties = propertyController.properties;
 
     // Get unique filter options based on the filterKey
-    List<String> filterOptions = properties
+    List<dynamic> filterOptions = properties
         .map((e) {
           switch (widget.filterKey) {
             case 'location':
-              return e.location;
+              return e.address;
             case 'type':
               return e.type;
-            case 'desc':
-              return e.desc;
+           
             default:
               return '';
           }
@@ -53,11 +52,10 @@ class _FilterPageState extends State<FilterPage> {
     List<PropertyModel> filteredProperties = properties.where((property) {
       switch (widget.filterKey) {
         case 'location':
-          return property.location == selectedFilterValue;
+          return property.address == selectedFilterValue;
         case 'type':
           return property.type == selectedFilterValue;
-        case 'desc':
-          return property.desc == selectedFilterValue;
+       
         default:
           return false;
       }
@@ -116,12 +114,12 @@ class _FilterPageState extends State<FilterPage> {
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                   child: ListTile(
                     leading: Image.asset(
-                      property.image,
+                      property.images[0],
                       width: 60,
                       fit: BoxFit.cover,
                     ),
-                    title: Text(property.name),
-                    subtitle: Text('${property.location} - ₹${property.price}'),
+                    title: Text(property.projectName),
+                    subtitle: Text('${property.address} - ₹${property.price}'),
                     onTap: () {
                       // Navigate to property detail if needed
                     },

@@ -6,6 +6,7 @@ import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/core/rozarpay_service.dart';
 import 'package:pilot_project/data/models/property_model.dart';
 import 'package:pilot_project/presentation/controllers/pilotController.dart';
+import 'package:pilot_project/routes/api_routes.dart';
 import 'package:pilot_project/routes/page_route.dart';
 
 class Propertydetail extends StatefulWidget {
@@ -40,12 +41,19 @@ class _PropertydetailState extends State<Propertydetail> {
           children: [
             Stack(
               children: [
-                Image.asset(
-                  widget.property.image,
-                  width: double.infinity,
-                  height: 250,
-                  fit: BoxFit.cover,
-                ),
+                Container(
+                  height: Get.height * 0.4,
+                  decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(
+                          '${ApiRoutes.imageRoutes}${    widget.property.images[0]}'),
+                      fit: BoxFit
+                          .cover, // Ensures the image covers the entire container
+                    ),
+                    ),
+                  ),
+                
+               
                 Positioned(
                   top: 40,
                   left: 16,
@@ -68,19 +76,12 @@ class _PropertydetailState extends State<Propertydetail> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.property.name!,
+                        widget.property.projectName!,
                         style: GoogleFonts.acme(
                           fontSize: Constants.fontSizeExtraLarge,
                         ),
                       ),
-                      Text(
-                        widget.property.desc!,
-                        style: GoogleFonts.lato(
-                          fontSize: Constants.fontSizeBody,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.orange,
-                        ),
-                      ),
+                     
                     ],
                   ),
                 ),
@@ -115,19 +116,24 @@ class _PropertydetailState extends State<Propertydetail> {
                       Get.toNamed(PageRoutes.mapPage, arguments: {
                         'latitude': widget.property.latitude,
                         'longitude': widget.property.longitude,
-                        'placeName': widget.property.name,
+                        'placeName': widget.property.projectName,
                       });
                     },
                     child: Row(
                       children: [
                         Icon(Icons.location_on),
                         SizedBox(width: 5),
-                        Text(
-                          widget.property.location!,
-                          style: GoogleFonts.lato(
-                            fontSize: Constants.fontSizeSubTitle,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.red,
+                        SizedBox(
+                          width: Get.width * 0.4,
+                          child: Text(
+                          
+                            widget.property.address!,
+                            maxLines: 3,
+                            style: GoogleFonts.lato(
+                              fontSize: Constants.fontSizeSubTitle,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.red,
+                            ),
                           ),
                         ),
                       ],
@@ -176,8 +182,10 @@ class _PropertydetailState extends State<Propertydetail> {
                 ],
               ),
             ),
-            SizedBox(height: 10),
-            SizedBox(height: 20),
+            SizedBox(height: 30),
+            
+              
+          
             Divider(thickness: 1),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
