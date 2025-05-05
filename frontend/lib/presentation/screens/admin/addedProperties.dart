@@ -27,8 +27,19 @@ class _PropertiesState extends State<Properties> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Added Properties",
+          style: GoogleFonts.aleo(
+              color: Theme.of(context).textTheme.bodySmall?.color,
+              fontSize: Constants.fontSizeHeading + 2,
+              fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        backgroundColor: Color.fromARGB(255, 86, 147, 127),
+      ),
       floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor:Color.fromARGB(255, 86, 147, 127),
         extendedPadding: EdgeInsets.all(5),
         onPressed: () {
           Get.toNamed(PageRoutes.addProperty);

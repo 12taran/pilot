@@ -125,6 +125,7 @@ class CustomWidgets {
         Get.toNamed(PageRoutes.propertydetail, arguments: property);
       },
       child: Card(
+        color: Color.fromARGB(255, 192, 217, 180),
         elevation: 4,
         margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -139,7 +140,7 @@ class CustomWidgets {
                 child: Center(
                     child: Container(
                         height: 100,
-                        width: 100,
+                        width: Get.width * 0.4,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: NetworkImage(
@@ -166,30 +167,11 @@ class CustomWidgets {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      "Price: ${Constants.rupeeSymbol}${property.price}",
+                      "Price: ${Constants.rupeeSymbol}${property.price} /- Per sqft" ,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 12),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Get.toNamed(PageRoutes.propertydetail,
-                              arguments: property);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primaryContainer,
-                          foregroundColor:
-                              Theme.of(context).colorScheme.onPrimaryContainer,
-                        ),
-                        child: const Text("Invest Now"),
-                      ),
-                    ),
+                    
                   ],
                 ),
               ),
