@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pilot_project/core/components/CustomContainer.dart';
 import 'package:pilot_project/core/utils.dart';
 import 'package:pilot_project/presentation/utils_widget.dart';
 import 'package:pilot_project/routes/api_routes.dart';
@@ -68,9 +70,67 @@ class RazorpayService {
     if (verifyResponse.statusCode == 200) {
       print(result);
       print("Payment Verified: ${result['message']}");
-      UtilsWidget.showDialogPage(
-          context: Get.context!,
-          child: Text("Payment Verified")); // Show success dialog
+
+      UtilsWidget.showWebXDialog(
+        Get.context!,
+        CustomContainer(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment:
+                CrossAxisAlignment.center, // Center align content
+            children: [
+              Icon(
+                Icons.check_circle_outline, // A more modern check icon
+                color: Colors.green[400], // A slightly softer green
+                size: 72, // Slightly larger icon
+              ),
+              SizedBox(height: 20),
+              Text(
+                "Payment Successful!", // Hindi translation for "Payment Successful!"
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.grey[
+                        800]), // Slightly larger and bolder text with a darker color
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 16),
+              Text(
+                "Thank you for your payment! Your Property Document will be delivered to your WhatsApp or Email soon!", // Hindi translation
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.grey[600]),
+              ),
+              SizedBox(height: 32),
+              SizedBox(
+                width: double.infinity, // Make button take full width
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        Colors.green[400], // Consistent green color
+                    padding: EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(8)), // Rounded button
+                    elevation: 2, // Subtle button shadow
+                  ),
+                  onPressed: () {
+                    Navigator.pop(Get.context!); // close dialog
+                  },
+                  child: Text(
+                    "OK", // Hindi translation for "OK"
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+
+      // Show success dialog
     } else {
       print("Verification Failed: ${result['message']}");
     }
