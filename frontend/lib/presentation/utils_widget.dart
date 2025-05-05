@@ -165,20 +165,6 @@ class UtilsWidget {
             children: <Widget>[
               Stack(
                 children: [
-                  Positioned(
-                    top: 10,
-                    right: 0,
-                    left: 0,
-                    child: FloatingActionButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      mini: true,
-                      backgroundColor: Theme.of(context).colorScheme.background,
-                      child: Icon(Icons.close,
-                          color: Theme.of(context).colorScheme.onBackground),
-                    ),
-                  ),
                   Center(
                     child: Container(
                         decoration: BoxDecoration(
@@ -336,7 +322,10 @@ class UtilsWidget {
                 style: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.bold)),
-            content: Text(message!,style: TextStyle(fontSize: Constants.fontSizeSmall+2),),
+            content: Text(
+              message!,
+              style: TextStyle(fontSize: Constants.fontSizeSmall + 2),
+            ),
             actions: <Widget>[
               Container(
                 decoration: BoxDecoration(
@@ -344,19 +333,25 @@ class UtilsWidget {
                   color: Colors.red.withOpacity(0.1),
                 ),
                 child: TextButton(
-                  child: const Text("No",style: TextStyle(color: Colors.red),),
+                  child: const Text(
+                    "No",
+                    style: TextStyle(color: Colors.red),
+                  ),
                   onPressed: () {
                     onNoPressed();
                   },
                 ),
               ),
               Container(
-                 decoration: BoxDecoration(
+                decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.green.withOpacity(0.1),
                 ),
                 child: TextButton(
-                  child: Text("YES",style: TextStyle(color: Colors.green),),
+                  child: Text(
+                    "YES",
+                    style: TextStyle(color: Colors.green),
+                  ),
                   onPressed: () {
                     onYesPressed();
                   },

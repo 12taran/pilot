@@ -8,6 +8,7 @@ import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/core/rozarpay_service.dart';
 import 'package:pilot_project/data/models/property_model.dart';
 import 'package:pilot_project/presentation/controllers/pilotController.dart';
+import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/screens/user/photo.dart';
 import 'package:pilot_project/routes/api_routes.dart';
 import 'package:pilot_project/routes/page_route.dart';
@@ -22,6 +23,7 @@ class Propertydetail extends StatefulWidget {
 class _PropertydetailState extends State<Propertydetail> {
   Pilotcontroller pilotcontroller = Get.put(Pilotcontroller());
   final razorpayService = RazorpayService();
+  final GlobalKey previewContainer = GlobalKey();
 
   @override
   void initState() {
@@ -163,7 +165,10 @@ class _PropertydetailState extends State<Propertydetail> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.find<PropertyController>()
+                          .generateAndSavePdf(context, widget.property);
+                    },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5.0),
                       child: Container(
