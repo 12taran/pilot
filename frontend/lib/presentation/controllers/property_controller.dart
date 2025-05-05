@@ -40,7 +40,7 @@ class PropertyController extends GetxController {
     "Sanand",
     "Gandhinagar",
     "Mohali",
-    "Dhulera",
+    "Dholera",
     "Himachal"
   ]; // Available locations
   RxString selectedType = "".obs;
@@ -253,6 +253,24 @@ class PropertyController extends GetxController {
     );
   }
 
+
+void buysProperty(
+    String propertyId,
+    String userId,
+    double areaToBuy,
+  ) async {
+    await PropertyRepo().buyProperty(
+      propertyId: propertyId,
+      userId: userId,
+      areaToBuy: areaToBuy,
+    );
+  }
+
+  // Example usage in a widget:
+  // ElevatedButton(
+  //   onPressed: () => generateAndSavePdf(context, property),
+  //   child: const Text('Download PDF'),
+  // );
 // Example usage in a button:
 // ElevatedButton(
 //   onPressed: () => generateAndSavePdf(context),

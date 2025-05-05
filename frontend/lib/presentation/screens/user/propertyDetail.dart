@@ -12,6 +12,7 @@ import 'package:pilot_project/presentation/controllers/property_controller.dart'
 import 'package:pilot_project/presentation/screens/user/photo.dart';
 import 'package:pilot_project/routes/api_routes.dart';
 import 'package:pilot_project/routes/page_route.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Propertydetail extends StatefulWidget {
   const Propertydetail({super.key, required this.property});
@@ -24,6 +25,8 @@ class _PropertydetailState extends State<Propertydetail> {
   Pilotcontroller pilotcontroller = Get.put(Pilotcontroller());
   final razorpayService = RazorpayService();
   final GlobalKey previewContainer = GlobalKey();
+  PropertyController propertyController = Get.put(PropertyController());
+ 
 
   @override
   void initState() {
@@ -324,7 +327,17 @@ class _PropertydetailState extends State<Propertydetail> {
                   borderRadius: 10,
                   width: Get.width * 0.3,
                   color: const Color.fromARGB(255, 98, 97, 95),
-                  onPressed: () {},
+                  onPressed: ()async {
+                     SharedPreferences? pref= await SharedPreferences.getInstance();
+                     String? userId = pref.getString(Constants.USER_ID);
+                    propertyController.buysProperty(
+                   
+                        widget.property.id,
+                            userId!,
+                            20
+                      );
+                      
+                  },
                   text: 'Sell',
                 ),
                 SizedBox(width: 10),

@@ -21,7 +21,7 @@ class AppTheme {
         labelMedium: TextStyle(color: Colors.black54),
         displayLarge: TextStyle(color: Colors.black54)),
     colorScheme: const ColorScheme.light(
-      primary: const Color.fromARGB(255, 87, 187, 91),
+      primary: Color.fromARGB(255, 134, 231, 137),
       secondary: const Color.fromARGB(255, 56, 98, 57),
       error: Colors.red,
       background: Colors.white,
@@ -51,7 +51,7 @@ class AppTheme {
         labelMedium: TextStyle(color: Colors.white54),
         displayLarge: TextStyle(color: Colors.white60)),
     colorScheme: const ColorScheme.dark(
-      primary: Color.fromARGB(255, 87, 187, 91),
+      primary: Color.fromARGB(255, 147, 227, 149),
       secondary: const Color.fromARGB(255, 56, 98, 57),
       error: Colors.red,
       background: Color(0xFF000000),

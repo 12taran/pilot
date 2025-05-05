@@ -39,9 +39,14 @@ class _AddpropertyState extends State<Addproperty> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add Property"),
+        title: Text("Add Property",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).textTheme.bodySmall?.color,
+            )),
         centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 56, 98, 57),
+        backgroundColor: Color.fromARGB(255, 16, 64, 16),
       ),
       body: SingleChildScrollView(
         child: Padding(
