@@ -1,3 +1,7 @@
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
+import 'package:pilot_project/core/utils.dart';
+import 'package:pilot_project/presentation/utils_widget.dart';
 import 'package:pilot_project/routes/api_routes.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -26,7 +30,7 @@ class RazorpayService {
       headers: {"Content-Type": "application/json"},
       body: jsonEncode({"amount": amount}),
     );
-
+    print('Response: ${response.body}');
     final data = jsonDecode(response.body)['data'];
 
     var options = {
@@ -64,6 +68,9 @@ class RazorpayService {
     if (verifyResponse.statusCode == 200) {
       print(result);
       print("Payment Verified: ${result['message']}");
+      UtilsWidget.showDialogPage(
+          context: Get.context!,
+          child: Text("Payment Verified")); // Show success dialog
     } else {
       print("Verification Failed: ${result['message']}");
     }

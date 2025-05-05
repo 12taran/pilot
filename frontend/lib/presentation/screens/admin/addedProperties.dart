@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/presentation/controllers/add_property_controller.dart';
-import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/widgets/custom_widgets.dart';
 import 'package:pilot_project/routes/page_route.dart';
 

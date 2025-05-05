@@ -19,7 +19,7 @@ router.route('/create').post(
     createProperty
 );
 router.route('/getAll').get(getAllProperties);
-router.route('/get/:userId').get(getUserProperty);
+router.route('/get').get(getUserProperty);
 router.route('/edit').patch(
     uploadPropertyImages.array("images", 20),
     isAdmin,

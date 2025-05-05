@@ -296,7 +296,7 @@ class _PropertydetailState extends State<Propertydetail> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Price per Alt.SQFT',
+              'Price per SQFT',
               style: GoogleFonts.lato(
                 fontSize: Constants.fontSizeSubTitle,
                 fontWeight: FontWeight.w400,
@@ -329,8 +329,11 @@ class _PropertydetailState extends State<Propertydetail> {
                   width: Get.width * 0.55,
                   text: 'Buy',
                   onPressed: () {
-                    razorpayService
-                        .openCheckout(int.tryParse(widget.property.price) ?? 0);
+                    print('Amount: ${widget.property.price}');
+                    int amountInRupees =
+                        (double.tryParse(widget.property.price) ?? 0.0).toInt();
+
+                    razorpayService.openCheckout(amountInRupees);
                   },
                 ),
               ],

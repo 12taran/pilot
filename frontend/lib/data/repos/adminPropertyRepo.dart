@@ -27,7 +27,7 @@ class AdminpropertyRepo {
   ) async {
     try {
       var response = await BaseService().getData(
-        endPoint: "${ApiRoutes().getAdiminProperties}/${userId}",
+        endPoint: "${ApiRoutes().getAdiminProperties}",
         queryBody: {"userId": userId},
         isTokenRequired: false,
       );
