@@ -4,6 +4,7 @@ import { Investment } from "../Models/investment.model.js";
 export const getUserInvestments = async (req, res) => {
   try {
     const { userId } = req.params;
+    console.log(req.params);
 
     const investments = await Investment.find({ userId }).populate("propertyId").populate("userId");
 

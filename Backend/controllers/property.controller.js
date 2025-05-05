@@ -1,3 +1,4 @@
+import { User } from "../Models/user.model.js";
 import { Property } from "../Models/property.model.js";
 import path from "path";
 import fs from "fs";
@@ -11,9 +12,9 @@ export const createProperty = async (req, res) => {
   try {
     console.log(req.body);
     console.log(req.files);
-
     const images = req.files.map(file => `property/${file.filename}`);// It loops through each file and extracts the filename
     const {
+      userId,
       projectName,
       address,
       area,
@@ -34,6 +35,7 @@ export const createProperty = async (req, res) => {
     }
 
     const newProperty = await Property.create({
+      userId,
       projectName,
       address,
       area: numericArea,
@@ -122,6 +124,26 @@ export const getAllProperties = async (req, res) => {
   }
 };
 
+// Get all properties by id 
+export const getUserProperty = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    console.log(userId);
+    const properties = await Property.find({userId}).sort({ createdAt: -1 }); // in descending order
+    return res.status(200).json({
+      message: "Properties retrieved successfully",
+      success: true,
+      properties,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      message: "Failed to retrieve properties",
+      success: false,
+    });
+  }
+};
+
 // Delete property 
 export const deleteProperty = async (req, res) => {
   try {
@@ -158,6 +180,7 @@ export const deleteProperty = async (req, res) => {
 // Buy Property (Fractional Area)
 export const buyProperty = async (req, res) => {
   try {
+    console.log(req.body);
     const { propertyId, areaToBuy, userId } = req.body;
 
     const numericAreaToBuy = Number(areaToBuy);
@@ -185,8 +208,10 @@ export const buyProperty = async (req, res) => {
       areaInvested: numericAreaToBuy
     });
 
+    const user = await User.findById(userId);
+
     return res.status(200).json({
-      message: `Successfully bought ${numericAreaToBuy} sq ft`,
+      message: `${user.fullname} Successfully bought ${numericAreaToBuy} sq ft`,
       remainingAvailableArea: property.availableArea,
       success: true,
     });
