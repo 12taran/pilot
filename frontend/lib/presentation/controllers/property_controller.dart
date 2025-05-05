@@ -154,57 +154,81 @@ class PropertyController extends GetxController {
 
     // Step 2: Build the PDF page
     pdf.addPage(
-      pw.Page(
+      pw.MultiPage(
         pageFormat: PdfPageFormat.a4,
         build: (pw.Context context) {
-          return pw.Column(
-            crossAxisAlignment: pw.CrossAxisAlignment.start,
-            children: [
-              if (imageBytesList.isNotEmpty)
-                ...imageBytesList.map((imgBytes) => pw.Container(
-                      margin: const pw.EdgeInsets.only(bottom: 10),
-                      //height: 200,
-                      width: double.infinity,
-                      decoration: pw.BoxDecoration(
-                        image: pw.DecorationImage(
-                          image: pw.MemoryImage(imgBytes),
-                          fit: pw.BoxFit.cover,
+          final titleColor = PdfColors.blue800;
+          final labelStyle =
+              pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold);
+          final valueStyle = pw.TextStyle(fontSize: 14);
+          return [
+            pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+              children: [
+                if (imageBytesList.isNotEmpty)
+                  pw.Wrap(
+                    spacing: 10,
+                    runSpacing: 10,
+                    children: imageBytesList.map((imgBytes) {
+                      return pw.Container(
+                        height: 150, // Adjust for grid size
+                        width: (PdfPageFormat.a4.availableWidth - 30) /
+                            2, // Two per row with spacing
+                        decoration: pw.BoxDecoration(
+                          image: pw.DecorationImage(
+                            image: pw.MemoryImage(imgBytes),
+                            fit: pw.BoxFit.cover,
+                          ),
+                          borderRadius: pw.BorderRadius.circular(8),
                         ),
-                        borderRadius: pw.BorderRadius.circular(8),
+                      );
+                    }).toList(),
+                  ),
+                pw.SizedBox(height: 20),
+                pw.Container(
+                  padding: const pw.EdgeInsets.all(12),
+                  decoration: pw.BoxDecoration(
+                    color: PdfColors.grey200,
+                    borderRadius: pw.BorderRadius.circular(6),
+                  ),
+                  child: pw.Column(
+                    crossAxisAlignment: pw.CrossAxisAlignment.start,
+                    children: [
+                      pw.Text(
+                        'Property Brochure',
+                        style: pw.TextStyle(
+                          color: titleColor,
+                          fontSize: 24,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
                       ),
-                    )),
-              pw.SizedBox(height: 20),
-              pw.Text(
-                '🏠 Property Brochure',
-                style: pw.TextStyle(
-                  fontSize: 28,
-                  fontWeight: pw.FontWeight.bold,
-                ),
-              ),
-              pw.Divider(),
-              pw.SizedBox(height: 10),
-              pw.Text('Property Name:',
-                  style: pw.TextStyle(
-                      fontSize: 16, fontWeight: pw.FontWeight.bold)),
-              pw.Text(property.projectName, style: pw.TextStyle(fontSize: 16)),
-              pw.SizedBox(height: 10),
-              pw.Text('Location:',
-                  style: pw.TextStyle(
-                      fontSize: 16, fontWeight: pw.FontWeight.bold)),
-              pw.Text(property.address, style: pw.TextStyle(fontSize: 16)),
-              pw.SizedBox(height: 10),
-              pw.Text('Price:',
-                  style: pw.TextStyle(
-                      fontSize: 16, fontWeight: pw.FontWeight.bold)),
-              pw.Text('${Constants.rupeeSymbol} ${property.price}',
-                  style: pw.TextStyle(fontSize: 16)),
-              pw.SizedBox(height: 10),
-              pw.Text('Description:',
-                  style: pw.TextStyle(
-                      fontSize: 16, fontWeight: pw.FontWeight.bold)),
-              pw.Text(property.description, style: pw.TextStyle(fontSize: 14)),
-            ],
-          );
+                      pw.Divider(thickness: 1, color: PdfColors.grey600),
+                      pw.SizedBox(height: 12),
+
+                      // Property Name
+                      pw.Text('Property Name:', style: labelStyle),
+                      pw.Text(property.projectName, style: valueStyle),
+                      pw.SizedBox(height: 10),
+
+                      // Location
+                      pw.Text('Location:', style: labelStyle),
+                      pw.Text(property.address, style: valueStyle),
+                      pw.SizedBox(height: 10),
+
+                      // Price
+                      pw.Text('Price:', style: labelStyle),
+                      pw.Text('${property.price}', style: valueStyle),
+                      pw.SizedBox(height: 10),
+
+                      // Description
+                      pw.Text('Description:', style: labelStyle),
+                      pw.Text(property.description, style: valueStyle),
+                    ],
+                  ),
+                )
+              ],
+            )
+          ];
         },
       ),
     );
