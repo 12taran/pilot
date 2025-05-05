@@ -118,6 +118,88 @@ class CustomWidgets {
     );
   }
 
+  static Widget propertyCardAdmin(
+      PropertyModel property, BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed(PageRoutes.propertydetail, arguments: property);
+      },
+      child: Card(
+        elevation: 4,
+        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Property Image
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Center(
+                    child: Container(
+                        height: 100,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(
+                                '${ApiRoutes.imageRoutes}${property.images[0]}'),
+                            fit: BoxFit.cover,
+                          ),
+                        ))),
+              ),
+
+              const SizedBox(width: 16),
+
+              // Property Info
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      property.projectName,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      "Price: ${Constants.rupeeSymbol}${property.price}",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    const SizedBox(height: 12),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Get.toNamed(PageRoutes.propertydetail,
+                              arguments: property);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primaryContainer,
+                          foregroundColor:
+                              Theme.of(context).colorScheme.onPrimaryContainer,
+                        ),
+                        child: const Text("Invest Now"),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   static Widget portfolioCard(BuildContext context, int index) {
     return Column(
       children: [
