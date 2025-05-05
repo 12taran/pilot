@@ -22,5 +22,5 @@ class PropertyRepo {
       .map((property) => PropertyModel.fromMap(property))
       .toList();
 }
-  
+
 }

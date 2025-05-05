@@ -8,6 +8,7 @@ import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/core/rozarpay_service.dart';
 import 'package:pilot_project/data/models/property_model.dart';
 import 'package:pilot_project/presentation/controllers/pilotController.dart';
+import 'package:pilot_project/presentation/screens/user/photo.dart';
 import 'package:pilot_project/routes/api_routes.dart';
 import 'package:pilot_project/routes/page_route.dart';
 
@@ -47,20 +48,26 @@ class _PropertydetailState extends State<Propertydetail> {
                   options: CarouselOptions(
                     height: Get.height * 0.4,
                     viewportFraction: 1.0,
-                    
                     enlargeCenterPage: false,
                     autoPlay: true,
                   ),
                   items: widget.property.images.map((imageUrl) {
                     return Builder(
                       builder: (BuildContext context) {
-                        return Container(
-                          width: Get.width,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                  '${ApiRoutes.imageRoutes}$imageUrl'),
-                              fit: BoxFit.cover,
+                        return GestureDetector(
+                          onTap: () {
+                            Get.to(PhotoView(
+                                imageUrl: imageUrl,
+                                name: widget.property.projectName!));
+                          },
+                          child: Container(
+                            width: Get.width,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                    '${ApiRoutes.imageRoutes}$imageUrl'),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         );
@@ -89,10 +96,14 @@ class _PropertydetailState extends State<Propertydetail> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        widget.property.projectName!,
-                        style: GoogleFonts.acme(
-                          fontSize: Constants.fontSizeExtraLarge,
+                      SizedBox(
+                        width: Get.width * 0.6,
+                        child: Text(
+                          widget.property.projectName!,
+                          maxLines: 3,
+                          style: GoogleFonts.acme(
+                            fontSize: Constants.fontSizeExtraLarge,
+                          ),
                         ),
                       ),
                     ],

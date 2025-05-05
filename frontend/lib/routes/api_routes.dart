@@ -20,4 +20,5 @@ class ApiRoutes {
   String getBoardMembers = "member/get";
   String getProperties = "property/getAll";
   String addProperties = "property/create";
+  String getAdiminProperties = "property/get";
 }
