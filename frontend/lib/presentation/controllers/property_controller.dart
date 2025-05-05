@@ -19,7 +19,7 @@ class PropertyController extends GetxController {
     "Sanand",
     "Gandhinagar",
     "Mohali",
-    "Dhulera",
+    "Dholera",
     "Himachal"
   ]; // Available locations
   RxString selectedType = "".obs;

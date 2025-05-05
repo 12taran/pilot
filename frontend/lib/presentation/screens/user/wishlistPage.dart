@@ -7,6 +7,7 @@ import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/data/models/property_model.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
+import 'package:pilot_project/presentation/widgets/propertyCard.dart';
 import 'package:pilot_project/routes/api_routes.dart';
 import 'package:pilot_project/routes/page_route.dart';
 
@@ -37,124 +38,9 @@ class _WishlistPageState extends State<WishlistPage> {
                 itemCount: propertyController.isFav.length,
                 itemBuilder: (context, index) {
                   final item = propertyController.isFav[index];
-                  return Card(
-                    color: const Color.fromARGB(255, 200, 221, 239),
-                    margin: const EdgeInsets.all(10),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              // Property Image
-                                ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-                child: Container(
-                  width: Get.width * 0.4,
-                  height: Get.height * 0.2,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(
-                              '${ApiRoutes.imageRoutes}${item.images[0]}'),
-                          fit: BoxFit.fill)),
-                ),
-              ),
-
-                              const SizedBox(width: 10),
-
-                              // Details + Delete Icon
-                              Expanded(
-                                child: Stack(
-                                  children: [
-                                    // Property Details
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          right:
-                                              35.0), // leave space for delete icon
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Text(item.projectName,
-                                              style: GoogleFonts.lato(
-                                                  fontSize: Constants
-                                                      .fontSizeSubTitle,
-                                                  fontWeight: FontWeight.bold)),
-                                          const SizedBox(height: 4),
-                                          Row(
-                                            children: [
-                                              Icon(
-                                                size: 20,
-                                                Icons.location_on,
-                                                color: Colors.green[300],
-                                              ),
-                                              Text(item.address,
-                                                  style: const TextStyle(
-                                                      fontSize: 15,
-                                                      color: Color.fromARGB(
-                                                          255, 69, 65, 65))),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 30,
-                                          ),
-                                          Align(
-                                            alignment: Alignment.bottomRight,
-                                            child: GlowContainer(
-                                              glowRadius: 8,
-                                              gradientColors: [
-                                                Colors.white,
-                                                Colors.yellow
-                                              ],
-                                              containerOptions: ContainerOptions(
-                                                  borderRadius: 10),
-                                              child: CustomButtons(
-                                                  width: Get.width * 0.4,
-                                                  margin: EdgeInsets.all(0),
-                                                  text: 'Invest Now',
-                                                  onPressed: () {
-                                                    PropertyModel detail =
-                                                        item;
-                                                    Get.toNamed(
-                                                        PageRoutes.propertydetail,
-                                                        arguments: detail);
-                                                  }),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-
-                                    // Delete Icon at Top Right
-                                    Positioned(
-                                      top: 0,
-                                      right: 0,
-                                      child: CircleAvatar(
-                                        backgroundColor: Colors.red[400],
-                                        radius: 16,
-                                        child: IconButton(
-                                          padding: EdgeInsets.zero,
-                                          iconSize: 16,
-                                          icon: const Icon(Icons.delete,
-                                              color: Colors.white),
-                                          onPressed: () {
-                                            propertyController.isFav
-                                                .removeAt(index);
-                                          },
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                  return PropertyCard(
+                    property: item,
+                  
                   );
                 },
               );
