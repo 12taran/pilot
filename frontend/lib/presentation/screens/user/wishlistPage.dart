@@ -7,6 +7,7 @@ import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/data/models/property_model.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
+import 'package:pilot_project/routes/api_routes.dart';
 import 'package:pilot_project/routes/page_route.dart';
 
 class WishlistPage extends StatefulWidget {
@@ -48,15 +49,18 @@ class _WishlistPageState extends State<WishlistPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               // Property Image
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.asset(
-                                  item.images[0],
-                                  width: Get.width * 0.3,
-                                  height: Get.height * 0.15,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+                                ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                child: Container(
+                  width: Get.width * 0.4,
+                  height: Get.height * 0.2,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(
+                              '${ApiRoutes.imageRoutes}${item.images[0]}'),
+                          fit: BoxFit.fill)),
+                ),
+              ),
 
                               const SizedBox(width: 10),
 
