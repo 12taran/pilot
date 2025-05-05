@@ -137,7 +137,22 @@ class PropertyController extends GetxController {
       BuildContext context, PropertyModel property) async {
     final pdf = pw.Document();
 
-    // Build PDF content using pdf widgets (not Flutter widgets)
+    // Step 1: Load all images as Uint8List
+    List<Uint8List> imageBytesList = [];
+
+    for (String url in property.images) {
+      try {
+        final response =
+            await http.get(Uri.parse("${ApiRoutes.imageRoutes}${url}"));
+        if (response.statusCode == 200) {
+          imageBytesList.add(response.bodyBytes);
+        }
+      } catch (e) {
+        print("Failed to load image: $url");
+      }
+    }
+
+    // Step 2: Build the PDF page
     pdf.addPage(
       pw.Page(
         pageFormat: PdfPageFormat.a4,
@@ -145,22 +160,19 @@ class PropertyController extends GetxController {
           return pw.Column(
             crossAxisAlignment: pw.CrossAxisAlignment.start,
             children: [
-              if (property.images.isNotEmpty)
-                ...property.images.map((img) {
-                  Uint8List imageBytes = loadNetworkImage(img) as Uint8List;
-                  return pw.Container(
-                    margin: const pw.EdgeInsets.only(bottom: 10),
-                    height: 200,
-                    width: double.infinity,
-                    decoration: pw.BoxDecoration(
-                      image: pw.DecorationImage(
-                        image: pw.MemoryImage(imageBytes), // img is Uint8List
-                        fit: pw.BoxFit.cover,
+              if (imageBytesList.isNotEmpty)
+                ...imageBytesList.map((imgBytes) => pw.Container(
+                      margin: const pw.EdgeInsets.only(bottom: 10),
+                      //height: 200,
+                      width: double.infinity,
+                      decoration: pw.BoxDecoration(
+                        image: pw.DecorationImage(
+                          image: pw.MemoryImage(imgBytes),
+                          fit: pw.BoxFit.cover,
+                        ),
+                        borderRadius: pw.BorderRadius.circular(8),
                       ),
-                      borderRadius: pw.BorderRadius.circular(8),
-                    ),
-                  );
-                }),
+                    )),
               pw.SizedBox(height: 20),
               pw.Text(
                 '🏠 Property Brochure',
@@ -197,22 +209,19 @@ class PropertyController extends GetxController {
       ),
     );
 
-    // Save to file
+    // Step 3: Save to file
     final directory = await getApplicationDocumentsDirectory();
     final filePath = '${directory.path}/property_details.pdf';
     final file = File(filePath);
-
     await file.writeAsBytes(await pdf.save());
 
-    // Notify user
+    // Step 4: Notify user
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('PDF saved to $filePath'),
         action: SnackBarAction(
           label: 'Open',
           onPressed: () {
-            print('Attempting to save to: $filePath'); // Print the actual path
-// ... rest of the saving logic
             OpenFile.open(filePath);
           },
         ),
