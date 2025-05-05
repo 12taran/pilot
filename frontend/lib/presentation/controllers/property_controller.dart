@@ -3,11 +3,13 @@ import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:open_file/open_file.dart';
 import 'package:pilot_project/core/config.dart';
+import 'package:pilot_project/core/utils.dart';
 import 'package:pilot_project/data/models/property_model.dart';
 import 'package:pilot_project/data/repos/property_repo.dart';
 import 'dart:io';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:pilot_project/presentation/controllers/pilotController.dart';
 import 'package:pilot_project/presentation/screens/admin/addedProperties.dart';
 import 'package:pilot_project/presentation/screens/user/propertyDetail.dart';
 import 'package:pilot_project/routes/api_routes.dart';
@@ -29,6 +31,7 @@ class PropertyController extends GetxController {
   RxList<PropertyModel> filteredProperties =
       <PropertyModel>[].obs; // For filtered results
   RxList<PropertyModel> isFav = <PropertyModel>[].obs;
+  Pilotcontroller pilotcontroller = Get.put(Pilotcontroller());
 
   RxList<String> types =
       ["Residential", "Commercial", "Holiday Homes"].obs; // Available types
@@ -164,14 +167,23 @@ class PropertyController extends GetxController {
           return [
             pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.start,
+              mainAxisAlignment: pw.MainAxisAlignment.start,
               children: [
+                pw.Text(
+                        'Brochure',
+                        style: pw.TextStyle(
+                          color: titleColor,
+                          fontSize: 30,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
+                      ),
                 if (imageBytesList.isNotEmpty)
                   pw.Wrap(
                     spacing: 10,
                     runSpacing: 10,
                     children: imageBytesList.map((imgBytes) {
                       return pw.Container(
-                        height: 150, // Adjust for grid size
+                        height: 100, // Adjust for grid size
                         width: (PdfPageFormat.a4.availableWidth - 30) /
                             2, // Two per row with spacing
                         decoration: pw.BoxDecoration(
@@ -184,7 +196,7 @@ class PropertyController extends GetxController {
                       );
                     }).toList(),
                   ),
-                pw.SizedBox(height: 20),
+                pw.SizedBox(height:5),
                 pw.Container(
                   padding: const pw.EdgeInsets.all(12),
                   decoration: pw.BoxDecoration(
@@ -195,7 +207,7 @@ class PropertyController extends GetxController {
                     crossAxisAlignment: pw.CrossAxisAlignment.start,
                     children: [
                       pw.Text(
-                        'Property Brochure',
+                        'Property Details',
                         style: pw.TextStyle(
                           color: titleColor,
                           fontSize: 24,
@@ -223,6 +235,43 @@ class PropertyController extends GetxController {
                       // Description
                       pw.Text('Description:', style: labelStyle),
                       pw.Text(property.description, style: valueStyle),
+                      
+
+                          pw.Column(
+  crossAxisAlignment: pw.CrossAxisAlignment.start,
+  children: [
+    pw.Text(
+      'Benefits',
+      style: valueStyle.copyWith(
+        fontSize: 12,
+        color: PdfColors.grey600,
+      ),
+    ),
+    pw.SizedBox(height: 4),
+    ...pilotcontroller.benefits.map((benefit) {
+      return pw.Column(
+        crossAxisAlignment: pw.CrossAxisAlignment.start,
+        children: [
+          pw.Text(
+            benefit["title"] ?? "No Title",
+            style: pw.TextStyle(
+              fontSize: 10,
+              fontWeight: pw.FontWeight.bold,
+            ),
+          ),
+          pw.Text(
+            benefit["description"] ?? "No Description",
+            style: pw.TextStyle(
+              fontSize: 10,
+            ),
+          ),
+          pw.SizedBox(height: 4),
+        ],
+      );
+    }).toList(),
+  ],
+)
+
                     ],
                   ),
                 )
@@ -238,8 +287,10 @@ class PropertyController extends GetxController {
     final filePath = '${directory.path}/property_details.pdf';
     final file = File(filePath);
     await file.writeAsBytes(await pdf.save());
-
+  
+   
     // Step 4: Notify user
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('PDF saved to $filePath'),

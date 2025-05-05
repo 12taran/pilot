@@ -70,7 +70,7 @@ class _PropertyCardState extends State<PropertyCard> {
                           Row(
                             children: [
                               Text(
-                                "${Constants.rupeeSymbol}${widget.property.price!}/- Per sqft" ,
+                                "${Constants.rupeeSymbol}${widget.property.price!}/-" ,
                                 style: GoogleFonts.andika(
                                     fontSize: Constants.fontSizeSubTitle,
                                     fontWeight: FontWeight.w900,
@@ -82,7 +82,8 @@ class _PropertyCardState extends State<PropertyCard> {
                               Text(
                                 'SQFT',
                                 style: TextStyle(
-                                    fontSize: 12,
+                                      fontSize: Constants.fontSizeSubTitle,
+                                    fontWeight: FontWeight.w900,
                                     color: Theme.of(context)
                                         .textTheme
                                         .bodyLarge
