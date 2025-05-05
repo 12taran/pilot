@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pilot_project/core/components/MyTextField.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/core/rozarpay_service.dart';
@@ -10,6 +11,7 @@ import 'package:pilot_project/data/models/property_model.dart';
 import 'package:pilot_project/presentation/controllers/pilotController.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/screens/user/photo.dart';
+import 'package:pilot_project/presentation/utils_widget.dart';
 import 'package:pilot_project/routes/api_routes.dart';
 import 'package:pilot_project/routes/page_route.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,7 +28,6 @@ class _PropertydetailState extends State<Propertydetail> {
   final razorpayService = RazorpayService();
   final GlobalKey previewContainer = GlobalKey();
   PropertyController propertyController = Get.put(PropertyController());
- 
 
   @override
   void initState() {
@@ -327,17 +328,7 @@ class _PropertydetailState extends State<Propertydetail> {
                   borderRadius: 10,
                   width: Get.width * 0.3,
                   color: const Color.fromARGB(255, 98, 97, 95),
-                  onPressed: ()async {
-                     SharedPreferences? pref= await SharedPreferences.getInstance();
-                     String? userId = pref.getString(Constants.USER_ID);
-                    propertyController.buysProperty(
-                   
-                        widget.property.id,
-                            userId!,
-                            20
-                      );
-                      
-                  },
+                  onPressed: () async {},
                   text: 'Sell',
                 ),
                 SizedBox(width: 10),
@@ -346,12 +337,114 @@ class _PropertydetailState extends State<Propertydetail> {
                   borderRadius: 10,
                   width: Get.width * 0.55,
                   text: 'Buy',
-                  onPressed: () {
-                    print('Amount: ${widget.property.price}');
-                    int amountInRupees =
-                        (double.tryParse(widget.property.price) ?? 0.0).toInt();
+                  onPressed: () async {
+                    TextEditingController amountController =
+                        TextEditingController(text: "1");
+                    UtilsWidget.showWebXDialog(
+                        context,
+                        Container(
+                          height: Get.height * 0.3,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Enter Amount to Buy',
+                                  style: GoogleFonts.aBeeZee(
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge!
+                                          .color,
+                                      fontSize: Constants.fontSizeSubTitle,
+                                      fontWeight: FontWeight.bold)),
+                              MyTextField(
+                                keyboardType: TextInputType.number,
+                                labelText: "Enter Amount to Buy",
+                                isLabelEnabled: false,
+                                onChanged: (v) {},
+                                borderWidth: 2,
+                                controller: amountController,
+                              ),
+                              SizedBox(height: 20),
+                              CustomButtons(
+                                  text: 'Submit',
+                                  onPressed: () async {
+                                    onPressed:
+                                    () async {
+                                      print('Amount: ${widget.property.price}');
 
-                    razorpayService.openCheckout(amountInRupees);
+                                      final amountInRupees = (double.tryParse(
+                                                  widget.property.price) ??
+                                              0.0)
+                                          .toInt();
+
+                                      // Step 1: Start Razorpay payment
+                                      await razorpayService
+                                          .openCheckout(amountInRupees)
+                                          .then((_) async {
+                                        // Step 2: After payment flow ends, check if payment was verified
+                                        if (propertyController
+                                            .paymentVerified.value) {
+                                          // Step 3: Retrieve user ID from shared preferences
+                                          final pref = await SharedPreferences
+                                              .getInstance();
+                                          final userId = pref.getString(
+                                                  Constants.USER_ID) ??
+                                              "";
+
+                                          // Step 4: Parse amount input by user (optional)
+                                          final amountText =
+                                              amountController.text.trim();
+                                          final parsedAmount =
+                                              double.tryParse(amountText) ??
+                                                  0.0;
+
+                                          // Step 5: Call your backend to register the purchase
+                                          await propertyController.buysProperty(
+                                            widget.property.id,
+                                            userId,
+                                            parsedAmount,
+                                          );
+
+                                          // Reset verification flag
+                                          propertyController
+                                              .paymentVerified.value = false;
+
+                                          // Step 6: Provide feedback to user
+                                          Get.snackbar(
+                                            "Success",
+                                            "Property purchased successfully!",
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            backgroundColor: Colors.green,
+                                            colorText: Colors.white,
+                                          );
+
+                                          Get.back();
+                                        } else {
+                                          print('Buy nahi hui h');
+                                          Get.snackbar(
+                                            "Failed",
+                                            "Payment was not verified. Purchase failed.",
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            backgroundColor: Colors.red,
+                                            colorText: Colors.white,
+                                          );
+                                        }
+                                      }).catchError((e) {
+                                        // Handle Razorpay or other errors
+                                        print('Payment Error: $e');
+                                        Get.snackbar(
+                                          "Error",
+                                          "Something went wrong during payment.",
+                                          snackPosition: SnackPosition.BOTTOM,
+                                          backgroundColor: Colors.red,
+                                          colorText: Colors.white,
+                                        );
+                                      });
+                                    };
+                                  })
+                            ],
+                          ),
+                        ));
                   },
                 ),
               ],

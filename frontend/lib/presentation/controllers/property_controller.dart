@@ -2,24 +2,18 @@ import 'dart:typed_data';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:open_file/open_file.dart';
-import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/data/models/property_model.dart';
 import 'package:pilot_project/data/repos/property_repo.dart';
 import 'dart:io';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:pilot_project/presentation/screens/admin/addedProperties.dart';
-import 'package:pilot_project/presentation/screens/user/propertyDetail.dart';
 import 'package:pilot_project/routes/api_routes.dart';
-import 'package:printing/printing.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_to_pdf/flutter_to_pdf.dart';
-import 'package:path_provider/path_provider.dart';
 
 // Import your PDF content widget
 // make sure you import it
@@ -29,6 +23,7 @@ class PropertyController extends GetxController {
   RxList<PropertyModel> filteredProperties =
       <PropertyModel>[].obs; // For filtered results
   RxList<PropertyModel> isFav = <PropertyModel>[].obs;
+  RxBool paymentVerified = false.obs;
 
   RxList<String> types =
       ["Residential", "Commercial", "Holiday Homes"].obs; // Available types
@@ -253,8 +248,7 @@ class PropertyController extends GetxController {
     );
   }
 
-
-void buysProperty(
+  Future<void >buysProperty(
     String propertyId,
     String userId,
     double areaToBuy,

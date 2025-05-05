@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pilot_project/core/components/CustomContainer.dart';
 import 'package:pilot_project/core/utils.dart';
+import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/utils_widget.dart';
 import 'package:pilot_project/routes/api_routes.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -34,7 +35,7 @@ class RazorpayService {
     );
     print('Response: ${response.body}');
     final data = jsonDecode(response.body)['data'];
- 
+
     var options = {
       'key': 'rzp_test_lSlqZQTgc9E6dg', // only key, not secret
       'amount': data['amount'],
@@ -70,7 +71,7 @@ class RazorpayService {
     if (verifyResponse.statusCode == 200) {
       print(result);
       print("Payment Verified: ${result['message']}");
-
+      Get.find<PropertyController>().paymentVerified.value = true;
       UtilsWidget.showWebXDialog(
         Get.context!,
         CustomContainer(
