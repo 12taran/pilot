@@ -78,7 +78,7 @@ class BottomNavScreenState extends State<BottomNavScreen> {
           HomePage(),
           WishlistPage(),
           Investpage(),
-          const PortfolioPage(),
+           PortfolioPage(),
           if (isAdmin) Properties(),
         ];
 

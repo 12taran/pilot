@@ -312,7 +312,7 @@ class _PropertydetailState extends State<Propertydetail> {
               ),
             ),
             Text(
-              "${Constants.rupeeSymbol}${widget.property.price!}",
+              "${Constants.rupeeSymbol}${widget.property.price}",
               style: GoogleFonts.aleo(
                 fontSize: Constants.fontSizeHeading,
                 fontWeight: FontWeight.w800,

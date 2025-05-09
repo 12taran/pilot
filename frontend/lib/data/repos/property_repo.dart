@@ -10,6 +10,7 @@ class PropertyRepo {
   Future<List<PropertyModel>> getProperties() async {
   final response = await BaseService().getData(
     endPoint: ApiRoutes().getProperties,
+    // Example query parameter
     isTokenRequired: false,
   );
 

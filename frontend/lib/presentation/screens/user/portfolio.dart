@@ -3,16 +3,25 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/components/CustomContainer.dart';
 import 'package:pilot_project/core/config.dart';
+import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/widgets/custom_widgets.dart';
 
 class PortfolioPage extends StatefulWidget {
-  const PortfolioPage({super.key});
+   PortfolioPage({super.key});
 
   @override
   State<PortfolioPage> createState() => _PortfolioPageState();
+  PropertyController propertyController = Get.put(PropertyController());
 }
 
 class _PortfolioPageState extends State<PortfolioPage> {
+@override
+  void initState() {
+    super.initState();
+    // Fetch the investments when the page is initialized
+    widget.propertyController.fetchInvestments();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

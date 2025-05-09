@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 import 'package:open_file/open_file.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/core/utils.dart';
+import 'package:pilot_project/data/models/invest_model.dart';
 import 'package:pilot_project/data/models/property_model.dart';
+import 'package:pilot_project/data/repos/portfolio_repo.dart';
 import 'package:pilot_project/data/repos/property_repo.dart';
 import 'dart:io';
 import 'package:pdf/pdf.dart';
@@ -22,6 +24,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_to_pdf/flutter_to_pdf.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Import your PDF content widget
 // make sure you import it
@@ -32,6 +35,13 @@ class PropertyController extends GetxController {
       <PropertyModel>[].obs; // For filtered results
   RxList<PropertyModel> isFav = <PropertyModel>[].obs;
   Pilotcontroller pilotcontroller = Get.put(Pilotcontroller());
+
+  var investments = <InvestmentModel>[].obs;
+  var isLoading = false.obs;
+  var errorMessage = ''.obs;
+
+  final _investmentRepo = InvestmentRepo();
+
 
   RxList<String> types =
       ["Residential", "Commercial", "Holiday Homes"].obs; // Available types
@@ -327,4 +337,21 @@ void buysProperty(
 //   onPressed: () => generateAndSavePdf(context),
 //   child: const Text('Download PDF'),
 // )
+
+
+ void fetchInvestments() async {
+    try {
+      isLoading.value = true;
+      errorMessage.value = '';
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    String? userId = prefs.getString(Constants.USER_ID);
+      final result = await _investmentRepo.getInvestments(userId ?? "");
+      investments.assignAll(result);
+    } catch (e) {
+      errorMessage.value = 'Error: $e';
+    } finally {
+      isLoading.value = false;
+    }
+  }
 }
