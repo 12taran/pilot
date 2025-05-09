@@ -70,6 +70,29 @@ export const userGet = async (req, res) => {
   }
 };
 
+export const getAdmin = async (req, res) => {
+  try {
+    const users = await User.find({isAdmin : true});
+    if(users.length === 0) {
+      return res.status(404).json({
+        message : "No admin found",
+        success : false,
+      });
+    }
+    return res.status(200).json({
+      success : true,
+      users,
+    });
+  }
+  catch (err){
+    console.log(err);
+    return res.status(500).json({
+      message : "Server problem",
+      success : false,
+    });
+  }
+};
+
 export const userById = async (req, res) => {
   try {
     const {userId} = req.params;

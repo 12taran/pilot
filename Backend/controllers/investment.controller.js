@@ -3,10 +3,14 @@ import { Investment } from "../Models/investment.model.js";
 // Get all investments of a user
 export const getUserInvestments = async (req, res) => {
   try {
-    const { userId } = req.params;
-    console.log(req.params);
+    console.log(req.body);
+    const { userId } = req.body;
 
-    const investments = await Investment.find({ userId }).populate("propertyId").populate("userId");
+    const investments = await Investment.find({ userId })
+    .sort({ createdAt: -1 })
+    .populate("propertyId")
+    .populate("adminId")
+    .populate("userId");
 
     return res.status(200).json({
       message: "Investments fetched successfully",

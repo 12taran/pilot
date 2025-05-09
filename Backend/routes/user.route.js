@@ -8,7 +8,8 @@ import {
   userVerify,
   userById,
   userLogin,
-  makeAdmin
+  makeAdmin,
+  getAdmin
 } from "../controllers/user.controller.js";
 import {upload} from "../middlewares/upload.middleware.js";
 
@@ -20,5 +21,6 @@ router.route('/getById/:userId').get(userById);
 router.route("/edit/:id").patch(upload.single("image"),userEdit);
 router.route('/login').post(userLogin);
 router.route('/makeAdmin').post(isAdmin,makeAdmin);
+router.route('/getAdmin').get(isAdmin,getAdmin);
 
 export default router;

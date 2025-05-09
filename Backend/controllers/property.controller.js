@@ -138,7 +138,7 @@ export const getAllProperties = async (req, res) => {
 // Get all properties by id
 export const getUserProperty = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const { userId } = req.body;
     console.log(userId);
     const properties = await Property.find({ userId }).sort({ createdAt: -1 }); // in descending order
     return res.status(200).json({
@@ -213,10 +213,14 @@ export const buyProperty = async (req, res) => {
     property.availableArea -= numericAreaToBuy;
     await property.save();
 
+    const adminId = property.userId;
+
     await Investment.create({
       userId,
       propertyId,
       areaInvested: numericAreaToBuy,
+      priceAtPurchase: property.price,
+      adminId,
     });
 
     const user = await User.findById(userId);
@@ -273,12 +277,13 @@ export const extendPropertyArea = async (req, res) => {
   }
 };
 
+// set property
 export const sellProperties = async (req, res) => {
   try {
     const { userId, propId, price } = req.body;
     if (!userId || !propId || !price) {
-      return res.status(500).json({
-        message: "No user found",
+      return res.status(400).json({
+        message: "Missing required fields",
         success: false,
       });
     }
