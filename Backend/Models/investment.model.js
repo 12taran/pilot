@@ -15,6 +15,15 @@ const investmentSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  priceAtPurchase: {
+    type: Number,
+    required: true,
+  },
+  adminId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 }, { timestamps: true });
 
 export const Investment = mongoose.model("Investment", investmentSchema);
