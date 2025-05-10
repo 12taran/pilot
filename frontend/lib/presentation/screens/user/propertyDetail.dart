@@ -91,7 +91,7 @@ class _PropertydetailState extends State<Propertydetail> {
                           onTap: () {
                             Get.to(PhotoView(
                                 imageUrl: imageUrl,
-                                name: widget.property.projectName!));
+                                name: widget.property.projectName));
                           },
                           child: Container(
                             width: Get.width,
@@ -132,7 +132,7 @@ class _PropertydetailState extends State<Propertydetail> {
                       SizedBox(
                         width: Get.width * 0.6,
                         child: Text(
-                          widget.property.projectName!,
+                          widget.property.projectName,
                           maxLines: 3,
                           style: GoogleFonts.acme(
                             fontSize: Constants.fontSizeExtraLarge,
@@ -152,7 +152,7 @@ class _PropertydetailState extends State<Propertydetail> {
                   ),
                   child: Center(
                     child: Text(
-                      widget.property.type!,
+                      widget.property.type,
                       style: GoogleFonts.abel(
                         fontSize: Constants.fontSizeSubTitle,
                         fontWeight: FontWeight.w800,
@@ -183,7 +183,7 @@ class _PropertydetailState extends State<Propertydetail> {
                         SizedBox(
                           width: Get.width * 0.4,
                           child: Text(
-                            widget.property.address!,
+                            widget.property.address,
                             maxLines: 3,
                             style: GoogleFonts.lato(
                               fontSize: Constants.fontSizeSubTitle,
@@ -340,7 +340,7 @@ class _PropertydetailState extends State<Propertydetail> {
               ),
             ),
             Text(
-              "${Constants.rupeeSymbol}${widget.property.price!}",
+              "${Constants.rupeeSymbol}${widget.property.price}",
               style: GoogleFonts.aleo(
                 fontSize: Constants.fontSizeHeading,
                 fontWeight: FontWeight.w800,

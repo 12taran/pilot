@@ -22,4 +22,5 @@ class ApiRoutes {
   String addProperties = "property/create";
   String getAdiminProperties = "property/get";
   String buyProperty = "property/buy";
+  String getInvestments= "investment/get";
 }
