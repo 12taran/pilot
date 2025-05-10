@@ -28,6 +28,7 @@ import 'package:pilot_project/presentation/screens/user/profile.dart';
 import 'package:pilot_project/presentation/screens/user/propertyDetail.dart';
 
 import 'package:pilot_project/presentation/screens/user/setting.dart';
+import 'package:pilot_project/presentation/web_window_views/home_screen.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -59,6 +60,9 @@ class PageRoutes {
   static const String kyc = "/kyc";
   static const String panVerifyScreen = "/panVerifyScreen";
   static const String aadharVerifyScreen = "/aadharVerifyScreen";
+
+  // Windows Screen
+  static const String homeScreen = "/homeScreen";
 
   // get product category
   static List<GetPage> getPageRoutes() {
@@ -291,8 +295,8 @@ class PageRoutes {
           );
         }),
       ),
-       GetPage(
-        name:bankDetail,
+      GetPage(
+        name: bankDetail,
         page: () => BankDetailsScreen(),
         transition: Transition.zoom,
         transitionDuration: const Duration(milliseconds: 200),
@@ -327,15 +331,14 @@ class PageRoutes {
           );
         }),
       ),
-       GetPage(
-        name:bankDetail,
+      GetPage(
+        name: bankDetail,
         page: () => BankDetailsScreen(),
         transition: Transition.zoom,
         transitionDuration: const Duration(milliseconds: 200),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);
-          
         }),
       ),
       GetPage(
@@ -346,30 +349,39 @@ class PageRoutes {
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);
-        
-        
         }),
       ),
       GetPage(
         name: panVerifyScreen,
         page: () => PanVerificationScreen(),
-       // transition: Transition.zoom,
+        // transition: Transition.zoom,
         transitionDuration: const Duration(milliseconds: 200),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);
-         
         }),
       ),
       GetPage(
         name: aadharVerifyScreen,
         page: () => AadharVerificationScreen(),
-       // transition: Transition.zoom,
+        // transition: Transition.zoom,
         transitionDuration: const Duration(milliseconds: 200),
         binding: BindingsBuilder(() async {
           final sharedPreferences = await SharedPreferences.getInstance();
           Get.put(() => sharedPreferences, permanent: true);
-         
+        }),
+      ),
+      GetPage(
+        name: homeScreen,
+        page: () => HomeScreen(),
+        transition: Transition.zoom,
+        transitionDuration: const Duration(milliseconds: 200),
+        binding: BindingsBuilder(() async {
+          final sharedPreferences = await SharedPreferences.getInstance();
+          Get.put(() => sharedPreferences, permanent: true);
+          Get.lazyPut(
+            () => PropertyController(),
+          );
         }),
       ),
     ];

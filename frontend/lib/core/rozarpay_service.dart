@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pilot_project/core/components/CustomContainer.dart';
-import 'package:pilot_project/core/utils.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/utils_widget.dart';
 import 'package:pilot_project/routes/api_routes.dart';

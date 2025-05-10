@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,6 +49,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     ThemeController themeController = Get.put(ThemeController());
+    print(
+        'Platform.isAndroid: ${Platform.isAndroid}, Platform.isIOS: ${Platform.isIOS}');
 
     return ScreenUtilInit(
       child: GetMaterialApp(
@@ -56,7 +60,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         themeMode: themeController.theme,
         getPages: PageRoutes.getPageRoutes(),
         debugShowCheckedModeBanner: false,
-        initialRoute: PageRoutes.splashScreen,
+        initialRoute: Platform.isAndroid || Platform.isIOS
+            ? PageRoutes.splashScreen
+            : PageRoutes.homeScreen,
       ),
     );
   }

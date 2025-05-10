@@ -27,12 +27,39 @@ class _PropertydetailState extends State<Propertydetail> {
   Pilotcontroller pilotcontroller = Get.put(Pilotcontroller());
   final razorpayService = RazorpayService();
   final GlobalKey previewContainer = GlobalKey();
+  TextEditingController amountController = TextEditingController(text: "1");
   PropertyController propertyController = Get.put(PropertyController());
 
   @override
   void initState() {
     super.initState();
     razorpayService.init();
+    ever(propertyController.paymentVerified, (bool verified) async {
+      if (verified) {
+        final prefs = await SharedPreferences.getInstance();
+        final userId = prefs.getString(Constants.USER_ID) ?? "";
+
+        final amountText = amountController.text.trim();
+        final parsedAmount = double.tryParse(amountText) ?? 0.0;
+
+        await propertyController.buysProperty(
+          propertyId: widget.property.id,
+          userId: userId,
+          areaToBuy: parsedAmount,
+        );
+
+        propertyController.paymentVerified.value = false;
+
+        Get.snackbar(
+          "Success",
+          "Property purchased successfully!",
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
+
+        Get.back();
+      }
+    });
   }
 
   @override
@@ -338,8 +365,6 @@ class _PropertydetailState extends State<Propertydetail> {
                   width: Get.width * 0.55,
                   text: 'Buy',
                   onPressed: () async {
-                    TextEditingController amountController =
-                        TextEditingController(text: "1");
                     UtilsWidget.showWebXDialog(
                         context,
                         Container(
@@ -360,6 +385,8 @@ class _PropertydetailState extends State<Propertydetail> {
                                 keyboardType: TextInputType.number,
                                 labelText: "Enter Amount to Buy",
                                 isLabelEnabled: false,
+                                textStyle:
+                                    TextStyle(fontSize: Constants.fontSizeBody),
                                 onChanged: (v) {},
                                 borderWidth: 2,
                                 controller: amountController,
@@ -368,79 +395,19 @@ class _PropertydetailState extends State<Propertydetail> {
                               CustomButtons(
                                   text: 'Submit',
                                   onPressed: () async {
-                                    onPressed:
-                                    () async {
-                                      print('Amount: ${widget.property.price}');
+                                    Get.back();
+                                    propertyController.paymentVerified.value =
+                                        false;
+                                    print('Amount: ${widget.property.price}');
 
-                                      final amountInRupees = (double.tryParse(
-                                                  widget.property.price) ??
-                                              0.0)
-                                          .toInt();
+                                    final amountInRupees = (double.tryParse(
+                                                widget.property.price) ??
+                                            0.0)
+                                        .toInt();
 
-                                      // Step 1: Start Razorpay payment
-                                      await razorpayService
-                                          .openCheckout(amountInRupees)
-                                          .then((_) async {
-                                        // Step 2: After payment flow ends, check if payment was verified
-                                        if (propertyController
-                                            .paymentVerified.value) {
-                                          // Step 3: Retrieve user ID from shared preferences
-                                          final pref = await SharedPreferences
-                                              .getInstance();
-                                          final userId = pref.getString(
-                                                  Constants.USER_ID) ??
-                                              "";
-
-                                          // Step 4: Parse amount input by user (optional)
-                                          final amountText =
-                                              amountController.text.trim();
-                                          final parsedAmount =
-                                              double.tryParse(amountText) ??
-                                                  0.0;
-
-                                          // Step 5: Call your backend to register the purchase
-                                          await propertyController.buysProperty(
-                                            widget.property.id,
-                                            userId,
-                                            parsedAmount,
-                                          );
-
-                                          // Reset verification flag
-                                          propertyController
-                                              .paymentVerified.value = false;
-
-                                          // Step 6: Provide feedback to user
-                                          Get.snackbar(
-                                            "Success",
-                                            "Property purchased successfully!",
-                                            snackPosition: SnackPosition.BOTTOM,
-                                            backgroundColor: Colors.green,
-                                            colorText: Colors.white,
-                                          );
-
-                                          Get.back();
-                                        } else {
-                                          print('Buy nahi hui h');
-                                          Get.snackbar(
-                                            "Failed",
-                                            "Payment was not verified. Purchase failed.",
-                                            snackPosition: SnackPosition.BOTTOM,
-                                            backgroundColor: Colors.red,
-                                            colorText: Colors.white,
-                                          );
-                                        }
-                                      }).catchError((e) {
-                                        // Handle Razorpay or other errors
-                                        print('Payment Error: $e');
-                                        Get.snackbar(
-                                          "Error",
-                                          "Something went wrong during payment.",
-                                          snackPosition: SnackPosition.BOTTOM,
-                                          backgroundColor: Colors.red,
-                                          colorText: Colors.white,
-                                        );
-                                      });
-                                    };
+                                    // Step 1: Start Razorpay payment
+                                    await razorpayService
+                                        .openCheckout(amountInRupees);
                                   })
                             ],
                           ),

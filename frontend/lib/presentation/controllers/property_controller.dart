@@ -248,10 +248,10 @@ class PropertyController extends GetxController {
     );
   }
 
-  Future<void >buysProperty(
-    String propertyId,
-    String userId,
-    double areaToBuy,
+  Future<void >buysProperty({required String propertyId,
+    required String userId,
+    required double areaToBuy,}
+    
   ) async {
     await PropertyRepo().buyProperty(
       propertyId: propertyId,
