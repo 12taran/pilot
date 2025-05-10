@@ -6,8 +6,8 @@ class InvestmentRepo{
   Future<List<InvestmentModel>> getInvestments(String userId) async {
     try{
   final response = await BaseService().getData(
-    endPoint: ApiRoutes().getInvestments,
-     queryBody: {"userId": userId},
+    endPoint: "${ApiRoutes().getInvestments}/$userId",
+  
     isTokenRequired: false, // or true if needed
   );
 
