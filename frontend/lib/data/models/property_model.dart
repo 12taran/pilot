@@ -5,7 +5,7 @@ class PropertyModel {
   final String address;
   final double latitude;
   final double longitude;
-  final String price;
+  final int price;
   final String type;
   final String description;
   final String createdAt;
@@ -31,8 +31,8 @@ class PropertyModel {
       projectName: map['projectName'] ?? '',
       images: List<String>.from(map['images'] ?? []),
       address: map['address'] ?? '',
-      latitude: (map['latitude'] ?? 0).toDouble(),
-      longitude: (map['longitude'] ?? 0).toDouble(),
+         latitude: (map['latitude'] as num?)?.toDouble() ?? 0.0, // ✅ Null check with fallback value
+      longitude: (map['longitude'] as num?)?.toDouble() ?? 0.0,
       price: map['price'] ?? '',
       type: map['type'] ?? '',
       description: map['description'] ?? '',

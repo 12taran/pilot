@@ -401,7 +401,7 @@ class _PropertydetailState extends State<Propertydetail> {
                                     print('Amount: ${widget.property.price}');
 
                                     final amountInRupees = (double.tryParse(
-                                                widget.property.price) ??
+                                                widget.property.price.toString()) ??
                                             0.0)
                                         .toInt();
 

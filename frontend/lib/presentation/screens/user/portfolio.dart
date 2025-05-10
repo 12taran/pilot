@@ -177,14 +177,31 @@ class _PortfolioPageState extends State<PortfolioPage> {
               ],
             ),
           ),
-          Expanded(
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                return CustomWidgets.portfolioCard(context, index);
-              },
-              itemCount: 10,
-            ),
-          )
+          Obx(() {
+        // Show a loading indicator if fetching investments
+        if (widget.propertyController.isLoading.value) {
+          return Center(child: CircularProgressIndicator());
+        }
+
+        // Show error message if any error occurs while fetching investments
+        if (widget.propertyController.errorMessage.value.isNotEmpty) {
+          return Center(child: Text(widget.propertyController.errorMessage.value));
+        }
+
+        // Display the portfolio cards
+        return Expanded(
+          child: ListView.builder(
+            itemCount: widget.propertyController.investments.length,
+            itemBuilder: (context, index) {
+              return CustomWidgets.portfolioCard(
+                context, index, widget.propertyController.investments
+              );
+            },
+          ),
+        );
+      }),
+  
+
         ],
       ),
     );

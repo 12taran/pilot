@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pilot_project/core/components/CustomContainer.dart';
 import 'package:pilot_project/core/config.dart';
+import 'package:pilot_project/data/models/invest_model.dart';
 import 'package:pilot_project/data/models/property_model.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/routes/api_routes.dart';
@@ -182,8 +183,13 @@ class CustomWidgets {
     );
   }
 
-  static Widget portfolioCard(BuildContext context, int index) {
-    return Column(
+ static Widget portfolioCard(BuildContext context, int index, List<InvestmentModel> investments) {
+    final investment = investments[index];
+
+    return Container(color:Colors.green,);
+    
+    
+    /* Column(
       children: [
         CustomContainer(
           backgroundColor: Theme.of(context).cardColor,
@@ -194,23 +200,21 @@ class CustomWidgets {
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             child: Column(
               children: [
-                Row(children: [
-                  Icon(Icons.house),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'Property ${index + 1} ',
-                    style: GoogleFonts.aBeeZee(
-                      fontSize: Constants.fontSizeBody,
-                      fontWeight: FontWeight.w600,
-                      color: Theme.of(context).textTheme.bodyLarge?.color,
+                Row(
+                  children: [
+                    Icon(Icons.house),
+                    SizedBox(width: 10),
+                    Text(
+                      investment.property.projectName ?? 'Property ${index + 1}',
+                      style: GoogleFonts.aBeeZee(
+                        fontSize: Constants.fontSizeBody,
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).textTheme.bodyLarge?.color,
+                      ),
                     ),
-                  ),
-                ]),
-                SizedBox(
-                  height: 5,
+                  ],
                 ),
+                SizedBox(height: 5),
                 CustomContainer(
                   borderColor: Colors.grey,
                   elevation: 10,
@@ -219,8 +223,8 @@ class CustomWidgets {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      // Invested Value
                       Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -228,12 +232,11 @@ class CustomWidgets {
                             style: GoogleFonts.aBeeZee(
                               fontSize: Constants.fontSizeSmall,
                               fontWeight: FontWeight.w600,
-                              color:
-                                  Theme.of(context).textTheme.bodyLarge?.color,
+                              color: Theme.of(context).textTheme.bodyLarge?.color,
                             ),
                           ),
                           Text(
-                            "${Constants.rupeeSymbol}4,00,000",
+                            "${Constants.rupeeSymbol}${(investment.areaInvested * investment.priceAtPurchase).toStringAsFixed(2)}",
                             style: GoogleFonts.aBeeZee(
                               fontSize: Constants.fontSizeTinySmall + 1,
                               fontWeight: FontWeight.w600,
@@ -242,8 +245,8 @@ class CustomWidgets {
                           ),
                         ],
                       ),
+                      // Current Value
                       Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -251,12 +254,11 @@ class CustomWidgets {
                             style: GoogleFonts.aBeeZee(
                               fontSize: Constants.fontSizeSmall,
                               fontWeight: FontWeight.w600,
-                              color:
-                                  Theme.of(context).textTheme.bodyLarge?.color,
+                              color: Theme.of(context).textTheme.bodyLarge?.color,
                             ),
                           ),
                           Text(
-                            "${Constants.rupeeSymbol}8,00,000",
+                            "${Constants.rupeeSymbol}${(investment.areaInvested).toStringAsFixed(2)}",
                             style: GoogleFonts.aBeeZee(
                               fontSize: Constants.fontSizeTinySmall + 1,
                               fontWeight: FontWeight.w600,
@@ -277,6 +279,9 @@ class CustomWidgets {
           height: 1,
         )
       ],
-    );
-  }
+    );*/
+    
+    }
+
+
 }
