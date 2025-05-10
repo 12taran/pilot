@@ -12,7 +12,7 @@ export const createProperty = async (req, res) => {
   try {
     console.log(req.body);
     console.log(req.files);
-    const images = req.files.map(file => `property/${file.filename}`);// It loops through each file and extracts the filename
+    const images = req.files.map((file) => `property/${file.filename}`); // It loops through each file and extracts the filename
     const {
       userId,
       projectName,
@@ -26,7 +26,6 @@ export const createProperty = async (req, res) => {
     } = req.body;
 
     const numericArea = Number(area);
-
     if (!projectName  || !address || !area || !latitude || !longitude || !price || !type || !description  || isNaN(numericArea) || numericArea <= 0 || images.length === 0) {
       return res.status(400).json({
         message: "All fields are required",
@@ -76,9 +75,10 @@ export const editProperty = async (req, res) => {
     }
 
     // Keep existing images and add new ones (if any)
-    const newImages = req.files?.length > 0
-      ? req.files.map(file => `property/${file.filename}`)
-      : [];
+    const newImages =
+      req.files?.length > 0
+        ? req.files.map((file) => `property/${file.filename}`)
+        : [];
 
     const updatedImages = [...property.images, ...newImages];
 
@@ -96,7 +96,6 @@ export const editProperty = async (req, res) => {
       success: true,
       property: updatedProperty,
     });
-
   } catch (err) {
     console.error(err);
     return res.status(500).json({
@@ -124,12 +123,12 @@ export const getAllProperties = async (req, res) => {
   }
 };
 
-// Get all properties by id 
+// Get all properties by id
 export const getUserProperty = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const { userId } = req.body;
     console.log(userId);
-    const properties = await Property.find({userId}).sort({ createdAt: -1 }); // in descending order
+    const properties = await Property.find({ userId }).sort({ createdAt: -1 }); // in descending order
     return res.status(200).json({
       message: "Properties retrieved successfully",
       success: true,
@@ -144,10 +143,10 @@ export const getUserProperty = async (req, res) => {
   }
 };
 
-// Delete property 
+// Delete property
 export const deleteProperty = async (req, res) => {
   try {
-    const { propertyId : id } = req.body;
+    const { propertyId: id } = req.body;
     const property = await Property.findById(id);
     if (!property) {
       return res.status(404).json({
@@ -202,10 +201,14 @@ export const buyProperty = async (req, res) => {
     property.availableArea -= numericAreaToBuy;
     await property.save();
 
+    const adminId = property.userId;
+
     await Investment.create({
       userId,
       propertyId,
-      areaInvested: numericAreaToBuy
+      areaInvested: numericAreaToBuy,
+      priceAtPurchase: property.price,
+      adminId,
     });
 
     const user = await User.findById(userId);
@@ -217,7 +220,9 @@ export const buyProperty = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ message: "Failed to buy property", success: false });
+    return res
+      .status(500)
+      .json({ message: "Failed to buy property", success: false });
   }
 };
 
@@ -254,6 +259,39 @@ export const extendPropertyArea = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ message: "Failed to extend area", success: false });
+    return res
+      .status(500)
+      .json({ message: "Failed to extend area", success: false });
+  }
+};
+
+// set property
+export const sellProperties = async (req, res) => {
+  try {
+    const { userId, propId, price } = req.body;
+    if (!userId || !propId || !price) {
+      return res.status(400).json({
+        message: "Missing required fields",
+        success: false,
+      });
+    }
+    const property = await Property.findById(propId);
+
+    if (!property) {
+      return res.status(500).json({
+        message: "Error",
+      });
+    }
+    return res.status(200).json({
+      message:
+        "Property Sold Successfully and the amount will be credited to your account in 2-3 working days",
+      success: true,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Sell Order of property Failed",
+      success: false,
+    });
   }
 };

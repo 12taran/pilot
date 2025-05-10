@@ -3,6 +3,6 @@ import { getUserInvestments } from '../controllers/investment.controller.js';
 
 const router = express.Router();
 
-router.get('/:userId', getUserInvestments);
+router.get('/get', getUserInvestments);
 
 export default router;
