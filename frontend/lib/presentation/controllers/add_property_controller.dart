@@ -56,6 +56,7 @@ class AdminPropertyController extends GetxController {
     List<PropertyModel> response =
         await adminPropertyRepo.getPropertiesbyId(userId ?? "");
     adminProperties.value = response;
+    
   }
 
   void fetchLocation(String address) async {

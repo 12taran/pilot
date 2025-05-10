@@ -6,7 +6,7 @@ import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/core/utils.dart';
 import 'package:pilot_project/data/models/invest_model.dart';
 import 'package:pilot_project/data/models/property_model.dart';
-import 'package:pilot_project/data/repos/portfolio_repo.dart';
+import 'package:pilot_project/data/repos/investment_repo.dart';
 import 'package:pilot_project/data/repos/property_repo.dart';
 import 'dart:io';
 import 'package:pdf/pdf.dart';
@@ -340,18 +340,38 @@ void buysProperty(
 
 
  void fetchInvestments() async {
-    try {
-      isLoading.value = true;
-      errorMessage.value = '';
-      SharedPreferences prefs = await SharedPreferences.getInstance();
+  try {
+    isLoading.value = true;
+    errorMessage.value = '';
 
+    // Retrieve user ID from shared preferences
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userId = prefs.getString(Constants.USER_ID);
-      final result = await _investmentRepo.getInvestments(userId ?? "");
-      investments.assignAll(result);
-    } catch (e) {
-      errorMessage.value = 'Error: $e';
-    } finally {
-      isLoading.value = false;
+
+    if (userId == null || userId.isEmpty) {
+      errorMessage.value = 'User ID is missing. Please log in again.';
+      print("Error: User ID is null or empty.");
+      return;
     }
+
+    print("Fetching investments for user ID: $userId");
+
+    // Fetch investments from the repository
+    final result = await _investmentRepo.getInvestments(userId);
+
+    if (result.isEmpty) {
+      print("No investments found for user ID: $userId");
+      errorMessage.value = 'No investments found.';
+    } else {
+      investments.assignAll(result);
+      print("Fetched ${result.length} investments.");
+    }
+  } catch (e) {
+    // Handle errors gracefully
+    errorMessage.value = 'Failed to fetch investments. Error: $e';
+    print("Error fetching investments: $e");
+  } finally {
+    isLoading.value = false;
   }
+}
 }

@@ -4,6 +4,7 @@ import 'package:pilot_project/routes/api_routes.dart';
 
 class InvestmentRepo{
   Future<List<InvestmentModel>> getInvestments(String userId) async {
+    try{
   final response = await BaseService().getData(
     endPoint: ApiRoutes().getInvestments,
      queryBody: {"userId": userId},
@@ -19,5 +20,12 @@ class InvestmentRepo{
       .map((investment) => InvestmentModel.fromJson(investment))
       .toList();
 }
+catch(e){
+      print(e);
+      return [];
+    }
+  }
+
+  
 
 }
