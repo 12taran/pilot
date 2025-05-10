@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
 
@@ -64,7 +65,9 @@ class NetworkController extends GetxController {
     // Prevent unnecessary navigation if already on splash screen or home
     if (Get.currentRoute != PageRoutes.splashScreen &&
         Get.currentRoute != PageRoutes.bottomNav) {
-      Get.offAllNamed(PageRoutes.splashScreen);
+      if ((Platform.isAndroid || Platform.isIOS)) {
+        Get.offAllNamed(PageRoutes.splashScreen);
+      }
     }
   }
 

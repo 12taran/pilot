@@ -15,7 +15,6 @@ import 'package:pilot_project/presentation/controllers/pilotController.dart';
 import 'package:pilot_project/presentation/screens/admin/addedProperties.dart';
 import 'package:pilot_project/presentation/screens/user/propertyDetail.dart';
 import 'package:pilot_project/routes/api_routes.dart';
-import 'package:printing/printing.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/rendering.dart';
@@ -35,13 +34,13 @@ class PropertyController extends GetxController {
       <PropertyModel>[].obs; // For filtered results
   RxList<PropertyModel> isFav = <PropertyModel>[].obs;
   Pilotcontroller pilotcontroller = Get.put(Pilotcontroller());
+  RxBool paymentVerified = false.obs;
 
   var investments = <InvestmentModel>[].obs;
   var isLoading = false.obs;
   var errorMessage = ''.obs;
 
   final _investmentRepo = InvestmentRepo();
-
 
   RxList<String> types =
       ["Residential", "Commercial", "Holiday Homes"].obs; // Available types
@@ -180,13 +179,13 @@ class PropertyController extends GetxController {
               mainAxisAlignment: pw.MainAxisAlignment.start,
               children: [
                 pw.Text(
-                        'Brochure',
-                        style: pw.TextStyle(
-                          color: titleColor,
-                          fontSize: 30,
-                          fontWeight: pw.FontWeight.bold,
-                        ),
-                      ),
+                  'Brochure',
+                  style: pw.TextStyle(
+                    color: titleColor,
+                    fontSize: 30,
+                    fontWeight: pw.FontWeight.bold,
+                  ),
+                ),
                 if (imageBytesList.isNotEmpty)
                   pw.Wrap(
                     spacing: 10,
@@ -206,7 +205,7 @@ class PropertyController extends GetxController {
                       );
                     }).toList(),
                   ),
-                pw.SizedBox(height:5),
+                pw.SizedBox(height: 5),
                 pw.Container(
                   padding: const pw.EdgeInsets.all(12),
                   decoration: pw.BoxDecoration(
@@ -245,43 +244,41 @@ class PropertyController extends GetxController {
                       // Description
                       pw.Text('Description:', style: labelStyle),
                       pw.Text(property.description, style: valueStyle),
-                      
 
-                          pw.Column(
-  crossAxisAlignment: pw.CrossAxisAlignment.start,
-  children: [
-    pw.Text(
-      'Benefits',
-      style: valueStyle.copyWith(
-        fontSize: 12,
-        color: PdfColors.grey600,
-      ),
-    ),
-    pw.SizedBox(height: 4),
-    ...pilotcontroller.benefits.map((benefit) {
-      return pw.Column(
-        crossAxisAlignment: pw.CrossAxisAlignment.start,
-        children: [
-          pw.Text(
-            benefit["title"] ?? "No Title",
-            style: pw.TextStyle(
-              fontSize: 10,
-              fontWeight: pw.FontWeight.bold,
-            ),
-          ),
-          pw.Text(
-            benefit["description"] ?? "No Description",
-            style: pw.TextStyle(
-              fontSize: 10,
-            ),
-          ),
-          pw.SizedBox(height: 4),
-        ],
-      );
-    }).toList(),
-  ],
-)
-
+                      pw.Column(
+                        crossAxisAlignment: pw.CrossAxisAlignment.start,
+                        children: [
+                          pw.Text(
+                            'Benefits',
+                            style: valueStyle.copyWith(
+                              fontSize: 12,
+                              color: PdfColors.grey600,
+                            ),
+                          ),
+                          pw.SizedBox(height: 4),
+                          ...pilotcontroller.benefits.map((benefit) {
+                            return pw.Column(
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.Text(
+                                  benefit["title"] ?? "No Title",
+                                  style: pw.TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: pw.FontWeight.bold,
+                                  ),
+                                ),
+                                pw.Text(
+                                  benefit["description"] ?? "No Description",
+                                  style: pw.TextStyle(
+                                    fontSize: 10,
+                                  ),
+                                ),
+                                pw.SizedBox(height: 4),
+                              ],
+                            );
+                          }).toList(),
+                        ],
+                      )
                     ],
                   ),
                 )
@@ -297,8 +294,7 @@ class PropertyController extends GetxController {
     final filePath = '${directory.path}/property_details.pdf';
     final file = File(filePath);
     await file.writeAsBytes(await pdf.save());
-  
-   
+
     // Step 4: Notify user
 
     ScaffoldMessenger.of(context).showSnackBar(
@@ -314,12 +310,11 @@ class PropertyController extends GetxController {
     );
   }
 
-
-void buysProperty(
-    String propertyId,
-    String userId,
-    double areaToBuy,
-  ) async {
+  Future<void> buysProperty({
+    required String propertyId,
+    required String userId,
+    required double areaToBuy,
+  }) async {
     await PropertyRepo().buyProperty(
       propertyId: propertyId,
       userId: userId,
@@ -338,40 +333,39 @@ void buysProperty(
 //   child: const Text('Download PDF'),
 // )
 
+  void fetchInvestments() async {
+    try {
+      isLoading.value = true;
+      errorMessage.value = '';
 
- void fetchInvestments() async {
-  try {
-    isLoading.value = true;
-    errorMessage.value = '';
+      // Retrieve user ID from shared preferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? userId = prefs.getString(Constants.USER_ID);
 
-    // Retrieve user ID from shared preferences
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? userId = prefs.getString(Constants.USER_ID);
+      if (userId == null || userId.isEmpty) {
+        errorMessage.value = 'User ID is missing. Please log in again.';
+        print("Error: User ID is null or empty.");
+        return;
+      }
 
-    if (userId == null || userId.isEmpty) {
-      errorMessage.value = 'User ID is missing. Please log in again.';
-      print("Error: User ID is null or empty.");
-      return;
+      print("Fetching investments for user ID: $userId");
+
+      // Fetch investments from the repository
+      final result = await _investmentRepo.getInvestments(userId);
+
+      if (result.isEmpty) {
+        print("No investments found for user ID: $userId");
+        errorMessage.value = 'No investments found.';
+      } else {
+        investments.assignAll(result);
+        print("Fetched ${result.length} investments.");
+      }
+    } catch (e) {
+      // Handle errors gracefully
+      errorMessage.value = 'Failed to fetch investments. Error: $e';
+      print("Error fetching investments: $e");
+    } finally {
+      isLoading.value = false;
     }
-
-    print("Fetching investments for user ID: $userId");
-
-    // Fetch investments from the repository
-    final result = await _investmentRepo.getInvestments(userId);
-
-    if (result.isEmpty) {
-      print("No investments found for user ID: $userId");
-      errorMessage.value = 'No investments found.';
-    } else {
-      investments.assignAll(result);
-      print("Fetched ${result.length} investments.");
-    }
-  } catch (e) {
-    // Handle errors gracefully
-    errorMessage.value = 'Failed to fetch investments. Error: $e';
-    print("Error fetching investments: $e");
-  } finally {
-    isLoading.value = false;
   }
-}
 }

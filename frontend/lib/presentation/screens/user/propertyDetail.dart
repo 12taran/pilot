@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pilot_project/core/components/MyTextField.dart';
 import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/core/rozarpay_service.dart';
@@ -10,6 +11,7 @@ import 'package:pilot_project/data/models/property_model.dart';
 import 'package:pilot_project/presentation/controllers/pilotController.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/screens/user/photo.dart';
+import 'package:pilot_project/presentation/utils_widget.dart';
 import 'package:pilot_project/routes/api_routes.dart';
 import 'package:pilot_project/routes/page_route.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,13 +27,39 @@ class _PropertydetailState extends State<Propertydetail> {
   Pilotcontroller pilotcontroller = Get.put(Pilotcontroller());
   final razorpayService = RazorpayService();
   final GlobalKey previewContainer = GlobalKey();
+  TextEditingController amountController = TextEditingController(text: "1");
   PropertyController propertyController = Get.put(PropertyController());
- 
 
   @override
   void initState() {
     super.initState();
     razorpayService.init();
+    ever(propertyController.paymentVerified, (bool verified) async {
+      if (verified) {
+        final prefs = await SharedPreferences.getInstance();
+        final userId = prefs.getString(Constants.USER_ID) ?? "";
+
+        final amountText = amountController.text.trim();
+        final parsedAmount = double.tryParse(amountText) ?? 0.0;
+
+        await propertyController.buysProperty(
+          propertyId: widget.property.id,
+          userId: userId,
+          areaToBuy: parsedAmount,
+        );
+
+        propertyController.paymentVerified.value = false;
+
+        Get.snackbar(
+          "Success",
+          "Property purchased successfully!",
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
+
+        Get.back();
+      }
+    });
   }
 
   @override
@@ -327,17 +355,7 @@ class _PropertydetailState extends State<Propertydetail> {
                   borderRadius: 10,
                   width: Get.width * 0.3,
                   color: const Color.fromARGB(255, 98, 97, 95),
-                  onPressed: ()async {
-                     SharedPreferences? pref= await SharedPreferences.getInstance();
-                     String? userId = pref.getString(Constants.USER_ID);
-                    propertyController.buysProperty(
-                   
-                        widget.property.id,
-                            userId!,
-                            20
-                      );
-                      
-                  },
+                  onPressed: () async {},
                   text: 'Sell',
                 ),
                 SizedBox(width: 10),
@@ -346,12 +364,54 @@ class _PropertydetailState extends State<Propertydetail> {
                   borderRadius: 10,
                   width: Get.width * 0.55,
                   text: 'Buy',
-                  onPressed: () {
-                    print('Amount: ${widget.property.price}');
-                    int amountInRupees =
-                        (double.tryParse(widget.property.price) ?? 0.0).toInt();
+                  onPressed: () async {
+                    UtilsWidget.showWebXDialog(
+                        context,
+                        Container(
+                          height: Get.height * 0.3,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Enter Amount to Buy',
+                                  style: GoogleFonts.aBeeZee(
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge!
+                                          .color,
+                                      fontSize: Constants.fontSizeSubTitle,
+                                      fontWeight: FontWeight.bold)),
+                              MyTextField(
+                                keyboardType: TextInputType.number,
+                                labelText: "Enter Amount to Buy",
+                                isLabelEnabled: false,
+                                textStyle:
+                                    TextStyle(fontSize: Constants.fontSizeBody),
+                                onChanged: (v) {},
+                                borderWidth: 2,
+                                controller: amountController,
+                              ),
+                              SizedBox(height: 20),
+                              CustomButtons(
+                                  text: 'Submit',
+                                  onPressed: () async {
+                                    Get.back();
+                                    propertyController.paymentVerified.value =
+                                        false;
+                                    print('Amount: ${widget.property.price}');
 
-                    razorpayService.openCheckout(amountInRupees);
+                                    final amountInRupees = (double.tryParse(
+                                                widget.property.price) ??
+                                            0.0)
+                                        .toInt();
+
+                                    // Step 1: Start Razorpay payment
+                                    await razorpayService
+                                        .openCheckout(amountInRupees);
+                                  })
+                            ],
+                          ),
+                        ));
                   },
                 ),
               ],
