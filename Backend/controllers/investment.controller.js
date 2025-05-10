@@ -3,8 +3,8 @@ import { Investment } from "../Models/investment.model.js";
 // Get all investments of a user
 export const getUserInvestments = async (req, res) => {
   try {
-    console.log(req.body);
-    const { userId } = req.body;
+    console.log(req.params);
+    const { userId } = req.params;
 
     const investments = await Investment.find({ userId })
     .sort({ createdAt: -1 })
