@@ -33,7 +33,7 @@ class PropertyModel {
       address: map['address'] ?? '',
       latitude: (map['latitude'] ?? 0).toDouble(),
       longitude: (map['longitude'] ?? 0).toDouble(),
-      price: map['price'] ?? '',
+      price: map['price'].toString() ?? '',
       type: map['type'] ?? '',
       description: map['description'] ?? '',
       createdAt: map['createdAt'] ?? '',
