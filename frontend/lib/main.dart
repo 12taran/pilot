@@ -33,7 +33,8 @@ class InitialBinding extends Bindings {
     Get.put(HelpAndSupportController());
     Get.put(BoardMemberController());
     Get.put(PropertyController());
-  }
+    Get.put(Usercontroller());
+      }
 }
 
 class MyApp extends StatefulWidget {

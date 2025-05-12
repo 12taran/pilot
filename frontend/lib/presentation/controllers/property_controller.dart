@@ -61,7 +61,19 @@ class PropertyController extends GetxController {
   void onInit() {
     super.onInit();
     loadProperties();
+    fetchInvestments();
+    total();
     filteredProperties.value = properties; // Initialize filtered properties
+  }
+ 
+  int total()
+  {
+    double total = 0;
+    for (var investment in investments) {
+      total += investment.areaInvested * investment.priceAtPurchase;
+    }
+    print("Total price of all properties: $total");
+    return total.toInt();
   }
 
   void loadProperties() async {
@@ -358,6 +370,7 @@ class PropertyController extends GetxController {
         errorMessage.value = 'No investments found.';
       } else {
         investments.assignAll(result);
+       
         print("Fetched ${result.length} investments.");
       }
     } catch (e) {

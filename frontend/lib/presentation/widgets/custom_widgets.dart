@@ -183,10 +183,92 @@ class CustomWidgets {
     );
   }
 
- static Widget portfolioCard(BuildContext context, int index, List<InvestmentModel> investments) {
-    final investment = investments[index];
+static Widget portfolioCard(BuildContext context, int index, List<InvestmentModel> investments) {
+  final investment = investments[index];
+  final theme = Theme.of(context);
 
-    return Container(color:Colors.green,);
+  return Card(
+     color: Theme.of(context).cardColor,
+    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    elevation: 6,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+    child: Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Property Name
+          Row(
+            children: [
+              const Icon(Icons.home, color: Colors.blueAccent),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  investment.property.projectName,
+                  style: GoogleFonts.aBeeZee(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: theme.colorScheme.primary,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+
+          // Investment Values
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _valueBlock(
+                title: "Invested",
+                value:
+                    "${Constants.rupeeSymbol}${(investment.areaInvested * investment.priceAtPurchase).toStringAsFixed(2)}",
+                theme: theme,
+              ),
+              _valueBlock(
+                title: "Current Value",
+                value:
+                    "${Constants.rupeeSymbol}${(investment.areaInvested).toStringAsFixed(2)}",
+                theme: theme,
+              ),
+            ],
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+static Widget _valueBlock({
+  required String title,
+  required String value,
+  required ThemeData theme,
+}) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        title,
+        style: GoogleFonts.aBeeZee(
+          fontSize: 14,
+          fontWeight: FontWeight.w600,
+          color: theme.textTheme.bodyLarge?.color,
+        ),
+      ),
+      const SizedBox(height: 4),
+      Text(
+        value,
+        style: GoogleFonts.aBeeZee(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          color: theme.colorScheme.primary,
+        ),
+      ),
+    ],
+  );
+}
+
     
     
     /* Column(
@@ -284,4 +366,4 @@ class CustomWidgets {
     }
 
 
-}
+

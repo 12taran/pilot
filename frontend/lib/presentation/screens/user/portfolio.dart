@@ -127,7 +127,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                         textAlign: TextAlign.start,
                       ),
                       Text(
-                        '${Constants.rupeeSymbol} 6,57,30,524',
+                        '${Constants.rupeeSymbol} ${widget.propertyController.total()}',
                         style: GoogleFonts.acme(
                           textStyle: Theme.of(context).textTheme.displayLarge,
                           fontSize: Constants.fontSizeExtraLarge,
@@ -152,7 +152,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                         textAlign: TextAlign.start,
                       ),
                       Text(
-                        '2',
+                        '${widget.propertyController.investments.length}',
                         style: GoogleFonts.acme(
                             textStyle: Theme.of(context).textTheme.displayLarge,
                             fontSize: Constants.fontSizeExtraLarge,
