@@ -1,10 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:glow_container/glow_container.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pilot_project/core/components/custom_buttons.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/data/models/board_member.dart';
 import 'package:pilot_project/presentation/controllers/boardmember_controller.dart';
+import 'package:pilot_project/presentation/controllers/help_and_supportController.dart';
 import 'package:pilot_project/presentation/controllers/pilotController.dart';
 import 'package:pilot_project/presentation/controllers/property_controller.dart';
 import 'package:pilot_project/presentation/controllers/userController.dart';
@@ -412,61 +415,289 @@ class _HomewState extends State<Homew> {
                   SizedBox(
                     height: Get.height * 0.02,
                   ),
-                  Container(
-                    height: Get.height,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Our Board Of Members',
-                          style: TextStyle(
-                              fontSize: Constants.fontSizeTiny,
-                              fontWeight: FontWeight.w500),
-                        ),
-                        SizedBox(
-                          height: Get.height * 0.02,
-                        ),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: List.generate(
-                              boardMemberController
-                                      .boardMembers.value?.data?.length ??
-                                  0,
-                              (index) => Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 120, vertical: 8),
-                                child: TeamMemberCard(
-                                  name: boardMemberController.boardMembers.value
-                                          ?.data?[index].name ??
-                                      "",
-                                  role: boardMemberController.boardMembers.value
-                                          ?.data?[index].designation ??
-                                      "",
-                                  imagePath: boardMemberController.boardMembers
-                                          .value?.data?[index].image ??
-                                      "",
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Container(
+                      
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                         mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Our Board Of Members',
+                            style: TextStyle(
+                                fontSize: Constants.fontSizeTiny,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          SizedBox(
+                            height: Get.height * 0.02,
+                          ),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: List.generate(
+                                boardMemberController
+                                        .boardMembers.value?.data?.length ??
+                                    0,
+                                (index) => Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 40, vertical: 8),
+                                  child: TeamMemberCard(
+                                    name: boardMemberController.boardMembers.value
+                                            ?.data?[index].name ??
+                                        "",
+                                    role: boardMemberController.boardMembers.value
+                                            ?.data?[index].designation ??
+                                        "",
+                                    imagePath: boardMemberController.boardMembers
+                                            .value?.data?[index].image ??
+                                        "",
+                                  ),
                                 ),
                               ),
                             ),
                           ),
+                          
+                    
+                        ],
+                      ),
+                    ),
+                  ),
+                  Divider(thickness:2),
+                  SizedBox(height: Get.height*0.15,),
+                      Padding(
+                padding: const EdgeInsets.all(1.0),
+                child: Center(
+                  child: Container(
+                    width: Get.width * 0.8,
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: const Color.fromARGB(255, 107, 106, 106),
+                          width: 0.5,
                         ),
-                        SizedBox(
-                          height: 50,
+                        borderRadius: BorderRadius.circular(10),
+                        shape: BoxShape.rectangle,
+                        boxShadow: [BoxShadow(spreadRadius: 1, blurRadius: 2)],
+                        color: Color.fromARGB(255, 236, 233, 233)),
+                    height: Get.height * 0.5,
+                    child: Stack(
+                      alignment: Alignment.topCenter,
+                      children: [
+                        Opacity(
+                          opacity: 0.5,
+                          child: Image.asset(
+                            'assets/images/invest.png',
+                            fit: BoxFit.fill,
+                            height: Get.height * 0.5,
+                            width: Get.width * 0.95,
+                          ),
                         ),
-                        Container(
-                          height: 1,
-                          width: Get.width * 0.8,
-                          color: Colors.black,
-                        )
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(' The smart way to invest in assets',
+                                style: TextStyle(
+                                    fontSize: Constants.fontSizeTiny,
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color.fromARGB(255, 2, 2, 72))),
+                            Text('fractionally, securely, profitably',
+                                style: TextStyle(
+                                    fontSize: Constants.fontSizeTiny,
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color.fromARGB(255, 2, 2, 72))),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            GlowContainer(
+                              containerOptions: const ContainerOptions(
+                                  borderRadius: 10,
+                                  borderSide: BorderSide(width: 2)),
+                              // optional, or customize
+                              gradientColors: const [
+                                Colors.yellow,
+                                Colors.green,
+                                Colors.greenAccent,
+                              ],
+                              glowRadius: 5,
+                              // match button's border
+                              child: CustomButtons(
+                                width: Get.width * 0.7,
+                                borderRadius: 12,
+                                margin: const EdgeInsets.all(0),
+                                color: Colors.white,
+                                textColor: Colors.greenAccent,
+                                text: 'Invest Now',
+                                onPressed: () {
+                                  print('Hello');
+                                
+                                },
+                              ),
+                            )
+                          ],
+                        ),
                       ],
                     ),
                   ),
+                ),
+              ),
+                            SizedBox(height:Get.height*0.1),
+              /*SizedBox(
+                height: Get.height * 0.01,
+              ),*/
+              Container(
+                //borderRadius: BorderRadius.circular(20),
+                decoration: const BoxDecoration(
+                    gradient: LinearGradient(colors: [
+                  Color.fromARGB(255, 190, 204, 215),
+                  Color.fromARGB(255, 146, 182, 118),
+                  Color.fromARGB(255, 173, 194, 173)
+                ])),
+              
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0, top: 20),
+                      child: Text(
+                        'Explore by Themes',
+                        style: GoogleFonts.aleo(
+                            fontSize: Constants.fontSizeSmall,
+                            color: Theme.of(context).primaryColor,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    SizedBox(
+                      height: Get.height * 0.02,
+                    ),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          for (int index = 0;
+                              index < propertyController.types.length;
+                              index++)
+                            Column(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    propertyController.selectedType.value =
+                                        propertyController
+                                            .types[index]; // Selected type
+                                    
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.3),
+                                          spreadRadius: 2,
+                                          blurRadius: 6,
+                                          offset: const Offset(0, 3),
+                                        ),
+                                      ],
+                                    ),
+                                    child: CircleAvatar(
+                                      radius: 60,
+                                      backgroundColor: Colors.white,
+                                      backgroundImage: AssetImage(
+                                        location[index],
+                                      ), // Yahi main kaam karta hai
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  propertyController.types[index],
+                                  style: GoogleFonts.aleo(
+                                      fontSize: Constants.fontSizeTiny,
+                                      color: Theme.of(context).primaryColor,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ],
+                            ),
+                        ])
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Center(
+                  child: Container(
+                    decoration: BoxDecoration(
+                        boxShadow: [BoxShadow(spreadRadius: 1, blurRadius: 5)],
+                        borderRadius: BorderRadius.circular(20),
+                        gradient: const LinearGradient(colors: [
+                          Color.fromARGB(255, 75, 138, 75),
+                          Color.fromARGB(255, 44, 121, 39),
+                          Color.fromARGB(255, 37, 72, 33),
+                        ])),
+                    
+                    width: Get.width * 0.9,
+                    child: Column(
+                      //mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Column(
+                                children: [
+                                  Center(
+                                    child: Text(
+                                        maxLines: 2,
+                                        "You are just a call away from ",
+                                        style: GoogleFonts.aleo(
+                                            fontSize: Constants.fontSizeTinySmall,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white)),
+                                  ),
+                                  Text('your dream Investment',
+                                      style: GoogleFonts.aleo(
+                                          fontSize: Constants.fontSizeTinySmall,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white)),
+                                  SizedBox(
+                                    height: Get.height * 0.02,
+                                  ),
+                                  Positioned(
+                                    right: 0,
+                                    child: GlowContainer(
+                                      
+                                      gradientColors: [Colors.purple],
+                                      glowRadius: 20,
+                                      containerOptions: ContainerOptions(padding: EdgeInsets.all(0),borderRadius: 20),
+                                      child: CustomButtons(
+                                        width: Get.width * 0.3,
+                                        height: Get.height * 0.08,
+                                        margin: EdgeInsets.all(0),
+                                        color: Color.fromARGB(255, 228, 116, 224),
+                                        textColor: Colors.white,
+                                        borderRadius: 20,
+                                        text: 'Call Us',
+                                        onPressed: () {
+                                          Get.find<HelpAndSupportController>()
+                                              .makePhoneCall('8006644389');
+                                        },
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              )
+                            ]),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
                 ],
               ),
             ],
           ),
+
         ),
       ),
     );

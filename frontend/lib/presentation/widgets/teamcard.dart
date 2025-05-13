@@ -18,7 +18,7 @@ class TeamMemberCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: Get.height * 0.39,
-      width: Get.width * 0.28,
+      width: Get.width * 0.25,
       margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       decoration: BoxDecoration(
         color: Colors.grey.shade300,
