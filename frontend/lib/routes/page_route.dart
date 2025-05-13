@@ -28,7 +28,7 @@ import 'package:pilot_project/presentation/screens/user/profile.dart';
 import 'package:pilot_project/presentation/screens/user/propertyDetail.dart';
 
 import 'package:pilot_project/presentation/screens/user/setting.dart';
-import 'package:pilot_project/presentation/web_window_views/home_screen.dart';
+import 'package:pilot_project/presentation/web_window_views/navigation_w.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -373,7 +373,7 @@ class PageRoutes {
       ),
       GetPage(
         name: homeScreen,
-        page: () => HomeScreen(),
+        page: () => NavigationPage(),
         transition: Transition.zoom,
         transitionDuration: const Duration(milliseconds: 200),
         binding: BindingsBuilder(() async {
