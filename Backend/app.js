@@ -10,6 +10,7 @@ import memberRoute from "./routes/member.route.js";
 import propertyRoute from "./routes/property.route.js";
 import investmentRoute from "./routes/investment.route.js";
 import paymentRoute from "./routes/payment.route.js";
+import bankRoute from "./routes/bank.route.js";
 
 dotenv.config();
 
@@ -20,24 +21,27 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors({ origin: "*" }));
 
-app.use('/uploads', express.static('uploads'));
+app.use("/uploads", express.static("uploads"));
 
 app.get("/", (req, res) => {
   res.send(`Hello World`);
 });
-
 // api's
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/user/member", memberRoute);
 app.use("/api/v1/user/property", propertyRoute);
 app.use("/api/v1/user/investment", investmentRoute);
-app.use("/api/v1/payment", paymentRoute);
+app.use("/api/v1/user/payment", paymentRoute);
+app.use("/api/v1/user/bank", bankRoute);
 
 //  Global error handler for image multer
 app.use((err, req, res, next) => {
-  if (err instanceof multer.MulterError || err.message.includes("Unexpected field")) {
+  if (
+    err instanceof multer.MulterError ||
+    err.message.includes("Unexpected field")
+  ) {
     return res.status(400).json({
-      message:"File upload error: " + err.message,
+      message: "File upload error: " + err.message,
       success: false,
     });
   }
