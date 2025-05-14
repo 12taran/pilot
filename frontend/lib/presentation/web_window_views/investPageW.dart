@@ -12,47 +12,28 @@ class InvestWPage extends StatefulWidget {
   @override
   State<InvestWPage> createState() => _InvestWPageState();
  
-  final dummy=[
-  {
-    "id": "1",
-    "projectName": "Skyline Heights",
-    "address": "New Delhi",
-    "price": 8500,
-    "images": ["https://example.com/image1.jpg"]
-  },
-  {
-    "id": "2",
-    "projectName": "Green Valley",
-    "address": "Mumbai",
-    "price": 9200,
-    "images": ["https://example.com/image2.jpg"]
-  },
-  {
-    "id": "3",
-    "projectName": "Ocean View",
-    "address": "Goa",
-    "price": 7800,
-    "images": ["https://example.com/image3.jpg"]
-  },
-  {
-    "id": "4",
-    "projectName": "Sunset Residency",
-    "address": "Jaipur",
-    "price": 8100,
-    "images": ["https://example.com/image4.jpg"]
-  },
-  {
-    "id": "5",
-    "projectName": "Palm Retreat",
-    "address": "Chandigarh",
-    "price": 8600,
-    "images": ["https://example.com/image5.jpg"]
-  }
-];
-  PropertyController propertyController = PropertyController();
+  
+ 
+  
 }
 
 class _InvestWPageState extends State<InvestWPage> {
+   PropertyController propertyController = PropertyController();
+   @override
+  void initState() {
+    super.initState();
+    propertyController.loadProperties();
+    propertyController.filterProperties(
+        type: propertyController.selectedType.value,
+        location: propertyController.selectedLocation.value);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    propertyController.selectedLocation.value = "";
+    propertyController.selectedType.value = "";
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -60,136 +41,121 @@ class _InvestWPageState extends State<InvestWPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            'Find your favorite property',
-             
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.primary,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Find your favorite property',
+                 
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+              
+            ],
           ),
           SizedBox(height: 10),
           
           // Beautified property types list using Wrap
-          Center(
-            child: Container(
-              height: Get.height*0.1,
-              color: Colors.brown,
-              width: Get.width*0.8,
-              padding: EdgeInsets.all(16),
-              child: Row(
-                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  for (int i = 0; i < widget.propertyController.types.length; i++)
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: Theme.of(context).colorScheme.primary,
-                          width: 1,
-                        ),
-                      ),
-                      child: Text(
-                        widget.propertyController.types[i],
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                ],
-              ),
-            ),
-          ),
-                      Expanded(
-              child: Obx(() {
-                
-                return GridView.builder(
-  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-    crossAxisCount: 3,
-    childAspectRatio: 0.65, // slightly lower for tighter vertical space
-    crossAxisSpacing: 8,
-    mainAxisSpacing: 5,
+Padding(
+  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+  child: SingleChildScrollView(
+    scrollDirection: Axis.horizontal,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: propertyController.types.map((type) {
+        return Padding(
+          padding: const EdgeInsets.only(right: 8),
+          child: Obx(() => FilterChip(
+                label: Text(type),
+                selected: propertyController.selectedType.value == type,
+                onSelected: (_) {
+                  propertyController.selectedType.value = type;
+                  propertyController.filterProperties(
+                    type: propertyController.selectedType.value,
+                    location: propertyController.selectedLocation.value,
+                  );
+                },
+              )),
+        );
+      }).toList(),
+    ),
   ),
-  itemCount: widget.dummy.length,
-  itemBuilder: (context, index) {
-    return Container(
-      margin: const EdgeInsets.all(6),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 4,
-            offset: Offset(0, 2),
+),
+
+// ✅ Reset Filters Button
+Row(
+  mainAxisAlignment: MainAxisAlignment.end,
+  children: [
+    Padding(
+      padding: const EdgeInsets.only(right: 16, bottom: 10),
+      child: ElevatedButton.icon(
+        onPressed: () {
+          propertyController.selectedType.value = '';
+          propertyController.selectedLocation.value = '';
+          propertyController.filterProperties(type: '', location: '');
+        },
+        icon: const Icon(Icons.refresh),
+        label: const Text('Reset Filters'),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+          foregroundColor: Theme.of(context).colorScheme.onSecondaryContainer,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
           ),
-        ],
-        border: Border.all(
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.25),
         ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            widget.dummy[index]['projectName'] as String,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-          SizedBox(height: 4),
-          Text(
-            widget.dummy[index]['address'] as String,
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.grey[700],
-            ),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          SizedBox(height: 2),
-          Text(
-            '₹${widget.dummy[index]['price']} / sq.ft',
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-          ),
-        ],
-      ),
-    );
-  },
-);
+    ),
+  ],
+),
 
-
-
-               
-                /*return ListView.builder(
-                  itemCount: widget.propertyController.filteredProperties.length,
+                  
+     Expanded(
+              child: Obx(() {
+                if (propertyController.filteredProperties.isEmpty) {
+                  
+                  return const Center(
+                    child: Center(
+                      child: Text(
+                        'No properties found.',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  );
+                }
+                return GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    childAspectRatio: 1.5,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                  ),
+                  itemCount: propertyController.filteredProperties.length,
                   itemBuilder: (context, index) {
-                    return CustomWidgets.propertyCard(
-                      widget.propertyController,
-                      widget.propertyController.filteredProperties[index],
+                    return CustomWidgets.propertyCardDesktop(
+                      propertyController,
+                      propertyController.filteredProperties[index],
                       context,
-                    );*/
+                    );
                   },
-                )
-              
+                );
+              }),
             ),
-
-        ]
-      ),
-    );
+          ],
+        ));
   }
 }
+
+
+
+        
+              
+              
+          
+
+      
+      
+  

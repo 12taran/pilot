@@ -11,15 +11,28 @@ class PropertyRepo {
     isTokenRequired: false,
   );
 
-    print(response.data);
+  print("Raw response: ${response.data}");
 
-    final json = response.data as Map<String, dynamic>;
-    final List<dynamic> propertyList = json['properties'];
-
-    return propertyList
-        .map((property) => PropertyModel.fromMap(property))
-        .toList();
+  if (response.data is! Map<String, dynamic>) {
+    throw Exception("Invalid response format");
   }
+
+  final json = response.data as Map<String, dynamic>;
+
+ 
+
+  final List<dynamic> propertyList = json['properties'];
+
+  return propertyList.map((property) {
+    try {
+      return PropertyModel.fromMap(property);
+    } catch (e) {
+      print("Error parsing property: $e\nData: $property");
+      return null;
+    }
+  }).whereType<PropertyModel>().toList();
+}
+
 
   Future<void> buyProperty({
     required String propertyId,

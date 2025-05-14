@@ -19,7 +19,7 @@ class TeamMemberCard extends StatelessWidget {
     return Container(
       height: Get.height * 0.39,
       width: Get.width * 0.25,
-      margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
       decoration: BoxDecoration(
         color: Colors.grey.shade300,
         borderRadius: BorderRadius.circular(8),

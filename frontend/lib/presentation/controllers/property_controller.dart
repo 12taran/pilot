@@ -63,7 +63,9 @@ class PropertyController extends GetxController {
     loadProperties();
     fetchInvestments();
     total();
-    filteredProperties.value = properties; // Initialize filtered properties
+    filteredProperties.value = properties;
+  
+     // Initialize filtered properties
   }
  
   int total()
@@ -75,11 +77,14 @@ class PropertyController extends GetxController {
     print("Total price of all properties: $total");
     return total.toInt();
   }
+Future<void> loadProperties() async {
+  isLoading.value = true;
+  final data = await PropertyRepo().getProperties();
+  properties.assignAll(data);
+  filteredProperties.assignAll(data);
+  isLoading.value = false;
+}
 
-  void loadProperties() async {
-    List<PropertyModel> response = await PropertyRepo().getProperties();
-    properties.value = response; // Initialize filtered properties
-  }
 
   // Filter by Type
   // Filter by Type

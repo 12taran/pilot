@@ -5,7 +5,7 @@ class PropertyModel {
   final String address;
   final double latitude;
   final double longitude;
-  final int price;
+  final double price;
   final String type;
   final String description;
   final String createdAt;
@@ -26,18 +26,23 @@ class PropertyModel {
   });
 
   factory PropertyModel.fromMap(Map<String, dynamic> map) {
-    return PropertyModel(
-      id: map['_id'] ?? '',
-      projectName: map['projectName'] ?? '',
-      images: List<String>.from(map['images'] ?? []),
-      address: map['address'] ?? '',
-         latitude: (map['latitude'] as num?)?.toDouble() ?? 0.0, // ✅ Null check with fallback value
-      longitude: (map['longitude'] as num?)?.toDouble() ?? 0.0,
-      price: map['price'] ?? '',
-      type: map['type'] ?? '',
-      description: map['description'] ?? '',
-      createdAt: map['createdAt'] ?? '',
-      updatedAt: map['updatedAt'] ?? '',
-    );
-  }
+  return PropertyModel(
+    id: map['_id'] ?? '',
+    projectName: map['projectName'] ?? '',
+    images: (map['images'] is List)
+        ? List<String>.from(map['images'].map((e) => e.toString()))
+        : [],
+    address: map['address'] ?? '',
+    latitude: (map['latitude'] as num?)?.toDouble() ?? 0.0,
+    longitude: (map['longitude'] as num?)?.toDouble() ?? 0.0,
+    price: (map['price'] is num || map['price'] is String)
+        ? double.tryParse(map['price'].toString()) ?? 0.0
+        : 0.0,
+    type: map['type'] ?? '',
+    description: map['description'] ?? '',
+    createdAt: map['createdAt'] ?? '',
+    updatedAt: map['updatedAt'] ?? '',
+  );
+}
+
 }

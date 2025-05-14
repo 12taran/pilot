@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pilot_project/core/components/CustomContainer.dart';
 import 'package:pilot_project/core/config.dart';
 import 'package:pilot_project/data/models/invest_model.dart';
 import 'package:pilot_project/data/models/property_model.dart';
@@ -182,6 +181,122 @@ class CustomWidgets {
       ),
     );
   }
+
+
+
+static Widget propertyCardDesktop(
+  PropertyController controller,
+  PropertyModel property,
+  BuildContext context,
+) {
+  return GestureDetector(
+    onTap: () {
+      Get.toNamed(PageRoutes.propertydetail, arguments: property);
+    },
+    child: Card(
+      elevation: 6,
+      margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Image Section
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.network(
+                '${ApiRoutes.imageRoutes}${property.images[0]}',
+                height: 140,
+                width: 180,
+                fit: BoxFit.cover,
+              ),
+            ),
+
+            const SizedBox(width: 24),
+
+            // Info Section
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    property.projectName,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    property.address,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.grey[700],
+                        ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    "Price: ${Constants.rupeeSymbol}${property.price}",
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.w600,
+                        ),
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          Get.toNamed(PageRoutes.propertydetail,
+                              arguments: property);
+                        },
+                        
+                        child: Text("Invest Now"),
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 12),
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primaryContainer,
+                          foregroundColor:
+                              Theme.of(context).colorScheme.onPrimaryContainer,
+                        ),
+                      ),
+
+                      // Favorite Icon
+                      Obx(() {
+                        final isFavorite =
+                            controller.isFav.contains(property);
+                        return IconButton(
+                          icon: Icon(
+                            Icons.favorite,
+                            color: isFavorite ? Colors.red : Colors.grey,
+                            size: 26,
+                          ),
+                          onPressed: () {
+                            if (isFavorite) {
+                              controller.isFav.remove(property);
+                            } else {
+                              controller.isFav.add(property);
+                            }
+                          },
+                        );
+                      }),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
 
 static Widget portfolioCard(BuildContext context, int index, List<InvestmentModel> investments) {
   final investment = investments[index];
