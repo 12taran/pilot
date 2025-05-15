@@ -21,6 +21,15 @@ const userSchema = new mongoose.Schema(
       maxlength: [10, "Phone number must be exactly 10 digits"],
       match: [/^\d{10}$/, "Phone number must contain only digits"],      
     },
+    image : {
+      type: String,
+      default: "userImage.jpg",
+    },
+    isAdmin:{
+      type: Boolean,
+      default : false,
+    }
+
   },
   { timestamps: true }
 );

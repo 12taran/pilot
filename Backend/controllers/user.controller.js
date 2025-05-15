@@ -1,4 +1,10 @@
+import fs from "fs";
+import path from "path";
 import { User } from "../Models/user.model.js";
+import { fileURLToPath } from "url";
+
+// Manually define __dirname in ES module
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export const userVerify = async (req, res) => {
   try {
@@ -41,23 +47,19 @@ export const userVerify = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+    return res.status(500).json({
+      message: "Server problem while creating user",
+      success: false,
+    });
   }
 };
 
 export const userGet = async (req, res) => {
   try {
-    const userId = req.id;
-    const user = await User.find({ userId });
-
-    if (!user) {
-      return res.status(404).json({
-        message: "Profile not found",
-        success: false,
-      });
-    }
+    const users = await User.find(); 
     return res.status(200).json({
       success: true,
-      user,
+      users, 
     });
   } catch (error) {
     console.log(error);
@@ -71,7 +73,7 @@ export const userGet = async (req, res) => {
 export const userById = async (req, res) => {
   try {
     const {userId} = req.params;
-    const user = await User.findById(userId );// findById() expects the ID directly, not an object
+    const user = await User.findById(userId );
 
     if (!user) {
       return res.status(404).json({
@@ -105,18 +107,31 @@ export const userEdit = async (req, res) => {
   try {
     const {id : userId} = req.params;// grabs id from URL and assigns it to userId
     const { fullname, address } = req.body;
+    const image = req.file ? req.file.filename : undefined;
 
-    // const user = await User.findById(userId);
+    const user = await User.findById(userId);
 
-    if (!userId) {
+    if (!user) {
       return res.status(404).json({
         message: "User not found",
         success: false,
       });
     }
 
-    const updatedData = { fullname, address };
+    // If the user has a previous image, delete it from the server
+    if (image && user.image && user.image !== "userImage.jpg") {
+      const oldImagePath = path.join(__dirname, "../uploads/user", user.image);
+      fs.unlink(oldImagePath, (err) => {
+        if (err) {
+          console.log("Error deleting old image: ", err);
+        }
+      });
+    }
 
+
+    const updatedData = { fullname, address };
+    if (image) updatedData.image = `user/${image}`;
+    
     const updatedUser = await User.findByIdAndUpdate(userId, updatedData, {
       new: true,
     });
@@ -171,3 +186,31 @@ export const userLogin = async (req, res) => {
     });
   }
 };
+
+export const makeAdmin = async (req, res) =>{
+  try {
+    const { targetUserId } = req.body;
+
+    const user = await User.findByIdAndUpdate(targetUserId,
+      {isAdmin : true},
+      {new : true}
+    );
+    if(!user){
+      return res.status(404).json({
+        message : "User not found",
+        success : false,
+      });
+    }
+    return res.status(200).json({
+      message : `${user.fullname} is now an admin`,
+      success : true,
+      user,
+    });
+  } catch (err){
+    console.log(err);
+    return res.status(500).json({
+      message : "Server problem",
+      success : false,
+    });
+  }
+}
