@@ -42,7 +42,8 @@ Start investing in property with just 1 acre — no middlemen, no hassle.
 
 ```bash
 # Clone the repo
-git clone git@github.com:12taran/pilot.git
+git clone https://github.com/12taran/pilot.git
+
 cd pilot/Backend
 
 # Run everything
